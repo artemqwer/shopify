@@ -3153,7 +3153,141 @@
       "adjusted_total": "סך הכל מותאם",
       "due_on_date": "תאריך יעד {{date}}",
       "due_on_fulfillment": "מועד הגשמה",
-      "due_on_receipt": "מועד קבלה"
+      "due_on_receipt": "מועד קבלה",
+      "not_applicable": "לא רלוונטי",
+      "paid_amount": "בתשלום",
+      "partially_refunded_label": "החזר חלקי",
+      "payment_confirmation": {
+        "payment_received": "תודה! התשלום שלך {{amount}} התקבל.",
+        "full_payment_received": "תודה! התשלום שלך בסך {{amount}} התקבל, והזמנה זו שולמה במלואה.",
+        "payment_authorized": "תודה! היתרה תעודכן עם קבלת התשלום.",
+        "dismiss_label": "ביטול אישור התשלום"
+      },
+      "payment": {
+        "status_in_review": "התשלום יבוצע לאחר בדיקה",
+        "status_unpaid": "התשלום מועד אחרון לתאריך {{date}}",
+        "title": "תַשְׁלוּם",
+        "payment_type": {
+          "gift_card": "כרטיס מתנה",
+          "store_credit": "אשראי בחנות",
+          "money_order": "הַמחָאַת כֶּסֶף",
+          "cash_on_delivery": "תשלום במזומן במשלוח (COD)",
+          "bank_deposit": "הפקדה בבנק",
+          "manual": "יָדָנִי"
+        },
+        "card_payment_details": "מסתיים ב {{lastDigits}} - {{formattedTransactionAmount}}",
+        "gift_card_payment_details": "מסתיים ב {{lastDigits}} - {{formattedTransactionAmount}}",
+        "store_credit_payment_details": "זיכוי חנות - {{formattedTransactionAmount}}",
+        "shop_pay_installments": {
+          "paid_in_installments": "שולם בתשלומים של Shop Pay",
+          "view_schedule": "הצג לוח זמנים"
+        },
+        "manual_payment_methods": {
+          "money_order": "הוראת תשלום - {{formattedTransactionAmount}}",
+          "cash_on_delivery": "מזומן במשלוח (COD) - {{formattedTransactionAmount}}",
+          "bank_deposit": "הפקדת בנק - {{formattedTransactionAmount}}",
+          "manual": "ידני - {{formattedTransactionAmount}}"
+        },
+        "transactions": {
+          "show_all": "הצג הכל",
+          "show_less": "הצג פחות",
+          "details": "פרטים",
+          "payment_details": "פרטי תשלום"
+        },
+        "emv_details": {
+          "auth": "אישור:",
+          "aid": "סִיוּעַ:",
+          "source": "מָקוֹר:"
+        }
+      },
+      "paid_with_shop_pay_installments_card": {
+        "paid_with_shop_pay_installments": "שולם בתשלומים של Shop Pay",
+        "description": "הישארו מעודכנים בלוח התשלומים שלכם בעזרת תזכורות באפליקציית Shop.",
+        "payment_reminders_button": "קבל תזכורות תשלום",
+        "desktop_qr_code_content": {
+          "title": "סרוק אחר תזכורות",
+          "description": "קבל תזכורות לתשלומים שלך עם Shop."
+        }
+      },
+      "refunded_amount": "החזר כספי",
+      "request_return_failed": "הייתה בעיה בעיבוד הבקשה שלך. אנא נסה שוב.",
+      "login_card": {
+        "resend_link_and_login": "כדי לצפות בפרטי ההזמנה שלך, התחבר או שלח קישור חדש לכתובת הדוא\"ל או למספר הטלפון שבהם השתמשת בקופה.",
+        "resend_link_only": "כדי לצפות בפרטי ההזמנה שלך, שלח קישור חדש לכתובת הדוא\"ל או למספר הטלפון שבהם השתמשת בעת ביצוע הרכישה.",
+        "log_in": "כניסה",
+        "resend_link": "שלח קישור חדש",
+        "link_expired": "פג תוקף הקישור"
+      },
+      "remaining_amount": "נוֹתָר",
+      "marketing_section_title": "חדשות והצעות",
+      "marketing_description": "תקבלו מיילים שיווקיים. תוכלו לבטל את המנוי בכל עת.",
+      "marketing_checkbox_label": "שלח לי אימייל עם חדשות והצעות",
+      "marketing_checkmark_label": "הנך רשום/ה לקבלת חדשות והצעות בדוא\"ל",
+      "marketing_pending_confirmation": "לחץ על הקישור באימייל שלך כדי לאשר.",
+      "marketing_resend_email": "שלח שוב אימייל",
+      "marketing_resend_email_success": "קישור נשלח",
+      "returns": {
+        "expand_events_label": "הצג פרטים",
+        "hide_events_label": "הסתר פרטים",
+        "ineligible_return_message": "אף פריט בהזמנה זו אינו זכאי להחזרה.",
+        "ineligible_return_message_when_returned": "אין פריטים נוספים בהזמנה זו הזכאים להחזרה.",
+        "print_shipping_label": "הדפס תווית משלוח",
+        "return_and_refund_modal_header": "מדיניות החזרים",
+        "tracking_number": "מספר מעקב:",
+        "exchange_header": "פריטים להחלפה",
+        "exchange_subheader": "פריטי החלפה יתווספו להזמנה לאחר השלמת תהליך ההחזרה."
+      },
+      "shipping": {
+        "address": "כתובת למשלוח",
+        "address_map_marker": "כתובת למשלוח",
+        "method": "שיטת משלוח",
+        "summary": "מִשׁלוֹחַ",
+        "free": "לְשַׁחְרֵר",
+        "free_shipping_discount": "משלוח חינם",
+        "one_time": "משלוח חד פעמי",
+        "subscription": "משלוח מנוי"
+      },
+      "pickup": {
+        "pickup": "איסוף",
+        "pickup_location": "מיקום איסוף",
+        "pickup_point": "נקודת איסוף"
+      },
+      "show_items": "הצג פריטים",
+      "total_savings": "סך החיסכון",
+      "show_order_summary": "הצג סיכום הזמנה",
+      "hide_order_summary": "הסתר את סיכום ההזמנה",
+      "subtitle": "אושר בתאריך {{date}}",
+      "subtotal": "סכום ביניים",
+      "subtotal_label_with_quantity": {
+        "one": "סכום ביניים",
+        "other": "סכום ביניים · {{count}} פריטים"
+      },
+      "summary_list_title_accessibility_label": "הזמנת פריטים",
+      "summary_title": "סיכום הזמנה",
+      "summary_totals_title_accessibility_label": "סך כל ההזמנות",
+      "shop_order_tracking": {
+        "download_shop_to_track": "הורד את החנות כדי לעקוב אחר החבילה",
+        "track_order_with_shop": "מעקב אחר הזמנה עם Shop",
+        "title_header": "סרוק עם הטלפון שלך",
+        "real_time_delivery_updates": "החנות תשלח לך עדכוני משלוח בזמן אמת לאחר שליחת ההזמנה שלך."
+      },
+      "edit_summary": {
+        "added": "נוסף",
+        "added_with_quantity": "נוסף {{quantity}}",
+        "removed": "הוסר",
+        "removed_with_quantity": "הוסר {{quantity}}",
+        "updated_at": "ההזמנה שלך עודכנה בתאריך {{date}}",
+        "returned": "הוחזר",
+        "returned_with_quantities": "הוחזרו {{delta}} מתוך {{total}}",
+        "removed_with_quantities": "הוסרו {{delta}} מתוך {{total}}",
+        "return_line_item_removed": "הוסר מההחזרה",
+        "return_line_item_removed_with_quantities": "הסר את {{delta}} מההחזרה"
+      },
+      "shop_pay": {
+        "order_completed_with": "ההזמנה הושלמה עם",
+        "learn_more": "למידע נוסף"
+      },
+      "taxes": "מיסים"
     },
     "account_menu": {
       "signed_out_state": {
