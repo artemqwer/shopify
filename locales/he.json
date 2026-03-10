@@ -3491,7 +3491,20 @@
         "loading_current_payment_method": "טוען את אמצעי התשלום הנוכחי",
         "loading_digital_wallets": "טוען אפשרויות ארנק דיגיטלי",
         "loading_card_fields": "טוען שדות כרטיס אשראי",
-        "loading_resources": "טוען מנויים והזמנות עתידיות"
+        "loading_resources": "טוען מנויים והזמנות עתידיות",
+        "title": "עדכון אמצעי תשלום",
+        "button_title": "לְעַדְכֵּן",
+        "billing_address": "כתובת לחיוב",
+        "disclaimer": "אמצעי תשלום זה יישמר לרכישות עתידיות וניתן להשתמש בו לכל רכישה חוזרת או נדחית.",
+        "error_message": "לא ניתן לעדכן את אמצעי התשלום",
+        "current": "נוֹכְחִי",
+        "subscriptions_title": "מנויים",
+        "subscriptions_list_accessibility_label": "רשימת מוצרי מנוי",
+        "pre_orders_title": "בקרוב",
+        "pre_orders_list_accessibility_label": "רשימת מוצרים בהמתנה להזמנה",
+        "resources_list_accessibility_label": "מוצרי מנוי ומוצרי הזמנות ממתינות באמצעות אמצעי תשלום זה",
+        "resources_card_scroll": "גלול לפריטים נוספים",
+        "resources_card_show_more": "הצג עוד"
       },
       "link_expired": {
         "message": "פג תוקף הקישור לעדכון אמצעי התשלום שלך.",
@@ -3605,6 +3618,117 @@
       "three_d_secure": {
         "title": "מאובטח תלת-ממדי",
         "verification_failed": "לא ניתן היה לאמת את התשלום שלך. נסה שוב או השתמש באמצעי תשלום אחר."
+      },
+      "delete_payment_method_button": "לִמְחוֹק",
+      "delete_payment_method_button_accessibility_label": "מחק את {{paymentMethodName}}",
+      "back_button": "בְּחֲזָרָה",
+      "back_button_accessibility_label": "חזרה אל {{paymentMethodStepTitle}}",
+      "default": "בְּרִירַת מֶחדָל",
+      "generic_card": "כַּרְטִיס",
+      "expiration_warning_button_accessibility_label": "הצג אזהרת תפוגה עבור {{paymentMethodName}} המסתיים ב {{lastDigits}}",
+      "expires_soon": "תוקף הכרטיס הזה עומד לפוג בקרוב",
+      "expired": "כרטיס זה פג תוקפו",
+      "expired_badge_label": "פג תוקף",
+      "card_update_consent": "אמצעי תשלום זה יישמר לרכישות עתידיות.",
+      "card_update_consent_subscriptions": "אמצעי תשלום זה יישמר לרכישות עתידיות וניתן להשתמש בו לכל רכישה חוזרת או נדחית.",
+      "digital_wallet_title": "ארנק דיגיטלי",
+      "credit_or_debit_card_title": "כרטיס אשראי או חיוב",
+      "credit_card_title": "כרטיס אשראי",
+      "additional_payment_methods": "אמצעי תשלום נוספים",
+      "or": "אוֹ",
+      "google_pay": {
+        "iframe_title_accessibility_label": "הוסף אמצעי תשלום ב-Google Pay",
+        "loading_accessibility_message": "טוען את גוגל פיי",
+        "loading": "טוען את גוגל פיי",
+        "errors": {
+          "generic": "הייתה בעיה עם Google Pay. נסה שוב או השתמש באמצעי תשלום אחר.",
+          "missing_billing_address": "Google Pay דורש כתובת לחיוב. אנא הוסף אחת לחשבונך."
+        }
+      },
+      "pay_pal": {
+        "iframe_title_accessibility_label": "הוסף אמצעי תשלום של PayPal",
+        "loading_accessibility_message": "טוען את פייפאל",
+        "errors": {
+          "generic": "הייתה בעיה עם PayPal. נסה שוב או השתמש באמצעי תשלום אחר."
+        }
+      },
+      "apple_pay": {
+        "loading": "טוען את Apple Pay",
+        "errors": {
+          "generic": "הייתה בעיה עם Apple Pay. נסה שוב או השתמש באמצעי תשלום אחר.",
+          "not_available": "אפל פיי אינו זמין במכשיר זה.",
+          "missing_billing_address": "Apple Pay דורש כתובת לחיוב. אנא הוסף אחת לחשבונך."
+        }
+      },
+      "store_credit": {
+        "label": "אשראי בחנות",
+        "accesibility_label": "אשראי בחנות - {{formattedBalance}}",
+        "expirable_amounts_button": "הצג סכומים שפג תוקפם",
+        "expirable_amounts_label": "סכומים שפג תוקפם",
+        "details_modal": {
+          "title": "זיכוי חנות שפג תוקפו",
+          "balance_label": "לְאַזֵן",
+          "expiration_date_label": "תַאֲרִיך תְפוּגָה",
+          "amount_label": "סְכוּם",
+          "date_label": "תַאֲרִיך",
+          "event_label": "מִקרֶה",
+          "events": {
+            "adjustment": "הַתאָמָה",
+            "order_payment": "תשלום הזמנה",
+            "order_refund": "החזר כספי על ההזמנה",
+            "payment_failure": "כשל בתשלום",
+            "payment_returned": "התשלום הוחזר",
+            "order_cancellation": "ביטול הזמנה",
+            "tax_finalization": "סיום מס"
+          },
+          "expirable_balance_info": "חלק מהיתרה שלך יפוג תוקף במועד עתידי",
+          "expirable_amount_label": "סכום כולל לפוגתו",
+          "expirable_amounts_info": "סכומים שפג תוקפם מוקדם יותר יוחלו תחילה בקופה",
+          "expirable_amounts_button": "נוֹף",
+          "expired_amounts_button": "הצג סכומים שפג תוקפם",
+          "pagination": {
+            "load_more_label": "טען עוד",
+            "load_more_accessibility_label": "טען עוד סכומים שפג תוקפם"
+          }
+        }
+      },
+      "payment_details": {
+        "title": "פרטי אמצעי התשלום",
+        "credit_card_details_accessibility_label": "מסתיים ב {{lastDigits}}",
+        "billing_title": "כתובת לחיוב",
+        "card_info_title": "פרטי כרטיס",
+        "payment_method_expiring_on": "פג תוקף בתאריך {{expiryDate}}",
+        "payment_method_expired_on": "פג תוקף בתאריך {{expiryDate}}",
+        "preauthorized_payments": "תשלומים מאושרים מראש",
+        "close_payment_modal": "לִסְגוֹר",
+        "close_payment_modal_accessibility_label": "סגור את פרטי אמצעי התשלום המודאלי",
+        "payment_method_not_found_error": "לא ניתן למצוא את אמצעי התשלום",
+        "payment_details_loading": "טוען את פרטי אמצעי התשלום",
+        "pre_authorized_payments": "תשלומים מאושרים מראש",
+        "total_amount_of_subscription_line_items_left": "ועוד {{total}}",
+        "total_amount_of_subscription_line_items_left_accessibility_label": "סה\"כ {{totalItems}} פריטים, מוצגים {{totalItemsToDisplay}} פריטים.",
+        "next_payment_due": "התשלום הבא מועד אחרון לשיווק {{dueDateInMonthDayYear}}",
+        "edit_payment_method_button": "לַעֲרוֹך",
+        "edit_payment_method_button_accessibility_label": "עריכת אמצעי תשלום המסתיים ב {{lastDigits}}",
+        "loading_shop_pay": "טוען את Shop Pay",
+        "invalid_payment_method": "אמצעי תשלום לא חוקי",
+        "invalid_payment_method_message": "השתמש בכרטיס אשראי חדש כדי להמשיך לקבל הזמנות עתידיות.",
+        "replace_payment_method": "החלפת אמצעי תשלום",
+        "checkout_card_banner": "ניתן להשתמש בשיטת תשלום זו רק עבור תשלומים מאושרים מראש. היא לא תופיע בקופה אם התחברת לחנות זו. ",
+        "default_checkbox": "הגדר כברירת מחדל",
+        "default_checkbox_accessibility_label": "הגדר אמצעי תשלום זה כברירת מחדל",
+        "replace_payment_method_button": "לְהַחלִיף"
+      },
+      "edit_payment_method": {
+        "title": "עריכת אמצעי תשלום",
+        "save_payment_method_button": "לְהַצִיל",
+        "cancel_edit_payment_method_button": "לְבַטֵל",
+        "payment_method_updated_toast": "אמצעי התשלום עודכן",
+        "billing_address": "כתובת לחיוב",
+        "billing_address_add_new": "הוסף חדש",
+        "billing_address_choose_from_list": "בחר מהרשימה",
+        "future_purchases_notice": "אמצעי תשלום זה יישמר לרכישות עתידיות.",
+        "generic_error": "הייתה בעיה בעדכון. אנא נסה שוב."
       }
     },
     "payment_method_brands": {
