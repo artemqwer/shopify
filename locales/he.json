@@ -109,7 +109,28 @@
         "phone_label": "טֵלֵפוֹן",
         "phone_rollup_accessibility_label": "אפשרויות טלפון",
         "phone_country_code_label": "קידומת בינלאומית של מספר טלפון",
-        "optional_phone_label": "טלפון (אופציונלי)"
+        "optional_phone_label": "טלפון (אופציונלי)",
+        "phone_placeholder": "טֵלֵפוֹן",
+        "phone_tooltip": "במקרה שנצטרך ליצור איתך קשר בנוגע להזמנה שלך",
+        "zip_code_label": "מיקוד",
+        "optional_zip_code_label": "מיקוד (אופציונלי)",
+        "zip_code_placeholder": "מיקוד",
+        "postal_code_label": "מיקוד",
+        "optional_postal_code_label": "מיקוד (אופציונלי)",
+        "postal_code_placeholder": "מיקוד",
+        "postcode_label": "מיקוד",
+        "optional_postcode_label": "מיקוד (אופציונלי)",
+        "postcode_placeholder": "מיקוד",
+        "pincode_label": "קוד סודי",
+        "optional_pincode_label": "קוד סודי (אופציונלי)",
+        "pincode_placeholder": "קוד סודי",
+        "civic_number_warning": "הוסף מספר בית אם יש לך אחד",
+        "optional_last_name_label": "שם משפחה (אופציונלי)",
+        "different_shipping_address_label": "לשלוח לכתובת אחרת",
+        "different_shipping_address_text": "השתמש בכתובת חד פעמית עבור הזמנה זו",
+        "change_company_location_link_label": "שינוי מיקום החברה",
+        "change_location_link_label": "שנה מיקום",
+        "ship_to_company": "לשלוח אל {{companyName}}"
       },
       "stock": {
         "price_column_header": "מְחִיר",
@@ -138,7 +159,56 @@
           "description": "פריטים אלה אינם זמינים עוד והוסרו מעגלת הקניות שלך.",
           "items_unavailable": "חלק מהפריטים אינם זמינים עוד והוסרו מעגלת הקניות שלך."
         },
-        "out_of_stock_in_context_label": "מוצר זה אינו זמין במדינה/אזור שלך."
+        "out_of_stock_in_context_label": "מוצר זה אינו זמין במדינה/אזור שלך.",
+        "page_title": "בעיות במלאי",
+        "title": "אזל מהמלאי",
+        "items_unavailable_notice": "חלק מהפריטים אינם זמינים עוד.",
+        "product_column_header": "מוצרים",
+        "quantity_column_header": "כַּמוּת",
+        "status_column_header": "סטָטוּס",
+        "removed_from_cart_notice": "הוסר מהעגלה",
+        "sold_out_label": "הַכַּרטִיסִים אָזלוּ",
+        "reduced_label": "מוּפחָת",
+        "reduced_with_quantity_label": "נותרו רק %{quantity_available}",
+        "remove_from_cart_button_label": "הסר מהעגלה",
+        "continue_shopping_button_label": "לְהַמשִׁיך",
+        "go_back_to_cart_button_label": "חזור לעגלת הקניות שלי",
+        "remove": "לְהַסִיר",
+        "return_to_store_label": "חזור לחנות",
+        "continue_cta_label": "המשך בקופה",
+        "item_label": {
+          "one": "פריט {{count}}",
+          "other": "{{count}}"
+        },
+        "empty_cart_label": "העגלה שלך ריקה",
+        "quantity_update": {
+          "page_title": "עדכון כמות",
+          "title": "עדכון כמות",
+          "description": "הכמויות הזמינות עבור פריטים אלה השתנו והן מעודכנות בעגלת הקניות שלך."
+        },
+        "unpurchasable_product": {
+          "title": "מוצר שאינו ניתן לרכישה",
+          "header": "חלק מהפריטים הוסרו מעגלת הקניות שלך",
+          "message": "פריטים אלה אינם זמינים להזמנות B2B.",
+          "status_column_header": "לא זמין"
+        },
+        "unpurchasable_product_generic": {
+          "title": "מוצר שאינו ניתן לרכישה",
+          "header": "חלק מהפריטים הוסרו מעגלת הקניות שלך",
+          "message": "פריטים אלה אינם זמינים.",
+          "status_column_header": "לא זמין"
+        },
+        "unfulfillable_product": {
+          "title": "משלוח אינו זמין",
+          "message": {
+            "one": "%{delivery_method} אינו זמין עוד עבור פריט זה.",
+            "other": "%{delivery_method} אינו זמין עוד עבור פריטים אלה."
+          },
+          "default_message": {
+            "one": "שיטת המשלוח שנבחרה אינה זמינה עוד עבור פריט זה.",
+            "other": "שיטת המשלוח שנבחרה אינה זמינה עוד עבור פריטים אלה."
+          }
+        }
       },
       "order_summary": {
         "more_items_modal": {
@@ -1608,6 +1678,60 @@
         "split_shipping_option_lowest_price": "המחיר הנמוך ביותר",
         "split_shipping_option_fastest": "המהיר ביותר",
         "split_shipping_option_recommended": "מוּמלָץ"
+      },
+      "delivery_options": {
+        "free_total_label": "לְשַׁחְרֵר",
+        "ship": "סְפִינָה",
+        "ship_to_address": "לשלוח לכתובת",
+        "shipping_address": "כתובת למשלוח",
+        "pick_up": "לֶאֱסוֹף",
+        "pick_up_from_store": "איסוף בחנות",
+        "pick_up_locations": "מיקומי איסוף",
+        "pickup_point_map_title": "מפת נקודות איסוף",
+        "pick_up_in_one_hour": "בדרך כלל מוכן תוך שעה",
+        "pick_up_in_two_hours": "בדרך כלל מוכן תוך שעתיים",
+        "pick_up_in_four_hours": "בדרך כלל מוכן תוך 4 שעות",
+        "pick_up_in_twenty_four_hours": "בדרך כלל מוכן תוך 24 שעות",
+        "pick_up_in_two_to_four_days": "בדרך כלל מוכן תוך 2-4 ימים",
+        "pick_up_in_five_or_more_days": "בדרך כלל מוכן תוך 5+ ימים",
+        "pick_up_in_zero_to_two_hours": "מוכן לאיסוף תוך שעתיים",
+        "pick_up_in_two_to_four_hours": "מוכן לאיסוף תוך 4 שעות",
+        "pick_up_immediately": "מוכן לאיסוף עכשיו",
+        "pick_up_next_day": "מוכן לאיסוף למחרת",
+        "pickup_point_method_definition": "לשלוח לנקודת איסוף",
+        "retail_method_definition": "משלוח קמעונאי",
+        "company_location_no_address_banner": "הזמנות למשלוח למיקומים ללא כתובת יישלחו לבדיקה.",
+        "none_method_definition": "אין משלוח",
+        "subscription_pickup_information": "שיטת משלוח זו תחול על כל הפריטים בהזמנה זו ועל כל ההזמנות העתידיות עבור מנוי זה."
+      },
+      "customer_account": {
+        "not_user_label": "לא %{first_name}?",
+        "have_an_account_label": "יש לך חשבון?",
+        "sign_in_link_label": "כניסה",
+        "sign_out_link_label": "יציאה",
+        "save_my_information_label": "שמור מידע זה לפעם הבאה",
+        "invalid_address": "הכתובת שנבחרה אינה חוקית. %{update_address_link} או בחר כתובת אחרת.",
+        "incomplete_address": "הכתובת שנבחרה אינה שלמה. %{update_address_link} או בחר כתובת אחרת.",
+        "rollup_label": "חֶשְׁבּוֹן",
+        "rollup_accessibility_label": "אפשרויות חשבון",
+        "invalid_shipping_method_summary": "בחר כתובת משלוח תקפה כדי להציג את שיטות המשלוח הזמינות",
+        "saved_address_option_description": {
+          "one": "שמרת כתובת אחת {{count}} .",
+          "other": "יש לך {{count}} כתובות שמורות."
+        },
+        "saved_address_option_link": "השתמש בכתובת שמורה",
+        "saved_address_modal_title": "השתמש בכתובת השמורה שלי"
+      },
+      "remote_merchandise_only": {
+        "title": "השלם את הרכישה שלך",
+        "remote_only_notice": "פריטים אלה נמכרים ונשלחים על ידי חנויות אחרות. בדוק בכל חנות כדי להשלים את הרכישה.",
+        "return_to_store_label": "חזור לחנות",
+        "detail_item_label": {
+          "one": "פריט {{count}}",
+          "other": "{{count}}"
+        },
+        "checkout_on_shop_label": "ניתן לשלם ב-%{shop_name}",
+        "single_shop_transition": "מפנה אותך אל %{advertiser} כדי להשלים את הרכישה."
       }
     },
     "page_titles": {
