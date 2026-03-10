@@ -18,8 +18,8 @@
         </button>
       </div>
 
-      <!-- Desktop Left Navigation (becomes RIGHT nav in RTL) -->
-      <nav class="hidden md:flex items-center flex-1" style="{% if request.locale.iso_code == 'he' %}flex-direction: row-reverse; justify-content: flex-start; gap: 3rem;{% else %}gap: 3rem;{% endif %}">
+      <!-- Desktop Left Navigation -->
+      <nav class="hidden md:flex items-center flex-1" style="gap: 3rem;">
         <a href="/" class="text-xs font-medium tracking-widest text-gray-900 uppercase hover:text-gray-500 transition-colors">
           {{ 'header.home' | t }}
         </a>

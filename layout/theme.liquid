@@ -25,47 +25,62 @@
     }
 
     /* ==========================================
-       RTL STYLES — only applied when dir="rtl"
+       RTL STYLES — Hebrew only
+       IMPORTANT: Images and grid ORDER stay unchanged (LTR visual order)
+       Only TEXT direction and alignment change
     =========================================== */
-    [dir="rtl"] body {
-      font-family: 'Inter', sans-serif;
-    }
-    /* Flip flex rows for RTL */
+
+    /* Force ALL flex containers to keep original LTR visual order */
+    [dir="rtl"] .flex,
     [dir="rtl"] nav,
-    [dir="rtl"] .flex-row {
-      flex-direction: row-reverse;
+    [dir="rtl"] section > div {
+      flex-direction: inherit;
     }
-    /* Fix spacing so left margin becomes right margin */
-    [dir="rtl"] .ml-1 { margin-left: 0; margin-right: 0.25rem; }
-    [dir="rtl"] .space-x-12 > * + * { margin-left: 0; margin-right: 3rem; }
-    [dir="rtl"] .space-x-10 > * + * { margin-left: 0; margin-right: 2.5rem; }
-    [dir="rtl"] .gap-4 { gap: 1rem; }
-    /* Reverse footer grid columns */
-    [dir="rtl"] footer .flex-row { flex-direction: row-reverse; }
-    /* Fix mega menu dropdown direction */
-    [dir="rtl"] .group:hover > div { left: auto; right: 0; }
-    /* Fix text alignment */
-    [dir="rtl"] .text-center { text-align: center; }
-    [dir="rtl"] h3, [dir="rtl"] p, [dir="rtl"] a, [dir="rtl"] li {
-      text-align: right;
-    }
-    /* Payment icons stay in their position but reversed */
-    [dir="rtl"] .md\:absolute.md\:left-\[1027\.6px\] {
-      left: auto;
-      right: 1027.6px;
-    }
-    /* Footer column order is reversed in RTL */
-    [dir="rtl"] footer .flex.flex-col.md\:flex-row {
-      flex-direction: row-reverse;
-    }
-    /* Product grid text alignment */
+    [dir="rtl"] .flex-row  { flex-direction: row !important; }
+    [dir="rtl"] .flex-col  { flex-direction: column !important; }
+
+    /* Grid stays LTR visually — hero images and product cards don't rearrange */
+    [dir="rtl"] .grid { direction: ltr; }
+    [dir="rtl"] .grid > * { direction: rtl; }
+
+    /* Header row stays in original LTR order */
+    [dir="rtl"] header > div > div { flex-direction: row !important; direction: ltr; }
+    [dir="rtl"] header nav { flex-direction: row !important; direction: ltr; }
+    [dir="rtl"] header nav a { direction: rtl; }
+
+    /* Footer columns keep LTR order */
+    [dir="rtl"] footer > div { flex-direction: column !important; }
+    [dir="rtl"] footer .md\:flex-row { flex-direction: row !important; }
+    [dir="rtl"] footer ul { direction: rtl; padding: 0; }
+    [dir="rtl"] footer li,
+    [dir="rtl"] footer h3,
+    [dir="rtl"] footer a { text-align: right; display: block; }
+
+    /* Text alignment only */
+    [dir="rtl"] h1, [dir="rtl"] h2 { text-align: center; }
+    [dir="rtl"] h3 { text-align: right; }
+    [dir="rtl"] p  { text-align: right; }
+
+    /* Product card text — right aligned */
     [dir="rtl"] .product-card h3,
-    [dir="rtl"] .product-card p {
+    [dir="rtl"] .product-card p { text-align: right; }
+    [dir="rtl"] .product-card > div:last-child { direction: rtl; }
+
+    /* Phone and email — keep LTR direction so numbers don't reverse */
+    [dir="rtl"] a[href^="tel:"],
+    [dir="rtl"] a[href^="mailto:"] {
+      direction: ltr;
+      display: inline-block;
       text-align: right;
+      unicode-bidi: embed;
     }
-    /* Hebrew font - use system font stack that supports Hebrew well */
+
+    /* Copyright is always centred */
+    [dir="rtl"] .text-center { text-align: center !important; }
+
+    /* Hebrew font stack */
     [dir="rtl"] {
-      font-family: 'Inter', Arial, sans-serif;
+      font-family: 'Inter', Arial, 'Noto Sans Hebrew', sans-serif;
     }
   </style>
 </head>
