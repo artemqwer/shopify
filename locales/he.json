@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin language editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "general": {
     "password_page": {
@@ -48,5 +57,190 @@
     "product_2": "מטפחת משי כחולה",
     "product_3": "מטפחת וורודה",
     "product_4": "מטפחת וינטג'"
+  },
+  "shopify": {
+    "checkout": {
+      "contact": {
+        "contact_method_title": "מַגָע"
+      },
+      "stock": {
+        "price_column_header": "מְחִיר"
+      },
+      "order_summary": {
+        "more_items_modal": {
+          "search_item": "לְחַפֵּשׂ"
+        },
+        "price_label": "מְחִיר",
+        "subtotal_label_with_quantity": {
+          "one": "סכום ביניים · %{count} פריט",
+          "other": "סכום ביניים · %{count} פריטים"
+        },
+        "shipping_label": "מִשׁלוֹחַ",
+        "pickup_label": "איסוף בחנות",
+        "no_pickup_location": "אין נקודות איסוף זמינות.",
+        "pickup_unavailable_banner_title": {
+          "one": "אין חנויות זמינות עם הפריט שלך",
+          "other": "אין חנויות זמינות עם הפריטים שלך"
+        },
+        "pickup_unavailable_banner_title_with_country": {
+          "one": "אין חנויות זמינות ב-%{country} עם הפריט שלך",
+          "other": "אין חנויות זמינות ב-%{country} עם הפריטים שלך"
+        },
+        "pickup_unavailable_banner_body": {
+          "ship_to_address": "לשלוח לכתובת",
+          "ship_to_address_instead_html": "%{link} במקום זאת"
+        },
+        "tip_label": "עֵצָה",
+        "unconfirmed_label": "לא אושר",
+        "calculating_shipping": "מחשב...",
+        "calculating": "מחשב...",
+        "shipping_default_value": "מחושב בשלב הבא",
+        "shipping_discount_title": "הנחת משלוח",
+        "shipping_pending_message": "עדיין לא זמין",
+        "shipping_policy_link": "עלויות משלוח",
+        "taxes_label": "מיסים",
+        "estimated_taxes_label": "מיסים משוערים",
+        "estimated_taxes_label_short": "מְשׁוֹעָר",
+        "information_estimated_taxes_label": "מיסים (משוערים)",
+        "estimated_taxes_finalization_tooltip_content": "המס הסופי והסכום הכולל יאושרו באמצעות דוא\"ל או הודעת טקסט לאחר ביצוע ההזמנה.",
+        "estimated_taxes_finalization_tooltip_content_short": "מס סוכם לאחר התשלום",
+        "order_total_label": "סה\"כ הזמנה",
+        "price_before_discount_aria_text": "מחיר מקורי",
+        "price_after_discount_aria_text": "מחיר מוזל",
+        "discount_code_aria_text": "קוד הנחה",
+        "total_savings": "סך החיסכון",
+        "total_label": "סַך הַכֹּל",
+        "total_due_label": "סכום לתשלום",
+        "total_paid_label": "סך הכל ששולם",
+        "total_price_label": "מחיר כולל",
+        "total_outstanding_label": "סכום לתשלום",
+        "deposit_label": "לְהַפְקִיד",
+        "total_due_today_label": "סכום לתשלום היום",
+        "total_due_later_label": "סה\"כ לתשלום מאוחר יותר",
+        "partial_total_label": "סַך הַכֹּל",
+        "free_total_label": "לְשַׁחְרֵר",
+        "free_shipping_total_label": "לְשַׁחְרֵר",
+        "paid_label": "בתשלום",
+        "payment_due_label": "תשלום עד מועד התשלום",
+        "vat_label_html": "כולל %{amount} במסים",
+        "duties_included_label": "הסכום כולל מיסים ומכסים. אין חיובים נוספים במשלוח.",
+        "discount_and_gift_card_savings_notice": "לאחר %{discount_amount} בהנחות ו-%{gift_card_amount} בכרטיסי מתנה",
+        "discount_savings_notice": "לאחר הנחות של %{discount_amount}",
+        "gift_card_savings_notice": "לאחר %{gift_card_amount} בכרטיסי מתנה",
+        "cost_table_title": "סיכום עלויות",
+        "cost_table_item_column_header": "פָּרִיט",
+        "cost_table_value_column_header": "עֵרֶך",
+        "description_label": "תֵאוּר",
+        "price_per_item": {
+          "accessibility_label": "%{price} לפריט",
+          "label": "%{מחיר}/ליחידה"
+        },
+        "quantity_label": "כַּמוּת",
+        "product_change_label": "לְשַׁנוֹת",
+        "product_image_label": "תמונת מוצר",
+        "product_image_quantity_label": "כַּמוּת",
+        "scroll_order_summary": "גלול לפריטים נוספים",
+        "expand_order_summary_short": "לְהַצִיג",
+        "collapse_order_summary_short": "לְהַסתִיר",
+        "original_price": "מחיר מקורי",
+        "sale_price": "מחיר מכירה",
+        "compare_at_sale": "מכירה (%{sale_amount})",
+        "total_updated_label": "מחיר כולל מעודכן:",
+        "order_total_updated_label": "סכום מעודכן",
+        "total_already_paid_label": "בתשלום",
+        "unit_price": {
+          "accessible_separator": "לְכָל",
+          "per_item": {
+            "single": "%{price} ליחידה",
+            "one": "%{price} לכל %{count} פריט",
+            "other": "%{price} לכל %{count} פריטים"
+          },
+          "per_unit": {
+            "single": "מחיר %/יחידה %"
+          }
+        },
+        "gift_card_ending": "כרטיס מתנה שמסתיים ב-%{last_characters}",
+        "estimated_tax_label": "מס משוער",
+        "multiple_shipping_lines_label": "סה\"כ משלוח",
+        "recurring_subtotal_label": "סכום ביניים חוזר",
+        "recurring_total_label": "סכום חוזר",
+        "recurring_total_tooltip": "לא כולל משלוח, מס, מכסים או כל הנחה רלוונטית.",
+        "confirmation_number_label": "אישור #%{confirmation_number}",
+        "higher_value_discount_applied": "לא ניתן היה להשתמש ב <strong style=\"text-transform:uppercase\">-%{code}</strong> עם ההנחות הקיימות שלך.",
+        "percent_off_shipping": "%{percent}% הנחה על משלוח",
+        "amount_off_shipping": "%{amount} הנחה על משלוח",
+        "deferred_payment_info": {
+          "title": "תשלום של %{amount_due} מועד אחרון לתאריך %{due_at}",
+          "description_html": "לשאלות בנוגע להזמנה שלך, %{contact_us}.",
+          "paid_today": "סך הכל ששולם היום",
+          "paid_today_next": "שולם היום",
+          "due_on_fulfillment_title": "תשלום של %{amount_due} יבוצע עם מימוש העסקה",
+          "due_on_receipt_title": "תשלום של %{amount_due} יבוצע עם קבלתו"
+        },
+        "deferred_balance_info": {
+          "title": "יתרת התשלום בסך {{amount_due}} מועד התשלום הוא בתאריך {{due_at}}",
+          "due_on_fulfillment_title": "יתרת התשלום בסך {{amount_due}} תישלח עם מימוש התשלום"
+        },
+        "payment_terms_totals": {
+          "due_today": "סכום לתשלום היום",
+          "due_today_next": "מועד אחרון להיום",
+          "due_later": "סך הכל לתשלום %{due_at}",
+          "due_on_fulfillment": "סה\"כ לתשלום בעת ביצוע",
+          "due_on_fulfillment_next": "מועד הגשמה",
+          "due_on_receipt": "סכום לתשלום עם הקבלה",
+          "due_later_checkout_to_draft": "סכום לתשלום מאוחר יותר",
+          "total_paid": "סך הכל ששולם"
+        }
+      },
+      "review": {
+        "blocks": {
+          "contact_method_title": "מַגָע"
+        }
+      },
+      "shop_policies": {
+        "contact_information": "מַגָע"
+      },
+      "pickup_point": {
+        "search_button": "לְחַפֵּשׂ"
+      }
+    },
+    "page_titles": {
+      "search": "לְחַפֵּשׂ"
+    }
+  },
+  "customer_accounts": {
+    "navigation_and_structure": {
+      "search": "לְחַפֵּשׂ"
+    },
+    "account_information": {
+      "profile_card": {
+        "title": "פּרוֹפִיל"
+      },
+      "title": "פּרוֹפִיל"
+    },
+    "orders": {
+      "list_title": "הזמנות"
+    },
+    "order_details": {
+      "contact": "מַגָע"
+    },
+    "account_menu": {
+      "signed_out_state": {
+        "orders_button": "הזמנות",
+        "profile_button": "פּרוֹפִיל"
+      },
+      "signed_in_state": {
+        "orders_button": "הזמנות",
+        "profile_button": "פּרוֹפִיל"
+      },
+      "location_picker": {
+        "search_field_placeholder": "לְחַפֵּשׂ"
+      }
+    },
+    "B2B": {
+      "orders": {
+        "order_list_column_headers_contact": "מַגָע"
+      }
+    }
   }
 }
