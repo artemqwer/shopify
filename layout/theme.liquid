@@ -9,7 +9,7 @@
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@100..900&display=swap" rel="stylesheet">
   
   <!-- Add Tailwind CDN for exact pixel-perfect match without build steps -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -74,21 +74,7 @@
 
     /* Hebrew font stack */
     [dir="rtl"] {
-      font-family: 'Rubik', 'Inter', Arial, sans-serif;
-    }
-    /* Keep Montserrat for headings (it has partial Hebrew support in uppercase) */
-    [dir="rtl"] h1, [dir="rtl"] h2, [dir="rtl"] h3 {
-      font-family: 'Rubik', 'Montserrat', sans-serif;
-      font-weight: 300;
-    }
-    /* Numbers and latin text stay readable */
-    [dir="rtl"] a[href^="tel:"],
-    [dir="rtl"] a[href^="mailto:"] {
-      font-family: 'Inter', 'Rubik', sans-serif;
-      direction: ltr;
-      display: inline-block;
-      text-align: right;
-      unicode-bidi: embed;
+      font-family: 'Inter', Arial, 'Noto Sans Hebrew', sans-serif;
     }
   </style>
 </head>
