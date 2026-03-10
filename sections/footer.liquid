@@ -65,7 +65,8 @@
       </div>
 
       <!-- Payment Methods Desktop -->
-      <div class="mt-8 md:mt-0 md:absolute md:left-[1027.6px] md:right-[300px] top-0 flex justify-center pointer-events-none">
+      <div class="mt-8 md:mt-0 md:absolute top-0 flex justify-center pointer-events-none"
+        style="{% if request.locale.iso_code == 'he' %}right: 1027.6px; left: auto;{% else %}left: 1027.6px; right: 300px;{% endif %}">
         <img
           src="{{ 'pay.png' | asset_url }}"
           alt="Payment Methods"
