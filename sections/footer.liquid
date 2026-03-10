@@ -5,6 +5,22 @@
 }
 {% endschema %}
 
+<style>
+  /* Mobile accordion chevron animation */
+  details summary svg {
+    transition: transform 0.3s ease;
+  }
+  details[open] summary svg {
+    transform: rotate(180deg);
+  }
+  details summary::-webkit-details-marker {
+    display: none;
+  }
+  details summary::marker {
+    display: none;
+  }
+</style>
+
 <footer class="bg-white shrink-0 border-[#F5F5F5] pt-10 md:pt-[44px] pb-[19px] md:h-[224px] flex flex-col justify-between relative z-50 w-full">
   <!-- Absolute top border that enforces the Figma structure without messing up internal text padding -->
   <div class="absolute top-0 left-0 w-full h-[1px] bg-[#F5F5F5] pointer-events-none"></div>

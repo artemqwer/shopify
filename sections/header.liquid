@@ -73,12 +73,17 @@
         </a>
       </div>
 
-      <!-- Mobile Header Right: Cart Icon -->
-      <div class="md:hidden flex-1 flex items-center justify-end">
-         <button class="text-gray-900 relative">
-           <svg class="w-[22px] h-[22px]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-           </svg>
+      <!-- Mobile Header Right: Search + Cart Icons -->
+      <div class="md:hidden flex-1 flex items-center justify-end gap-4">
+        <button class="text-gray-900" aria-label="Search" onclick="window.location='/search'">
+          <svg class="w-[20px] h-[20px]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+        </button>
+        <button class="text-gray-900 relative" aria-label="Cart" onclick="window.location='/cart'">
+          <svg class="w-[22px] h-[22px]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+          </svg>
         </button>
       </div>
 
@@ -109,11 +114,11 @@
   </div>
 
   <!-- Mobile Menu (Hidden by default) -->
-  <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full bg-white border-t border-[#F5F5F5] shadow-lg">
-    <nav class="flex flex-col py-4 px-4">
-      <a href="/" class="py-3 text-sm font-medium tracking-[0.1em] text-gray-900 uppercase border-b border-[#F5F5F5]">Home</a>
-      <a href="/catalog" class="py-3 text-sm font-medium tracking-[0.1em] text-gray-900 uppercase border-b border-[#F5F5F5]">Catalog</a>
-      <a href="/popular" class="py-3 text-sm font-medium tracking-[0.1em] text-gray-900 uppercase">Popular</a>
+  <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full bg-white border-t border-[#F5F5F5] shadow-lg z-50">
+    <nav class="flex flex-col py-2 px-4">
+      <a href="/" class="py-4 text-[11px] font-medium tracking-[0.18em] text-gray-900 uppercase border-b border-[#F5F5F5] hover:text-gray-500 transition-colors">Home</a>
+      <a href="/catalog" class="py-4 text-[11px] font-medium tracking-[0.18em] text-gray-900 uppercase border-b border-[#F5F5F5] hover:text-gray-500 transition-colors">Catalog</a>
+      <a href="/popular" class="py-4 text-[11px] font-medium tracking-[0.18em] text-gray-900 uppercase hover:text-gray-500 transition-colors">Popular</a>
     </nav>
   </div>
 </header>
