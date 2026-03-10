@@ -64,11 +64,40 @@
         "contact_method_title": "מַגָע"
       },
       "stock": {
-        "price_column_header": "מְחִיר"
+        "price_column_header": "מְחִיר",
+        "unshippable_product": {
+          "title": "אין משלוח זמין",
+          "header": {
+            "one": "אין משלוח זמין עבור פריט %{count}",
+            "other": "אין משלוח זמין עבור %{count} פריטים"
+          },
+          "message": {
+            "one": "פריט זה יוסר מעגלת הקניות שלך מכיוון שאין שיטות משלוח זמינות עבור כתובתך.",
+            "other": "פריטים אלה יוסרו מעגלת הקניות שלך מכיוון שאין שיטות משלוח זמינות עבור כתובתך."
+          },
+          "status_column_header": "אין משלוח"
+        },
+        "price_update": {
+          "title": "עדכון מחיר",
+          "description": "המחירים עבור פריטים אלה השתנו והם מעודכנים בעגלת הקניות שלך.",
+          "updated_price": "מחיר מעודכן"
+        },
+        "price_and_quantity_update": {
+          "title": "עדכון מחיר וכמות",
+          "description": "המחירים והכמויות הזמינות עבור פריטים אלה השתנו ומעודכנים בעגלת הקניות שלך."
+        },
+        "out_of_stock": {
+          "description": "פריטים אלה אינם זמינים עוד והוסרו מעגלת הקניות שלך.",
+          "items_unavailable": "חלק מהפריטים אינם זמינים עוד והוסרו מעגלת הקניות שלך."
+        },
+        "out_of_stock_in_context_label": "מוצר זה אינו זמין במדינה/אזור שלך."
       },
       "order_summary": {
         "more_items_modal": {
-          "search_item": "לְחַפֵּשׂ"
+          "search_item": "לְחַפֵּשׂ",
+          "clear_search": "נקה חיפוש",
+          "empty_results": "לא נמצאו תוצאות עבור \"%{searchText}\". בדוק את האיות או השתמש במילה או בביטוי אחר.",
+          "number_items_shown": "%{shownNumber} מתוך %{totalNumber} פריטים"
         },
         "price_label": "מְחִיר",
         "subtotal_label_with_quantity": {
@@ -190,7 +219,73 @@
           "due_on_receipt": "סכום לתשלום עם הקבלה",
           "due_later_checkout_to_draft": "סכום לתשלום מאוחר יותר",
           "total_paid": "סך הכל ששולם"
-        }
+        },
+        "title": "סיכום הזמנה",
+        "group_title_label": "חלק מ-\"%{group_title}\"",
+        "for_add_on": "עבור: %{group_title}",
+        "from_shop_heading": "מאת %{shop_name}",
+        "from_other_stores_heading": "מחנויות אחרות",
+        "from_multiple_stores_heading": "מחנויות מרובות",
+        "number_items": {
+          "one": "פריט %{count}",
+          "other": "%{count} פריטים"
+        },
+        "view_all_items": {
+          "one": "הצג פריט %{count}",
+          "other": "הצג את כל %{count} הפריטים"
+        },
+        "order_name_label": "הזמנה %{name}",
+        "shopping_cart_label": "עגלת קניות",
+        "discount_title": "דִיסקוֹנט",
+        "discount_title_stacking": {
+          "one": "דִיסקוֹנט",
+          "other": "הנחות"
+        },
+        "discount_order_stacking": {
+          "one": "הנחת הזמנה",
+          "other": "הנחות על הזמנות"
+        },
+        "discount_label": "קוד הנחה",
+        "discount_not_found": "לא ניתן למצוא הנחה תקפה התואמת את הקוד שהוזן",
+        "discount_placeholder": "קוד הנחה",
+        "discount_code_applied": "קוד הנחה הוחל",
+        "discount_code_applied_with_code": "קוד ההנחה %{code} הוחל",
+        "discount_code_removed": "קוד ההנחה %{code} הוסר",
+        "discount_code_replaced": "קוד ההנחה %{old_code} הוסר ו-%{code} יושם",
+        "discount_code_replaced_multiple": "מספר קודי הנחה הוסרו ו-%{code} הוחל",
+        "discount_code_allocations_mismatch": "קוד ההנחה <strong style=\"text-transform:uppercase\">%{code}</strong> שלך השתנה. בדוק את עגלת הקניות ונסה שוב.",
+        "order_discounts_apply_to_local_shop": "הנחות הזמנות חלות רק על פריטים מ- %{shop_name}",
+        "gift_card_applied": "כרטיס מתנה הוחל",
+        "enter_shipping_address": "הזן כתובת למשלוח",
+        "gift_card_title": "כרטיס מתנה",
+        "gift_card_label": "כרטיס מתנה",
+        "gift_card_placeholder": "כרטיס מתנה",
+        "gift_card_and_discount_title": "קוד הנחה או כרטיס מתנה",
+        "gift_card_and_discount_label": "קוד הנחה או כרטיס מתנה",
+        "gift_card_and_discount_placeholder": "קוד הנחה או כרטיס מתנה",
+        "gift_cards_apply_to_local_shop": "כרטיסי מתנה תקפים רק לפריטים מ-%{shop_name}",
+        "add_discount_or_gift_card": "הוסף קוד הנחה או כרטיס מתנה",
+        "remove_gift_card_label": "כרטיס מתנה ברור",
+        "remove_discount_label": "הסר הנחה",
+        "return_restocking_fee_label": "דמי חידוש מלאי",
+        "return_shipping_fee_label": "משלוח חזרה",
+        "free_shipping_discount_label": "משלוח חינם",
+        "applied_free_shipping_discount_label": "יישומי",
+        "apply_discount_button_label": "לִפְנוֹת",
+        "applied_discount_message": "%{amount} הנחה על מחיר ההזמנה הכולל",
+        "discount_has_been_applied": "ההנחה יושמה",
+        "discount_has_been_removed": "ההנחה הוסרה",
+        "gift_card_has_been_applied": "כרטיס מתנה הוחל",
+        "gift_card_has_been_removed": "כרטיס המתנה הוסר",
+        "gift_card_subscriptions_notice": "כרטיסי מתנה יחולו רק על התשלום הראשון שלך",
+        "discount_already_applied": "הנחה הוחלה על הזמנה זו. לא ניתן להוסיף הנחה נוספת.",
+        "cart_does_not_meet_discount_requirements_notice": "קוד ההנחה <strong style=\"text-transform:uppercase\">%{code}</strong> אינו תקף לפריטים בעגלת הקניות שלך",
+        "discount_requires_customer_notice": "הזן את פרטי המשלוח שלך כדי להחיל את קוד ההנחה <strong style=\"text-transform:uppercase\">%{code}</strong>",
+        "customer_does_not_meet_discount_requirements_notice": "קוד ההנחה <strong style=\"text-transform:uppercase\">%{code}</strong> אינו זמין עבורך כרגע",
+        "eligible_customer_missing_notice": "קוד הנחה <strong style=\"text-transform:uppercase\">%{code}</strong> דורש לקוחות זכאים",
+        "shipping_information_does_not_meet_discount_requirements_notice": "קוד ההנחה <strong style=\"text-transform:uppercase\">%{code}</strong> אינו זמין עבור כתובת המשלוח שלך",
+        "customer_already_used_once_per_customer_discount_notice": "קוד ההנחה <strong style=\"text-transform:uppercase\">%{code}</strong> כבר נוצל",
+        "subtotal_label": "סכום ביניים"
       },
       "review": {
         "blocks": {
@@ -710,10 +805,72 @@
         "apple": {
           "connect": "לחץ כדי לחבר את חשבון Apple Pay שלך"
         }
+      },
+      "contextual_availability": {
+        "title": {
+          "one": "מוצר לא זמין",
+          "other": "מוצרים לא זמינים"
+        },
+        "products_not_available": {
+          "one": "מוצר זה יוסר מעגלת הקניות שלך מכיוון שהוא אינו זמין במדינה/אזור שלך.",
+          "other": "מוצרים אלה יוסרו מעגלת הקניות שלך מכיוון שהם אינם זמינים במדינה/אזור שלך."
+        },
+        "all_products_in_cart_unavailable": {
+          "one": "מוצר זה אינו זמין במדינה/אזור שלך.",
+          "other": "מוצרים אלה אינם זמינים במדינה/אזור שלך."
+        },
+        "unavailable_label": "לא זמין"
+      },
+      "merchandise_unavailable_in_buyer_location": {
+        "banner_title": {
+          "some_products_one": "מוצר זה אינו זמין למשלוח אל %{location_name}.",
+          "some_products_other": "מוצרים אלה אינם זמינים למשלוח ל-%{location_name}.",
+          "all_products_one": "המוצר בעגלת הקניות שלך אינו זמין למשלוח אל %{location_name}.",
+          "all_products_other": "המוצרים בעגלת הקניות שלך אינם זמינים למשלוח אל %{location_name}."
+        },
+        "missing_country_fallback": "המדינה שלך",
+        "indeterminate_location_fallback": "המיקום שלך",
+        "cart_updated": "העגלה שלך עודכנה.",
+        "change_address_only": "שנה את כתובת המשלוח כדי להמשיך.",
+        "change_address_or_remove": "שנה כתובת למשלוח או %{remove_action}.",
+        "remove_items_action": {
+          "one": "הסר פריט לא זמין",
+          "other": "הסר פריטים שאינם זמינים"
+        },
+        "empty_cart_action": "רוקנו את העגלה והחזרתם לחנות"
+      },
+      "deliverability": {
+        "not_deliverable": {
+          "title": {
+            "one": "אין משלוח זמין עבור פריט %{count}",
+            "other": "אין משלוח זמין עבור %{count} פריטים"
+          },
+          "message": {
+            "one": "פריט זה יוסר מעגלת הקניות שלך מכיוון שאין שיטות משלוח זמינות עבור כתובתך.",
+            "other": "פריטים אלה יוסרו מעגלת הקניות שלך מכיוון שאין שיטות משלוח זמינות עבור כתובתך."
+          },
+          "label": "אין משלוח"
+        }
       }
     },
     "page_titles": {
-      "search": "לְחַפֵּשׂ"
+      "search": "לְחַפֵּשׂ",
+      "blog_or_article_with_error": "שגיאה - %{title}",
+      "products": "מוצרים",
+      "shopping_cart": "עגלת הקניות שלך",
+      "account": "חֶשְׁבּוֹן",
+      "create_account": "צור חשבון",
+      "reset_account": "איפוס חשבון",
+      "addresses": "כתובות",
+      "order": "הזמנה %{name}",
+      "search_results": {
+        "one": "חיפוש: נמצאה %{count} תוצאה עבור \"%{terms}\"",
+        "other": "חיפוש: %{count} תוצאות נמצאו עבור \"%{terms}\""
+      },
+      "collections": "אוספים",
+      "not_found": "404 לא נמצא",
+      "challenge": "אֶתגָר",
+      "checkpoint": "מחסום"
     },
     "pagination": {
       "previous": "קוֹדֵם",
@@ -824,11 +981,137 @@
           "admin_link_text": "מנהל"
         }
       }
+    },
+    "email_marketing": {
+      "subscribed": {
+        "confirmation": "תודה שנרשמת לרשימת התפוצה שלנו.",
+        "disclaimer": "ניתן לבטל את המנוי בכל עת.",
+        "unsubscribe": "ביטול מנוי"
+      },
+      "unsubscribed": {
+        "confirmation": "ביטלת את המנוי שלך לרשימת התפוצה שלנו.",
+        "disclaimer": "לא תקבלו מאיתנו עדכונים שיווקיים נוספים. תוכלו להירשם שוב בכל עת.",
+        "preview": "אתה מציג תצוגה מקדימה של מה שלקוחות יראו כשהם יבטל את המנוי."
+      },
+      "sms_unsubscribe_confirm": {
+        "message": "האם אתה בטוח שברצונך לבטל את המנוי לשיווק SMS?",
+        "button": "ביטול מנוי"
+      },
+      "open_tracking": {
+        "opt_in": {
+          "opted_in_html": "<b>בחרתם במעקב אחר פתיחת דוא\"ל.</b>",
+          "visibility": "שיעורי פתיחת אימיילים ידווחו באופן אנונימי. נראה רק אם פתחת אימייל כחלק משיעור פתיחת אימייל מצטבר.",
+          "opt_out_html": "באפשרותך <a style=\"text-decoration:underline;\" href=\"%{link}\">לבטל</a> את מעקב פתיחת הדוא\"ל אם אינך מעוניין לשתף מידע זה.",
+          "preview_bar": "אתם מציגים בתצוגה מקדימה מה לקוחות יראו כשהם יבחרו במעקב אחר פתיחת דוא\"ל."
+        },
+        "opt_out": {
+          "opted_out_html": "<b>ביטלת את הסכמתך למעקב אחר פתיחת אימיילים.</b>",
+          "visibility": "לא נראה אם ​​פתחת את האימיילים שלנו.",
+          "opt_in_html": "<a style=\"text-decoration:underline;\" href=\"%{link}\">הצטרף</a> למעקב אחר פתיחת דוא\"ל.",
+          "preview_bar": "אתם מציגים בתצוגה מקדימה מה לקוחות יראו כשהם מבטלים את הסכמתם למעקב אחר פתיחת אימייל."
+        },
+        "no_longer_track": {
+          "status_html": "<b>אנחנו כבר לא עוקבים אחר פתיחות של אימיילים.</b>",
+          "privacy_policy": "לאחר שליחת אימייל זה, עדכנו את מדיניות הפרטיות שלנו ואנו כבר לא עוקבים אחר פתיחות."
+        },
+        "track": {
+          "status_html": "<b>מדווח על מעקב אחר פתיחת אימיילים.</b>",
+          "visibility": "נראה רק אם פתחת את האימייל, כחלק משיעור הפתיחה הכולל של האימייל."
+        },
+        "updated_policy": {
+          "status_html": "<b>מדווח על מעקב אחר פתיחת אימיילים.</b>",
+          "visibility": "עדכנו את המדיניות שלנו, וכעת אנו עוקבים אחר פתיחות אימיילים. שיעורי פתיחת אימיילים ידווחו באופן אנונימי. נראה רק אם פתחת אימייל כחלק משיעור הפתיחה הכולל של האימייל.",
+          "opt_out_html": "אם אינך מעוניין לשתף מידע זה, תוכל <a style=\"text-decoration:underline;\" href=\"%{link}\">לבטל את המנוי.</a>"
+        }
+      }
+    },
+    "filters": {
+      "availability": {
+        "value": {
+          "in_stock": "בִּמלַאִי",
+          "out_of_stock": "אזל מהמלאי"
+        }
+      },
+      "boolean": {
+        "true_label": "כֵּן",
+        "false_label": "לֹא"
+      }
+    },
+    "search": {
+      "error": "אירעה בעיה בטעינת תוצאות החיפוש. אנא רענן את הדף או נסה שוב מאוחר יותר.",
+      "sorting": {
+        "relevance": "רלוונטיות",
+        "price_ascending": "מחיר, מהנמוך לגבוה",
+        "price_descending": "מחיר, מהגבוה לנמוך"
+      }
+    },
+    "cart": {
+      "discounts_with_count": "%{count} הנחות יושמו"
+    },
+    "challenge": {
+      "message": "כדי להמשיך, אנא הודיעו לנו שאתם לא רובוטים.",
+      "error": "תשובתך לא הייתה נכונה, אנא נסה שוב.",
+      "submit_button_text": "לְהַגִישׁ"
+    },
+    "checkpoint": {
+      "message": "פתור את קפטצ'ה כדי להמשיך",
+      "error": "אימות ה-CAPTCHA נכשל",
+      "submit_button_text": "לְהַגִישׁ"
+    },
+    "store_availability": {
+      "pick_up_time": {
+        "one_hour": "בדרך כלל מוכן תוך שעה",
+        "two_hours": "בדרך כלל מוכן תוך שעתיים",
+        "four_hours": "בדרך כלל מוכן תוך 4 שעות",
+        "twenty_four_hours": "בדרך כלל מוכן תוך 24 שעות",
+        "two_to_four_days": "בדרך כלל מוכן תוך 2-4 ימים",
+        "five_or_more_days": "בדרך כלל מוכן תוך 5+ ימים",
+        "zero_to_two_hours": "בדרך כלל מוכן תוך שעתיים",
+        "two_to_four_hours": "בדרך כלל מוכן תוך 4 שעות",
+        "immediately": "מוכן לאיסוף עכשיו",
+        "next_day": "מוכן לאיסוף למחרת"
+      }
+    },
+    "subscriptions": {
+      "buyer_consent_product": "פריט זה הוא רכישה חוזרת או נדחית. על ידי המשך הרכישה, אני מסכים ל-%{cancellationPolicyLink} ומאשר לך לחייב את אמצעי התשלום שלי במחירים, בתדירות ובתאריכים המפורטים בדף זה עד לביצוע ההזמנה שלי או עד שאבטל, אם ירשו לי.",
+      "buyer_consent_cart": "אחד או יותר מהפריטים בעגלת הקניות שלך הוא רכישה חוזרת או נדחית. על ידי המשך השימוש, אני מסכים ל-%{cancellationPolicyLink} ומאשר לך לחייב את אמצעי התשלום שלי במחירים, בתדירות ובתאריכים המפורטים בדף זה עד לביצוע ההזמנה שלי או עד שאבטל, אם ירשו לי.",
+      "cancellation_policy": "מדיניות ביטול"
     }
   },
   "customer_accounts": {
     "navigation_and_structure": {
-      "search": "לְחַפֵּשׂ"
+      "search": "לְחַפֵּשׂ",
+      "account_menu": {
+        "hide_accessibility_label": "הסתר תפריט חשבון",
+        "show_accessibility_label": "הצג תפריט חשבון",
+        "nav_accessibility_label": "ניווט בחשבון",
+        "open_menu_accessibility_label": "ניווט פתיחת חשבון",
+        "close_menu_accessibility_label": "סגור ניווט בחשבון",
+        "loading_message": "טוען ניווט בחשבון"
+      },
+      "action_menu_accessibility_label": "פעולות נוספות",
+      "close_menu_accessibility_label": "סגור את הניווט הראשי",
+      "contact_email_subject": "איש קשר מחנות המקוונת של {{shopName}}",
+      "contact_link": "פרטי קשר",
+      "delete_confirmation": {
+        "cancel": "לְבַטֵל",
+        "delete": "לִמְחוֹק"
+      },
+      "dismiss_toast": "לְפַטֵר",
+      "document_title": "{{sectionName}} - {{shopName}} - חשבון",
+      "loading_message": "טְעִינָה",
+      "loading_policy_content_accessibility_label": "טוען תוכן מדיניות",
+      "policy_load_error": "לא ניתן היה לטעון את {{policyName}}",
+      "policy_try_again": "נסה שוב",
+      "log_out_link": "יציאה",
+      "logout_overlay_label": "מתנתק...",
+      "nav_label_accessibility_label": "ניווט ראשי",
+      "navigation_accessibility_message": "ניווטת אל {{sectionName}}",
+      "open_menu_accessibility_label": "פתח את הניווט הראשי",
+      "shop_logo_accessibility_label": "לוגו של {{shopName}}",
+      "settings_link": "הגדרות",
+      "country_switcher_toast_message": "המדינה הועברה ל {{countryName}}",
+      "switch_country": "החלפת מדינה"
     },
     "account_information": {
       "profile_card": {
@@ -1320,6 +1603,22 @@
           "invalid_code": "הזן את הקוד בן 6 הספרות הנכון"
         }
       }
-    }
+    },
+    "callback": {
+      "try_again": "נסה שוב"
+    },
+    "date": {
+      "humanize": {
+        "lessThanOneHourAgo": {
+          "one": "לפני {{count}}",
+          "other": "לפני {{count}} דקות"
+        },
+        "lessThanOneMinuteAgo": "זֶה עַתָה",
+        "yesterday": "אתמול בשעה {{time}}",
+        "today": "היום בשעה {{time}}",
+        "tomorrow": "מחר בשעה {{time}}"
+      }
+    },
+    "enable_javascript": "כדי לצפות בחשבונך, הפעל JavaScript בהגדרות הדפדפן שלך או היכנס באמצעות דפדפן אחר."
   }
 }
