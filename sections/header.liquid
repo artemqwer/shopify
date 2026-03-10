@@ -29,13 +29,28 @@
             Catalog <svg xmlns="http://www.w3.org/2000/svg" class="ml-1 w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
           </a>
           <!-- Mega Menu Dropdown -->
-          <div class="absolute top-16 left-0 pt-4 hidden group-hover:block z-50">
-            <div class="bg-white border-t border-[#F5F5F5] shadow-lg w-max min-w-[200px] flex flex-col items-start px-8 py-6 gap-4">
-              <a href="/catalog/silk" class="text-xs uppercase font-medium tracking-widest text-gray-900 hover:text-gray-500 transition-colors">Silk Scarves</a>
-              <a href="/catalog/cotton" class="text-xs uppercase font-medium tracking-widest text-gray-900 hover:text-gray-500 transition-colors">Cotton Scarves</a>
-              <a href="/catalog/linen" class="text-xs uppercase font-medium tracking-widest text-gray-900 hover:text-gray-500 transition-colors">Linen Scarves</a>
-              <a href="/catalog/accessories" class="text-xs uppercase font-medium tracking-widest text-gray-900 hover:text-gray-500 transition-colors">Accessories</a>
-              <a href="/catalog/all" class="text-xs uppercase font-medium tracking-widest pl-4 text-pink-500 hover:text-pink-600 transition-colors mt-2">View All Categories</a>
+          <div class="absolute top-[80%] -left-8 pt-8 hidden group-hover:block z-50">
+            <div class="bg-white border border-gray-100 w-[600px] shadow-lg p-8 grid grid-cols-4 gap-6">
+              <div class="flex flex-col space-y-3">
+                <a href="/catalog/all" class="text-sm text-gray-800 hover:text-gray-500">Усі товари</a>
+                <a href="/catalog/bestsellers" class="text-sm text-gray-800 hover:text-gray-500">Бестселери</a>
+                <a href="/catalog/kepi" class="text-sm text-gray-800 hover:text-gray-500">Кепі</a>
+              </div>
+              <div class="flex flex-col space-y-3">
+                <a href="/catalog/hats" class="text-sm text-gray-800 hover:text-gray-500">Капелюхи</a>
+                <a href="/catalog/beretes" class="text-sm text-gray-800 hover:text-gray-500">Берети</a>
+                <a href="/catalog/beanies" class="text-sm text-gray-800 hover:text-gray-500">Шапки</a>
+              </div>
+              <div class="flex flex-col space-y-3">
+                <a href="/catalog/caps" class="text-sm text-gray-800 hover:text-gray-500">Кепки</a>
+                <a href="/catalog/panamas" class="text-sm text-gray-800 hover:text-gray-500">Панами</a>
+                <a href="/catalog/scarves" class="text-sm text-gray-800 hover:text-gray-500">Хустки</a>
+              </div>
+              <div class="flex flex-col space-y-3">
+                <a href="/catalog/scarfs" class="text-sm text-gray-800 hover:text-gray-500">Шарфи</a>
+                <a href="/catalog/headbands" class="text-sm text-gray-800 hover:text-gray-500">Пов'язки</a>
+                <a href="/catalog/sets" class="text-sm text-gray-800 hover:text-gray-500">Комплекти</a>
+              </div>
             </div>
           </div>
         </div>
@@ -71,6 +86,14 @@
       <div class="hidden md:flex space-x-10 items-center justify-end flex-1">
         <div class="relative group cursor-pointer py-8 text-xs font-medium tracking-widest text-gray-900 uppercase hover:text-gray-500 flex items-center transition-colors">
           EN <svg xmlns="http://www.w3.org/2000/svg" class="ml-1 w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          <div class="absolute top-[80%] right-0 pt-8 z-50 hidden group-hover:flex">
+             <div class="bg-white border border-gray-100 shadow-lg flex flex-col py-2 w-24">
+                 <a href="?lang=en" class="px-4 py-2 hover:bg-gray-50 text-[13px] tracking-widest transition-colors text-[#f04f98] border-l-2 border-[#f04f98] text-center">ENG</a>
+                 <a href="?lang=uk" class="px-4 py-2 hover:bg-gray-50 text-[13px] tracking-widest transition-colors text-[#546a81] border-l-2 border-transparent text-center">UA</a>
+                 <a href="?lang=fr" class="px-4 py-2 hover:bg-gray-50 text-[13px] tracking-widest transition-colors text-[#546a81] border-l-2 border-transparent text-center">FR</a>
+                 <a href="?lang=he" class="px-4 py-2 hover:bg-gray-50 text-[13px] tracking-widest transition-colors text-[#546a81] border-l-2 border-transparent text-center">עב</a>
+             </div>
+          </div>
         </div>
 
         <button class="text-xs font-medium tracking-widest text-gray-900 uppercase hover:text-gray-500 transition-colors flex items-center">
