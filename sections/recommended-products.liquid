@@ -1,0 +1,79 @@
+{% schema %}
+{
+  "name": "Recommended Products",
+  "settings": []
+}
+{% endschema %}
+
+<section class="w-full px-4 md:px-12 lg:px-[160px]">
+  <div class="text-center mb-[32px] md:mb-[48px] flex justify-center">
+    <h2 
+      class="text-[20px] md:text-[40px] font-light md:font-extralight text-black"
+      style="font-family: var(--font-montserrat), Montserrat, sans-serif; line-height: 1.2;"
+    >
+      Recommended products
+    </h2>
+  </div>
+
+  <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+    <!-- Product 1 -->
+    <div class="group cursor-pointer flex flex-col">
+      <div class="relative aspect-[3/4] mb-4 overflow-hidden w-full">
+        <img 
+          src="{{ 'product-1.png' | asset_url }}" 
+          alt="Leopard Print Scarf" 
+          class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 bg-gray-100"
+        />
+      </div>
+      <div class="flex flex-col space-y-1.5 px-1">
+        <h3 class="text-[13px] font-semibold text-gray-900 tracking-wide">Leopard Print Scarf</h3>
+        <p class="text-[13px] text-gray-500 font-light">$ 80</p>
+      </div>
+    </div>
+    
+    <!-- Product 2 -->
+    <div class="group cursor-pointer flex flex-col">
+      <div class="relative aspect-[3/4] mb-4 overflow-hidden w-full">
+        <img 
+          src="{{ 'product-2.png' | asset_url }}" 
+          alt="Blue Silk Scarf" 
+          class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 bg-gray-100"
+        />
+      </div>
+      <div class="flex flex-col space-y-1.5 px-1">
+        <h3 class="text-[13px] font-semibold text-gray-900 tracking-wide">Blue Silk Scarf</h3>
+        <p class="text-[13px] text-gray-500 font-light">$ 80</p>
+      </div>
+    </div>
+    
+    <!-- Product 3 -->
+    <div class="group cursor-pointer flex flex-col">
+      <div class="relative aspect-[3/4] mb-4 overflow-hidden w-full">
+        <img 
+          src="{{ 'product-3.png' | asset_url }}" 
+          alt="Pink Scarf" 
+          class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 bg-gray-100"
+        />
+      </div>
+      <div class="flex flex-col space-y-1.5 px-1">
+        <h3 class="text-[13px] font-semibold text-gray-900 tracking-wide">Pink Scarf</h3>
+        <p class="text-[13px] text-gray-500 font-light">$ 80</p>
+      </div>
+    </div>
+    
+    <!-- Product 4 -->
+    <div class="group cursor-pointer flex flex-col">
+      <div class="relative aspect-[3/4] mb-4 overflow-hidden w-full">
+        <img 
+          src="{{ 'product-4.png' | asset_url }}" 
+          alt="Vintage Scarf" 
+          class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 bg-gray-100"
+        />
+      </div>
+      <div class="flex flex-col space-y-1.5 px-1">
+        <h3 class="text-[13px] font-semibold text-gray-900 tracking-wide">Vintage Scarf</h3>
+        <p class="text-[13px] text-gray-500 font-light">$ 80</p>
+      </div>
+    </div>
+  </div>
+</section>

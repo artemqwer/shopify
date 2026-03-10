@@ -1,0 +1,17 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero"
+    },
+    "recommended": {
+      "type": "recommended-products",
+      "settings": {
+        "heading": "Recommended products"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "recommended"
+  ]
+}
