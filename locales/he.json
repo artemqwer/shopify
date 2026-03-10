@@ -1333,6 +1333,141 @@
         "manual_payment_gateway_label": "יָדָנִי",
         "billing_address_title": "כתובת לחיוב",
         "free_label": "לְשַׁחְרֵר"
+      },
+      "shipping": {
+        "subscription_delivery_description": {
+          "prepaid_order_one_cycle_delivery_not_included": {
+            "other": "%{shipping_price} עבור %{count} משלוחים (%{per_delivery_cost})"
+          },
+          "prepaid_order_no_cycle": {
+            "one": "%{shipping_price} עבור %{count} משלוח נוסף, ואחריו %{recurring_order_shipping_price}",
+            "other": "%{shipping_price} עבור %{count} משלוחים נוספים (%{per_delivery_cost}), ולאחר מכן %{recurring_order_shipping_price}"
+          },
+          "prepaid_order_no_cycle_delivery_not_included": {
+            "one": "%{shipping_price} עבור משלוח %{count}, ואחריו %{recurring_order_shipping_price}",
+            "other": "%{shipping_price} עבור %{count} משלוחים (%{per_delivery_cost}), ואחריהם %{recurring_order_shipping_price}"
+          },
+          "subscription_free_with_frequency_label": "משלוח חינם %{delivery_frequency}",
+          "prepaid_delivery_frequency": {
+            "one": "עבור משלוח %{count}",
+            "other": "עבור %{count} משלוחים"
+          },
+          "subscription_delivery_frequency": {
+            "day": {
+              "one": "כל יום",
+              "other": "כל %{count} ימים"
+            },
+            "week": {
+              "one": "כל שבוע",
+              "other": "כל %{count} שבועות"
+            },
+            "month": {
+              "one": "כל חודש",
+              "other": "כל %{count} חודשים"
+            },
+            "year": {
+              "one": "כל שנה",
+              "other": "כל %{count} שנים"
+            }
+          },
+          "multiple_subscriptions_shipping_price_label": "%{shipping_price} למשלוח",
+          "prepaid_shipping_price_label": "%{shipping_price} למשלוח x %{delivery_interval_count}",
+          "initial_order_discounted": "ראשית עלות משלוח %{discounted_shipping_cost}, לאחר מכן %{frequency_description}",
+          "prepaid_initial_order_discounted": "עלות משלוח ראשונה %{discounted_shipping_price} %{prepaid_delivery_frequency}",
+          "prepaid_initial_order_discounted_with_per_delivery_price": "עלות משלוח ראשונה %{discounted_shipping_price} %{prepaid_delivery_frequency} (%{discounted_cost_per_delivery})",
+          "prepaid_initial_order_discounted_with_renewal": "עלות משלוח ראשונה %{discounted_shipping_price} %{prepaid_delivery_frequency}, לאחר מכן %{shipping_price} %{billing_cycle}",
+          "prepaid_initial_order_discounted_with_per_delivery_price_and_renewal": "עלות משלוח ראשונה %{discounted_shipping_price} %{prepaid_delivery_frequency} (%{discounted_cost_per_delivery}), לאחר מכן %{shipping_price} %{billing_cycle}",
+          "shipping_price_included": "כּוֹלֵל",
+          "recurring_order_shipping_price": "ואחריו %{recurring_order_shipping_price}",
+          "first_order_shipping_price_included": "הזמנה ראשונה כלולה, ולאחריה %{recurring_order_shipping_price}",
+          "first_order_different_shipping_price": "%{first_order_shipping_price} (%{per_delivery_price} למשלוח), ואחריו %{recurring_order_shipping_price}",
+          "first_n_order_free": {
+            "one": "הזמנה ראשונה חינם",
+            "other": "%{count} הזמנות ראשונות בחינם"
+          },
+          "free_for_first_n_order": {
+            "one": "להזמנה ראשונה",
+            "other": "עבור %{count} הזמנות ראשונות"
+          }
+        },
+        "one_time_purchase_shipping": "משלוח חד פעמי",
+        "duties_and_taxes_title": "חובות ומסים",
+        "shipping_information_required_notice": "נדרש פרטי משלוח. {{link}}",
+        "shipping_information_redirect_link": "הזן את המידע שלך כאן",
+        "loading_progressive_rates": "מחפש תעריפים נוספים…",
+        "no_other_methods_available": "אין שיטות אחרות זמינות",
+        "duties_and_taxes_options": {
+          "ddu_title": "תשלום במשלוח",
+          "ddu_caption": "ייתכן שיחולו עמלות נוספות",
+          "ddp_title": "שלם עכשיו",
+          "ddp_caption": "אין עמלות נוספות במשלוח"
+        },
+        "shipping_method_combinations": {
+          "without_separator": "%{שיטה ראשונה}, %{שיטה שנייה}",
+          "with_separator": "%{מנוחה}, %{נוכחי},",
+          "combination": "%{rest} ו-%{current}"
+        },
+        "shipping_used_as_billing_notice": "כתובת זו תשמש גם ככתובת החיוב שלך עבור הזמנה זו.",
+        "address_update": "עדכון כתובת",
+        "shipping_address_title": "לשלוח אל",
+        "shipping_address_rollup_accessibility_label": "אפשרויות משלוח לכתובת",
+        "third_party_address_timeout": "לא ניתן לטעון כתובות. נסה שוב או השתמש בכתובת אחרת.",
+        "third_party_address_error": "אירעה שגיאה בעת טעינת בחירת הכתובת. הזן את הכתובת שלך באופן ידני למטה.",
+        "third_party_payment_timeout": "לא ניתן לטעון אמצעי תשלום. נסה שוב או השתמש באמצעי תשלום אחר.",
+        "third_party_payment_error": "אירעה שגיאה בעת טעינת בחירת התשלום. השתמש באמצעי תשלום אחר.",
+        "add_address": "השתמש בכתובת אחרת",
+        "add_delivery_instructions": "הוסף הוראות משלוח",
+        "edit": "לַעֲרוֹך",
+        "delete": "לִמְחוֹק",
+        "back": "בְּחֲזָרָה",
+        "address_more": "פעולות נוספות עבור כתובת זו",
+        "address_edit": "עריכת כתובת",
+        "address_delete": "מחיקת כתובת",
+        "address_confirm": "האם אתה בטוח שברצונך למחוק את הכתובת הזו מחשבונך?",
+        "address_default": "הגדר כברירת מחדל",
+        "address_form": {
+          "add_address": "הוסף כתובת",
+          "save": "לְהַצִיל",
+          "cancel": "לְבַטֵל",
+          "edit": "עריכת כתובת",
+          "update": "שמירת שינויים",
+          "generic_error": "הייתה בעיה בשמירת הכתובת שלך. נסה שוב.",
+          "one_time_address_subtitle": "השתמש בכתובת חד פעמית עבור הזמנה זו"
+        },
+        "different_shipping_method_summary": "הזן כתובת משלוח אחרת כדי להציג את שיטות המשלוח הזמינות",
+        "invalid_shipping_method_summary": "הזן כתובת משלוח תקפה כדי להציג את שיטות המשלוח הזמינות",
+        "invalid_shipping_method_summary_selected": "בחר כתובת משלוח אחרת כדי להציג את שיטות המשלוח הזמינות",
+        "method_summary": {
+          "incomplete_address_entered": "הזן כתובת משלוח מלאה כדי להציג את שיטות המשלוח הזמינות",
+          "incomplete_address_selected": "בחר כתובת משלוח מלאה כדי להציג את שיטות המשלוח הזמינות"
+        },
+        "local_pickup": {
+          "search_address": "חיפוש כתובת",
+          "rollup_title": "מיקום איסוף",
+          "rollup_accessibility_label": "אפשרויות מיקום איסוף"
+        },
+        "missing_shipping_address": "כתובת המשלוח חסרה",
+        "split_shipping_merchandise_quantity_label_standard": "%{quantity} פריטים",
+        "split_shipping_merchandise_quantity_label_additional": "+%{כמות} יותר",
+        "split_shipping_merchandise_shipment_number": "משלוח %{number} מתוך %{total}",
+        "pre_order_ships_now": "נשלח עכשיו",
+        "pre_order_ships_later": "נשלח מאוחר יותר",
+        "pre_order_ships_date": "משלוחים %{date}",
+        "split_shipping_shipped_by_shop": "נשלח על ידי %{shop_name}",
+        "split_shipping_multiple_shipment_label": "משלוחים מרובים",
+        "split_shipping_shipping_label": "שִׁיטָה",
+        "split_shipping_shipment_notice": "ההזמנה שלך תגיע בכמות של %{quantity_shipments}",
+        "split_shipping_first_shipment_notice": "ההזמנה הראשונה שלך תגיע ב-%{quantity_shipments}",
+        "split_shipping_multiple_shipment_quantity_label": "משלוחים %{quantity}",
+        "split_shipping_multiple_shipment_notice": "ההזמנה שלך תגיע במספר משלוחים",
+        "split_shipping_multiple_shipment_notice_one_time_purchase": "ההזמנה שלך תגיע במשלוחים של %{quantity}",
+        "split_shipping_more_shipping_options": "אפשרויות משלוח נוספות",
+        "split_shipping_shipment_number": "משלוח %{number}",
+        "split_shipping_merchandise_quantity_label_inline_primary": "כמות: %{כמות}",
+        "split_shipping_option_free": "משלוח חינם",
+        "split_shipping_option_lowest_price": "המחיר הנמוך ביותר",
+        "split_shipping_option_fastest": "המהיר ביותר",
+        "split_shipping_option_recommended": "מוּמלָץ"
       }
     },
     "page_titles": {
