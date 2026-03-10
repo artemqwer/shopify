@@ -414,7 +414,47 @@
         "contact_information": "מַגָע"
       },
       "pickup_point": {
-        "search_button": "לְחַפֵּשׂ"
+        "search_button": "לְחַפֵּשׂ",
+        "location_is_currently_closed": "סָגוּר",
+        "business_hours": "שְׁעוֹת פְּתִיחָה",
+        "no_business_hours": "אין שעות פתיחה זמינות",
+        "open_twenty_four_hours": "פתוח 24/7",
+        "title": "נקודת איסוף",
+        "or": "אוֹ",
+        "address_label": "כְּתוֹבֶת",
+        "selector_tabs": "בורר נקודות איסוף",
+        "selector_tab_map": "מַפָּה",
+        "selector_tab_list": "רְשִׁימָה",
+        "could_not_resolve_address": "לא ניתן היה לאתר את הכתובת שלך. נסה שוב או השתמש בכתובת אחרת.",
+        "no_pickup_points_near_you": "לא נמצאו נקודות איסוף ליד הכתובת שנבחרה",
+        "no_pickup_points_near_location": "לא נמצאו נקודות איסוף בקרבת מיקומך",
+        "pickup_unavailable_banner_title": {
+          "one": "אין נקודות איסוף זמינות עבור הפריט שלך",
+          "other": "אין נקודות איסוף זמינות עבור הפריטים שלך"
+        },
+        "no_pickup_points_found": "לא נמצאו נקודות איסוף",
+        "paginator": {
+          "next_accessibility_label": "עמוד הבא",
+          "previous_accessibility_label": "עמוד קודם",
+          "header": {
+            "one": "מציג %{first} - %{last} מתוך %{count} נקודות",
+            "other": "מציג %{first} - %{last} מתוך %{count} נקודות"
+          },
+          "selected_pickup_point_label": {
+            "one": "%{pickup_point_index} מתוך %{count} נקודות",
+            "other": "%{pickup_point_index} מתוך %{count} נקודות"
+          },
+          "selected_page": {
+            "one": "%{first} - %{last} מתוך %{count} נקודות",
+            "other": "%{first} - %{last} מתוך %{count} נקודות"
+          }
+        },
+        "number_of_pickup_points_near_location": {
+          "one": "נקודת איסוף %{count} ליד מיקומך",
+          "other": "%{count} נקודות איסוף ליד מיקומך"
+        },
+        "change": "שנה מיקום",
+        "waiting_on_pickup_point_location_notice": "מחפש נקודות איסוף..."
       },
       "thank_you": {
         "ready_for_delivery_description": "הכנו את ההזמנה שלך.",
@@ -1117,7 +1157,73 @@
         "order_edit_banner_multiple_items_returned": "הוחזר {{amount}}",
         "order_edit_banner_single_item_return_line_item_removed": "הוסר מההחזרה",
         "order_edit_banner_multiple_items_return_line_item_removed": "הוסר {{amount}} מההחזרה",
-        "order_edit_banner_updated_order_label": "הזמנה מעודכנת"
+        "order_edit_banner_updated_order_label": "הזמנה מעודכנת",
+        "network_card_payment_options": "בחירת רשת כרטיסים",
+        "network_card_persistence_description": "הרשת שנבחרה תישמר יחד עם אמצעי התשלום שלך לצורך עסקאות עתידיות.",
+        "amazon_payments_label": "אמזון פיי",
+        "amazon_payments_login_hint": "תתבקשו להתחבר באמצעות אמזון.",
+        "amazon_payments_logout": "התנתק מאמזון פיי",
+        "amazon_payments_failed_mfa_challenge": "לא ניתן היה להשתמש בשיטת התשלום שנבחרה. בחר שיטה אחרת או צור קשר עם הבנק או מנפיק הכרטיס שלך.",
+        "amazon_payments_abandoned_mfa_challenge": "לא ניתן היה להשלים את התשלום שלך. נסה אמצעי תשלום אחר או צור קשר עם הבנק או מנפיק הכרטיס שלך.",
+        "amazon_payments_could_not_enqueue_authorize": "אירעה בעיה בעיבוד התשלום שלך. נסה שוב או השתמש באמצעי תשלום אחר.",
+        "title": "תַשְׁלוּם",
+        "amount_left_to_pay_label": "תשלום לתשלום:",
+        "discount_button_action_label": "החלת קוד הנחה",
+        "discount_codes_removed_summary": {
+          "one": "קוד הנחה %{count} הוסר",
+          "other": "%{count} קודי הנחה הוסרו"
+        },
+        "discount_codes_modified_summary": {
+          "one": "קוד הנחה %{count} שונה",
+          "other": "%{count} קודי הנחה שונו"
+        },
+        "discount_codes_removed_or_modified_summary": {
+          "one": "קוד הנחה %{count} הוסר או שונה",
+          "other": "%{count} קודי הנחה הוסרו או שונו"
+        },
+        "discount_show_more_warnings": {
+          "one": "הצג %{count} נוספים",
+          "other": "הצג %{count} נוספים"
+        },
+        "gift_card_code_label": "קוד כרטיס מתנה",
+        "apply_gift_card_button_label": "לִפְנוֹת",
+        "gift_card_balance_label": "לְאַזֵן:",
+        "supported_card_brands_more_label": "ועוד…",
+        "detected_card_brand": "מותג כרטיס שזוהה: {brand}",
+        "credit_card_vaulting_sign_in_banner_title": "שמור את כרטיס האשראי שלך",
+        "credit_card_vaulting_sign_in_banner_info": "התחבר או צור חשבון כדי לשמור את כרטיס האשראי שלך לרכישות עתידיות.",
+        "credit_card_vaulting_sign_in_banner_button_label": "התחברות",
+        "ftd_vault_credit_card_label": "שמור כרטיס אשראי זה בחשבון שלי לתשלום מהיר יותר",
+        "card_number_label": "מספר כרטיס",
+        "card_number_placeholder": "מספר כרטיס",
+        "card_pay_with": "שלם עם:",
+        "card_security_notice": "כל העסקאות מאובטחות ומוצפנות.",
+        "card_security_vault_notice": "אנו זקוקים לפרטים שלך לצורך תשלומים עתידיים. כל העסקאות מאובטחות ומוצפנות.",
+        "card_information_notice": "כל העסקאות מאובטחות ומוצפנות. פרטי כרטיס אשראי לעולם אינם נשמרים.",
+        "name_on_card_label": "שם על הכרטיס",
+        "name_on_card_placeholder": "שם על הכרטיס",
+        "card_nickname_label": "כינוי (אופציונלי)",
+        "card_expired": "פג תוקף",
+        "card_expiry_label": "תאריך תפוגה (חודש / שנה)",
+        "card_expiry_placeholder": "תאריך תפוגה (חודש / שנה)",
+        "credit_card_start_month": "חודש התחלה",
+        "credit_card_start_year": "שנת התחלה",
+        "delete_customer_mandate_modal_title": "להסיר את כרטיס התשלום הזה?",
+        "delete_customer_mandate_modal_body": "אם תסיר את הכרטיס הזה, תצטרך להוסיף אותו שוב לפני שתוכל להשתמש בו לתשלומים.",
+        "delete_customer_mandate_modal_confirm": "הסר כרטיס",
+        "delete_customer_mandate_modal_cancel": "לְבַטֵל",
+        "card_verification_value_label": "קוד אבטחה",
+        "card_verification_value_placeholder": "קוד אבטחה",
+        "card_verification_confirm": "למטרות אימות, הזן את קוד האבטחה של הכרטיס שלך.",
+        "card_expiry_date_explanation": "תאריך תפוגת הכרטיס בפורמט: חודש, חודש, שנה, שנה",
+        "card_expiration_month_label": "חודש תפוגה",
+        "card_expiration_year_label": "שנת תפוגה",
+        "card_verification_value_explanation": "קוד אבטחה בן 3 ספרות נמצא בדרך כלל בגב הכרטיס. לכרטיסי אמריקן אקספרס יש קוד בן 4 ספרות הממוקם בחזית.",
+        "card_verification_value_explanation_amex": "קוד אבטחה בן 4 ספרות בחזית הכרטיס",
+        "card_verification_value_explanation_other": "קוד אבטחה בן 3 ספרות בגב הכרטיס שלך",
+        "card_start_label": "תאריך הנפקה (חודש / שנה)",
+        "card_start_placeholder": "תאריך הנפקה (חודש / שנה)",
+        "card_issue_number_label": "מספר גיליון"
       },
       "contextual_availability": {
         "title": {
@@ -1677,7 +1783,11 @@
         "split_shipping_option_free": "משלוח חינם",
         "split_shipping_option_lowest_price": "המחיר הנמוך ביותר",
         "split_shipping_option_fastest": "המהיר ביותר",
-        "split_shipping_option_recommended": "מוּמלָץ"
+        "split_shipping_option_recommended": "מוּמלָץ",
+        "split_shipping_option_custom": "מִנְהָג",
+        "add_shipping_address": "הוסף כתובת למשלוח",
+        "add_new_delivery_address": "הוסף כתובת משלוח חדשה",
+        "choose_new_address": "בחר כתובת חדשה"
       },
       "delivery_options": {
         "free_total_label": "לְשַׁחְרֵר",
@@ -1732,6 +1842,162 @@
         },
         "checkout_on_shop_label": "ניתן לשלם ב-%{shop_name}",
         "single_shop_transition": "מפנה אותך אל %{advertiser} כדי להשלים את הרכישה."
+      },
+      "localized_fields": {
+        "additional_information": {
+          "title": "מידע נוסף",
+          "shipping_credential_kr": "קוד מכס אישי",
+          "shipping_credential_cn": "מספר תעודת זהות של תושב",
+          "tax_credential_it": "קוד פיסקאל (אופציונלי)",
+          "tax_email_it": "PEC (אופציונלי)",
+          "tax_credential_cl": "שִׁגרָה",
+          "shipping_credential_cl": "שִׁגרָה",
+          "tax_credential_co": "סדולה/IRA",
+          "tax_credential_type_co": "טיפו סדולה",
+          "shipping_credential_co": "סדולה/IRA",
+          "shipping_credential_type_co": "טיפו סדולה",
+          "tax_credential_cr": "מספר זיהוי/RUT",
+          "shipping_credential_cr": "מספר זיהוי/RUT",
+          "tax_credential_gt": "ניט/אי קיימא",
+          "shipping_credential_gt": "ניט/אי קיימא",
+          "tax_credential_my": "מספר רישום/TIN",
+          "shipping_credential_my": "מספר רישום/TIN",
+          "tax_credential_type_mx": "משטר פיסקאלי",
+          "tax_credential_use_mx": "שימוש ב-CFDI",
+          "tax_credential_pt": "קרן נכסים לאומית/מע\"מ",
+          "shipping_credential_pt": "קרן נכסים לאומית/מע\"מ",
+          "shipping_credential_tw": "מספר תעודת זהות/מע\"מ"
+        }
+      },
+      "change_currency": {
+        "change_currency_link": "שנה ל-%{currency_name}",
+        "card_provider_fx_charges_warning": "ספק כרטיס האשראי שלך עשוי לגבות עמלות על עסקאות %{currency_code}.",
+        "currency_not_supported_by_shop": "המטבע שבחרת אינו זמין עוד. כל המחירים כעת מופיעים ב-%{currency_code}."
+      },
+      "change_country": {
+        "cart_updated_based_on_country": "העגלה שלך עודכנה בהתאם למדינת המשלוח שלך.",
+        "cart_and_currency_updated_based_on_country": "עגלת הקניות והמטבע שלך עודכנו בהתאם למדינת המשלוח שלך.",
+        "currency_updated_for_country": "המטבע עודכן עבור %{country}"
+      },
+      "change_cart_localization": {
+        "verify_shipping_address": "המדינה/אזור שלך עודכנו. הזן את כתובת המשלוח שלך כדי להמשיך בתשלום."
+      },
+      "tips": {
+        "title": "הוסף טיפ",
+        "description": "הראו את תמיכתכם בצוות ב- %{shop_name}",
+        "presets_description": "בחר אחוז טיפ",
+        "custom_label": "טיפ מותאם אישית",
+        "add_tip": "הוסף טיפ",
+        "update_tip": "טיפ לעדכון",
+        "message": "תודה, אנו מעריכים זאת.",
+        "no_tip_label": "אַף לֹא אֶחָד"
+      },
+      "open_graph_meta_tag": {
+        "title_with_products": {
+          "zero": "רכישה %{product_name}",
+          "one": "רכישת %{product_name} ו-%{count} פריט נוסף",
+          "other": "רכישת %{product_name} ו-%{count} פריטים נוספים"
+        }
+      },
+      "subscriptions": {
+        "recurring_total_intervals": {
+          "day": {
+            "one": "יְוֹם",
+            "other": "%{count} ימים"
+          },
+          "week": {
+            "one": "שָׁבוּעַ",
+            "other": "%{count} שבועות"
+          },
+          "month": {
+            "one": "חוֹדֶשׁ",
+            "other": "חודשים"
+          },
+          "year": {
+            "one": "שָׁנָה",
+            "other": "%{count} שנים"
+          }
+        },
+        "recurring_totals": "%{total_price} כל %{interval}",
+        "recurring_totals_with_initial_order_shipping_discount": "תשלום ראשון %{total_price_with_discount}, לאחר מכן %{recurring_total}",
+        "recurring_totals_with_policies": {
+          "first_cycles": {
+            "one": "תשלום ראשון %{total_price}",
+            "other": "%{count} תשלומים ראשונים %{total_price} כל אחד"
+          },
+          "following_cycles": ", ואז %{total_price} כל %{interval}"
+        },
+        "recurring_totals_with_initial_order_shipping_discount_with_policies": {
+          "first_cycles": {
+            "one": ", לאחר מכן תשלום %{count} ב- %{total_price}",
+            "other": ", לאחר מכן %{count} תשלומים ב- %{total_price} כל אחד"
+          }
+        }
+      },
+      "customer_payment_methods": {
+        "page_title": "אמצעי תשלום",
+        "title": "אמצעי תשלום",
+        "update_card_button_label": "עדכון כרטיס",
+        "delete_customer_mandate": {
+          "generic_error": "הייתה בעיה בעיבוד הבקשה שלך.",
+          "success_message": "אמצעי התשלום שלך נמחק בהצלחה"
+        }
+      },
+      "throttle": {
+        "too_many_attempts": {
+          "message": "יותר מדי ניסיונות",
+          "description": "נסה שוב בעוד מספר דקות"
+        },
+        "line_to_check_out": "אתה בתור לצ'ק אאוט",
+        "cart_summary_heading": "העגלה שלך",
+        "merchandise": {
+          "available": "זָמִין",
+          "sold_out": "הַכַּרטִיסִים אָזלוּ"
+        },
+        "inventory": {
+          "partial_inventory_banner": "חלק מהעגלה שלך אזל ולא יהיה זמין לרכישה בקופה.",
+          "sold_out": {
+            "heading": "העגלה שלך אזלה",
+            "storefront_body": "חזור לחנות כדי להמשיך בקניות",
+            "no_storefront_body": "למרבה הצער, הפריט שברצונך לרכוש אינו זמין עוד.",
+            "link": "חזרה לחנות"
+          }
+        },
+        "title": "תוֹר",
+        "time_to_checkout_title": "הגיע הזמן לקופה - {{shopName}}",
+        "estimated_wait_time": {
+          "calculating": "חישוב זמן המתנה משוער",
+          "less_than_one": "זמן המתנה משוער: פחות מדקה",
+          "one": "זמן המתנה משוער: דקה {{count}}",
+          "other": "זמן המתנה משוער: {{count}} דקות"
+        },
+        "last_checked": "(נבדק לאחרונה: {{time}} )",
+        "footer": {
+          "heading": "אל תרענן דף זה, הוא יתעדכן אוטומטית.",
+          "body": "הפריטים בעגלת הקניות שלך אינם שמורים עד שתסיים את תהליך התשלום."
+        }
+      },
+      "cart_checkout_validation": {
+        "runtime_error": "הייתה בעיה בעיבוד הבקשה שלך. צור קשר עם בעל החנות."
+      },
+      "no_address_location": {
+        "title": "מיקום ללא כתובת",
+        "header": "אין לך כתובת למשלוח עבור מיקום זה",
+        "alt_header": "כתובת משלוח חסרה",
+        "message": "צרו קשר כדי להוסיף כתובת למיקום זה ולהשלים את תהליך התשלום.",
+        "email_us_button_label": "שלח לנו אימייל"
+      },
+      "order_errors": {
+        "creation_failure": "אירעה בעיה ביצירת ההזמנה שלך. נסה שוב, או צור איתנו קשר לקבלת פרטים נוספים.",
+        "network_failure": "לא ניתן היה לשלוח את ההזמנה שלך עקב שגיאת רשת. בדוק את החיבור שלך ונסה שוב.",
+        "inventory_reservation_failure": "חלק מהפריטים אינם זמינים עוד."
+      },
+      "session_errors": {
+        "session_not_unique": "אירעה בעיה בעיבוד ההזמנה שלך. רענן דף זה כדי לחזור לחנות.",
+        "session_already_finished": "הזמנה זו כבר נשלחה. באפשרותך לחזור לחנות כדי להתחיל הזמנה חדשה."
+      },
+      "artifact_errors": {
+        "artifact_dissatisfaction_without_violation": "הייתה בעיה בעיבוד ההזמנה שלך. נסה שוב בעוד מספר דקות."
       }
     },
     "page_titles": {
