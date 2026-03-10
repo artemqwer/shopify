@@ -7,7 +7,7 @@
 
 <header class="sticky top-0 w-full z-50 bg-white border-b-2 border-[#F5F5F5] transition-all duration-300 shadow-sm">
   <div class="w-full max-w-[1920px] mx-auto px-4 md:px-12 lg:px-[160px]">
-    <div class="flex {% if request.locale.iso_code == 'he' %}flex-row-reverse{% endif %} justify-between items-center py-4 md:py-5">
+    <div class="flex justify-between items-center py-4 md:py-5">
 
       <!-- Mobile Header Left: Hamburger Menu -->
       <div class="md:hidden flex-1 flex items-center">
@@ -18,8 +18,8 @@
         </button>
       </div>
 
-      <!-- Desktop Left Navigation (RIGHT side in Hebrew) -->
-      <nav class="hidden md:flex items-center flex-1 {% if request.locale.iso_code == 'he' %}justify-end{% endif %}" style="gap: 3rem;">
+      <!-- Desktop Left Navigation (RIGHT side in Hebrew due to dir=rtl) -->
+      <nav class="hidden md:flex items-center flex-1" style="gap: 3rem;">
         <a href="/" class="text-xs font-medium tracking-widest text-gray-900 uppercase hover:text-gray-500 transition-colors">
           {{ 'header.home' | t }}
         </a>
@@ -88,8 +88,8 @@
         </button>
       </div>
 
-      <!-- Desktop Right Navigation (LEFT side in Hebrew) -->
-      <div class="hidden md:flex items-center flex-1 {% if request.locale.iso_code == 'he' %}flex-row-reverse justify-start{% else %}justify-end{% endif %}" style="gap: 2.5rem;">
+      <!-- Desktop Right Navigation (LEFT side in Hebrew due to dir=rtl) -->
+      <div class="hidden md:flex items-center flex-1 justify-end" style="gap: 2.5rem;">
 
         <!-- Language Selector — Shopify localization form -->
         <div class="relative group cursor-pointer py-8 text-xs font-medium tracking-widest text-gray-900 uppercase hover:text-gray-500 flex items-center transition-colors">
