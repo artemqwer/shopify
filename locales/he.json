@@ -882,11 +882,147 @@
         "tracking_number": {
           "one": "מספר מעקב",
           "other": "מספרי מעקב"
+        },
+        "on_its_way_label": "בדרכו",
+        "out_for_delivery_label": "יצא למשלוח",
+        "resume_tracking": "מעקב אחר קורות חיים",
+        "submitted_label": "הוגש",
+        "submitted_description": "בדיקת פרטי ההזמנה והתשלום.",
+        "there_was_a_problem_label": "הייתה בעיה",
+        "track_shipment": "מעקב אחר משלוח",
+        "request_return": "בקשת החזרה",
+        "view_order_for_details": "ראה פרטים על ההזמנה",
+        "external_promise_manage_button_label": {
+          "buy_with_prime": "ניהול באמזון"
+        },
+        "amazon_buy_with_prime": {
+          "order_tracking_link": {
+            "text": "ניהול עם אמזון",
+            "new_window_disclaimer": "(פותח חלון חדש)"
+          }
+        },
+        "delivery_promise_v2": {
+          "promise_line": {
+            "shop_promise_brand_label": "משלוח מובטח על ידי",
+            "external_promise_brand_label": "משלוח על ידי",
+            "not_delivered_by_label": "נמסר לאחר {{date}}",
+            "delivery_guarantee_expired_label": "פג תוקף אחריות המשלוח",
+            "modal_accessibility_button_label": "פרטי הבטחת האספקה",
+            "download_shop_app_button_label": "הורד את החנות כדי לעקוב",
+            "track_with_shop_button_label": "מעקב עם חנות",
+            "claim_shop_cash_button_label": "תביעת מזומן בחנות"
+          },
+          "details_modal": {
+            "title": "אחריות משלוח",
+            "active_delivery_guarantee_label": "משלוח עד {{date}}",
+            "expired_delivery_guarantee_description": "פג תוקף אחריות Shop Promise ל-30 יום של הזמנה זו.",
+            "expired_badge_label": "פג תוקף",
+            "order_includes_guarantees_label": "ההזמנה שלך כוללת {{deliveryAgreementsCount}} ערבויות",
+            "order_includes_guarantees_description": "Shop Promise מבטיח משלוח מהיר ואמין. קבלו את Shop Cash אם ההזמנה שלכם מגיעה לאחר {{date}} .",
+            "delivered_after_label": "נמסר לאחר {{date}}",
+            "delivered_after_description": "מכיוון שההזמנה שלך הגיעה באיחור, אתה זכאי לתבוע {{amount}} Shop Cash.",
+            "claimed_shop_cash_description": "מכיוון שהזמנה זו הגיעה באיחור, תבעת {{amount}} Shop Cash.",
+            "eligible_to_claim_shop_cash_description": "מכיוון שההזמנה שלך הגיעה באיחור, אתה זכאי לתבוע {{amount}} Shop Cash.",
+            "learn_more_button_label": "למידע נוסף",
+            "claim_shop_cash_button_label": "תביעת מזומן בחנות",
+            "view_balance_in_shop_button_label": "הצג יתרה בחנות",
+            "scan_to_claim_shop_cash_label": "סרוק כדי לתבוע {{amount}} Shop Cash"
+          }
+        },
+        "delivery_promise": {
+          "promise_line": {
+            "single_brand_label": "משלוח מגובה על ידי",
+            "mixed_brands_label": "משלוח מובטח",
+            "not_delivered_by_label": "לא סופק עד {{date}}",
+            "modal_accessibility_button_label": "פרטי הבטחת האספקה"
+          },
+          "claim_shop_cash_cta": {
+            "has_shop_app_label": "תבע את מזומן החנות שלך",
+            "no_shop_app_label": "{{appDownloadLink}} כדי לתבוע כסף מזומן מחנות",
+            "download_shop_app_label": "חנות הורדות"
+          },
+          "details_modal": {
+            "title": "משלוח מגובה על ידי",
+            "modal_accessiblity_label": "פרטי הבטחת האספקה",
+            "delivery_guarantee_label": "אחריות משלוח",
+            "delivery_by_label": "משלוח עד {{date}}",
+            "delivery_guaranteed_by_label": "משלוח מובטח עד {{date}}",
+            "shop_cash_claim": {
+              "may_be_eligible_label": "Shop Promise מבטיח משלוח מהיר ואמין. קבלו את Shop Cash אם ההזמנה שלכם מגיעה באיחור.",
+              "may_be_eligible_not_authorized_label": "ייתכן שאתה זכאי לתבוע מזומן מאחר שהזמנה זו הגיעה באיחור. היכנס כדי לצפות בפרטים.",
+              "redeemed_label": "כבר תבעת את חשבונך בחנות מזומן מכיוון שההזמנה הגיעה באיחור.",
+              "expired_label": "הזמנה זו אינה זכאית לתביעה בגין איחור באספקה ​​מכיוון שתוקף האחריות ל-30 יום פג.",
+              "no_shop_cash_label": "הזמנה זו אינה זכאית לתביעה בגין איחור במשלוח מכיוון שלא שולמה באמצעות Shop Pay.",
+              "no_longer_guaranteed_label": "פריטים אלה אינם מגובים עוד בערבות משלוח.",
+              "claim_shop_cash_title": "סרוק כדי לתבוע {{amount}} ב-Shop Cash",
+              "claim_shop_cash_description": "ניתן להשתמש ב-Shop Cash ברכישות עתידיות באפליקציית Shop."
+            }
+          }
         }
-      }
+      },
+      "status_mark_as_delivered": "סמן כמסופק",
+      "fulfillment_status_title": "סטטוס אספקה: {{status}}",
+      "buy_again": "קנה שוב",
+      "buy_again_accessibility_label": "קנה שוב עבור הזמנה {{orderId}}",
+      "manage": "לְנַהֵל",
+      "manage_accessiblity_label": "ניהול הזמנה {{orderId}}",
+      "group_title_label": "חלק מ: {{groupTitle}}",
+      "group_title_label_with_parent": "עבור: {{groupTitle}}"
     },
     "order_details": {
-      "contact": "מַגָע"
+      "contact": "מַגָע",
+      "shipment_timeline": {
+        "expand_events_label": "הצג פרטים",
+        "expand_events_accessibility_label": "הצג פרטי משלוח ההזמנה",
+        "hide_events_label": "הסתר פרטים",
+        "hide_events_accessibility_label": "הסתר את פרטי משלוח ההזמנה"
+      },
+      "addresses_section_title": "חיוב ומשלוח",
+      "order_details": "פרטי הזמנה",
+      "order_details_skeleton_accessibility_label": "היכנס כדי לצפות בכל פרטי ההזמנה.",
+      "billing_address": "כתובת לחיוב",
+      "card_ending_with": "מסתיים ב {{lastDigits}}",
+      "contact_information": "פרטי קשר",
+      "company": "חֶברָה",
+      "company_and_location": "חברה ומיקום",
+      "fully_refunded_label": "החזר כספי",
+      "group_title_label": "חלק מ: {{groupTitle}}",
+      "group_title_label_with_parent": "עבור: {{groupTitle}}",
+      "view_controls": {
+        "gallery": "גָלֶרֵיָה",
+        "list": "רְשִׁימָה"
+      },
+      "grouped_view_components": {
+        "expand_line_items": "הצג {{count}} פריטים",
+        "collapse_line_items": "הסתר {{count}} פריטים",
+        "line_item_summary_list_accessibility_label": "פריטים בחבילה {{productTitle}}"
+      },
+      "discount": "דִיסקוֹנט",
+      "discount_order_stacking": {
+        "one": "הנחת הזמנה",
+        "other": "הנחות על הזמנות"
+      },
+      "price_before_discount_accessibility_label": "מחיר מקורי",
+      "price_after_discount_accessibility_label": "מחיר מוזל",
+      "compare_at_sale": "מכירה ( {{saleAmount}} )",
+      "hide_items": "הסתר פריטים",
+      "loading": "טוען את פרטי ההזמנה",
+      "loading_finished_accessibility_message": "פרטי ההזמנה נטענו",
+      "location": "מִקוּם",
+      "image_gallery": {
+        "next": "הצג את הפריטים הבאים",
+        "previous": "הצג פריטים קודמים",
+        "load_more_items": {
+          "one": "טען עוד {{count}} פריטים",
+          "other": "טען עוד {{count}} פריטים"
+        }
+      },
+      "mobile_summary_toggle_button": {
+        "open": "הצג סיכום הזמנה",
+        "closed": "הסתר את סיכום ההזמנה"
+      },
+      "no_data": "אַף לֹא אֶחָד",
+      "no_data_provided_accessibility_label": "שם {{fieldName}} ריק"
     },
     "account_menu": {
       "signed_out_state": {
