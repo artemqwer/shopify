@@ -61,7 +61,55 @@
   "shopify": {
     "checkout": {
       "contact": {
-        "contact_method_title": "מַגָע"
+        "contact_method_title": "מַגָע",
+        "title": "מֵידָע",
+        "address_title": "כְּתוֹבֶת",
+        "shipping_used_as_billing_notice": "כתובת זו תשמש גם ככתובת החיוב שלך עבור הזמנה זו.",
+        "delivery_option_title": "שיטת משלוח",
+        "email_label": "אֶלֶקטרוֹנִי",
+        "email_rollup_accessibility_label": "אפשרויות דוא\"ל",
+        "email_placeholder": "אֶלֶקטרוֹנִי",
+        "email_or_phone_label": "דוא\"ל או מספר טלפון נייד",
+        "email_or_phone_placeholder": "דוא\"ל או מספר טלפון נייד",
+        "stored_addresses_label": "כתובות שנשמרו",
+        "available_addresses_label": "כתובות זמינות",
+        "new_address_label": "השתמש בכתובת חדשה",
+        "first_name_label": "שֵׁם פְּרַטִי",
+        "optional_first_name_label": "שם פרטי (אופציונלי)",
+        "last_name_label": "שֵׁם מִשׁפָּחָה",
+        "company_label": "חֶברָה",
+        "storefront_link": "אתר האינטרנט של הסוחר",
+        "company_attention_label": "חברה/תשומת לב",
+        "optional_company_attention_label": "חברה/תשומת לב (אופציונלי)",
+        "optional_company_label": "חברה (אופציונלי)",
+        "address1_label": "כְּתוֹבֶת",
+        "address2_label": "דירה, סוויטה וכו'.",
+        "optional_address2_label": "דירה, סוויטה וכו' (אופציונלי)",
+        "city_label": "עִיר",
+        "suburb_label": "פַּרבָּר",
+        "country_label": "מדינה/אזור",
+        "country_code": "קוד מדינה/אזור",
+        "province_label": "מָחוֹז",
+        "province_placeholder": "מָחוֹז",
+        "county_label": "מָחוֹז",
+        "county_placeholder": "מָחוֹז",
+        "state_label": "מְדִינָה",
+        "state_placeholder": "מְדִינָה",
+        "region_label": "אֵזוֹר",
+        "region_placeholder": "אֵזוֹר",
+        "region_none": "אף אחד לא נבחר",
+        "prefecture_label": "מחוז",
+        "prefecture_placeholder": "מחוז",
+        "governorate_label": "מחוז",
+        "governorate_placeholder": "מחוז",
+        "emirate_label": "אמירות",
+        "emirate_placeholder": "אמירות",
+        "state_and_territory_label": "מדינה/טריטוריה",
+        "state_and_territory_placeholder": "מדינה/טריטוריה",
+        "phone_label": "טֵלֵפוֹן",
+        "phone_rollup_accessibility_label": "אפשרויות טלפון",
+        "phone_country_code_label": "קידומת בינלאומית של מספר טלפון",
+        "optional_phone_label": "טלפון (אופציונלי)"
       },
       "stock": {
         "price_column_header": "מְחִיר",
@@ -971,6 +1019,90 @@
           "long": "תקבלו אימייל ברגע שההזמנה שלכם תעובד. יש כרגע כמות גדולה של הזמנות.",
           "no_auto_refresh_html": "אם לא תופנה אוטומטית, %{link}."
         }
+      },
+      "general": {
+        "autocomplete_powered_by_google": "מופעל על ידי {{brandName}}",
+        "submit": "לְהַגִישׁ",
+        "processing": "עיבוד...",
+        "stepper": {
+          "increase": "הגדלת {{type}}",
+          "decrease": "הקטן {{type}}",
+          "minimum_reached": "מינימום של {{value}} הושג",
+          "maximum_reached": "הגעת למקסימום של {{value}}"
+        },
+        "remove_chip": "הסר פריט",
+        "remove_item": "הסר את %{label}",
+        "remove_tag": "הסר תגית",
+        "dates": {
+          "weekdays": {
+            "monday": "יוֹם שֵׁנִי",
+            "tuesday": "יוֹם שְׁלִישִׁי",
+            "wednesday": "יוֹם רְבִיעִי",
+            "thursday": "יוֹם חֲמִישִׁי",
+            "friday": "יוֹם שִׁישִׁי",
+            "saturday": "שַׁבָּת",
+            "sunday": "יוֹם רִאשׁוֹן"
+          },
+          "weekdays_abbreviation": {
+            "monday": "מו",
+            "tuesday": "טו",
+            "wednesday": "אָנוּ",
+            "thursday": "ה'",
+            "friday": "פר",
+            "saturday": "סא",
+            "sunday": "סו"
+          },
+          "months": {
+            "january": "יָנוּאָר",
+            "february": "פֶבּרוּאָר",
+            "march": "מַרס",
+            "april": "אַפּרִיל",
+            "may": "מַאִי",
+            "june": "יוּנִי",
+            "july": "יוּלִי",
+            "august": "אוֹגוּסט",
+            "september": "סֶפּטֶמבֶּר",
+            "october": "אוֹקְטוֹבֶּר",
+            "november": "נוֹבֶמבֶּר",
+            "december": "דֵצֶמבֶּר"
+          }
+        },
+        "datepicker": {
+          "show_previous_month": "הצג את החודש הקודם, {{month}} {{year}}",
+          "show_next_month": "הצג בחודש הבא, {{month}} {{year}}",
+          "range_start": "תחילת טווח",
+          "in_range": "בטווח",
+          "range_end": "סוף טווח"
+        },
+        "map": {
+          "cluster_title": {
+            "one": "אשכול של סמן {{number}}",
+            "other": "אשכול של סמנים {{number}}"
+          }
+        },
+        "sheet": {
+          "expand": "לְהַרְחִיב"
+        },
+        "dropzone": {
+          "add_file": "הוסף קובץ",
+          "invalid_file_type": "סוג הקובץ אינו נתמך",
+          "dragged_over": "שחררו קובץ להעלאה"
+        }
+      },
+      "embed": {
+        "header": {
+          "review_order": "סקור את ההזמנה שלך"
+        },
+        "shipping": {
+          "shipping_options": "ראה את כל אפשרויות המשלוח"
+        },
+        "payment": {
+          "payment_options": "ראה את כל אפשרויות התשלום"
+        }
+      },
+      "payment_collection": {
+        "cancelled": "תשלום זה אינו נדרש עוד. בקר בדף ההזמנה לקבלת פרטים.",
+        "paid": "תשלום זה כבר הוגשה. בקר בדף ההזמנה לקבלת פרטים."
       }
     },
     "page_titles": {
@@ -1083,7 +1215,145 @@
           "forgot_your_store_link_text": "שכחת את החנות שלך",
           "add_storefront": "ניתן להגדיר את אתר האינטרנט שלך על ידי הוספת ערוץ החנות המקוונת בדף %{admin_link} שלך. אם אתה מתקשה להיכנס לחנות שלך, נסה את דף %{forgot_your_store_link}.",
           "admin_link_text": "מנהל"
+        },
+        "ctas": {
+          "sell_in_person": {
+            "header": "למכור באופן אישי",
+            "caption": "קבלו את התכונות הדרושות לכם כדי להפעיל את החנות הקמעונאית שלכם, בין אם אתם מתחילים או מגדילים את העסק.",
+            "link_text": "התחל ניסיון חינם"
+          },
+          "open_a_store": {
+            "header": "פתיחת חנות Shopify חדשה",
+            "caption": "התחל תקופת ניסיון בחינם ל-3 ימים, ולאחר מכן המשך תמורת דולר אחד לחודש למשך 3 החודשים הבאים.",
+            "link_text": "הירשמו עכשיו"
+          },
+          "editions": {
+            "header": "בדקו את מהדורות Shopify",
+            "caption": "עם יותר מ-100 עדכוני מוצרים, תוכלו להיות פרודוקטיביים, יצירתיים וחזקים יותר במסחר ממה שאי פעם דמיינתם.",
+            "link_text": "גלה את המהדורות האחרונות"
+          },
+          "store_owner": {
+            "header": "האם אתה בעל החנות?",
+            "caption": "האם אתה מתקשה להיכנס לחנות שלך? נסה את התכונה %{forgot_your_store_link}. אם ברצונך להפעיל מחדש את החנות שלך, צור קשר עם %{shopify_support_link}.",
+            "shopify_support_link_text": "תמיכת Shopify"
+          }
         }
+      }
+    },
+    "notices": {
+      "customer": {
+        "password_reset_error": "שגיאת איפוס סיסמה",
+        "subscribe_error": "שגיאת הרשמה",
+        "unsubscribe_error": "שגיאת ביטול מנוי",
+        "no_account_found": "לא נמצא חשבון עם כתובת האימייל הזו.",
+        "invalid_credentials": "כתובת דוא\"ל או סיסמה שגויים.",
+        "denylisted_reset_password": "לא ניתן היה לגשת לחשבונך מכיוון שהסיסמה הנוכחית אינה מאובטחת. תקבל אימייל לעדכון הסיסמה.",
+        "signup_disabled": "יצירת חשבון לקוח הושבתה."
+      },
+      "address": {
+        "updated": "הכתובת עודכנה בהצלחה.",
+        "error_updating": "שגיאה בעדכון הכתובת",
+        "created": "הכתובת נוצרה בהצלחה",
+        "error_creating": "שגיאה ביצירת כתובת.",
+        "deleted": "הכתובת נמחקה בהצלחה",
+        "error_deleting": "שגיאה במחיקת כתובת."
+      },
+      "line_item": {
+        "item_status": {
+          "add_variant": "נוסף %{delta}",
+          "increment_item": "נוסף %{delta}",
+          "decrement_item": "הוסר %{delta} מתוך %{total}",
+          "decrement_fulfilled_line_item": "הוחזר %{delta} מתוך %{total}",
+          "decrement_return_line_item": "הוסר %{delta} מההחזרה"
+        }
+      },
+      "order": {
+        "not_available": "הזמנה זו אינה זמינה",
+        "financial_status": {
+          "authorized": "מוּסמָך",
+          "pending": "תָלוּי וְעוֹמֵד",
+          "paid": "בתשלום",
+          "unpaid": "לא שולם",
+          "voided": "בוטל",
+          "partially_paid": "שולם חלקית",
+          "partially_refunded": "החזר חלקי",
+          "refunded": "החזר כספי",
+          "expired": "פג תוקף"
+        },
+        "fulfillment_status": {
+          "fulfilled": "הוגש",
+          "complete": "לְהַשְׁלִים",
+          "partial": "חֶלקִי",
+          "unfulfilled": "לא מומש",
+          "restocked": "מלאי מחדש"
+        },
+        "transaction_status": {
+          "success": "הַצלָחָה",
+          "pending": "תָלוּי וְעוֹמֵד",
+          "failure": "כֶּשֶׁל",
+          "error": "שְׁגִיאָה"
+        },
+        "cancel_reason": {
+          "declined": "התשלום נדחה",
+          "inventory": "פריטים לא זמינים",
+          "fraud": "הזמנה הונאה",
+          "customer": "לקוח שינה/ביטל הזמנה",
+          "staff": "שגיאת צוות",
+          "other": "אַחֵר"
+        },
+        "cash_on_delivery": "תשלום במזומן במשלוח (COD)"
+      },
+      "cart": {
+        "not_found": "עגלת קניות לא נמצאה",
+        "only_n_items_available": "ניתן להוסיף רק %{count} %{name} לעגלה.",
+        "too_many_items_in_cart": "לא ניתן להוסיף %{name} נוספים לעגלה.",
+        "only_one_added_to_cart": "רק פריט אחד נוסף לעגלת הקניות שלך עקב זמינות.",
+        "only_n_added_to_cart": "רק %{quantity} פריטים נוספו לעגלת הקניות שלך עקב זמינות.",
+        "maximum_available_quantity_reached": "הכמות המקסימלית של פריט זה כבר נמצאת בעגלת הקניות שלך.",
+        "less_than_minimum": "לפריט זה יש מינימום של %{min}.",
+        "more_than_maximum": "לפריט זה יש מקסימום של %{max}.",
+        "not_respect_step": "ניתן להוסיף פריט זה רק במרווחים של %{step}.",
+        "all_items_in_cart": "כל %{count} %{name} נמצאים בעגלת הקניות שלך.",
+        "empty_update": "לא ניתן לעדכן את עגלת הקניות הריקה",
+        "missing_parameters": "אין מזהה או פרמטר שורה תקף",
+        "generic_error": "שגיאת עגלה",
+        "invalid_input": "הפרמטר %{parameter} אינו חוקי.",
+        "product_not_available": "המוצר אינו זמין",
+        "too_many_line_items_error": "העגלה שלך לא יכולה להכיל יותר מ-%{max} פריטים.",
+        "link_expired": "פג תוקף הקישור",
+        "link_no_longer_exists": "הקישור כבר לא קיים.",
+        "stock_problems_html": "פריט אחד או יותר אינם זמינים עוד. סיפקנו <a href=\"%{link}\">עגלת קניות מעודכנת</a> .",
+        "changed": "עגלת הקניות השתנתה",
+        "items_changed": "פריט אחד או יותר השתנו.",
+        "product_sold_out": "המוצר '%{name}' כבר אזל.",
+        "variant_not_found": "לא ניתן למצוא גרסה",
+        "variant_requires_selling_plan": "ניתן לרכוש וריאנט רק עם תוכנית מכירה.",
+        "selling_plan_not_available_for_company_locations": "רכישה חד פעמית בלבד זמינה עבור הזמנות B2B",
+        "digital_product_not_available_for_company_locations": "לא ניתן להוסיף פריט זה להזמנה B2B",
+        "buyer_cannot_purchase_for_company_locations": "לא ניתן לרכוש עבור מיקום זה",
+        "selling_plan_not_applicable": "לא ניתן להחיל תוכנית מכירה על גרסה",
+        "shipping_address_not_required": "עגלה זו אינה דורשת משלוח",
+        "shipping_address_invalid": "אירעה בעיה בחישוב תעריפי המשלוח. המשך בתהליך התשלום כדי לבחור תעריף משלוח לפני שתשלים את ההזמנה.",
+        "bundle_requires_components": "לא ניתן להוסיף את מוצר החבילה '%{name}' לעגלת הקניות.",
+        "gift_card_with_components_not_supported": "לא ניתן להוסיף את מוצר החבילה '%{name}' לעגלת הקניות.",
+        "gift_card_price_must_be_greater_than_zero": "לא ניתן להוסיף את מוצר החבילה '%{name}' לעגלת הקניות.",
+        "gift_card_recipient_validation_error": "מקבל כרטיס המתנה שצוין אינו חוקי",
+        "view_lines_limit_reached": "שורות חייבות להיות קטנות או שוות ל-%{limit}",
+        "cart_too_large": "העגלה גדולה מדי.",
+        "cart_attributes_error": "מאפייני עגלת הקניות מכילים נתונים לא חוקיים.",
+        "merchandise_line_transformers": {
+          "run_error": "אירעה שגיאה בעגלת הקניות שלך."
+        },
+        "merchandise_not_applicable": "לא ניתן לרכוש את הפריט כפי שהוגדר."
+      },
+      "storefront": {
+        "invalid_password": "הסיסמה שגויה, אנא נסה שוב."
+      },
+      "tags": {
+        "add_articles": "צמצם את החיפוש למאמרים שגם כוללים את התגית %{tag}",
+        "add_products": "צמצם את הבחירה למוצרים התואמים לתג %{tag}",
+        "remove_articles": "הרחב את החיפוש למאמרים שאינם מתויגים %{tag}",
+        "remove_products": "הסר את התגית %{tag}"
       }
     }
   },
