@@ -2707,19 +2707,82 @@
   },
   "customer_accounts": {
     "navigation_and_structure": {
-      "search": "לְחַפֵּשׂ"
+      "search": "לְחַפֵּשׂ",
+      "no_countries_found": "לא נמצאו מדינות",
+      "location_switcher_toast_message": "המיקום הועבר ל {{locationName}}",
+      "switch_location": "החלפת מיקום",
+      "no_locations_found": "לא נמצאו מיקומים",
+      "try_new_search": "נסה חיפוש חדש",
+      "view_details": "הצג פרטים",
+      "company_location": "מיקום החברה",
+      "skip_to_content": "דלג לתוכן"
     },
     "account_information": {
       "profile_card": {
-        "title": "פּרוֹפִיל"
+        "title": "פּרוֹפִיל",
+        "cancel": "לְבַטֵל",
+        "cancel_accessibility_label": "ביטול עריכת הפרופיל",
+        "edit": "לַעֲרוֹך",
+        "edit_accessibility_label": "עריכת פרופיל",
+        "email_help_text": "לא ניתן לערוך את האימייל",
+        "editable_email_help_text": "כתובת דוא\"ל זו משמשת לכניסה ועדכוני הזמנות.",
+        "first_name": "שֵׁם פְּרַטִי",
+        "last_name": "שֵׁם מִשׁפָּחָה",
+        "email": "אֶלֶקטרוֹנִי",
+        "no_name_provided_accessibility_label": "לא נוסף שם",
+        "phone_number_help_text": "לא ניתן לערוך את מספר הטלפון",
+        "save": "לְהַצִיל",
+        "save_accessibility_label": "שמור פרופיל",
+        "errors": {
+          "name_too_long": "{{fieldName}} ארוך מדי (מקסימום 255 תווים)",
+          "name_cannot_contain_url": "כתובת האתר {{fieldName}} לא יכולה להכיל כתובת URL",
+          "name_cannot_contain_html_tags": "{{fieldName}} לא יכול להכיל תגי HTML",
+          "email_cant_be_blank": "כתובת האימייל לא יכולה להיות ריקה",
+          "invalid_email_format": "הזן כתובת דוא\"ל חוקית"
+        }
       },
-      "title": "פּרוֹפִיל"
+      "title": "פּרוֹפִיל",
+      "loading_accessibility_message": "טוען פרטי חשבון",
+      "loading_finished_accessibility_message": "פרטי החשבון נטענו",
+      "verify_new_email_modal": {
+        "title": "אימות כתובת דוא\"ל",
+        "description": "הזן את הקוד שנשלח אל {{email}}",
+        "one_time_password_label": "קוד בן 6 ספרות",
+        "email_resend_button": "שלח שוב את הקוד",
+        "email_resend_button_accessibility_label": "שלח שוב את קוד האימות",
+        "verify_button": "לְאַמֵת",
+        "verify_button_accessibility_label": "אימות סיסמה חד פעמית",
+        "cancel_button": "לְבַטֵל",
+        "cancel_button_accessibility_label": "ביטול עריכת אימייל",
+        "email_resend_button_success_toast_message": "קוד אימות נשלח",
+        "email_resend_button_failure_banner_message": "לא ניתן היה לשלוח את קוד האימות"
+      },
+      "email_update_success_modal": {
+        "title": "אימות כתובת דוא\"ל",
+        "description": "האימייל עודכן בהצלחה. מפנה מחדש להתחברות."
+      },
+      "profile_update_confirmation_message": "הפרופיל עודכן",
+      "email_update_confirmation_message": "האימייל עודכן ל {{email}}",
+      "people": {
+        "pagination": {
+          "load_more": "טען עוד",
+          "load_more_accessibility_label": "טען עוד אנשים",
+          "loading_accessibility_label": "טוען אנשים"
+        }
+      },
+      "add_button": "לְהוֹסִיף"
     },
     "orders": {
       "list_title": "הזמנות",
       "order_list": {
         "pagination": {
-          "load_more_accessibility_label": "טען הזמנות נוספות"
+          "load_more_accessibility_label": "טען הזמנות נוספות",
+          "nav_accessibility_label": "כפתורי ניווט להזמנות",
+          "next": "הַבָּא",
+          "next_accessibility_label": "הזמנות הבאות",
+          "previous": "קודם",
+          "previous_accessibility_label": "הזמנות קודמות",
+          "load_more": "טען עוד"
         },
         "order_status_message": {
           "list_view": {
@@ -2799,7 +2862,51 @@
         },
         "show_order_actions_accessibility_label": "הצג פעולות הזמנה עבור הזמנה {{name}}",
         "view_order": "הצג הזמנה",
-        "view_order_accessibility_label": "הצג הזמנה {{orderName}}"
+        "view_order_accessibility_label": "הצג הזמנה {{orderName}}",
+        "column_headers": {
+          "order": "לְהַזמִין",
+          "total": "סַך הַכֹּל",
+          "actions_accessibility_label": "פעולות",
+          "products_accessibility_label": "מוצרים"
+        },
+        "delivered": "נמסר בתאריך {{date}}",
+        "empty_state_order_source_description": "רק הזמנות שבוצעו על ידי {{email}} יוצגו כאן.",
+        "empty_state_subtitle": "עבור לחנות כדי לבצע הזמנה.",
+        "empty_state_title": "אין עדיין הזמנות",
+        "empty_state_with_location_title": "אין הזמנות עבור {{locationName}}",
+        "empty_state_title_for_pending_orders": "אין הזמנות ממתינות",
+        "no_order_banner": "כדי לבדוק את התוסף שלך בדף סטטוס ההזמנה, צור הזמנה.",
+        "estimated_shortform": "נוסד בתאריך {{date}}",
+        "estimated_delivery": "צפוי בתאריך {{date}}",
+        "one_images_accessibility_label": "ההזמנה כוללת {{lineItemName1}}",
+        "two_images_accessibility_label": "ההזמנה כוללת {{lineItemName1}} , {{lineItemName2}}",
+        "three_images_accessibility_label": "ההזמנה כוללת {{lineItemName1}} , {{lineItemName2}} , {{lineItemName3}}",
+        "four_images_accessibility_label": "ההזמנה כוללת {{lineItemName1}} , {{lineItemName2}} , {{lineItemName3}} , {{lineItemName4}}",
+        "more_than_three_products_accessibility_label": "ההזמנה כוללת {{lineItemName1}} , {{lineItemName2}} , ועוד {{numberOfAdditionalProducts}} מוצרים",
+        "more_than_four_products_accessibility_label": "ההזמנה כוללת {{lineItemName1}} , {{lineItemName2}} , {{lineItemName3}} , ועוד {{numberOfAdditionalProducts}} מוצרים",
+        "plus_more": "+ {{numberOfAdditionalProducts}}",
+        "plus_more_products": "+ {{numberOfAdditionalProducts}} מוצרים",
+        "carousel": {
+          "one_products_accessibility_label": "ההזמנה כוללת כמות של {{lineItemName1}} {{lineItemQuantity1}}",
+          "two_products_accessibility_label": "ההזמנה כוללת כמות של {{lineItemName1}} {{lineItemQuantity1}} , כמות של {{lineItemName2}} {{lineItemQuantity2}}",
+          "three_products_accessibility_label": "ההזמנה כוללת כמות של {{lineItemName1}} {{lineItemQuantity1}} , כמות של { {{lineItemName2}} {{lineItemQuantity2}} , כמות של {{lineItemName3}} {{lineItemQuantity3}}",
+          "four_products_accessibility_label": "ההזמנה כוללת כמות של {{lineItemName1}} {{lineItemQuantity1}} , כמות של {{lineItemName2 {{lineItemName2}} {{lineItemName3}} {{lineItemQuantity2}} , כמות של {{lineItemQuantity3}} , כמות של {{lineItemName4}} {{lineItemQuantity4}}",
+          "five_products_accessibility_label": "ההזמנה כוללת כמות של {{lineItemName1}} {{lineItemQuantity1}} , כמות של {{lineItemQuantity2}} {{lineItemName2}} {{lineItemName3}} }}, כמות של {{lineItemQuantity3}} lineItemName3}} {{lineItemName4}} , כמות של {{lineItemQuantity4}} , כמות של {{lineItemName5}} {{lineItemQuantity5}}",
+          "six_products_accessibility_label": "ההזמנה כוללת כמות של {{lineItemName1}} {{lineItemQuantity1}} , כמות של {{lineItemQuantity2}} {{lineItemName2}} {{lineItemName3}} }}, כמות של {{lineItemQuantity3}} {{lineItemName4}} , כמות של {{lineItemQuantity4}} {{lineItemName5}} lineItemQuantity4}}, כמות של {{lineItemQuantity5}} , כמות של {{lineItemName6}} {{lineItemQuantity6}}",
+          "six_and_more_products_accessibility_label": "ההזמנה כוללת כמות של {{lineItemName1}} {{lineItemQuantity1}} , כמות של {{lineItemQuantity2}} {{lineItemName2}} {{lineItemName3}} }}, כמות של {{lineItemQuantity3}} {{lineItemName4}} , כמות של {{lineItemQuantity4}} {{lineItemName5}} {{lineItemName6}} {{lineItemQuantity5}} , כמות של {{lineItemQuantity6}} ועוד.",
+          "view_order_details": "הצג פרטי הזמנה",
+          "previous": "קוֹדֵם",
+          "next": "הַבָּא"
+        },
+        "items": {
+          "one": "פריט {{count}}",
+          "other": "{{count}}"
+        },
+        "no_filtered_results_description": "הסר או התאם מסננים כדי לראות את ההזמנות שלך",
+        "no_filtered_results_title": "אין תוצאות מסוננות",
+        "order_link": "הצג הזמנה {{name}}",
+        "order_number": "הזמנה {{name}}",
+        "orders_title": "מְאוּשָׁר"
       },
       "order_status": {
         "attempted_delivery_label": "ניסיון משלוח",
@@ -2952,7 +3059,13 @@
       "manage": "לְנַהֵל",
       "manage_accessiblity_label": "ניהול הזמנה {{orderId}}",
       "group_title_label": "חלק מ: {{groupTitle}}",
-      "group_title_label_with_parent": "עבור: {{groupTitle}}"
+      "group_title_label_with_parent": "עבור: {{groupTitle}}",
+      "list_layout_accessibility_label": "אפשרויות פריסה",
+      "list_title_with_pending_orders": "הזמנות:",
+      "list_title_confirmed_orders_accessibility_label": "הזמנות: אושרו",
+      "list_title_pending_orders_accessibility_label": "הזמנות: ממתינות",
+      "switch_order_type_pending_orders_accessibility_label": "החלפת סוג הזמנה, מציגה כעת הזמנות ממתינות",
+      "switch_order_type_confirmed_orders_accessibility_label": "החלפת סוג הזמנה, מוצג כעת הזמנות שאושרו"
     },
     "order_details": {
       "contact": "מַגָע",
@@ -3748,6 +3861,11 @@
       "shoppay": "חנות תשלום",
       "applepay": "אפל פיי",
       "googlepay": "גוגל פיי"
+    },
+    "announcement_bar": {
+      "expand_label": "הרחב את סרגל ההכרזות",
+      "collapse_label": "כיווץ סרגל ההכרזות",
+      "close_label": "סגור את סרגל ההכרזות"
     }
   }
 }
