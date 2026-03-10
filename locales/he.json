@@ -852,7 +852,62 @@
         },
         "apple": {
           "connect": "לחץ כדי לחבר את חשבון Apple Pay שלך"
-        }
+        },
+        "gift_card_wrapper": {
+          "payment_tag": "כרטיס מתנה",
+          "add_label": "הוסף כרטיס מתנה",
+          "manage_label": "ניהול כרטיסי מתנה"
+        },
+        "gift_card_store_credit": {
+          "add_label": "הוסף כרטיס מתנה או זיכוי בחנות",
+          "manage_label": "ניהול כרטיסי מתנה או אשראי בחנות"
+        },
+        "gift_card_checkbox_label": "החלת כרטיס מתנה",
+        "custom_onsite_payment_method_modal": {
+          "title": "אישור תשלום מותאם אישית באתר"
+        },
+        "markets_pro_disclaimer_label": "על ידי ביצוע ההזמנה שלך, הנך מסכים לרכוש מ-Global-e כסוחר הרשום, בכפוף ל-%{markets_pro_terms} ול-%{privacy_policy} של Global-e, ולשתף את המידע שלך עם %{shop_name}.",
+        "markets_pro_disclaimer_terms_and_conditions": "תנאים והגבלות",
+        "markets_pro_disclaimer_privacy_policy": "מדיניות פרטיות",
+        "markets_pro_disclaimer_terms_and_conditions_title": "תנאים והגבלות של סוחר רשומות",
+        "markets_pro_disclaimer_privacy_policy_title": "מדיניות הפרטיות של סוחר הרשומות",
+        "purchase_order_number": {
+          "title": "מספר הזמנת רכש",
+          "label": "מספר הזמנת רכש (אופציונלי)"
+        },
+        "alternative_payment_currency_total_notice": "הערה: תחויב בסכום של %{amount_due}.",
+        "alternative_payment_currency_total_manual_payment_notice": "הערה: הסכום המומר הוא %{amount_due}.",
+        "waiting_on_taxes_message": "אם המיסים שלך לא מחושבים תוך מספר שניות, רענן את הדף.",
+        "waiting_on_taxes_notice": "חישוב מיסים",
+        "payment_method": "אמצעי תשלום",
+        "payment_method_rollup_accessibility_label": "אפשרויות אמצעי תשלום",
+        "expired_payment_method": "פג תוקף אמצעי התשלום שנבחר",
+        "payment_method_update_failed": "עדכון אמצעי התשלום נכשל.",
+        "payment_method_incompatible_with_payment_terms": "אמצעי התשלום אינו תואם את תנאי התשלום.",
+        "proposed_gateway_unavailable": "שער התשלום המוצע אינו זמין",
+        "pay_in_installments_split_pay_short": "4 תשלומים של %{amount}",
+        "gift_cards_unavailable": "לא ניתן עוד להחיל את כרטיס המתנה שלך על הזמנה זו והוא הוסר",
+        "payment_flexibility_terms_id_mismatch": "אי התאמה במזהה של תנאי גמישות התשלום",
+        "payment_option": {
+          "accessibility_label": "בחר אפשרות תשלום"
+        },
+        "bank_account_type": {
+          "checking": "בודק",
+          "savings": "חיסכון"
+        },
+        "new_bank_account_disclaimer": "על ידי השלמת הזמנתך, הנך מאשר ל-%{shop_name} לחייב את החשבון שלהלן באמצעות ACH בסכום ובזמן המוצג.",
+        "bank_account_disclaimer": "עיבוד תשלומי ACH יכול להימשך עד 4 ימי עסקים.",
+        "bank_account_choose": "בחר חשבון כדי להשלים את הרכישה בצורה מאובטחת",
+        "bank_account_connect_another": "חיבור חשבון בנק נוסף",
+        "bank_account_connect": "חיבור חשבון בנק",
+        "bank_account_missing": "חשבון הבנק חייב להיות מחובר",
+        "bank_account_generic_error": "לא ניתן היה להוסיף חשבון בנק. נסה שוב מאוחר יותר.",
+        "separate_payments_label": "הפריטים שלך מגיעים מיותר מחנות אחת. תחויב ב-%{separate_payments_link}.",
+        "separate_payments_text": "תשלומים נפרדים",
+        "payments": "תשלומים",
+        "add_payment_method": "הוסף אמצעי תשלום",
+        "add_new_payment_method": "הוסף אמצעי תשלום חדש",
+        "choose_new_payment_method": "בחר אמצעי תשלום חדש"
       },
       "contextual_availability": {
         "title": {
@@ -1189,7 +1244,43 @@
         "must_use_available_delivery_address": "יש לבחור את כתובת המשלוח מבין כתובות המשלוח הזמינות.",
         "must_use_available_shipping_rate": "יש לבחור את תעריף המשלוח מבין תעריפי המשלוח הזמינים.",
         "split_by_delivery_method_not_allowed": "פיצול לפי שיטת משלוח אינו מותר עבור סשן או חנות זו.",
-        "split_by_delivery_method_unsupported_method_type": "בוצע ניסיון פיצול לפי שיטת משלוח עם סוג שיטת משלוח שאינו נתמך."
+        "split_by_delivery_method_unsupported_method_type": "בוצע ניסיון פיצול לפי שיטת משלוח עם סוג שיטת משלוח שאינו נתמך.",
+        "handle_phone_invalid": "הזן מספר טלפון תקין",
+        "handle_email_invalid": "הזן כתובת דוא\"ל חוקית",
+        "email_invalid": "הזן כתובת דוא\"ל חוקית",
+        "email_or_phone_blank": "הזן כתובת דוא\"ל או מספר טלפון",
+        "email_or_phone_invalid": "הזן כתובת דוא\"ל או מספר טלפון נייד תקינים",
+        "address_first_name_blank": "הזן שם פרטי",
+        "address_first_name_too_long": "השם הפרטי ארוך מדי (מקסימום 255 תווים)",
+        "address_first_name_contains_emojis": "שם פרטי לא יכול להכיל אימוג'ים",
+        "address_first_name_contains_html_tags": "שם פרטי לא יכול להכיל תגי HTML.",
+        "address_first_name_contains_url": "שם פרטי לא יכול להכיל כתובת URL",
+        "address_first_name_contains_mathematical_symbols": "שם פרטי אינו יכול להכיל סמלים מתמטיים",
+        "address_last_name_blank": "הזן שם משפחה",
+        "address_last_name_too_long": "שם המשפחה ארוך מדי (מקסימום 255 תווים)",
+        "address_last_name_contains_emojis": "שם משפחה לא יכול להכיל אימוג'ים",
+        "address_last_name_contains_html_tags": "שם משפחה לא יכול להכיל תגי HTML.",
+        "address_last_name_contains_url": "שם משפחה לא יכול להכיל כתובת URL",
+        "address_last_name_contains_mathematical_symbols": "שם משפחה לא יכול להכיל סמלים מתמטיים",
+        "address_address1_blank": "הזן כתובת",
+        "address_address1_too_long": "שורת הכתובת הראשונה ארוכה מדי (מקסימום 255 תווים)",
+        "address_address1_contains_emojis": "כתובת 1 לא יכולה להכיל אימוג'ים",
+        "address_address1_contains_html_tags": "כתובת1 לא יכולה להכיל תגי HTML.",
+        "address_address1_contains_mathematical_symbols": "שורת הכתובת הראשונה לא יכולה להכיל סמלים מתמטיים",
+        "address_address2_blank": "כניסה לדירה, סוויטה וכו'.",
+        "address_address2_too_long": "שורת הכתובת השנייה ארוכה מדי (מקסימום 255 תווים)",
+        "address_address2_contains_emojis": "כתובת2 לא יכולה להכיל אימוג'ים",
+        "address_address2_contains_html_tags": "כתובת2 לא יכולה להכיל תגי HTML.",
+        "address_address2_contains_mathematical_symbols": "שורת הכתובת השנייה לא יכולה להכיל סמלים מתמטיים",
+        "address_city_blank": "הזן עיר",
+        "address_city_too_long": "העיר ארוכה מדי (מקסימום 255 תווים)",
+        "address_city_contains_emojis": "העיר לא יכולה להכיל אימוג'ים",
+        "address_city_contains_html_tags": "עיר לא יכולה להכיל תגי HTML.",
+        "address_city_contains_mathematical_symbols": "עיר לא יכולה להכיל סמלים מתמטיים",
+        "address_country_blank": "בחר מדינה/אזור",
+        "address_country_not_supported": "איננו שולחים למדינה או לאזור זה. הזן כתובת משלוח חדשה ונסה שוב.",
+        "address_province_blank": "בחר מדינה / מחוז",
+        "address_province_invalid": "בחר מדינה/מחוז תקפים"
       },
       "store_credit_errors": {
         "generic_error": "הייתה בעיה עם זיכוי החנות שלך. נסה שוב או טען מחדש את הדף."
@@ -1213,6 +1304,35 @@
         "duplicate_variant_id": "פקודת הסחורה %{position} %{name} מכילה מזהה וריאנט כפול %{variant_id}.",
         "invalid_variant_id_target": "הוראת הסחורה %{name} מתייחסת למזהה הגרסה %{variant_id}, אך גרסה זו אינה נמצאת בשורות הסחורה.",
         "invalid_price_override_target": "הוראת עקיפת המחיר של הסחורה עבור פריט %{stable_id} אינה חוקית מכיוון שמדובר ברכיב חבילה."
+      },
+      "billing": {
+        "billing_address_title": "חשבונית אל",
+        "billing_address_rollup_accessibility_label": "אפשרויות חיוב",
+        "same_as_shipping": "זהה לכתובת המשלוח",
+        "add_address": "השתמש בכתובת אחרת",
+        "edit": "לַעֲרוֹך",
+        "delete": "לִמְחוֹק",
+        "address_more": "פעולות נוספות עבור כתובת זו",
+        "address_edit": "עריכת כתובת",
+        "address_delete": "מחיקת כתובת",
+        "address_confirm": "האם אתה בטוח שברצונך למחוק את הכתובת הזו מחשבונך?",
+        "address_form": {
+          "add_address": "הוסף כתובת",
+          "save": "לְהַצִיל",
+          "cancel": "לְבַטֵל"
+        }
+      },
+      "company_location": {
+        "location_title": "מיקום החברה",
+        "location_rollup_accessibility_label": "אפשרויות מיקום החברה"
+      },
+      "payment_summary": {
+        "gift_card_current_balance_notice": "יתרה נוכחית %{amount}",
+        "credit_card_expires_on_notice": "פג תוקף בתאריך %{חודש}/%{שנה}",
+        "express_payment_gateway_label": "אֶקְסְפּרֶס",
+        "manual_payment_gateway_label": "יָדָנִי",
+        "billing_address_title": "כתובת לחיוב",
+        "free_label": "לְשַׁחְרֵר"
       }
     },
     "page_titles": {
