@@ -407,11 +407,58 @@
       },
       "review": {
         "blocks": {
-          "contact_method_title": "מַגָע"
+          "contact_method_title": "מַגָע",
+          "billing_address_title": "חיוב",
+          "shipping_address_title": "לשלוח אל",
+          "shipping_method_title": "שיטת משלוח",
+          "payment_method_title": "אמצעי תשלום",
+          "change_link_label": "לְשַׁנוֹת",
+          "change_contact_method_link_label": "שינוי פרטי קשר",
+          "change_billing_address_link_label": "שינוי כתובת לחיוב",
+          "change_company_location_link_label": "שינוי מיקום החברה",
+          "change_shipping_address_link_label": "שינוי כתובת משלוח",
+          "change_shipping_method_link_label": "שנה את שיטת המשלוח",
+          "change_payment_method_link_label": "שנה אמצעי תשלום",
+          "pick_up_in_store_shipping_method_html": "איסוף בחנות · %{location_name}",
+          "purchase_order_number_title": "מספר הזמנת רכש",
+          "change_purchase_order_number_label": "שינוי מספר הזמנת רכש",
+          "change_delivery_method_link_label": "שנה שיטת משלוח",
+          "no_address": "(אין כתובת)",
+          "no_purchase_order_number": "(אין מספר הזמנת רכש)",
+          "due_after_order_reviewed_html": "מועד אחרון לביצוע לאחר בדיקת ההזמנה",
+          "review_title_free_order": "סקור והשלם את ההזמנה שלך",
+          "payment_method_saved_company_location": "שמור כרטיס עבור מיקום זה",
+          "company_location": "מיקום החברה"
+        },
+        "title": "סְקִירָה",
+        "review_title": "השלם את ההזמנה שלך",
+        "review_and_confirm_title": "סקירה ואישור",
+        "checkout_as_guest": "צ'ק אאוט כאורח",
+        "account_more_actions": "פעולות נוספות עבור חשבון זה",
+        "checkout_a_different_way": "בדוק דרך אחרת",
+        "block_title": "בדוק את המידע שלך",
+        "item_header": {
+          "change_value": "שינוי ערך",
+          "section": "סָעִיף",
+          "value": "עֵרֶך"
         }
       },
       "shop_policies": {
-        "contact_information": "מַגָע"
+        "contact_information": "מַגָע",
+        "policy_label": "מְדִינִיוּת",
+        "policies_label": "מדיניות",
+        "select_policy_label": "בחר מדיניות",
+        "refund_policy": "מדיניות החזרים",
+        "privacy_policy": "מדיניות הפרטיות",
+        "terms_of_service": "תנאי השירות",
+        "legal_notice": "הודעה משפטית",
+        "shipping_policy": "מִשׁלוֹחַ",
+        "terms_of_sale": "תנאי המכירה",
+        "subscription_policy": "ביטולים",
+        "purchase_options_policy": "מדיניות אפשרויות רכישה",
+        "purchase_options_cancellation_policy": "ביטולים",
+        "cookie_preferences": "עוגיות",
+        "terms_and_policies": "תנאים ומדיניות"
       },
       "pickup_point": {
         "search_button": "לְחַפֵּשׂ",
@@ -587,7 +634,8 @@
           "other": "תקבלו הודעת טקסט עם כרטיסי המתנה שלכם תוך מספר דקות."
         },
         "gift_card_confirmation_by_email_typ": {
-          "one": "תקבלו אימייל עם כרטיס המתנה שלכם תוך מספר דקות."
+          "one": "תקבלו אימייל עם כרטיס המתנה שלכם תוך מספר דקות.",
+          "other": "תקבלו אימייל עם כרטיסי המתנה שלכם תוך מספר דקות."
         },
         "thank_you_confirmed_order_with_email_pick_up": "תקבלו אימייל כאשר ההזמנה שלכם תהיה מוכנה לאיסוף.",
         "thank_you_confirmed_order_with_phone_pick_up": "תקבלו הודעת טקסט כאשר ההזמנה שלכם תהיה מוכנה לאיסוף.",
@@ -694,7 +742,37 @@
         "confirmed_orders_title": "ההזמנות שלך אושרו",
         "ready_for_pickup_title": "ההזמנה שלך מוכנה לאיסוף",
         "ready_for_pickup_description": "ההזמנה שלך מוכנה לאיסוף. יש להביא את אישור ההזמנה שלך בעת איסוף ההזמנה.",
-        "ready_for_delivery_title": "ההזמנה שלך מוכנה למשלוח"
+        "ready_for_delivery_title": "ההזמנה שלך מוכנה למשלוח",
+        "gift_card_email_title": {
+          "one": "כרטיס מתנה נשלח במייל",
+          "other": "כרטיסי מתנה נשלחו במייל"
+        },
+        "gift_card_text_title": {
+          "one": "כרטיס מתנה נשלח בהודעת טקסט",
+          "other": "כרטיסי מתנה נשלחו באמצעות הודעת טקסט"
+        },
+        "resend_gift_cards_by_email": "שלח שוב אימייל",
+        "resend_gift_cards_by_text": "שלח שוב הודעת טקסט",
+        "gift_card_resent_confirmation": {
+          "one": "כרטיס מתנה נשלח מחדש.",
+          "other": "כרטיסי מתנה נשלחו מחדש."
+        },
+        "gift_card_resend_failure": {
+          "one": "הייתה בעיה בשליחת כרטיס המתנה שלך מחדש. נסה שוב או צור איתנו קשר.",
+          "other": "הייתה בעיה בשליחת כרטיסי המתנה שלך מחדש. נסה שוב או צור איתנו קשר."
+        },
+        "vat_invoices": {
+          "title": "חשבוניות מע\"מ"
+        },
+        "verify_shop_account_title": "אימות חשבון החנות שלך",
+        "verify_shop_account_message": "המידע שלך נשמר באמצעות Shop, אמת את חשבונך כדי להשתמש בו אוטומטית במיליוני חנויות.",
+        "verify_shop_account_cta": "אימות החשבון שלך",
+        "verify_shop_account_confirmation": "פרטי התשלום נשמרו",
+        "announcement": {
+          "close": "לִסְגוֹר",
+          "expand": "לְהַרְחִיב",
+          "collapse": "הִתמוֹטְטוּת"
+        }
       },
       "note": {
         "length_exceeds_maximum": "יש להקטין את גודל ההערה ל-5000 תווים או פחות."
@@ -1880,7 +1958,9 @@
       "change_currency": {
         "change_currency_link": "שנה ל-%{currency_name}",
         "card_provider_fx_charges_warning": "ספק כרטיס האשראי שלך עשוי לגבות עמלות על עסקאות %{currency_code}.",
-        "currency_not_supported_by_shop": "המטבע שבחרת אינו זמין עוד. כל המחירים כעת מופיעים ב-%{currency_code}."
+        "currency_not_supported_by_shop": "המטבע שבחרת אינו זמין עוד. כל המחירים כעת מופיעים ב-%{currency_code}.",
+        "credit_card_will_be_charged_html": "כרטיס האשראי שלך יחויב בסכום של %{amount}",
+        "payment_total_label": "סכום התשלום"
       },
       "change_country": {
         "cart_updated_based_on_country": "העגלה שלך עודכנה בהתאם למדינת המשלוח שלך.",
@@ -2312,6 +2392,65 @@
       },
       "online_store_chat": {
         "title": "שאלות? צ'אט איתנו"
+      },
+      "vaulted": {
+        "change_button": "לְשַׁנוֹת"
+      },
+      "marketing": {
+        "accept_marketing_checkbox_label": "שלח לי אימייל עם חדשות והצעות",
+        "post_accept_marketing_checkbox_label": "הנך רשום/ה לקבלת חדשות והצעות בדוא\"ל",
+        "pending_accept_marketing_checkbox_label": "בדוק את האימייל שלך כדי לאשר את הרשמתך לחדשות ומבצעים",
+        "accept_sms_checkbox_label": "שלח לי הודעה עם חדשות והצעות",
+        "disclaimer": {
+          "privacy_policy": "מדיניות פרטיות",
+          "terms_of_service": "תנאי השירות"
+        },
+        "sms": {
+          "disclaimer": {
+            "privacy_policy": "מדיניות פרטיות",
+            "terms_of_service": "תנאי השירות",
+            "description_html": "על ידי הרשמה באמצעות הודעת טקסט, הנך מסכים לקבל הודעות שיווק אוטומטיות חוזרות, כולל תזכורות לעגלת קניות, למספר הטלפון שסופק. הסכמה אינה תנאי לרכישה. השב ל-STOP כדי לבטל את המנוי. השב ל-HELP לקבלת עזרה. תדירות ההודעות משתנה. ייתכן שיחולו חיובים על הודעות ונתונים. עיין ב-%{privacy_policy_link} וב-%{terms_of_service_link} שלנו.",
+            "description_transactional_html": "ייתכן שתקבלו הודעות טקסט הקשורות לאישור הזמנה ועדכוני משלוח. השב ל-STOP כדי לבטל את המנוי. השב ל-HELP לקבלת עזרה. תדירות ההודעות משתנה. ייתכן שיחולו חיובים על הודעות ונתונים. עיינו ב-%{privacy_policy_modal_link} וב-%{terms_of_service_modal_link} שלנו."
+          },
+          "mobile_phone_number": "מספר טלפון נייד",
+          "get_offers_by_text": "קבל הצעות באמצעות הודעת טקסט"
+        },
+        "unsubscribe": {
+          "title": "ביטלת את המנוי",
+          "description": "לא תקבלו מאיתנו תזכורות נוספות לעגלת קניות."
+        },
+        "accept_shop_pay_marketing_checkbox_label": "הירשמו אותי לחדשות ומבצעים מהחנות הזו"
+      },
+      "remote_policies": {
+        "unavailable_policy": "לא סופק %{policy_name} עבור חנות זו. למידע נוסף, פנו ישירות ל- %{shop_name}."
+      },
+      "mor_policies": {
+        "terms_and_conditions": "תנאים והגבלות של סוחר רשומות",
+        "privacy_policy": "מדיניות הפרטיות של סוחר הרשומות"
+      },
+      "markets": {
+        "invalid_market_manager_error": "בדוק את פרטי הקשר שלך לפני השלמת התשלום"
+      },
+      "notifications": {
+        "title": "התראות"
+      },
+      "order_payment_collection": {
+        "custom_line_item_description": "סכום לתשלום עבור הזמנה %{order_name}",
+        "changes_summary": {
+          "added": {
+            "one": "נוסף",
+            "other": "נוסף %{count}"
+          },
+          "removed": "הוסר",
+          "subtracted": "הוסר %{count}",
+          "returned": "הוחזר %{count}",
+          "return_line_item_removed": "הוסר %{count} מההחזרה"
+        },
+        "additional_payment_requested": "נדרש תשלום של %{total_outstanding}",
+        "checkout_review_and_pay": "ההזמנה שלך %{order_name} עודכנה. בדוק את השינויים הללו ולאחר מכן שלם כדי לאשר את ההזמנה.",
+        "order_updated_on": "ההזמנה שלך עודכנה בתאריך %{last_edited_at}.",
+        "order_review_and_pay": "ההזמנה שלך עודכנה. בדוק ושלם כדי לאשר את ההזמנה.",
+        "pay_now": "שלם עכשיו"
       }
     },
     "page_titles": {
@@ -3345,7 +3484,146 @@
       "add_payment_method_banner": "הוסף אמצעי תשלום לתשלום מהיר יותר או לשירותים מאושרים מראש",
       "no_payment_methods_banner": "לא נוספו אמצעי תשלום",
       "edit_payment_method_button_accessibility_label": "עריכת {{paymentMethodName}} המסתיימת ב {{lastDigits}}",
-      "edit_payment_method_brand_button_accessibility_label": "עריכת {{paymentMethodName}}"
+      "edit_payment_method_brand_button_accessibility_label": "עריכת {{paymentMethodName}}",
+      "update_payment_method": {
+        "resources_card_show_less": "הצג פחות",
+        "loading_form_accessibility_message": "טוען טופס עדכון אמצעי תשלום",
+        "loading_current_payment_method": "טוען את אמצעי התשלום הנוכחי",
+        "loading_digital_wallets": "טוען אפשרויות ארנק דיגיטלי",
+        "loading_card_fields": "טוען שדות כרטיס אשראי",
+        "loading_resources": "טוען מנויים והזמנות עתידיות"
+      },
+      "link_expired": {
+        "message": "פג תוקף הקישור לעדכון אמצעי התשלום שלך.",
+        "update_message": "פג תוקף הקישור לעדכון אמצעי התשלום שלך.",
+        "add_message": "פג תוקף הקישור להוספת אמצעי התשלום שלך.",
+        "return_home_button": "חזרה לדף הבית"
+      },
+      "update_success": {
+        "title": "אמצעי התשלום עודכן",
+        "done_button": "המשך קניות"
+      },
+      "add_success": {
+        "title": "אמצעי התשלום נוסף",
+        "done_button": "המשך קניות"
+      },
+      "card_fields": {
+        "card_number_label": "מספר כרטיס",
+        "card_number_placeholder": "מספר כרטיס",
+        "name_on_card_label": "שם על הכרטיס",
+        "name_on_card_placeholder": "שם על הכרטיס",
+        "card_expiry_label": "תאריך תפוגה (חודש / שנה)",
+        "card_expiry_placeholder": "תאריך תפוגה (חודש / שנה)",
+        "card_verification_value_label": "קוד אבטחה",
+        "card_verification_value_placeholder": "קוד אבטחה",
+        "card_start_label": "תאריך הנפקה (חודש / שנה)",
+        "card_start_placeholder": "תאריך הנפקה (חודש / שנה)",
+        "tooltip": {
+          "tooltip_accessibility_label": "מידע נוסף",
+          "card_verification_value_explanation_amex": "קוד אבטחה בן 4 ספרות בחזית הכרטיס",
+          "card_verification_value_explanation_other": "קוד אבטחה בן 3 ספרות בגב הכרטיס שלך",
+          "card_verification_value_explanation": "קוד אבטחה בן 3 ספרות נמצא בדרך כלל בגב הכרטיס. לכרטיסי אמריקן אקספרס יש קוד בן 4 ספרות הממוקם בחזית.",
+          "card_security_notice": "כל העסקאות מאובטחות ומוצפנות."
+        },
+        "field_errors": {
+          "credit_card_name_invalid": "הזן את שמך בדיוק כפי שהוא כתוב על הכרטיס שלך",
+          "credit_card_number_invalid": "הזן מספר כרטיס תקף",
+          "credit_card_expiry_invalid": "הזן תאריך תפוגה תקף של כרטיס",
+          "credit_card_verification_value_blank": "הזן את קוד ה-CVV או קוד האבטחה בכרטיס שלך"
+        },
+        "unavailable": {
+          "text": "תשלומים בכרטיס אשראי וכרטיס חיוב אינם זמינים כרגע.",
+          "link_text": "רענן דף זה",
+          "suffix": "או לנסות שוב מאוחר יותר."
+        }
+      },
+      "payment_delete": {
+        "title": "מחיקת אמצעי תשלום",
+        "description_without_replacement": "אמצעי תשלום זה לא יהיה זמין עוד לרכישות עתידיות.",
+        "description_with_replacement": "מחיקת אמצעי תשלום זה תשפיע על תשלומים שאושרו מראש. באפשרותך להחליף אותו באמצעי תשלום אחר כדי להמשיך לקבל הזמנות עתידיות.",
+        "warning_message_with_replacement": {
+          "with_pending_orders_and_subscriptions": "מחיקת אמצעי תשלום זה תשפיע על תשלומים שאושרו מראש. אלא אם כן תבחר אמצעי תשלום חלופי, אמצעי תשלום זה עדיין יחויב עבור כל יתרה שטרם נפרעה בהזמנות קיימות. בחירת אמצעי תשלום חלופי תאפשר לך לקבל הזמנות מנוי עתידיות ללא הפרעה.",
+          "with_pending_orders": "מחיקת אמצעי תשלום זה תסיר אותו מחשבונך ולא יהיה זמין עוד לרכישות עתידיות. אלא אם כן תבחר אמצעי תשלום חלופי, הוא עדיין יחויב עבור כל יתרה שטרם נפרעה בהזמנות קיימות.",
+          "with_subscriptions": "מחיקת אמצעי תשלום זה תשפיע על תשלומים שאושרו מראש. החלף אותו באמצעי תשלום חלופי כדי להמשיך לקבל הזמנות עתידיות."
+        },
+        "warning_message_without_replacement": {
+          "with_pending_orders_and_subscriptions": "מחיקת אמצעי תשלום זה תשפיע על תשלומים שאושרו מראש. אמצעי תשלום זה עדיין יחויב עבור כל יתרה שטרם נפרעה בהזמנות קיימות, אך לא תקבל הזמנות מנוי עתידיות. הוסף אמצעי תשלום חלופי כדי להמשיך לקבל הזמנות מנוי.",
+          "with_pending_orders": "מחיקת אמצעי תשלום זה תסיר אותו מחשבונך ולא יהיה זמין עוד לרכישות עתידיות. הוא עדיין יחויב עבור כל יתרה שטרם נפרעה בהזמנות קיימות.",
+          "with_subscriptions": "מחיקת אמצעי תשלום זה תשפיע על תשלומים שאושרו מראש. הוסף אמצעי תשלום חלופי כדי להמשיך לקבל הזמנות עתידיות."
+        },
+        "payment_method_selector_placeholder": "בחר אמצעי תשלום חלופי (אופציונלי)",
+        "payment_method_selector_no_alternative_payment": "אין שיטת החלפה",
+        "replace_method_with_new_method_description": "ה {{currentPaymentMethodName}} שלך יימחק ויוחלף ב {{newPaymentMethodName}} שלך.",
+        "error_when_deleting": "אנו מתנצלים, אך משהו השתבש ולא הצלחנו למחוק את אמצעי התשלום הזה. אנא נסה שוב מאוחר יותר או רענן את הדף.",
+        "delete_and_replace_button": "מחיקה והחלפה",
+        "delete_and_replace_button_accessibility_label": "מחק {{currentPaymentMethodName}} והחלף אותו ב- {{newPaymentMethodName}} .",
+        "deleted_successfully": "אמצעי התשלום נמחק בהצלחה.",
+        "loading_available_payment_methods_accessibility_label": "טוען אמצעי תשלום זמינים"
+      },
+      "add_payment_method": {
+        "title": "הוסף אמצעי תשלום",
+        "button_title": "לְהוֹסִיף",
+        "payment_method_added_confirmation": "אמצעי התשלום נוסף",
+        "missing_customer_error": "משהו השתבש. אנא נסה שוב או צור קשר עם התמיכה.",
+        "replace_mode_warning": "מחיקת אמצעי תשלום זה תשפיע על מנויים או הזמנות מראש. החלף אותו באמצעי תשלום חלופי כדי להמשיך לקבל הזמנות עתידיות.",
+        "choose_from_list": "בחר מהרשימה",
+        "add_new_button": "הוסף חדש",
+        "billing_address": {
+          "title": "כתובת לחיוב",
+          "add_billing_address_button": "הוסף חדש",
+          "add_billing_address_button_accessibility_label": "הוסף כתובת לחיוב חדשה",
+          "choose_billing_address_from_list_button": "בחר מהרשימה",
+          "choose_billing_address_from_list_button_accessibility_label": "בחר כתובת לחיוב מהרשימה",
+          "missing_billing_address_error_message": "אנא ציין כתובת לחיוב",
+          "default_checkbox": "הגדר כאמצעי תשלום ברירת מחדל"
+        },
+        "subscription_contracts": {
+          "title": "השתמשו באמצעי תשלום עבור הזמנות חוזרות",
+          "more_items": {
+            "one": "עוד {{count}} מוצר",
+            "other": "עוד {{count}} מוצרים"
+          },
+          "product_count": {
+            "one": "מוצר {{count}}",
+            "other": "{{count}}"
+          },
+          "product_details": "פרטי מוצר",
+          "load_more": "טען עוד"
+        },
+        "updating_contracts": {
+          "one": "מעדכן חוזה מנוי {{count}} ...",
+          "other": "מעדכן את חוזי המנוי של {{count}} ..."
+        },
+        "contracts_updated": {
+          "one": "חוזה מנוי של {{count}} עודכן בהצלחה",
+          "other": "עודכנו בהצלחה {{count}} חוזי מנוי"
+        },
+        "contracts_update_failed": "נכשל עדכון חלק מחוזי המנוי",
+        "subscription_contracts_updated": "עודכן {{succeeded}} מתוך {{total}} מנויים",
+        "invalid_wallet_type_error": "סוג ארנק לא חוקי."
+      },
+      "three_d_secure": {
+        "title": "מאובטח תלת-ממדי",
+        "verification_failed": "לא ניתן היה לאמת את התשלום שלך. נסה שוב או השתמש באמצעי תשלום אחר."
+      }
+    },
+    "payment_method_brands": {
+      "visa": "וִיזָה",
+      "mastercard": "מאסטרקארד",
+      "americanexpress": "אָמֶרִיקָן אֶקספּרֶס",
+      "discover": "לְגַלוֹת",
+      "dinersclub": "דיינרס קלאב",
+      "elo": "אלו",
+      "visaelectron": "ויזה אלקטרון",
+      "maestro": "מָאֵסטרוֹ",
+      "forbrugsforeningen": "איגוד הצרכנים",
+      "dankort": "דנקורט",
+      "hipercard": "היפרקארד",
+      "unionpay": "יוניון פיי",
+      "laser": "לייזר",
+      "shoppay": "חנות תשלום",
+      "applepay": "אפל פיי",
+      "googlepay": "גוגל פיי"
     }
   }
 }
