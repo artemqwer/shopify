@@ -454,7 +454,15 @@
           "other": "%{count} נקודות איסוף ליד מיקומך"
         },
         "change": "שנה מיקום",
-        "waiting_on_pickup_point_location_notice": "מחפש נקודות איסוף..."
+        "waiting_on_pickup_point_location_notice": "מחפש נקודות איסוף...",
+        "geolocation": {
+          "shared_location_button": "השתמש במיקום שלי",
+          "errors": {
+            "unsuported_by_browser": "קבלת מיקום גיאוגרפי אינה נתמכת על ידי הדפדפן שלך. נסה שוב או השתמש בדפדפן אחר.",
+            "permission_not_allowed": "אפשר שיתוף של המיקום שלך.",
+            "permission_denied": "לא ניתן היה לאתר את המיקום שלך. נסה שוב."
+          }
+        }
       },
       "thank_you": {
         "ready_for_delivery_description": "הכנו את ההזמנה שלך.",
@@ -2001,7 +2009,81 @@
       },
       "local_pickup": {
         "pickup_unavailable_banner_body": {
-          "ship_items_or_search_elsewhere": "%{ship_items} או %{search_elsewhere}"
+          "ship_items_or_search_elsewhere": "%{ship_items} או %{search_elsewhere}",
+          "ship_items": "שלח את הפריטים שלך",
+          "search_elsewhere": "חפש במקום אחר"
+        },
+        "location_address_search_label": "כְּתוֹבֶת",
+        "location_address_search_placeholder": "%{postal_code_label} או כתובת",
+        "location_closest": "המיקום הקרוב ביותר עם הפריט שלך",
+        "location_information": {
+          "one": "יש %{count} סניף עם מלאי קרוב אליך",
+          "other": "ישנם %{count} סניפים עם מלאי קרוב אליך"
+        },
+        "location_information_far_away": {
+          "one": "יש %{count} מיקום עם הפריט שלך",
+          "other": "יש %{count} מיקומים עם הפריט שלך"
+        },
+        "location_nearby": {
+          "one": "יש %{count} מיקום בקרבת מקום עם הפריט שלך",
+          "other": "יש %{count} מיקומים בקרבת מקום עם הפריט שלך"
+        },
+        "location_nearby_short": {
+          "one": "%{count} מיקום קרוב עם הפריט שלך",
+          "other": "%{count} מיקומים בקרבת מקום עם הפריט שלך"
+        },
+        "location_far_away": {
+          "one": "מיקום %{count} עם הפריט שלך",
+          "other": "%{count} מיקומים עם הפריט שלך"
+        },
+        "toggle_location": "שנה מיקום",
+        "toggle_more_locations": {
+          "one": "%{count} מיקום נוסף",
+          "other": "%{count} מיקומים נוספים"
+        },
+        "toggle_multiple_locations": "%{count}+ מיקומים נוספים",
+        "or": "אוֹ",
+        "cancel": "לְבַטֵל",
+        "your_location": "המיקום שלך",
+        "search_button": "מצא חנויות",
+        "no_stores_found": "לא נמצאו חנויות",
+        "all_stores_far_away": {
+          "title": "המיקומים הקרובים ביותר נמצאים במרחק של יותר מ-%{distance}",
+          "title_with_item": {
+            "one": "המיקום הקרוב ביותר עם הפריט שלך נמצא במרחק של יותר מ-%{distance} מ-%{location}",
+            "other": "המיקום הקרוב ביותר עם הפריטים שלך נמצא במרחק של יותר מ-%{distance} מ-%{location}"
+          },
+          "title_with_specific_location": "המיקום הקרוב ביותר עם הפריט שלך נמצא במרחק של יותר מ-%{distance} מ-%{location}",
+          "description": "בחר מיקום או %{ship_to_address_link}",
+          "ship_to_address_link": "לשלוח לכתובת",
+          "change_location_link": "שנה את המיקום שלך"
+        },
+        "selected_pickup_option_no_longer_available": {
+          "title": "המיקום שבחרת בעבר אינו זמין עוד",
+          "description": "בחר מיקום חדש או %{ship_to_address_link}",
+          "ship_to_address_link": "לשלוח לכתובת"
+        },
+        "could_not_resolve_address": "לא ניתן היה לאתר את הכתובת שלך. נסה שוב או השתמש בכתובת אחרת.",
+        "paginator": {
+          "accessibility_label": "דפדוף איסוף מקומי",
+          "previous": "עמוד קודם",
+          "next": "עמוד הבא",
+          "label": {
+            "one": "%{first} - %{last} מתוך %{count} חנות",
+            "other": "%{first} - %{last} מתוך %{count} חנויות"
+          }
+        },
+        "reveal_more_label": {
+          "one": "הצג %{count} מיקומים נוספים",
+          "other": "הצג %{count} מיקומים נוספים"
+        },
+        "pickup_unavailable_banner_title": {
+          "one": "אין מיקומים עם הפריט שלך",
+          "other": "אין מיקומים עם הפריטים שלך"
+        },
+        "pickup_unavailable_banner_title_with_country": {
+          "one": "אין מיקומים ב-%{country} עם הפריט שלך",
+          "other": "אין מיקומים ב-%{country} עם הפריטים שלך"
         }
       },
       "split_delivery": {
@@ -2154,6 +2236,82 @@
           "and_return_to_checkout": "ולחזור לקופה",
           "cancel": "לְבַטֵל"
         }
+      },
+      "error_page": {
+        "terminal": {
+          "title": "הייתה בעיה בקופה שלנו",
+          "message": "רענן דף זה או נסה שוב בעוד מספר דקות",
+          "action": {
+            "cta": "רענן דף"
+          },
+          "request_id": "מזהה בקשה: {{requestId}}"
+        },
+        "embed_errors": {
+          "storefront_password_required": "חנות זו מוגנת בסיסמה",
+          "customer_account_required": "נדרש חשבון לקוח להשלמת התשלום",
+          "cart_completed": "ביצוע הקופה כבר הושלם",
+          "invalid_cart": "העגלה כבר לא תקפה",
+          "not_authorized": "אימות התשלום נכשל. אמת את פרטי הגישה של האפליקציה שלך.",
+          "killswitch_enabled": "התשלום אינו זמין באופן זמני",
+          "policy_violation": "לא ניתן להשלים את התשלום עקב מגבלות תצורת המדיניות",
+          "unrecoverable_failure": "לא ניתן לטעון את התשלום. נסה שוב."
+        }
+      },
+      "notice_banner": {
+        "return_to_cart_link_text": "חזור לעגלה",
+        "return_to_cart_to_update_quantities": "%{return_to_cart_link_text} כדי לעדכן את הכמויות",
+        "subscription_changed": "אחד המנויים שלך השתנה.",
+        "company_location_changed": "העגלה שלך עודכנה. בדוק את ההזמנה שלך לפני שליחתה.",
+        "company_location_changed_product_removed": "עגלת הקניות שלך עודכנה מכיוון שחלק מהמוצרים אינם זמינים במיקום זה. בדוק את ההזמנה שלך לפני שליחתה.",
+        "violations_title": "{{violation}} חסר או לא חוקי",
+        "individual_violations_title": {
+          "DeliveryViolations": "כתובת למשלוח",
+          "PaymentViolations": "כתובת לחיוב",
+          "OtherViolations": "פרטי הזמנה",
+          "UnhandledViolations": "פרטי הזמנה"
+        },
+        "all_violations_content": "התקשרו אלינו או שלחו לנו {{emailLink}} כדי לעדכן מידע זה ולהשלים את הזמנתכם:",
+        "all_violations_email_link": "אֶלֶקטרוֹנִי",
+        "editable_shipping_address_violations_message_title": "הוסף מידע זה כדי להשלים את ההזמנה שלך:",
+        "editable_shipping_address_violations_message_footer": "כדי לעדכן לצמיתות את הכתובת עבור מיקום זה, {{emailLink}} .",
+        "editable_shipping_address_violations_email_link": "צרו קשר",
+        "shipping_address_incomplete_title": "כתובת המשלוח אינה מלאה",
+        "calculating_shipping": "המשלוח עדיין בחישוב. נסה שוב בעוד מספר שניות. לא חויבת.",
+        "calculating_taxes": "המיסים עדיין מחושבים. נסה שוב בעוד מספר שניות. לא חויבת.",
+        "generic_processing_error": {
+          "title": "הייתה בעיה בעיבוד ההזמנה שלך",
+          "body": "לא חויבת. נסה שוב או השתמש באמצעי תשלום אחר."
+        },
+        "payment_method_not_available_with_payment_terms": "אמצעי התשלום שבחרת אינו זמין עוד מכיוון שהתשלום עבור הזמנה זו מתבצע כעת בתנאי {{paymentTerms}}",
+        "payment_method_not_available_with_fulfillment_terms": "אמצעי התשלום שבחרת אינו זמין עוד מכיוון שהתשלום עבור הזמנה זו יבוצע כעת עם ביצועה",
+        "payment_method_not_available_with_fixed_terms": "אמצעי התשלום שבחרת אינו זמין עוד מכיוון שהתשלום עבור הזמנה זו מועד אחרון",
+        "payment_method_not_available_with_review_requirement": "אמצעי התשלום שבחרת אינו זמין עוד מכיוון שהתשלום יבוצע לאחר אישור ההזמנה שלך.",
+        "contact_information": {
+          "title": "פרטי הקשר אינם חוקיים",
+          "header": "כדי לעדכן את המידע שלך, {{emailLink}} .",
+          "email_link": "צרו קשר"
+        }
+      },
+      "review_address_modal": {
+        "title": "כתובת הביקורת",
+        "subtitle": {
+          "one": "הזמנה זו תישלח לכתובת שסופקה על ידי {{merchant}} .",
+          "other": "הזמנה זו תישלח לכתובת שסופקה על ידי {{merchant}} . בחר כתובת למשלוח."
+        },
+        "subtitle_no_match": "כתובת זו אינה תואמת לאף אחת מהכתובות השמורות שלך.",
+        "subtitle_must_use": "ההזמנה שלך תישלח לכתובת זו.",
+        "continue": "המשך עם כתובת זו",
+        "use_saved_address": "השתמש בכתובת אחרת",
+        "return_to_cart": "חזור לעגלה"
+      },
+      "marketplaces": {
+        "legal_notice": {
+          "legal_text": "סְקִירָה",
+          "link_label": "תנאים והגבלות {{partnerDisplayName}}"
+        }
+      },
+      "online_store_chat": {
+        "title": "שאלות? צ'אט איתנו"
       }
     },
     "page_titles": {
