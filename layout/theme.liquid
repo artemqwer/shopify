@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="{{ request.locale.iso_code }}">
+<html lang="{{ request.locale.iso_code }}" {% if request.locale.iso_code == 'he' %}dir="rtl"{% else %}dir="ltr"{% endif %}>
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -22,6 +22,50 @@
     }
     body {
       font-family: 'Inter', sans-serif;
+    }
+
+    /* ==========================================
+       RTL STYLES — only applied when dir="rtl"
+    =========================================== */
+    [dir="rtl"] body {
+      font-family: 'Inter', sans-serif;
+    }
+    /* Flip flex rows for RTL */
+    [dir="rtl"] nav,
+    [dir="rtl"] .flex-row {
+      flex-direction: row-reverse;
+    }
+    /* Fix spacing so left margin becomes right margin */
+    [dir="rtl"] .ml-1 { margin-left: 0; margin-right: 0.25rem; }
+    [dir="rtl"] .space-x-12 > * + * { margin-left: 0; margin-right: 3rem; }
+    [dir="rtl"] .space-x-10 > * + * { margin-left: 0; margin-right: 2.5rem; }
+    [dir="rtl"] .gap-4 { gap: 1rem; }
+    /* Reverse footer grid columns */
+    [dir="rtl"] footer .flex-row { flex-direction: row-reverse; }
+    /* Fix mega menu dropdown direction */
+    [dir="rtl"] .group:hover > div { left: auto; right: 0; }
+    /* Fix text alignment */
+    [dir="rtl"] .text-center { text-align: center; }
+    [dir="rtl"] h3, [dir="rtl"] p, [dir="rtl"] a, [dir="rtl"] li {
+      text-align: right;
+    }
+    /* Payment icons stay in their position but reversed */
+    [dir="rtl"] .md\:absolute.md\:left-\[1027\.6px\] {
+      left: auto;
+      right: 1027.6px;
+    }
+    /* Footer column order is reversed in RTL */
+    [dir="rtl"] footer .flex.flex-col.md\:flex-row {
+      flex-direction: row-reverse;
+    }
+    /* Product grid text alignment */
+    [dir="rtl"] .product-card h3,
+    [dir="rtl"] .product-card p {
+      text-align: right;
+    }
+    /* Hebrew font - use system font stack that supports Hebrew well */
+    [dir="rtl"] {
+      font-family: 'Inter', Arial, sans-serif;
     }
   </style>
 </head>

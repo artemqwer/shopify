@@ -1,0 +1,52 @@
+{
+  "general": {
+    "password_page": {
+      "login_form_heading": "הזן את החנות באמצעות סיסמה"
+    }
+  },
+  "header": {
+    "home": "דף הבית",
+    "catalog": "קטלוג",
+    "popular": "פופולרי",
+    "search": "חיפוש",
+    "cart": "סל קניות",
+    "language": "עב",
+    "menu": {
+      "all": "כל המוצרים",
+      "bestsellers": "מוצרים פופולריים",
+      "kepi": "כובעי קפי",
+      "hats": "כובעים",
+      "beretes": "ברטים",
+      "beanies": "כובעי גרב",
+      "caps": "קאפס",
+      "panamas": "כובעי פנמה",
+      "scarves": "מטפחות",
+      "scarfs": "צעיפים",
+      "headbands": "סרטי ראש",
+      "sets": "סטים"
+    }
+  },
+  "footer": {
+    "navigation": "ניווט",
+    "contacts": "צור קשר",
+    "legal": "מידע משפטי",
+    "home": "דף הבית",
+    "catalog": "קטלוג",
+    "popular": "פופולרי",
+    "about": "אודותינו",
+    "phone": "+38 (345) 78 95",
+    "email": "info@hoops.com.ua",
+    "instagram": "Instagram",
+    "public_offer": "תקנון האתר",
+    "privacy": "מדיניות פרטיות",
+    "shipping": "משלוחים ותשלומים",
+    "copyright": "© 2026 ESTER WUGMAN"
+  },
+  "products": {
+    "recommended_heading": "מוצרים מומלצים",
+    "product_1": "מטפחת מנומרת",
+    "product_2": "מטפחת משי כחולה",
+    "product_3": "מטפחת וורודה",
+    "product_4": "מטפחת וינטג'"
+  }
+}

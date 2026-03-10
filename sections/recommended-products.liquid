@@ -20,7 +20,7 @@
       class="text-[20px] md:text-[40px] font-light md:font-extralight text-black"
       style="font-family: var(--font-montserrat), Montserrat, sans-serif; line-height: 1.2;"
     >
-      Recommended products
+      {{ 'products.recommended_heading' | t }}
     </h2>
   </div>
 
@@ -35,8 +35,8 @@
           class="product-card-img absolute inset-0 w-full h-full object-cover"
         />
       </div>
-      <div class="flex flex-col space-y-1.5 px-1">
-        <h3 class="text-[13px] font-semibold text-gray-900 tracking-wide group-hover:text-gray-500 transition-colors">Leopard Print Scarf</h3>
+      <div class="flex flex-col space-y-1.5 px-1 {% if request.locale.iso_code == 'he' %}text-right{% endif %}">
+        <h3 class="text-[13px] font-semibold text-gray-900 tracking-wide group-hover:text-gray-500 transition-colors">{{ 'products.product_1' | t }}</h3>
         <p class="text-[13px] text-gray-500 font-light">$ 80</p>
       </div>
     </a>
@@ -50,8 +50,8 @@
           class="product-card-img absolute inset-0 w-full h-full object-cover"
         />
       </div>
-      <div class="flex flex-col space-y-1.5 px-1">
-        <h3 class="text-[13px] font-semibold text-gray-900 tracking-wide group-hover:text-gray-500 transition-colors">Blue Silk Scarf</h3>
+      <div class="flex flex-col space-y-1.5 px-1 {% if request.locale.iso_code == 'he' %}text-right{% endif %}">
+        <h3 class="text-[13px] font-semibold text-gray-900 tracking-wide group-hover:text-gray-500 transition-colors">{{ 'products.product_2' | t }}</h3>
         <p class="text-[13px] text-gray-500 font-light">$ 80</p>
       </div>
     </a>
@@ -65,8 +65,8 @@
           class="product-card-img absolute inset-0 w-full h-full object-cover"
         />
       </div>
-      <div class="flex flex-col space-y-1.5 px-1">
-        <h3 class="text-[13px] font-semibold text-gray-900 tracking-wide group-hover:text-gray-500 transition-colors">Pink Scarf</h3>
+      <div class="flex flex-col space-y-1.5 px-1 {% if request.locale.iso_code == 'he' %}text-right{% endif %}">
+        <h3 class="text-[13px] font-semibold text-gray-900 tracking-wide group-hover:text-gray-500 transition-colors">{{ 'products.product_3' | t }}</h3>
         <p class="text-[13px] text-gray-500 font-light">$ 80</p>
       </div>
     </a>
@@ -80,8 +80,8 @@
           class="product-card-img absolute inset-0 w-full h-full object-cover"
         />
       </div>
-      <div class="flex flex-col space-y-1.5 px-1">
-        <h3 class="text-[13px] font-semibold text-gray-900 tracking-wide group-hover:text-gray-500 transition-colors">Vintage Scarf</h3>
+      <div class="flex flex-col space-y-1.5 px-1 {% if request.locale.iso_code == 'he' %}text-right{% endif %}">
+        <h3 class="text-[13px] font-semibold text-gray-900 tracking-wide group-hover:text-gray-500 transition-colors">{{ 'products.product_4' | t }}</h3>
         <p class="text-[13px] text-gray-500 font-light">$ 80</p>
       </div>
     </a>
