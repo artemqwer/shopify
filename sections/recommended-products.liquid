@@ -5,6 +5,15 @@
 }
 {% endschema %}
 
+<style>
+  .product-card-img {
+    transition: transform 0.7s ease;
+  }
+  .product-card:hover .product-card-img {
+    transform: scale(1.05);
+  }
+</style>
+
 <section class="w-full px-4 md:px-12 lg:px-[160px]">
   <div class="text-center mb-[32px] md:mb-[48px] flex justify-center">
     <h2 
@@ -16,64 +25,66 @@
   </div>
 
   <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
     <!-- Product 1 -->
-    <div class="group cursor-pointer flex flex-col">
-      <div class="relative aspect-[3/4] mb-4 overflow-hidden w-full">
+    <a href="/products/leopard-print-scarf" class="product-card cursor-pointer flex flex-col group no-underline">
+      <div class="relative aspect-[3/4] mb-4 overflow-hidden w-full bg-gray-100">
         <img 
           src="{{ 'product-image-1.png' | asset_url }}" 
           alt="Leopard Print Scarf" 
-          class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 bg-gray-100"
+          class="product-card-img absolute inset-0 w-full h-full object-cover"
         />
       </div>
       <div class="flex flex-col space-y-1.5 px-1">
-        <h3 class="text-[13px] font-semibold text-gray-900 tracking-wide">Leopard Print Scarf</h3>
+        <h3 class="text-[13px] font-semibold text-gray-900 tracking-wide group-hover:text-gray-500 transition-colors">Leopard Print Scarf</h3>
         <p class="text-[13px] text-gray-500 font-light">$ 80</p>
       </div>
-    </div>
-    
+    </a>
+
     <!-- Product 2 -->
-    <div class="group cursor-pointer flex flex-col">
-      <div class="relative aspect-[3/4] mb-4 overflow-hidden w-full">
+    <a href="/products/blue-silk-scarf" class="product-card cursor-pointer flex flex-col group no-underline">
+      <div class="relative aspect-[3/4] mb-4 overflow-hidden w-full bg-gray-100">
         <img 
           src="{{ 'product-image-2.png' | asset_url }}" 
           alt="Blue Silk Scarf" 
-          class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 bg-gray-100"
+          class="product-card-img absolute inset-0 w-full h-full object-cover"
         />
       </div>
       <div class="flex flex-col space-y-1.5 px-1">
-        <h3 class="text-[13px] font-semibold text-gray-900 tracking-wide">Blue Silk Scarf</h3>
+        <h3 class="text-[13px] font-semibold text-gray-900 tracking-wide group-hover:text-gray-500 transition-colors">Blue Silk Scarf</h3>
         <p class="text-[13px] text-gray-500 font-light">$ 80</p>
       </div>
-    </div>
-    
+    </a>
+
     <!-- Product 3 -->
-    <div class="group cursor-pointer flex flex-col">
-      <div class="relative aspect-[3/4] mb-4 overflow-hidden w-full">
+    <a href="/products/pink-scarf" class="product-card cursor-pointer flex flex-col group no-underline">
+      <div class="relative aspect-[3/4] mb-4 overflow-hidden w-full bg-gray-100">
         <img 
           src="{{ 'product-image-3.png' | asset_url }}" 
           alt="Pink Scarf" 
-          class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 bg-gray-100"
+          class="product-card-img absolute inset-0 w-full h-full object-cover"
         />
       </div>
       <div class="flex flex-col space-y-1.5 px-1">
-        <h3 class="text-[13px] font-semibold text-gray-900 tracking-wide">Pink Scarf</h3>
+        <h3 class="text-[13px] font-semibold text-gray-900 tracking-wide group-hover:text-gray-500 transition-colors">Pink Scarf</h3>
         <p class="text-[13px] text-gray-500 font-light">$ 80</p>
       </div>
-    </div>
-    
+    </a>
+
     <!-- Product 4 -->
-    <div class="group cursor-pointer flex flex-col">
-      <div class="relative aspect-[3/4] mb-4 overflow-hidden w-full">
+    <a href="/products/vintage-scarf" class="product-card cursor-pointer flex flex-col group no-underline">
+      <div class="relative aspect-[3/4] mb-4 overflow-hidden w-full bg-gray-100">
         <img 
           src="{{ 'product-image-4.png' | asset_url }}" 
           alt="Vintage Scarf" 
-          class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 bg-gray-100"
+          class="product-card-img absolute inset-0 w-full h-full object-cover"
         />
       </div>
       <div class="flex flex-col space-y-1.5 px-1">
-        <h3 class="text-[13px] font-semibold text-gray-900 tracking-wide">Vintage Scarf</h3>
+        <h3 class="text-[13px] font-semibold text-gray-900 tracking-wide group-hover:text-gray-500 transition-colors">Vintage Scarf</h3>
         <p class="text-[13px] text-gray-500 font-light">$ 80</p>
       </div>
-    </div>
+    </a>
+
   </div>
 </section>
