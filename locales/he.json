@@ -465,14 +465,259 @@
               "nl": "הזן מספר מע\"מ הולנדי תקף",
               "pl": "הזן מספר מע\"מ תקף בפולין",
               "pt": "הזן מספר מע\"מ תקף בפורטוגל",
-              "ro": "הזן מספר מע\"מ תקף ברומניה"
+              "ro": "הזן מספר מע\"מ תקף ברומניה",
+              "sk": "הזן מספר מע\"מ תקף בסלובקיה",
+              "si": "הזן מספר מע\"מ תקף בסלובניה",
+              "es": "הזן מספר מע\"מ תקף בספרד",
+              "se": "הזן מספר מע\"מ תקף בשוודיה",
+              "gb": "הזן מספר מע\"מ תקף בממלכה המאוחדת"
+            },
+            "service_unavailable": "שירות האימות אינו זמין",
+            "service_error": "שירות האימות אינו זמין"
+          },
+          "accessibility": {
+            "status": {
+              "validating": "אימות מספר מע\"מ מתבצע",
+              "valid": "מספר המע\"מ תקף",
+              "applied": "פטור ממע\"מ הוחל",
+              "domestic": "פטור ממע\"מ לא יושם",
+              "invalid_number": "פטור ממע\"מ נכשל",
+              "service_unavailable": "לא ניתן לאמת פטור ממע\"מ",
+              "service_error": "לא ניתן לאמת פטור ממע\"מ"
             }
           }
+        }
+      },
+      "payment": {
+        "card_issue_number_placeholder": "מספר גיליון",
+        "card_change_label": "לְשַׁנוֹת",
+        "card_update_label": "עדכון כרטיס",
+        "paypal_disconnect": "לְנַתֵק",
+        "ends_with_label": "מסתיים ב-%{last_digits}",
+        "masked_digits_label": "•••• %{אחרון_ספרות}",
+        "payment_method_saved": "אמצעי התשלום נשמר",
+        "card_vaulted_company_location": "הכרטיס נשמר עבור מיקום זה",
+        "bank_account_vaulted_company_location": "חשבון בנק שנשמר עבור מיקום זה",
+        "expiry_long": "(פג תוקף %{חודש}/%{שנה})",
+        "expiry_short": "(תפוגה %{חודש}/%{שנה})",
+        "crypto_payment_method": {
+          "description": "התחבר בצורה מאובטחת לארנק שלך ברשת הבסיס",
+          "tooltip": "יתרת הארנק והכתובת שלך לא ישותפו ורק הסכום המבוקש יוכל לנכות."
+        },
+        "crypto_modal": {
+          "header": "שלם %{shop_name} %{total_price} דולר אמריקאי",
+          "error": {
+            "refresh": "לְרַעֲנֵן",
+            "close": "לִסְגוֹר",
+            "sandbox_error": "משהו השתבש",
+            "web_component_error": "הייתה בעיה בטעינת דף זה"
+          }
+        },
+        "saved_by_payment_method": "נשמר על ידי %{payment_method}",
+        "pay_with_payment_method": "שלם באמצעות %{payment_method}",
+        "different_credit_card_label": "השתמש בכרטיס אשראי אחר",
+        "same_billing_address_label": "זהה לכתובת המשלוח",
+        "different_billing_address_label": "השתמש בכתובת חיוב שונה",
+        "billing_address_associated_with_mandate": "השתמש בכתובת המשויכת לאמצעי התשלום",
+        "billing_address_associated_with_mandate_info": "אם ברצונך לשנות את כתובת החיוב שלך, הסר והזן מחדש את פרטי כרטיס האשראי שלך.",
+        "free_order_notice_html": "ההזמנה שלך היא <strong>בחינם</strong> . אין צורך בתשלום.",
+        "express_checkout_free_order": "לא תחויב עבור הזמנה בחינם",
+        "order_covered_by_gift_cards_notice": {
+          "one": "ההזמנה שלך מכוסה על ידי כרטיס המתנה שלך.",
+          "other": "ההזמנה שלך מכוסה על ידי כרטיסי המתנה שלך."
+        },
+        "offsite_gateway_redirect_hint": "תועברו אל %{gateway_label} כדי להשלים את הרכישה.",
+        "offsite_gateway_review_page_redirect_hint": "לאחר שתבדוק את ההזמנה שלך, תועבר אל %{gateway_label} כדי להשלים את הרכישה.",
+        "offsite_gateway_redirect_hint_multi_currency_html": "%{gateway_label} סך הכל %{total_shop_price}",
+        "offsite_gateway_redirect_hint_no_button_label": "תועברו אל %{gateway_label} כדי להשלים את הרכישה.",
+        "receiver_payment_experience_hint": "לאחר ביצוע ההזמנה, תקבלו פרטי תשלום. בצעו את התשלום ב-Multibanco או באינטרנט תוך %{due_days} ימים.",
+        "billing_address_title": "כתובת לחיוב",
+        "billing_address_rollup_accessibility_label": "אפשרויות כתובת לחיוב",
+        "billing_address_description": "בחר את הכתובת התואמת לכרטיס או לשיטת התשלום שלך.",
+        "billing_address_description_no_shipping_address": "הזן את הכתובת התואמת לכרטיס או לשיטת התשלום שלך.",
+        "no_js_credit_card_fields_redirect_hint": "תועברו להוספת פרטי התשלום שלכם.",
+        "card_fields_container_prefix": "מיכל שדה עבור:",
+        "card_fields_unavailable_html": {
+          "one": "תשלומים בכרטיס אשראי וכרטיס חיוב אינם זמינים כרגע.<br> <a href=\"%{current_url}\">רענן דף זה</a> או נסה שוב מאוחר יותר.",
+          "other": "תשלומים בכרטיס אשראי וכרטיס חיוב אינם זמינים כרגע.<br> <a href=\"%{current_url}\">רענן דף זה</a> או נסה אמצעי תשלום אחר."
+        },
+        "card_fields_processing_error": "אירעה בעיה בעיבוד התשלום. נסה לרענן דף זה או לבדוק את חיבור האינטרנט שלך.",
+        "technical_error": "לא ניתן לעבד תשלומים כרגע עקב בעיה טכנית. נסה שוב בעוד מספר דקות.",
+        "no_method_error": "חנות זו אינה יכולה לקבל תשלומים כרגע.",
+        "not_configured_error": "חנות זו אינה יכולה לקבל תשלומים כרגע.",
+        "missing_credit_card_error": "הזן את פרטי הכרטיס שלך כדי להשלים את התשלום",
+        "shop_pay_ideal_unavailable_error": "iDEAL | Wero אינו זמין להזמנה זו. בחר אמצעי תשלום אחר.",
+        "payment_method_not_available_for_shipping_address_error": "אמצעי התשלום אינו זמין עבור כתובת המשלוח שנבחרה. בחר אמצעי תשלום אחר.",
+        "billing_address_not_supported_for_payment_method_error": "אמצעי תשלום זה אינו זמין עבור כתובת החיוב והמטבע שלך. נסה אמצעי תשלום אחר.",
+        "generic_incorrect_card_info": "לא ניתן היה לאמת את פרטי התשלום שלך. בדוק את פרטי הכרטיס ונסה שוב.",
+        "sofort_label": "העברה בנקאית Sofort",
+        "paypal_label": "פייפאל",
+        "paypal_wallet_label": "ארנק PayPal",
+        "shop_pay_installments_label": "חנות תשלום בתשלומים",
+        "default": "בְּרִירַת מֶחדָל",
+        "continue_to_guest_checkout": "המשך לתשלום עבור אורח",
+        "paypal_modal": {
+          "order_contains_subscriptions": "מִנוּי",
+          "order_contains_fixed_selling_plans": "ייתכן שהסכום הכולל לא יכלול מיסים, משלוח, חיובים נדחים והנחות מסוימות. המשך לתשלום עבור הסכום לתשלום היום."
+        },
+        "klarna_label": "קלרנה",
+        "klarna_pay_later_label": "שלמו מאוחר יותר עם Klarna",
+        "klarna_pay_now_label": "שלמו עכשיו עם קלרנה",
+        "bancontact_label": "בנקונטקט",
+        "giropay_label": "ג'ירופיי",
+        "multibanco_label": "מולטיבנקו",
+        "eps_label": "eps-אוברווייזונג",
+        "klarna_slice_it_label": "מימון עם קלרנה",
+        "ideal_label": "iDEAL | וורו",
+        "bank_picker_label": "בַּנק",
+        "afterpay_label": "תשלום לאחר מכן",
+        "cashapppay_label": "תשלום באפליקציית מזומן",
+        "przelewy24_label": "פרז'לווי24",
+        "blik_label": "בליק",
+        "twint_label": "טווינט",
+        "swish_label": "לְהַצְלִיף",
+        "vipps_label": "ויפפס",
+        "grabpay_label": "גראבפיי",
+        "kcp_creditcard_label": "כרטיס אשראי KCP",
+        "usdc_label": "דולר אמריקאי",
+        "usdc_cashback_title": "1% החזר כספי",
+        "usdc_cashback_additional_info": "קבל 1% החזר בדולר אמריקאי על בסיס שער החליפין תוך 30 יום.",
+        "usdc_cashback_terms": "תנאים חלים",
+        "purchase_options_card_update_agreement_label_html": "על ידי עדכון אמצעי התשלום שלך, הנך מאשר תשלומים עבור כל רכישה חוזרת או נדחית בהתאם <a class=\"link--small\" data-modal=\"true\" data-title-text=\"%{cancellation_policy}\" href=\"%{policy_href}\">למדיניות הביטולים</a> של חנות זו.",
+        "subscription_card_update_agreement_label": "שינוי אמצעי התשלום יעודכן את המנוי שלך ואת התשלומים החוזרים העתידיים.",
+        "subscription_agreement_label": "פריט אחד או יותר בעגלת הקניות שלך הוא רכישה נדחית או רכישה כמנוי. על ידי המשך התשלום, אתה מסכים שאמצעי התשלום שלך יחויב אוטומטית במחיר ובתדירות המפורטים בדף זה עד לסיום התשלום או עד שתבטל. כל הביטולים כפופים ל-%{cancelled}.",
+        "subscription_agreement_cancelled": "מדיניות ביטול",
+        "subscription_heading": "הסכם מנוי",
+        "subscription_agreement_label_html": "אני מבין/ה שאני מסכים/ה למנוי. הוא יתחדש במחיר ובתדירות המפורטים עד לסיומו או עד שייגמר.\n <a class=\"link--small\" data-modal=\"true\" data-title-text=\"%{subscription_policy}\" href=\"%{policy_href}\">בוטל</a> .\n",
+        "purchase_options_agreement_label": "פריט אחד או יותר בעגלת הקניות שלך הוא רכישה נדחית או חוזרת. על ידי המשך התשלום, אתה מסכים שאמצעי התשלום שלך יחויב אוטומטית במחיר ובתדירות המפורטים בדף זה עד לסיומו או עד שתבטל. כל הביטולים כפופים ל-%{cancellation_policy_label}.",
+        "purchase_options_agreement_label_html": "אני מבין/ה שאחד או יותר מהפריטים בעגלת הקניות שלי הם רכישה נדחית או חוזרת. בהמשך, אני מסכים/ה ל\n <a class=\"link--small\" data-modal=\"true\" data-title-text=\"%{subscription_policy}\" href=\"%{policy_href}\">מדיניות ביטול</a>\n ומאשר לך לחייב את אמצעי התשלום שלי במחירים, בתדירות ובתאריכים המפורטים בדף זה עד\n ההזמנה בוצעה או שאני מבטל, אם מותר.\n",
+        "purchase_options_agreement_label_wallets": "על ידי המשך התשלום, הנך מסכים לחיובים העתידיים המפורטים בדף זה ולמדיניות הביטול.",
+        "change_currency_section_description": "בחר אפשרות מטבע",
+        "no_real_orders_dev_store": "חנות זו אינה יכולה לקבל הזמנות אמיתיות או תשלומים אמיתיים.",
+        "waiting_on_payment_methods": "מקבל אמצעי תשלום זמינים...",
+        "apple_pay_payment_error": "לא ניתן היה להשלים את התשלום שלך. נסה שוב או השתמש באמצעי תשלום אחר.",
+        "taxes_not_included": "מיסים אינם כלולים",
+        "no_taxes_banner_content": "לא יחויבו מיסים על הזמנה זו. לאחר גביית התשלום, לא ניתן עוד להוסיף מיסים.",
+        "paypal": {
+          "connect": "לחץ כדי לחבר את חשבון ה-PayPal שלך"
+        },
+        "apple": {
+          "connect": "לחץ כדי לחבר את חשבון Apple Pay שלך"
         }
       }
     },
     "page_titles": {
       "search": "לְחַפֵּשׂ"
+    },
+    "pagination": {
+      "previous": "קוֹדֵם",
+      "next": "הַבָּא"
+    },
+    "links": {
+      "powered_by_shopify": "מופעל על ידי Shopify",
+      "learn_more": "למידע נוסף"
+    },
+    "feed": {
+      "more": "יוֹתֵר"
+    },
+    "attributes": {
+      "email": "אֶלֶקטרוֹנִי",
+      "password": "סִיסמָה",
+      "password_confirmation": "אישור הסיסמה",
+      "first_name": "שֵׁם פְּרַטִי",
+      "last_name": "שֵׁם מִשׁפָּחָה",
+      "body": "גוּף",
+      "signature": "כְּתוֹבֶת"
+    },
+    "addresses": {
+      "zip_code": "מיקוד",
+      "postal_code": "מיקוד",
+      "postcode": "מיקוד",
+      "pincode": "קוד סודי",
+      "region": "אֵזוֹר",
+      "prefecture": "מחוז",
+      "province": "מָחוֹז",
+      "state": "מְדִינָה",
+      "state_and_territory": "מדינה/טריטוריה",
+      "county": "מָחוֹז",
+      "emirate": "אמירות",
+      "governorate": "מחוז",
+      "confirm": "האם אתה בטוח שברצונך למחוק את הכתובת הזו?"
+    },
+    "collections": {
+      "sorting": {
+        "manual": "מוּבלָט",
+        "best_selling": "הנמכר ביותר",
+        "az": "לפי סדר אלפביתי, AZ",
+        "za": "לפי סדר אלפביתי, ZA",
+        "price_ascending": "מחיר, מהנמוך לגבוה",
+        "price_descending": "מחיר, מהגבוה לנמוך",
+        "date_ascending": "תאריך, מהישן לחדש",
+        "date_descending": "תאריך, מהחדש לישן"
+      }
+    },
+    "errors": {
+      "blank": "לא יכול להיות ריק",
+      "blocked_address": "מיקום זה אינו נתמך",
+      "credit_card_session_expired": "פג תוקף האישור לכרטיס האשראי, אנא הזן שוב את פרטי התשלום שלך. הכרטיס שלך לא חויב.",
+      "empty": "לא יכול להיות ריק",
+      "invalid_email": "חייבת להיות כתובת דוא\"ל תקפה",
+      "discount_disabled": "הנחה זו הושבתה",
+      "discount_expired": "הנחה זו אינה תקפה יותר",
+      "discount_limit_reached": "הנחה זו הגיעה למגבלת השימוש שלה",
+      "discount_not_found": "לא ניתן למצוא הנחה תקפה התואמת את הקוד שהוזן",
+      "customer_already_used_once_per_customer_discount_notice": "הנחה זו הגיעה למגבלת השימוש שלה",
+      "gift_card_already_applied": "הקוד כבר הוחל בקופה שלך",
+      "gift_card_code_invalid": "הקוד אינו תקין",
+      "gift_card_currency_mismatch": "כרטיס המתנה שלך הוא ב-%{gift_card_currency}. צור איתנו קשר כדי להנפיק אותו מחדש ב-%{checkout_currency}.",
+      "gift_card_depleted": "לא נותרו כספים בכרטיס מתנה זה",
+      "gift_card_disabled": "כרטיס מתנה מושבת",
+      "gift_card_expired": "כרטיס המתנה פג תוקף",
+      "invalid": "לא חוקי",
+      "bad_domain": "מכיל שם דומיין לא חוקי",
+      "taken": "כבר נלקח",
+      "contains_html_tags": "לא יכול להכיל תגי HTML",
+      "too_short": "קצר מדי (המינימום הוא %{count} תווים)",
+      "too_long": "ארוך מדי (מקסימום %{count} תווים)",
+      "password_mismatch": "חייב להתאים לסיסמה שסופקה",
+      "contains_spaces": "מתחיל או מסתיים ברווחים.",
+      "invalid_for_country": "אינו תקף עבור %{country}",
+      "invalid_for_country_and_province": "אינו תקף עבור %{province} ו-%{country}",
+      "invalid_province_in_country": "אינו מחוז תקף ב-%{country}",
+      "invalid_state_in_country": "אינה מדינה תקפה ב-%{country}",
+      "invalid_region_in_country": "אינו אזור תקף ב-%{country}",
+      "less_than_or_equal_to": "חייב להיות קטן או שווה ל- %{count}",
+      "not_supported": "אינו נתמך",
+      "full_name_required": "הזן שם פרטי ושם משפחה",
+      "invalid_for_card_type": "אינו תקף",
+      "invalid_type": "מצטערים, איננו מקבלים כרטיסים מסוג זה",
+      "invalid_format": "הפורמט אינו תקין",
+      "expired": "פג תוקף",
+      "invalid_start_date_or_issue_number_for_debit": "נדרש תאריך התחלה או מספר הנפקה תקפים",
+      "invalid_expiry_year": "אינו שנת תפוגה תקפה",
+      "reset_password_html": "כתובת דוא\"ל זו כבר משויכת לחשבון. אם חשבון זה שלך, תוכל <a href=\"/account/login#recover\">לאפס את הסיסמה שלך.</a>",
+      "verify_email": "שלחנו אימייל אל %{customer_email}, אנא לחץ על הקישור המצורף כדי לאמת את כתובת האימייל שלך.",
+      "product_not_available": "המוצר לא פורסם עבור לקוח זה.",
+      "shop_404": {
+        "title": "צור אתר מסחר אלקטרוני ומכור באינטרנט! תוכנת מסחר אלקטרוני מבית Shopify",
+        "heros": {
+          "store_unavailable": "מצטערים, חנות זו אינה זמינה כרגע.",
+          "store_not_exist": "החנות הזו לא קיימת.",
+          "no_storefront": "לחנות הזו עדיין אין אתר אינטרנט."
+        },
+        "links": {
+          "explore_other_stores": "גלו חנויות אחרות",
+          "start_free_trial": "התחל תקופת ניסיון בחינם"
+        },
+        "owner_ctas": {
+          "header": "האם אתה בעל החנות?",
+          "fix_domain": "סיימו את הגדרת כתובת האינטרנט החדשה שלכם, גשו אל %{domain_settings_link}. לחצו על \"חבר דומיין\" והזינו: %{domain}.<br> אם אתם מתקשים להיכנס לחנות שלכם, נסו את הדף %{forgot_your_store_link}.",
+          "fix_domain_link_text": "הגדרות הדומיין שלך",
+          "forgot_your_store_link_text": "שכחת את החנות שלך",
+          "add_storefront": "ניתן להגדיר את אתר האינטרנט שלך על ידי הוספת ערוץ החנות המקוונת בדף %{admin_link} שלך. אם אתה מתקשה להיכנס לחנות שלך, נסה את דף %{forgot_your_store_link}.",
+          "admin_link_text": "מנהל"
+        }
+      }
     }
   },
   "customer_accounts": {
@@ -788,6 +1033,49 @@
             "description_due_on_fulfillment": "התשלום יבוצע לאחר מילוי כל הפריטים בהזמנה זו.",
             "description_due_on_fulfillment_partially_paid": "הזמנה זו שולמה באופן חלקי. נותרה לך יתרה. התשלום יבוצע לאחר שכל הפריטים בהזמנה זו ימומשו."
           }
+        }
+      }
+    },
+    "intents": {
+      "subscription_replace_payment_method": {
+        "card_number": "מספר כרטיס",
+        "title": "החלפת אמצעי תשלום",
+        "replace_with": "החלף עם",
+        "add_new_payment_method": "הוסף חדש",
+        "save_button": "לְהַצִיל",
+        "close_button": "לִסְגוֹר",
+        "loading": "טוען את אמצעי התשלום המודאלי החלופי",
+        "success": "אמצעי התשלום עודכן",
+        "invalid_subscription_contract": "לא ניתן למצוא את המנוי",
+        "expiry_date": "תוקף {{expiryDate}}",
+        "edit_current_payment_method": "עריכת אמצעי התשלום הנוכחי",
+        "edit_selected_payment_method": "עריכת אמצעי התשלום שנבחר"
+      }
+    },
+    "sign_in": {
+      "brand_logo_alt_text": "לוגו %{shop_name}",
+      "processing": "עיבוד...",
+      "step_one": {
+        "page_title": "כניסה - %{shop_name}",
+        "heading": "כניסה",
+        "subheading": "הזן את כתובת האימייל שלך ונשלח לך קוד אימות",
+        "subheading_with_sign_in_options": "היכנס או צור חשבון",
+        "input_field_label": "אֶלֶקטרוֹנִי",
+        "button": "לְהַמשִׁיך",
+        "or": "אוֹ"
+      },
+      "step_two": {
+        "page_title": "הזן את הקוד - %{shop_name}",
+        "heading": "הזן קוד",
+        "subheading": "נשלח אל %{email}",
+        "restart_link": "היכנס עם כתובת דוא\"ל שונה",
+        "input_field_label": "קוד בן 6 ספרות",
+        "button": "לְהַגִישׁ"
+      },
+      "error": {
+        "invalid": {
+          "invalid_email": "הזן כתובת דוא\"ל חוקית",
+          "invalid_code": "הזן את הקוד בן 6 הספרות הנכון"
         }
       }
     }
