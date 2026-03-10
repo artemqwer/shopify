@@ -26,29 +26,28 @@
 
     /* ==========================================
        RTL STYLES — Hebrew only
-       IMPORTANT: Images and grid ORDER stay unchanged (LTR visual order)
-       Only TEXT direction and alignment change
+       - Header: flex reverses naturally (nav goes RIGHT, cart/search goes LEFT)
+       - Grids (hero images, product cards): stay LTR order
+       - Footer columns: stay in LTR visual order
+       - Only TEXT alignment/direction changes
     =========================================== */
 
-    /* Force ALL flex containers to keep original LTR visual order */
-    [dir="rtl"] .flex,
-    [dir="rtl"] nav,
-    [dir="rtl"] section > div {
-      flex-direction: inherit;
+    /* 1. HEADER — let it reverse naturally via RTL */
+    /* Nav items within each group keep their own LTR text direction */
+    [dir="rtl"] header nav a,
+    [dir="rtl"] header button {
+      direction: rtl;
+      unicode-bidi: embed;
     }
-    [dir="rtl"] .flex-row  { flex-direction: row !important; }
-    [dir="rtl"] .flex-col  { flex-direction: column !important; }
+    /* Inner nav group: keep items in their own reading order (not reversed) */
+    [dir="rtl"] header nav { flex-direction: row-reverse !important; }
+    [dir="rtl"] header > div > div > div:not(.shrink-0) { flex-direction: row-reverse !important; }
 
-    /* Grid stays LTR visually — hero images and product cards don't rearrange */
+    /* 2. GRID — hero images and product cards stay in LTR visual order */
     [dir="rtl"] .grid { direction: ltr; }
     [dir="rtl"] .grid > * { direction: rtl; }
 
-    /* Header row stays in original LTR order */
-    [dir="rtl"] header > div > div { flex-direction: row !important; direction: ltr; }
-    [dir="rtl"] header nav { flex-direction: row !important; direction: ltr; }
-    [dir="rtl"] header nav a { direction: rtl; }
-
-    /* Footer columns keep LTR order */
+    /* 3. FOOTER — columns stay in LTR visual order (NAVIGATION left → CONTACTS center → LEGAL right) */
     [dir="rtl"] footer > div { flex-direction: column !important; }
     [dir="rtl"] footer .md\:flex-row { flex-direction: row !important; }
     [dir="rtl"] footer ul { direction: rtl; padding: 0; }
