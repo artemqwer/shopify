@@ -79,12 +79,12 @@
 
         <!-- Language Selector -->
         <div class="hidden md:flex relative group cursor-pointer py-8 text-[14px] font-medium tracking-widest text-gray-900 uppercase hover:text-[#d62873] items-center transition-colors">
-          {% if request.locale.iso_code == 'he' %}ЧўЧ‘{% elsif request.locale.iso_code == 'uk' %}UA{% elsif request.locale.iso_code == 'fr' %}FR{% else %}EN{% endif %}
+          {% if request.locale.iso_code == 'he' %}עב{% elsif request.locale.iso_code == 'uk' %}UA{% elsif request.locale.iso_code == 'fr' %}FR{% else %}EN{% endif %}
           <svg xmlns="http://www.w3.org/2000/svg" class="ml-1 w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
           <div class="absolute top-[80%] right-0 pt-8 z-50 hidden group-hover:flex">
              <div class="bg-white border border-gray-100 shadow-lg flex flex-col py-2 w-24">
                {% form 'localization', class: 'contents' %}
-                 <button type="submit" name="locale_code" value="he" class="px-4 py-2 hover:bg-gray-50 text-[13px] tracking-widest transition-colors {% if request.locale.iso_code == 'he' %}text-[#d62873] font-bold{% else %}text-gray-600{% endif %} text-center w-full">ЧўЧ‘</button>
+                 <button type="submit" name="locale_code" value="he" class="px-4 py-2 hover:bg-gray-50 text-[13px] tracking-widest transition-colors {% if request.locale.iso_code == 'he' %}text-[#d62873] font-bold{% else %}text-gray-600{% endif %} text-center w-full">עב</button>
                  <button type="submit" name="locale_code" value="en" class="px-4 py-2 hover:bg-gray-50 text-[13px] tracking-widest transition-colors {% if request.locale.iso_code == 'en' %}text-[#d62873] font-bold{% else %}text-gray-600{% endif %} text-center w-full">ENG</button>
                  <button type="submit" name="locale_code" value="uk" class="px-4 py-2 hover:bg-gray-50 text-[13px] tracking-widest transition-colors {% if request.locale.iso_code == 'uk' %}text-[#d62873] font-bold{% else %}text-gray-600{% endif %} text-center w-full">UA</button>
                {% endform %}
