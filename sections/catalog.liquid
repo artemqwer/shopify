@@ -179,7 +179,7 @@
 
       {% for i in (1..12) %}
         {% assign idx = forloop.index0 | modulo: 4 %}
-        <a href="/pages/{{ placeholder_slugs[idx] }}" class="catalog-card cursor-pointer flex flex-col group no-underline">
+        <a href="/search?view=demo&product={{ placeholder_slugs[idx] }}" class="catalog-card cursor-pointer flex flex-col group no-underline">
           <div class="relative aspect-[3/4] mb-4 overflow-hidden w-full bg-gray-100">
             <img
               src="{{ placeholder_images[idx] | asset_url }}"

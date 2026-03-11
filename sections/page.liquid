@@ -57,6 +57,14 @@
 {% endcomment %}
 
 {% assign h = page.handle %}
+{% if h == blank or h == '' %}
+  {% assign query = request.query_string | replace: '&amp;', '&' | split: '&' %}
+  {% for param in query %}
+    {% if param contains 'product=' %}
+      {% assign h = param | split: '=' | last %}
+    {% endif %}
+  {% endfor %}
+{% endif %}
 
 {% if h == 'leopard-print-scarf' %}
   {% assign img_main   = 'product-image-1.png' %}

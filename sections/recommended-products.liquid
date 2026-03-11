@@ -27,7 +27,7 @@
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-8 md:gap-6">
 
     <!-- Product 1 -->
-    <a href="/products/leopard-print-scarf" class="product-card cursor-pointer flex flex-col group no-underline">
+    <a href="/search?view=demo&product=leopard-print-scarf" class="product-card cursor-pointer flex flex-col group no-underline">
       <div class="relative aspect-[3/4] mb-4 overflow-hidden w-full bg-gray-100">
         <img 
           src="{{ 'product-image-1.png' | asset_url }}" 
@@ -35,14 +35,14 @@
           class="product-card-img absolute inset-0 w-full h-full object-cover"
         />
       </div>
-      <div class="flex flex-col space-y-1.5 px-1 {% if request.locale.iso_code == 'he' %}text-right{% endif %}">
-        <h3 class="text-[13px] font-semibold text-gray-900 tracking-wide group-hover:text-gray-500 transition-colors">{{ 'products.product_1' | t }}</h3>
-        <p class="text-[13px] text-gray-500 font-light">$ 80</p>
+      <div class="flex flex-col space-y-1.5 px-1 {% if request.locale.iso_code == 'he' %}text-right{% endif %}" {% if request.locale.iso_code == 'he' %}dir="rtl" style="text-align: right;"{% endif %}>
+        <h3 class="text-[13px] font-semibold text-gray-900 tracking-wide group-hover:text-gray-500 transition-colors" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">{{ 'products.product_1' | t }}</h3>
+        <p class="text-[13px] text-gray-500 font-light" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">$ 80</p>
       </div>
     </a>
 
     <!-- Product 2 -->
-    <a href="/products/blue-silk-scarf" class="product-card cursor-pointer flex flex-col group no-underline">
+    <a href="/search?view=demo&product=blue-silk-scarf" class="product-card cursor-pointer flex flex-col group no-underline">
       <div class="relative aspect-[3/4] mb-4 overflow-hidden w-full bg-gray-100">
         <img 
           src="{{ 'product-image-2.png' | asset_url }}" 
@@ -50,14 +50,14 @@
           class="product-card-img absolute inset-0 w-full h-full object-cover"
         />
       </div>
-      <div class="flex flex-col space-y-1.5 px-1 {% if request.locale.iso_code == 'he' %}text-right{% endif %}">
-        <h3 class="text-[13px] font-semibold text-gray-900 tracking-wide group-hover:text-gray-500 transition-colors">{{ 'products.product_2' | t }}</h3>
-        <p class="text-[13px] text-gray-500 font-light">$ 80</p>
+      <div class="flex flex-col space-y-1.5 px-1 {% if request.locale.iso_code == 'he' %}text-right{% endif %}" {% if request.locale.iso_code == 'he' %}dir="rtl" style="text-align: right;"{% endif %}>
+        <h3 class="text-[13px] font-semibold text-gray-900 tracking-wide group-hover:text-gray-500 transition-colors" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">{{ 'products.product_2' | t }}</h3>
+        <p class="text-[13px] text-gray-500 font-light" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">$ 80</p>
       </div>
     </a>
 
     <!-- Product 3 -->
-    <a href="/products/pink-scarf" class="product-card cursor-pointer flex flex-col group no-underline">
+    <a href="/search?view=demo&product=pink-scarf" class="product-card cursor-pointer flex flex-col group no-underline">
       <div class="relative aspect-[3/4] mb-4 overflow-hidden w-full bg-gray-100">
         <img 
           src="{{ 'product-image-3.png' | asset_url }}" 
@@ -65,14 +65,14 @@
           class="product-card-img absolute inset-0 w-full h-full object-cover"
         />
       </div>
-      <div class="flex flex-col space-y-1.5 px-1 {% if request.locale.iso_code == 'he' %}text-right{% endif %}">
-        <h3 class="text-[13px] font-semibold text-gray-900 tracking-wide group-hover:text-gray-500 transition-colors">{{ 'products.product_3' | t }}</h3>
-        <p class="text-[13px] text-gray-500 font-light">$ 80</p>
+      <div class="flex flex-col space-y-1.5 px-1 {% if request.locale.iso_code == 'he' %}text-right{% endif %}" {% if request.locale.iso_code == 'he' %}dir="rtl" style="text-align: right;"{% endif %}>
+        <h3 class="text-[13px] font-semibold text-gray-900 tracking-wide group-hover:text-gray-500 transition-colors" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">{{ 'products.product_3' | t }}</h3>
+        <p class="text-[13px] text-gray-500 font-light" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">$ 80</p>
       </div>
     </a>
 
     <!-- Product 4 -->
-    <a href="/products/vintage-scarf" class="product-card cursor-pointer flex flex-col group no-underline">
+    <a href="/search?view=demo&product=vintage-scarf" class="product-card cursor-pointer flex flex-col group no-underline">
       <div class="relative aspect-[3/4] mb-4 overflow-hidden w-full bg-gray-100">
         <img 
           src="{{ 'product-image-4.png' | asset_url }}" 
@@ -80,9 +80,9 @@
           class="product-card-img absolute inset-0 w-full h-full object-cover"
         />
       </div>
-      <div class="flex flex-col space-y-1.5 px-1 {% if request.locale.iso_code == 'he' %}text-right{% endif %}">
-        <h3 class="text-[13px] font-semibold text-gray-900 tracking-wide group-hover:text-gray-500 transition-colors">{{ 'products.product_4' | t }}</h3>
-        <p class="text-[13px] text-gray-500 font-light">$ 80</p>
+      <div class="flex flex-col space-y-1.5 px-1 {% if request.locale.iso_code == 'he' %}text-right{% endif %}" {% if request.locale.iso_code == 'he' %}dir="rtl" style="text-align: right;"{% endif %}>
+        <h3 class="text-[13px] font-semibold text-gray-900 tracking-wide group-hover:text-gray-500 transition-colors" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">{{ 'products.product_4' | t }}</h3>
+        <p class="text-[13px] text-gray-500 font-light" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">$ 80</p>
       </div>
     </a>
 
