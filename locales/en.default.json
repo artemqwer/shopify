@@ -57,5 +57,8 @@
     "product_2": "Blue Silk Scarf",
     "product_3": "Pink Scarf",
     "product_4": "Vintage Scarf"
+  },
+  "catalog": {
+    "filter": "Filter"
   }
 }

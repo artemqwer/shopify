@@ -1,1 +1,9 @@
-﻿{ "sections": {} }
+{
+  "sections": {
+    "catalog": {
+      "type": "catalog",
+      "settings": {}
+    }
+  },
+  "order": ["catalog"]
+}

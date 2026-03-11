@@ -1,0 +1,111 @@
+{% schema %}
+{
+  "name": "Catalog",
+  "settings": []
+}
+{% endschema %}
+
+<style>
+  .catalog-card-img {
+    transition: transform 0.7s ease;
+  }
+  .catalog-card:hover .catalog-card-img {
+    transform: scale(1.05);
+  }
+  /* Pagination styling */
+  .pagination-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 28px;
+    height: 28px;
+    font-size: 12px;
+    font-family: var(--font-montserrat), Montserrat, sans-serif;
+    letter-spacing: 0.1em;
+    color: #000;
+    transition: color 0.2s;
+  }
+  .pagination-link:hover { color: #9ca3af; }
+  .pagination-link.active { color: #f04f98; }
+  .pagination-dots { color: #9ca3af; }
+</style>
+
+<div class="w-full max-w-[1920px] mx-auto px-4 md:px-[160px] pt-[24px] pb-[80px] md:pb-[120px]">
+
+  <!-- Breadcrumb + Filter Row -->
+  <div class="flex items-center justify-between mb-[48px]">
+    <!-- Breadcrumb -->
+    <nav class="flex items-center gap-2" aria-label="Breadcrumb">
+      <a href="/"
+         class="text-[11px] font-medium tracking-[0.15em] uppercase text-gray-400 hover:text-gray-700 transition-colors"
+         style="font-family: var(--font-montserrat), Montserrat, sans-serif;">
+        {{ 'header.home' | t }}
+      </a>
+      <span class="text-gray-300 text-[11px]">›</span>
+      <span class="text-[11px] font-medium tracking-[0.15em] uppercase text-gray-900"
+            style="font-family: var(--font-montserrat), Montserrat, sans-serif;">
+        {{ 'header.catalog' | t }}
+      </span>
+    </nav>
+
+    <!-- Filter Button -->
+    <button
+      class="flex items-center gap-2 text-[11px] font-medium tracking-[0.15em] uppercase text-gray-900 hover:text-gray-500 transition-colors"
+      style="font-family: var(--font-montserrat), Montserrat, sans-serif;"
+      aria-label="Filter">
+      {{ 'catalog.filter' | t }} (0)
+      <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M3 4.5h18M7 12h10M10.5 19.5h3"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Products Grid -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-[48px] md:gap-x-6 md:gap-y-[64px]">
+
+    {% assign catalog_products = (1..12) %}
+    {% assign product_images = "product-image-1.png,product-image-2.png,product-image-3.png,product-image-4.png" | split: "," %}
+    {% assign product_names = "products.product_1,products.product_2,products.product_3,products.product_4" | split: "," %}
+    {% assign product_slugs = "leopard-print-scarf,blue-silk-scarf,pink-scarf,vintage-scarf" | split: "," %}
+
+    {% for i in catalog_products %}
+      {% assign img_index = forloop.index0 | modulo: 4 %}
+      {% assign name_key = product_names[img_index] %}
+      {% assign img_src = product_images[img_index] %}
+      {% assign slug = product_slugs[img_index] %}
+
+      <a href="/products/{{ slug }}" class="catalog-card cursor-pointer flex flex-col group no-underline">
+        <div class="relative aspect-[3/4] mb-4 overflow-hidden w-full bg-gray-100">
+          <img
+            src="{{ img_src | asset_url }}"
+            alt="{{ name_key | t }}"
+            class="catalog-card-img absolute inset-0 w-full h-full object-cover"
+            loading="lazy"
+          />
+        </div>
+        <div class="flex flex-col space-y-1.5 px-1">
+          <h3 class="text-[13px] font-semibold text-gray-900 tracking-wide group-hover:text-gray-500 transition-colors"
+              style="font-family: var(--font-montserrat), Montserrat, sans-serif;">
+            {{ name_key | t }}
+          </h3>
+          <p class="text-[13px] text-gray-500 font-light"
+             style="font-family: var(--font-montserrat), Montserrat, sans-serif;">
+            $ 80
+          </p>
+        </div>
+      </a>
+    {% endfor %}
+
+  </div>
+
+  <!-- Pagination -->
+  <div class="flex items-center justify-center gap-1 mt-[64px] md:mt-[80px]">
+    <a href="/catalog?page=1" class="pagination-link active">1</a>
+    <a href="/catalog?page=2" class="pagination-link">2</a>
+    <a href="/catalog?page=3" class="pagination-link">3</a>
+    <span class="pagination-dots pagination-link">…</span>
+    <a href="/catalog?page=12" class="pagination-link">12</a>
+    <a href="/catalog?page=2" class="pagination-link ml-1" aria-label="Next">›</a>
+  </div>
+
+</div>

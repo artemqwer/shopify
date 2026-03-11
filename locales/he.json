@@ -58,6 +58,9 @@
     "product_3": "מטפחת וורודה",
     "product_4": "מטפחת וינטג'"
   },
+  "catalog": {
+    "filter": "סינון"
+  },
   "shopify": {
     "checkout": {
       "contact": {

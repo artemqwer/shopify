@@ -65,14 +65,27 @@
       </div>
 
       <!-- Payment Methods Desktop -->
-      <div class="mt-8 md:mt-0 md:absolute top-0 flex justify-center pointer-events-none"
-        style="{% if request.locale.iso_code == 'he' %}right: 1027.6px; left: auto;{% else %}left: 1027.6px; right: 300px;{% endif %}">
+      <div class="mt-8 md:mt-0 md:absolute top-0 flex items-center justify-center pointer-events-none"
+        style="{% if request.locale.iso_code == 'he' %}right: 53.5%; transform: translateX(136px); left: auto;{% else %}left: 1027.6px; right: 300px;{% endif %}; gap: 34px;">
         <img
-          src="{{ 'pay.png' | asset_url }}"
-          alt="Payment Methods"
-          width="272"
+          src="{{ 'googlePay.png' | asset_url }}"
+          alt="Google Pay"
           height="39"
-          class="w-[272px] h-[39px] object-contain"
+          class="h-[39px] w-auto object-contain"
+          loading="lazy"
+        />
+        <img
+          src="{{ 'mastercard.png' | asset_url }}"
+          alt="Mastercard"
+          height="39"
+          class="h-[39px] w-auto object-contain"
+          loading="lazy"
+        />
+        <img
+          src="{{ 'visa.png' | asset_url }}"
+          alt="Visa"
+          height="39"
+          class="h-[39px] w-auto object-contain"
           loading="lazy"
         />
       </div>
@@ -142,12 +155,10 @@
     </div>
 
     <!-- Payment Methods Mobile -->
-    <div class="mt-[48px] mb-[64px] flex justify-center w-full">
-      <img
-        src="{{ 'pay.png' | asset_url }}"
-        alt="Payment Methods"
-        class="w-[272px] h-[39px] object-contain"
-      />
+    <div class="mt-[48px] mb-[64px] flex justify-center items-center w-full" style="gap: 34px;">
+      <img src="{{ 'googlePay.png' | asset_url }}" alt="Google Pay" class="h-[39px] w-auto object-contain" />
+      <img src="{{ 'mastercard.png' | asset_url }}" alt="Mastercard" class="h-[39px] w-auto object-contain" />
+      <img src="{{ 'visa.png' | asset_url }}" alt="Visa" class="h-[39px] w-auto object-contain" />
     </div>
 
     <!-- Copyright Mobile -->
