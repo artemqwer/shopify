@@ -6,16 +6,20 @@
 {% endschema %}
 
 <!-- Drawer Overlay -->
-<div id="drawer-overlay" class="fixed inset-0 bg-black/40 z-[100] hidden backdrop-blur-sm transition-opacity duration-300 opacity-0" onclick="closeAllDrawers()"></div>
+<div id="drawer-overlay" 
+     class="fixed inset-0 bg-black/40 z-[100] hidden backdrop-blur-sm transition-opacity duration-500 opacity-0 cursor-pointer" 
+     style="display: none;"></div>
 
 <!-- ==========================================
      SHOPPING CART DRAWER
 =========================================== -->
-<div id="cart-drawer" class="fixed top-0 right-0 h-full w-full sm:w-[500px] bg-white z-[110] translate-x-full transition-transform duration-500 shadow-2xl flex flex-col">
+<div id="cart-drawer" 
+     class="fixed top-0 right-0 h-full w-full sm:w-[500px] bg-white z-[110] transition-transform duration-500 shadow-2xl flex flex-col"
+     style="transform: translateX(100%);">
   <!-- Header -->
   <div class="p-8 flex justify-between items-center bg-white border-b border-gray-100">
     <h2 class="text-[32px] font-medium text-black uppercase tracking-tight" style="font-family: var(--font-montserrat);">Shopping Cart</h2>
-    <button onclick="closeCart()" class="p-2 -mr-2 hover:opacity-50 transition-opacity">
+    <button data-drawer-close="cart-drawer" class="p-2 -mr-2 hover:opacity-50 transition-opacity">
       <svg class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M18 6L6 18M6 6l12 12"/></svg>
     </button>
   </div>
@@ -24,7 +28,7 @@
   <div class="flex-1 overflow-y-auto px-8 py-4 space-y-8">
     
     <!-- Item 1 -->
-    <div class="flex gap-6 pb-8 border-b border-gray-50">
+    <div class="flex gap-6 pb-8 border-b border-gray-50" data-line="1">
       <div class="w-[100px] aspect-[3/4] shrink-0 bg-gray-100 overflow-hidden">
         <img src="{{ 'product-image-4.png' | asset_url }}" class="w-full h-full object-cover" alt="Vintage Scarf">
       </div>
@@ -41,15 +45,15 @@
           <p class="text-[14px] text-gray-400 mt-1" style="font-family: var(--font-montserrat);">Price: $80 | Size: M</p>
         </div>
         <div class="flex items-center border border-gray-200 w-fit">
-          <button class="w-8 h-8 flex items-center justify-center hover:bg-gray-50">−</button>
-          <span class="w-8 h-8 flex items-center justify-center text-[14px]">1</span>
-          <button class="w-8 h-8 flex items-center justify-center hover:bg-gray-50">+</button>
+          <button class="w-8 h-8 flex items-center justify-center hover:bg-gray-50" data-qty="-">−</button>
+          <span class="w-8 h-8 flex items-center justify-center text-[14px]" data-qty-display>1</span>
+          <button class="w-8 h-8 flex items-center justify-center hover:bg-gray-50" data-qty="+">+</button>
         </div>
       </div>
     </div>
 
     <!-- Item 2 -->
-    <div class="flex gap-6 pb-8 border-b border-gray-50">
+    <div class="flex gap-6 pb-8 border-b border-gray-50" data-line="2">
       <div class="w-[100px] aspect-[3/4] shrink-0 bg-gray-100 overflow-hidden">
         <img src="{{ 'product-image-3.png' | asset_url }}" class="w-full h-full object-cover" alt="Pink Scarf">
       </div>
@@ -66,9 +70,9 @@
           <p class="text-[14px] text-gray-400 mt-1" style="font-family: var(--font-montserrat);">Price: $80 | Size: S</p>
         </div>
         <div class="flex items-center border border-gray-200 w-fit">
-          <button class="w-8 h-8 flex items-center justify-center hover:bg-gray-50">−</button>
-          <span class="w-8 h-8 flex items-center justify-center text-[14px]">1</span>
-          <button class="w-8 h-8 flex items-center justify-center hover:bg-gray-50">+</button>
+          <button class="w-8 h-8 flex items-center justify-center hover:bg-gray-50" data-qty="-">−</button>
+          <span class="w-8 h-8 flex items-center justify-center text-[14px]" data-qty-display>1</span>
+          <button class="w-8 h-8 flex items-center justify-center hover:bg-gray-50" data-qty="+">+</button>
         </div>
       </div>
     </div>
@@ -89,7 +93,7 @@
       <span class="relative px-4 text-gray-400 text-[14px] bg-white">or</span>
     </div>
     <div class="text-center">
-      <button onclick="closeCart()" class="text-[24px] font-normal text-black border-b border-black pb-1 hover:text-gray-400 hover:border-gray-400 transition-all" style="font-family: var(--font-montserrat);">
+      <button data-drawer-close="cart-drawer" class="text-[24px] font-normal text-black border-b border-black pb-1 hover:text-gray-400 hover:border-gray-400 transition-all" style="font-family: var(--font-montserrat);">
         Continue shopping
       </button>
     </div>
@@ -99,10 +103,12 @@
 <!-- ==========================================
      FILTER DRAWER
 =========================================== -->
-<div id="filter-drawer" class="fixed top-0 right-0 h-full w-full sm:w-[450px] bg-white z-[110] translate-x-full transition-transform duration-500 shadow-2xl flex flex-col overflow-y-auto">
+<div id="filter-drawer" 
+     class="fixed top-0 right-0 h-full w-full sm:w-[450px] bg-white z-[110] transition-transform duration-500 shadow-2xl flex flex-col overflow-y-auto"
+     style="transform: translateX(100%);">
   <!-- Header -->
   <div class="p-8 flex justify-end">
-    <button onclick="closeFilter()" class="p-2 hover:opacity-50 transition-opacity">
+    <button data-drawer-close="filter-drawer" class="p-2 hover:opacity-50 transition-opacity">
       <svg class="w-10 h-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M18 6L6 18M6 6l12 12"/></svg>
     </button>
   </div>
