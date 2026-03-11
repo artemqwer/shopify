@@ -116,7 +116,7 @@
     {% if paginate.pages > 1 %}
       <div class="flex items-center justify-center gap-1 mt-[64px] md:mt-[80px]">
         {% if paginate.previous %}
-          <a href="{{ paginate.previous.url }}" class="pagination-link mr-1" aria-label="Previous">вЂ№</a>
+          <a href="{{ paginate.previous.url }}" class="pagination-link mr-1" aria-label="Previous">&lsaquo;</a>
         {% endif %}
 
         {% for part in paginate.parts %}
@@ -134,7 +134,7 @@
         {% endfor %}
 
         {% if paginate.next %}
-          <a href="{{ paginate.next.url }}" class="pagination-link ml-1" aria-label="Next">вЂє</a>
+          <a href="{{ paginate.next.url }}" class="pagination-link ml-1" aria-label="Next">&rsaquo;</a>
         {% endif %}
       </div>
     {% endif %}
@@ -179,9 +179,9 @@
       <a href="/collections/all?page=1" class="pagination-link current">1</a>
       <a href="/collections/all?page=2" class="pagination-link">2</a>
       <a href="/collections/all?page=3" class="pagination-link">3</a>
-      <span class="pagination-dots">вЂ¦</span>
+      <span class="pagination-dots">&hellip;</span>
       <a href="/collections/all?page=12" class="pagination-link">12</a>
-      <a href="/collections/all?page=2" class="pagination-link ml-1" aria-label="Next">вЂє</a>
+      <a href="/collections/all?page=2" class="pagination-link ml-1" aria-label="Next">&rsaquo;</a>
     </div>
 
   {% endif %}
