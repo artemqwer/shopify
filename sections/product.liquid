@@ -1,0 +1,373 @@
+{% schema %}
+{
+  "name": "Product",
+  "settings": []
+}
+{% endschema %}
+
+<style>
+  .product-gallery-main img { transition: opacity 0.35s ease; }
+  .product-thumb { cursor: pointer; border: 2px solid transparent; transition: border-color 0.2s; }
+  .product-thumb.active { border-color: #222; }
+  .product-thumb:hover { border-color: #aaa; }
+
+  /* Color swatch */
+  .color-swatch {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: border-color 0.2s;
+    outline: none;
+  }
+  .color-swatch.active,
+  .color-swatch:hover { border-color: #222; }
+
+  /* Size btn */
+  .size-btn {
+    min-width: 36px;
+    height: 36px;
+    padding: 0 8px;
+    border: 1.5px solid #d1d1d1;
+    font-size: 13px;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+    background: transparent;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-montserrat), Montserrat, sans-serif;
+  }
+  .size-btn.active { border-color: #222; background: #222; color: #fff; }
+  .size-btn:hover:not(.active) { border-color: #888; }
+
+  /* Accordion */
+  .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
+  .accordion-content.open { max-height: 600px; }
+  .accordion-icon { transition: transform 0.3s; }
+  .accordion-icon.open { transform: rotate(45deg); }
+
+  /* Buttons */
+  .btn-cart {
+    width: 100%;
+    background: #222;
+    color: #fff;
+    height: 52px;
+    font-size: 14px;
+    letter-spacing: 0.08em;
+    font-family: var(--font-montserrat), Montserrat, sans-serif;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .btn-cart:hover { background: #444; }
+  .btn-buy {
+    width: 100%;
+    background: transparent;
+    color: #222;
+    height: 52px;
+    font-size: 14px;
+    letter-spacing: 0.08em;
+    font-family: var(--font-montserrat), Montserrat, sans-serif;
+    font-weight: 600;
+    border: 1.5px solid #222;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+  }
+  .btn-buy:hover { background: #222; color: #fff; }
+
+  /* Zoom gallery on mobile */
+  @media (max-width: 768px) {
+    .product-layout { flex-direction: column; }
+    .product-gallery-col { width: 100%; }
+    .product-info-col { width: 100%; padding: 24px 0 0; }
+  }
+</style>
+
+{% comment %} ───────── DATA MAPPING ─────────────────────────────
+  Map product handle → gallery images (fallback to asset images)
+  When real Shopify products are set up, product.images is used automatically.
+{% endcomment %}
+
+{% assign p1_imgs = "product-image-1.png" | split: "," %}
+{% assign p2_imgs = "product-image-2.png" | split: "," %}
+{% assign p3_imgs = "product-image-3.png" | split: "," %}
+{% assign p4_imgs = "product-image-4.png,product-image-5.png,product-image-6.png" | split: "," %}
+
+{% comment %} Choose gallery based on handle {% endcomment %}
+{% if product.handle == 'leopard-print-scarf' or product.handle == 'leopard-scarf' %}
+  {% assign gallery_imgs = p1_imgs %}
+  {% assign ui_title_uk = "Хустка Леопард" %}
+  {% assign ui_title_he = "מטפחת מנומרת" %}
+  {% assign ui_desc_uk = "Відкрийте стихію дикої природи з нашою хусткою Леопард. Виконана з преміальних матеріалів, вона має благородний матовий блиск та неймовірно приємну на дотик текстуру. Унікальний принт та глибока палітра роблять її не просто аксесуаром, а центральним елементом вашого образу — від ділового костюма до розкішного виходу у світ." %}
+  {% assign ui_desc_he = "פתחו את עולם הטבע הפראי עם המטפחת המנומרת שלנו. עשויה מחומרים פרמיה עם ברק מט ומרקם נעים במיוחד למגע. הדוגמה הייחודית ופלטת הצבעים העמוקה הופכות אותה לאלמנט מרכזי בכל מתלבש." %}
+{% elsif product.handle == 'blue-silk-scarf' or product.handle == 'blue-scarf' %}
+  {% assign gallery_imgs = p2_imgs %}
+  {% assign ui_title_uk = "Хустка Синій шовк" %}
+  {% assign ui_title_he = "מטפחת משי כחולה" %}
+  {% assign ui_desc_uk = "Витончений синій шовк у чистому вигляді. Ця хустка виготовлена з натурального шовку 60-х шовкографічним методом. Приємна на дотик і неймовірно елегантна — ідеальний вибір для тих хто цінує якість і стиль." %}
+  {% assign ui_desc_he = "משי כחול מעודן בצורתו הטהורה. מטפחת זו עשויה ממשי טבעי בשיטת הדפסה וינטג'. נעימה למגע ואלגנטית להפליא." %}
+{% elsif product.handle == 'pink-scarf' or product.handle == 'rose-scarf' %}
+  {% assign gallery_imgs = p3_imgs %}
+  {% assign ui_title_uk = "Хустка Рожева" %}
+  {% assign ui_title_he = "מטפחת וורודה" %}
+  {% assign ui_desc_uk = "Яскрава та енергійна — рожева хустка стане найкращим акцентом вашого образу. Виконана з якісного атласу, вона ідеально лягає та зберігає форму протягом усього дня. Соковитий рожевий колір піднімає настрій та додає жіночності будь-якому ансамблю." %}
+  {% assign ui_desc_he = "עזה ואנרגטית — המטפחת הוורודה תהיה האקסנט הטוב ביותר בלוקים שלכם. עשויה מסאטן איכותי, שומרת על צורתה לאורך היום." %}
+{% else %}
+  {% assign gallery_imgs = p4_imgs %}
+  {% assign ui_title_uk = "Хустинка Вінтаж" %}
+  {% assign ui_title_he = "מטפחת וינטג'" %}
+  {% assign ui_desc_uk = "Відчуйте естетику минулих десятиліть у сучасному виконанні. Ця хустка — одна вузлуватому шику, натхненна класичними образами 60-х років. Виконана з преміального натурального шовку, вона має благородний матовий блиск та неймовірно приємну на дотик текстуру. Унікальний принт та глибока палітра роблять її не просто аксесуаром, а центральним елементом вашого образу — від ділового костюма до розкішного виходу у світ." %}
+  {% assign ui_desc_he = "חוו את אסתטיקת העשורים האחרונים בביצוע מודרני. מטפחת זו — שיק צנוע בבית, בהשראת לוקים קלאסיים של שנות ה-60. עשויה ממשי טבעי פרמיה, יש לה ברק מט אצילי ומרקם נעים להפליא למגע. הדוגמה הייחודית ופלטת הצבעים העמוקה הופכות אותה לא רק לאקססוריז, אלא לאלמנט מרכזי של הלוק שלכם." %}
+{% endif %}
+
+{% comment %} Locale-aware texts {% endcomment %}
+{% if request.locale.iso_code == 'he' %}
+  {% assign ui_title = ui_title_he %}
+  {% assign ui_desc = ui_desc_he %}
+  {% assign txt_home = "דף הבית" %}
+  {% assign txt_catalog = "קטלוג" %}
+  {% assign txt_scarf = "הוספה לסל" %}
+  {% assign txt_buy = "רכישה מידית" %}
+  {% assign txt_size_guide = "מדריך מידות" %}
+  {% assign txt_material = "חומר" %}
+  {% assign txt_care = "טיפול" %}
+  {% assign txt_add_cart = "הוסף לסל" %}
+  {% assign txt_buy_now = "רכישה עכשיו" %}
+  {% assign care_text = "- אל תכבסו במכונת כביסה; השתמשו בניקוי יבש או הלבנה עדינה בידיים עם מגבת לחה לסיבים.\n- ייבשו שטוחים ואל תייבשו במייבש; צאו לאוויר הפתוח בצורה מרווחת לשמור על צורתו.\n- אחסנו בצורה מקופלת ולא תלויה, כדי למנוע עיוות.\n- לטיפול מהיר: כאשר אתם מגהצים את החומר, השתמשו בנייר בין הברזל לבד, ואל תגעו בברזל ישירות." %}
+  {% assign material_text = "משי טבעי 100%" %}
+{% else %}
+  {% assign ui_title = ui_title_uk %}
+  {% assign ui_desc = ui_desc_uk %}
+  {% assign txt_home = "Головна" %}
+  {% assign txt_catalog = "Каталог" %}
+  {% assign txt_scarf = "Хустка" %}
+  {% assign txt_buy = "Оформити покупку" %}
+  {% assign txt_size_guide = "Розмірна сітка" %}
+  {% assign txt_material = "Матеріал" %}
+  {% assign txt_care = "Догляд" %}
+  {% assign txt_add_cart = "Додати в кошик" %}
+  {% assign txt_buy_now = "Оформити покупку" %}
+  {% assign care_text = "- Очищення: не прати у машинці; використовуйте сухе чищення або акуратне видалення забруднень з м'якою ганчіркою чи вологою серветкою для волокон.\n- Сушка: не відмивайте й не сушіть на батареї; залишайте лежати відпочивати способом у добре провітрюваному місці, зберігаючи форму.\n- Зберігайте у сухому місці, подалі від прямого сонця; бажано зберігати на підставці чи у коробці, щоб уникнути деформації.\n- Догляд за тканиною: час від часу освіжайте матеріал паром з відстані; не торкайтеся праскою безпосередньо." %}
+  {% assign material_text = "100% натуральний шовк" %}
+{% endif %}
+
+{% comment %} ─── PRICE ─── {% endcomment %}
+{% assign product_price = product.price | money %}
+{% if product.price == 0 or product.price == blank %}
+  {% assign product_price = "$ 80" %}
+{% endif %}
+
+{% comment %} ─── GALLERY IMAGES ─── {% endcomment %}
+{% if product.images.size > 0 %}
+  {% assign use_shopify_imgs = true %}
+{% else %}
+  {% assign use_shopify_imgs = false %}
+{% endif %}
+
+<div class="w-full max-w-[1920px] mx-auto px-4 md:px-[160px] pt-[12px] pb-[64px]" {% if request.locale.iso_code == 'he' %}dir="rtl"{% endif %}>
+
+  <!-- Breadcrumbs -->
+  <nav class="flex items-center gap-2 mb-[28px]" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">
+    {% if request.locale.iso_code == 'he' %}
+      <span class="text-[10px] tracking-[0.12em] uppercase text-gray-800" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">{{ ui_title | upcase }}</span>
+      <span class="text-gray-300 text-[10px]">‹</span>
+      <span class="text-[10px] tracking-[0.12em] uppercase text-gray-400">{{ txt_scarf }}</span>
+      <span class="text-gray-300 text-[10px]">‹</span>
+      <a href="/collections/all" class="text-[10px] tracking-[0.12em] uppercase text-gray-400 hover:text-gray-700 transition-colors">{{ txt_catalog }}</a>
+      <span class="text-gray-300 text-[10px]">‹</span>
+      <a href="/" class="text-[10px] tracking-[0.12em] uppercase text-gray-400 hover:text-gray-700 transition-colors">{{ txt_home }}</a>
+    {% else %}
+      <a href="/" class="text-[10px] tracking-[0.12em] uppercase text-gray-400 hover:text-gray-700 transition-colors">{{ txt_home }}</a>
+      <span class="text-gray-300 text-[10px]">›</span>
+      <a href="/collections/all" class="text-[10px] tracking-[0.12em] uppercase text-gray-400 hover:text-gray-700 transition-colors">{{ txt_catalog }}</a>
+      <span class="text-gray-300 text-[10px]">›</span>
+      <span class="text-[10px] tracking-[0.12em] uppercase text-gray-400">{{ txt_scarf }}</span>
+      <span class="text-gray-300 text-[10px]">›</span>
+      <span class="text-[10px] tracking-[0.12em] uppercase text-gray-800">{{ ui_title | upcase }}</span>
+    {% endif %}
+  </nav>
+
+  <!-- Main Product Layout -->
+  <div class="flex gap-[48px] product-layout">
+
+    <!-- ═══ LEFT: GALLERY ═══ -->
+    <div class="product-gallery-col w-full md:w-[55%] flex-shrink-0">
+
+      <!-- Main big image -->
+      <div class="product-gallery-main relative w-full overflow-hidden mb-3" style="aspect-ratio: 3/4;">
+        {% if use_shopify_imgs %}
+          <img id="gallery-main-img"
+               src="{{ product.images[0] | image_url: width: 1000 }}"
+               alt="{{ product.title }}"
+               class="absolute inset-0 w-full h-full object-cover"
+               loading="eager" />
+        {% else %}
+          <img id="gallery-main-img"
+               src="{{ gallery_imgs[0] | asset_url }}"
+               alt="{{ ui_title }}"
+               class="absolute inset-0 w-full h-full object-cover"
+               loading="eager" />
+        {% endif %}
+      </div>
+
+      <!-- Thumbnails row (2 side by side below) -->
+      {% if use_shopify_imgs %}
+        {% if product.images.size > 1 %}
+          <div class="grid gap-3" style="grid-template-columns: repeat({{ product.images.size | minus: 1 }}, 1fr);">
+            {% for image in product.images offset: 1 %}
+              <div class="product-thumb relative overflow-hidden"
+                   style="aspect-ratio: 1/1;"
+                   onclick="setMainImg('{{ image | image_url: width: 1000 }}', this)">
+                <img src="{{ image | image_url: width: 400 }}"
+                     alt="{{ product.title }}"
+                     class="absolute inset-0 w-full h-full object-cover" />
+              </div>
+            {% endfor %}
+          </div>
+        {% endif %}
+      {% else %}
+        {% if gallery_imgs.size > 1 %}
+          <div class="grid gap-3" style="grid-template-columns: repeat({{ gallery_imgs.size | minus: 1 }}, 1fr);">
+            {% for img_name in gallery_imgs offset: 1 %}
+              <div class="product-thumb relative overflow-hidden"
+                   style="aspect-ratio: 1/1;"
+                   onclick="setMainImg('{{ img_name | asset_url }}', this)">
+                <img src="{{ img_name | asset_url }}"
+                     alt="{{ ui_title }}"
+                     class="absolute inset-0 w-full h-full object-cover" />
+              </div>
+            {% endfor %}
+          </div>
+        {% endif %}
+      {% endif %}
+
+    </div><!-- /gallery -->
+
+    <!-- ═══ RIGHT: PRODUCT INFO ═══ -->
+    <div class="product-info-col flex-1 flex flex-col pt-0">
+
+      <!-- Title -->
+      <h1 class="text-[28px] md:text-[32px] font-bold text-[#222] tracking-wider uppercase mb-1"
+          style="font-family: var(--font-montserrat), Montserrat, sans-serif;">
+        {{ ui_title }}
+      </h1>
+
+      <!-- Price -->
+      <p class="text-[18px] text-[#444] mb-5"
+         style="font-family: var(--font-montserrat), Montserrat, sans-serif;">
+        {{ product_price }}
+      </p>
+
+      <!-- Description -->
+      <p class="text-[13px] text-[#555] leading-[1.75] mb-7"
+         style="font-family: var(--font-montserrat), Montserrat, sans-serif;">
+        {{ ui_desc }}
+      </p>
+
+      <!-- Color swatches -->
+      <div class="flex items-center gap-3 mb-6">
+        <button class="color-swatch active" style="background:#1b2536;" aria-label="Темно синій"></button>
+        <button class="color-swatch" style="background:#63141f;" aria-label="Бордо"></button>
+        <button class="color-swatch" style="background:#3d2b2b;" aria-label="Темно коричневий"></button>
+      </div>
+
+      <!-- Size selector -->
+      <div class="mb-2">
+        <div class="flex items-center gap-3">
+          <button class="size-btn" onclick="selectSize(this)">S</button>
+          <button class="size-btn active" onclick="selectSize(this)">M</button>
+          <button class="size-btn" onclick="selectSize(this)">L</button>
+        </div>
+      </div>
+
+      <!-- Size guide link -->
+      <div class="mb-7 {% if request.locale.iso_code == 'he' %}text-right{% else %}text-right{% endif %}">
+        <a href="#" class="text-[12px] text-[#888] underline hover:text-[#333] transition-colors"
+           style="font-family: var(--font-montserrat), Montserrat, sans-serif;">
+          {{ txt_size_guide }}
+        </a>
+      </div>
+
+      <!-- Add to cart -->
+      <div class="flex flex-col gap-3 mb-8">
+        <form action="/cart/add" method="post" enctype="multipart/form-data">
+          <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
+          <button type="submit" class="btn-cart">{{ txt_add_cart }}</button>
+        </form>
+        <button type="button" class="btn-buy">{{ txt_buy_now }}</button>
+      </div>
+
+      <!-- Accordion: Material -->
+      <div class="border-t border-[#e5e5e5]">
+        <button class="w-full flex items-center justify-between py-4 text-left" onclick="toggleAccordion('acc-material')">
+          <span class="text-[13px] font-medium text-[#222] tracking-wider"
+                style="font-family: var(--font-montserrat), Montserrat, sans-serif;">{{ txt_material }}</span>
+          <span id="acc-material-icon" class="accordion-icon text-[20px] font-light text-[#222] leading-none">+</span>
+        </button>
+        <div id="acc-material" class="accordion-content">
+          <p class="text-[13px] text-[#555] leading-[1.75] pb-4"
+             style="font-family: var(--font-montserrat), Montserrat, sans-serif;">
+            {{ material_text }}
+          </p>
+        </div>
+      </div>
+
+      <!-- Accordion: Care -->
+      <div class="border-t border-[#e5e5e5]">
+        <button class="w-full flex items-center justify-between py-4 text-left" onclick="toggleAccordion('acc-care')">
+          <span class="text-[13px] font-medium text-[#222] tracking-wider"
+                style="font-family: var(--font-montserrat), Montserrat, sans-serif;">{{ txt_care }}</span>
+          <span id="acc-care-icon" class="accordion-icon text-[20px] font-light text-[#e61a7a] leading-none">✕</span>
+        </button>
+        <div id="acc-care" class="accordion-content open">
+          <div class="text-[13px] text-[#555] leading-[1.9] pb-4"
+               style="font-family: var(--font-montserrat), Montserrat, sans-serif; white-space: pre-line;">{{ care_text }}</div>
+        </div>
+      </div>
+      <div class="border-t border-[#e5e5e5]"></div>
+
+    </div><!-- /info -->
+  </div><!-- /flex layout -->
+</div>
+
+<script>
+  // Gallery switcher
+  function setMainImg(src, thumbEl) {
+    const main = document.getElementById('gallery-main-img');
+    if (main) { main.style.opacity = '0'; setTimeout(() => { main.src = src; main.style.opacity = '1'; }, 180); }
+    document.querySelectorAll('.product-thumb').forEach(t => t.classList.remove('active'));
+    if (thumbEl) thumbEl.classList.add('active');
+  }
+
+  // Size selector
+  function selectSize(btn) {
+    document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+
+  // Color swatch
+  document.querySelectorAll('.color-swatch').forEach(sw => {
+    sw.addEventListener('click', function() {
+      document.querySelectorAll('.color-swatch').forEach(s => s.classList.remove('active'));
+      this.classList.add('active');
+    });
+  });
+
+  // Accordion
+  function toggleAccordion(id) {
+    const content = document.getElementById(id);
+    const icon = document.getElementById(id + '-icon');
+    if (!content) return;
+    const isOpen = content.classList.contains('open');
+    content.classList.toggle('open', !isOpen);
+    if (icon) {
+      icon.classList.toggle('open', !isOpen);
+      if (id === 'acc-material') {
+        icon.textContent = isOpen ? '+' : '–';
+      } else {
+        icon.textContent = isOpen ? '✕' : '✕';
+        icon.style.color = isOpen ? '#222' : '#e61a7a';
+      }
+    }
+  }
+</script>
