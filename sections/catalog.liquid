@@ -44,14 +44,14 @@
          style="font-family: var(--font-montserrat), Montserrat, sans-serif;">
         {{ 'header.home' | t }}
       </a>
-      <span class="text-gray-300 text-[11px]">›</span>
+      <span class="text-gray-300 text-[11px]">вЂє</span>
       <a href="/collections/all"
          class="text-[11px] font-medium tracking-[0.15em] uppercase {% if collection.handle == 'all' %}text-gray-900{% else %}text-gray-400 hover:text-gray-700{% endif %} transition-colors"
          style="font-family: var(--font-montserrat), Montserrat, sans-serif;">
         {{ 'header.catalog' | t }}
       </a>
       {% unless collection.handle == 'all' %}
-        <span class="text-gray-300 text-[11px]">›</span>
+        <span class="text-gray-300 text-[11px]">вЂє</span>
         <span class="text-[11px] font-medium tracking-[0.15em] uppercase text-gray-900"
               style="font-family: var(--font-montserrat), Montserrat, sans-serif;">
           {{ collection.title }}
@@ -117,7 +117,7 @@
     {% if paginate.pages > 1 %}
       <div class="flex items-center justify-center gap-1 mt-[64px] md:mt-[80px]">
         {% if paginate.previous %}
-          <a href="{{ paginate.previous.url }}" class="pagination-link mr-1" aria-label="Previous">‹</a>
+          <a href="{{ paginate.previous.url }}" class="pagination-link mr-1" aria-label="Previous">вЂ№</a>
         {% endif %}
 
         {% for part in paginate.parts %}
@@ -135,7 +135,7 @@
         {% endfor %}
 
         {% if paginate.next %}
-          <a href="{{ paginate.next.url }}" class="pagination-link ml-1" aria-label="Next">›</a>
+          <a href="{{ paginate.next.url }}" class="pagination-link ml-1" aria-label="Next">вЂє</a>
         {% endif %}
       </div>
     {% endif %}
@@ -143,7 +143,7 @@
   {% else %}
   <!-- ============================================================
        PLACEHOLDER LAYOUT (shown when collection is empty)
-       Admin: add products in Shopify → Products → Collections
+       Admin: add products in Shopify в†’ Products в†’ Collections
   ============================================================= -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-[48px] md:gap-x-6 md:gap-y-[64px]">
       {% assign placeholder_images = "product-image-1.png,product-image-2.png,product-image-3.png,product-image-4.png" | split: "," %}
@@ -180,9 +180,9 @@
       <a href="/collections/all?page=1" class="pagination-link current">1</a>
       <a href="/collections/all?page=2" class="pagination-link">2</a>
       <a href="/collections/all?page=3" class="pagination-link">3</a>
-      <span class="pagination-dots">…</span>
+      <span class="pagination-dots">вЂ¦</span>
       <a href="/collections/all?page=12" class="pagination-link">12</a>
-      <a href="/collections/all?page=2" class="pagination-link ml-1" aria-label="Next">›</a>
+      <a href="/collections/all?page=2" class="pagination-link ml-1" aria-label="Next">вЂє</a>
     </div>
 
   {% endif %}
