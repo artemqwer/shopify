@@ -372,22 +372,25 @@
         label.addEventListener('click', (e) => {
           e.preventDefault(); // prevent default behavior to avoid erratic scrolling if forms are added
           const box = label.querySelector('div.relative');
-          const svg = label.querySelector('svg');
           if(!box) return;
           
           if (box.classList.contains('bg-[#e61a7a]')) {
             // Deactivate
-            box.classList.remove('bg-[#e61a7a]', 'border-[#e61a7a]');
+            box.classList.remove('bg-[#e61a7a]', 'border-[#e61a7a]', 'flex', 'items-center', 'justify-center');
             box.classList.add('border-[#222]', 'group-hover:border-[#e61a7a]');
+            const svg = box.querySelector('svg');
             if(svg) {
                 svg.classList.add('hidden');
             }
           } else {
             // Activate
-            box.classList.add('bg-[#e61a7a]', 'border-[#e61a7a]');
+            box.classList.add('bg-[#e61a7a]', 'border-[#e61a7a]', 'flex', 'items-center', 'justify-center');
             box.classList.remove('border-[#222]', 'group-hover:border-[#e61a7a]');
+            let svg = box.querySelector('svg');
             if(svg) {
                 svg.classList.remove('hidden');
+            } else {
+                box.innerHTML = '<svg class="w-3 h-3 text-white block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>';
             }
           }
         });
