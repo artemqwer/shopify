@@ -5,17 +5,27 @@
 }
 {% endschema %}
 
+<style>
+  #drawer-overlay {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+  #cart-drawer, #filter-drawer {
+    transform: translateX(100%);
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+</style>
+
 <!-- Drawer Overlay -->
 <div id="drawer-overlay" 
-     class="fixed inset-0 bg-black/40 z-[100] hidden backdrop-blur-sm transition-opacity duration-500 opacity-0 cursor-pointer" 
-     style="display: none;"></div>
+     class="fixed inset-0 bg-black/60 z-[100] backdrop-blur-sm cursor-pointer"></div>
 
 <!-- ==========================================
      SHOPPING CART DRAWER
 =========================================== -->
 <div id="cart-drawer" 
-     class="fixed top-0 right-0 h-full w-full sm:w-[500px] bg-white z-[110] transition-transform duration-500 shadow-2xl flex flex-col"
-     style="transform: translateX(100%);">
+     class="fixed top-0 right-0 h-full w-full sm:w-[500px] bg-white z-[110] shadow-2xl flex flex-col">
   <!-- Header -->
   <div class="p-8 flex justify-between items-center bg-white border-b border-gray-100">
     <h2 class="text-[32px] font-medium text-black uppercase tracking-tight" style="font-family: var(--font-montserrat);">Shopping Cart</h2>
@@ -104,8 +114,7 @@
      FILTER DRAWER
 =========================================== -->
 <div id="filter-drawer" 
-     class="fixed top-0 right-0 h-full w-full sm:w-[450px] bg-white z-[110] transition-transform duration-500 shadow-2xl flex flex-col overflow-y-auto"
-     style="transform: translateX(100%);">
+     class="fixed top-0 right-0 h-full w-full sm:w-[450px] bg-white z-[110] shadow-2xl flex flex-col overflow-y-auto">
   <!-- Header -->
   <div class="p-8 flex justify-end">
     <button data-drawer-close="filter-drawer" class="p-2 hover:opacity-50 transition-opacity">
