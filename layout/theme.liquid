@@ -92,58 +92,55 @@
     {% section 'footer' %}
   </div>
 
-  {% section 'drawers' %}
+  <!-- DRAWERS: Cart + Filter (must be inline in theme.liquid, not {% section %}) -->
+  <style>
+    #drawer-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:10000;display:none;opacity:0;transition:opacity .4s ease;backdrop-filter:blur(4px);cursor:pointer;}
+    .side-drawer{position:fixed;top:0;right:0;height:100%;background:#fff;z-index:10001;box-shadow:-10px 0 30px rgba(0,0,0,.1);transform:translateX(100%);transition:transform .4s cubic-bezier(.16,1,.3,1);display:flex;flex-direction:column;width:100%;}
+    @media(min-width:640px){.side-drawer{width:500px;}#filter-drawer{width:450px;}}
+  </style>
+
+  <div id="drawer-overlay" onclick="closeAllDrawers()"></div>
+
+  <!-- CART DRAWER -->
+  <div id="cart-drawer" class="side-drawer">
+    <div style="padding:2rem;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #f3f4f6;">
+      <h2 style="font-size:1.5rem;font-weight:500;text-transform:uppercase;font-family:var(--font-montserrat);">Shopping Cart</h2>
+      <button onclick="closeCart()" style="padding:.5rem;cursor:pointer;background:none;border:none;">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div style="flex:1;overflow-y:auto;padding:1rem 2rem;">
+      <p style="color:#999;font-family:var(--font-montserrat);margin-top:2rem;text-align:center;">Your cart is empty</p>
+    </div>
+    <div style="padding:2rem;border-top:1px solid #f3f4f6;">
+      <a href="/checkout" style="display:block;width:100%;padding:1.25rem;background:#d62873;color:#fff;text-align:center;font-size:1rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;font-family:var(--font-montserrat);">Checkout</a>
+      <div style="text-align:center;margin-top:1rem;">
+        <button onclick="closeCart()" style="font-size:1rem;font-family:var(--font-montserrat);background:none;border:none;border-bottom:1px solid #000;cursor:pointer;padding-bottom:.25rem;">Continue shopping</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FILTER DRAWER -->
+  <div id="filter-drawer" class="side-drawer" style="overflow-y:auto;">
+    <div style="padding:2rem;display:flex;justify-content:flex-end;">
+      <button onclick="closeFilter()" style="background:none;border:none;cursor:pointer;padding:.5rem;">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div style="padding:0 2.5rem 4rem;">
+      <h3 style="font-size:1.25rem;font-weight:600;font-family:var(--font-montserrat);margin-bottom:1.5rem;">FILTERS</h3>
+      <p style="color:#999;font-family:var(--font-montserrat);">Filter options coming soon</p>
+    </div>
+  </div>
 
   <script>
-    // Universal Drawer Logic (Global Scope)
-    function openDrawer(id) {
-      var d = document.getElementById(id);
-      var o = document.getElementById('drawer-overlay');
-      if (!d || !o) {
-        console.error('Drawer Error: Missing element', id);
-        return;
-      }
-      o.style.display = 'block';
-      document.body.style.overflow = 'hidden';
-      setTimeout(function() {
-        o.style.opacity = '1';
-        d.style.transform = 'translateX(0)';
-        d.classList.add('is-open');
-      }, 10);
-    }
-
-    function closeAllDrawers() {
-      var o = document.getElementById('drawer-overlay');
-      var drawers = document.querySelectorAll('.side-drawer');
-      drawers.forEach(function(d) {
-        d.style.transform = 'translateX(100%)';
-        d.classList.remove('is-open');
-      });
-      if (o) o.style.opacity = '0';
-      document.body.style.overflow = '';
-      setTimeout(function() {
-        if (o) o.style.display = 'none';
-      }, 400);
-    }
-
-    // Export to window for global access
-    window.openCart = function() { openDrawer('cart-drawer'); };
-    window.openFilter = function() { openDrawer('filter-drawer'); };
-    window.closeCart = closeAllDrawers;
-    window.closeFilter = closeAllDrawers;
-    window.closeAllDrawers = closeAllDrawers;
-
-    // Click delegation for any dynamic triggers
-    document.addEventListener('click', function(e) {
-      var t = e.target.closest('[data-drawer-trigger]');
-      if (t) {
-        e.preventDefault();
-        var targetId = t.getAttribute('data-drawer-trigger');
-        openDrawer(targetId);
-      }
-    });
-
-    console.log('Drawers Loaded Successfully');
+    function openDrawer(id){var d=document.getElementById(id);var o=document.getElementById('drawer-overlay');if(!d||!o)return;o.style.display='block';document.body.style.overflow='hidden';setTimeout(function(){o.style.opacity='1';d.style.transform='translateX(0)';},10);}
+    function closeAllDrawers(){var o=document.getElementById('drawer-overlay');document.querySelectorAll('.side-drawer').forEach(function(d){d.style.transform='translateX(100%)';});if(o){o.style.opacity='0';setTimeout(function(){o.style.display='none';},400);}document.body.style.overflow='';}
+    window.openCart=function(){openDrawer('cart-drawer');};
+    window.closeCart=closeAllDrawers;
+    window.openFilter=function(){openDrawer('filter-drawer');};
+    window.closeFilter=closeAllDrawers;
+    window.closeAllDrawers=closeAllDrawers;
   </script>
 </body>
 </html>
