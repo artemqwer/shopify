@@ -13,7 +13,7 @@
   
   <!-- Add Tailwind CDN for exact pixel-perfect match without build steps -->
   <script src="https://cdn.tailwindcss.com"></script>
-  
+
   {{ content_for_header }}
   
   <style>
@@ -92,5 +92,6 @@
   </div>
 
   {% section 'drawers' %}
+  <script src="{{ 'drawers.js' | asset_url }}"></script>
 </body>
 </html>
