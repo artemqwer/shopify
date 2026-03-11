@@ -1,19 +1,17 @@
 <!doctype html>
-<html lang="{{ request.locale.iso_code }}" {% if request.locale.iso_code == 'he' %}dir="rtl"{% else %}dir="ltr"{% endif %}>
+<html class="no-js" lang="{{ request.locale.iso_code }}" dir="{% if request.locale.iso_code == 'he' %}rtl{% else %}ltr{% endif %}">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="">
   <link rel="canonical" href="{{ canonical_url }}">
+
   <title>{{ page_title }}</title>
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@100..900&display=swap" rel="stylesheet">
-  
+  {% if page_description %}<meta name="description" content="{{ page_description | escape }}">{% endif %}
+
   <!-- Add Tailwind CDN for exact pixel-perfect match without build steps -->
   <script src="https://cdn.tailwindcss.com"></script>
-
 
   {{ content_for_header }}
   
@@ -21,64 +19,27 @@
     :root {
       --font-montserrat: 'Montserrat', sans-serif;
     }
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
     body {
-      font-family: 'Inter', sans-serif;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
     }
-
-    /* ==========================================
-       RTL STYLES — Hebrew only
-       - Header: dir="rtl" naturally reverses flex → nav goes RIGHT, cart goes LEFT
-       - Grids (hero, products): forced LTR order via direction:ltr
-       - Footer columns: forced LTR visual order
-    =========================================== */
-
-    /* 1. HEADER — NO overrides needed.
-       dir="rtl" on <html> makes the main header flex container go right-to-left:
-       - Left nav (Home/Catalog/Popular) appears on the RIGHT side ✅
-       - Logo stays in center ✅
-       - Right nav (EN/Search/Cart) appears on the LEFT side ✅
-       The INTERNAL order within each nav group is also correct via RTL. */
-
-    /* 2. GRID — hero images and product cards stay in LTR visual order */
-    [dir="rtl"] .grid { direction: ltr; }
-    [dir="rtl"] .grid > * { direction: rtl; }
-
-    /* 3. FOOTER — columns keep LTR visual order (ניווט | צור קשר | מידע משפטי) */
-    [dir="rtl"] footer > div { flex-direction: column !important; }
-    [dir="rtl"] footer .md\:flex-row { flex-direction: row !important; }
-    [dir="rtl"] footer ul { direction: rtl; padding: 0; }
-    [dir="rtl"] footer li,
-    [dir="rtl"] footer h3,
-    [dir="rtl"] footer a { text-align: right; display: block; }
-
-    /* Text alignment only */
-    [dir="rtl"] h1, [dir="rtl"] h2 { text-align: center; }
-    [dir="rtl"] h3 { text-align: right; }
-    [dir="rtl"] p  { text-align: right; }
-
-    /* Product card text — right aligned */
-    [dir="rtl"] .product-card h3,
-    [dir="rtl"] .product-card p { text-align: right; }
-    [dir="rtl"] .product-card > div:last-child { direction: rtl; }
-
-    /* Phone and email — keep LTR direction so numbers don't reverse */
-    [dir="rtl"] a[href^="tel:"],
-    [dir="rtl"] a[href^="mailto:"] {
-      direction: ltr;
-      display: inline-block;
-      text-align: right;
-      unicode-bidi: embed;
-    }
-
-    /* Copyright is always centred */
-    [dir="rtl"] .text-center { text-align: center !important; }
-
-    /* Hebrew font stack */
-    [dir="rtl"] {
-      font-family: 'Inter', Arial, 'Noto Sans Hebrew', sans-serif;
-    }
+    /* Reset for shopify top bar */
+    #shopify-section-header { z-index: 50; position: sticky; top: 0; }
   </style>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
+
 <body class="antialiased bg-white text-neutral-900 min-h-screen flex flex-col relative max-w-[1920px] mx-auto">
   {% section 'header' %}
   
@@ -92,55 +53,7 @@
     {% section 'footer' %}
   </div>
 
-  <!-- DRAWERS: Cart + Filter (must be inline in theme.liquid, not {% section %}) -->
-  <style>
-    #drawer-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:10000;display:none;opacity:0;transition:opacity .4s ease;backdrop-filter:blur(4px);cursor:pointer;}
-    .side-drawer{position:fixed;top:0;right:0;height:100%;background:#fff;z-index:10001;box-shadow:-10px 0 30px rgba(0,0,0,.1);transform:translateX(100%);transition:transform .4s cubic-bezier(.16,1,.3,1);display:flex;flex-direction:column;width:100%;}
-    @media(min-width:640px){.side-drawer{width:500px;}#filter-drawer{width:450px;}}
-  </style>
+  {% section 'drawers' %}
 
-  <div id="drawer-overlay" onclick="closeAllDrawers()"></div>
-
-  <!-- CART DRAWER -->
-  <div id="cart-drawer" class="side-drawer">
-    <div style="padding:2rem;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #f3f4f6;">
-      <h2 style="font-size:1.5rem;font-weight:500;text-transform:uppercase;font-family:var(--font-montserrat);">Shopping Cart</h2>
-      <button onclick="closeCart()" style="padding:.5rem;cursor:pointer;background:none;border:none;">
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M18 6L6 18M6 6l12 12"/></svg>
-      </button>
-    </div>
-    <div style="flex:1;overflow-y:auto;padding:1rem 2rem;">
-      <p style="color:#999;font-family:var(--font-montserrat);margin-top:2rem;text-align:center;">Your cart is empty</p>
-    </div>
-    <div style="padding:2rem;border-top:1px solid #f3f4f6;">
-      <a href="/checkout" style="display:block;width:100%;padding:1.25rem;background:#d62873;color:#fff;text-align:center;font-size:1rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;font-family:var(--font-montserrat);">Checkout</a>
-      <div style="text-align:center;margin-top:1rem;">
-        <button onclick="closeCart()" style="font-size:1rem;font-family:var(--font-montserrat);background:none;border:none;border-bottom:1px solid #000;cursor:pointer;padding-bottom:.25rem;">Continue shopping</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- FILTER DRAWER -->
-  <div id="filter-drawer" class="side-drawer" style="overflow-y:auto;">
-    <div style="padding:2rem;display:flex;justify-content:flex-end;">
-      <button onclick="closeFilter()" style="background:none;border:none;cursor:pointer;padding:.5rem;">
-        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M18 6L6 18M6 6l12 12"/></svg>
-      </button>
-    </div>
-    <div style="padding:0 2.5rem 4rem;">
-      <h3 style="font-size:1.25rem;font-weight:600;font-family:var(--font-montserrat);margin-bottom:1.5rem;">FILTERS</h3>
-      <p style="color:#999;font-family:var(--font-montserrat);">Filter options coming soon</p>
-    </div>
-  </div>
-
-  <script>
-    function openDrawer(id){var d=document.getElementById(id);var o=document.getElementById('drawer-overlay');if(!d||!o)return;o.style.display='block';document.body.style.overflow='hidden';setTimeout(function(){o.style.opacity='1';d.style.transform='translateX(0)';},10);}
-    function closeAllDrawers(){var o=document.getElementById('drawer-overlay');document.querySelectorAll('.side-drawer').forEach(function(d){d.style.transform='translateX(100%)';});if(o){o.style.opacity='0';setTimeout(function(){o.style.display='none';},400);}document.body.style.overflow='';}
-    window.openCart=function(){openDrawer('cart-drawer');};
-    window.closeCart=closeAllDrawers;
-    window.openFilter=function(){openDrawer('filter-drawer');};
-    window.closeFilter=closeAllDrawers;
-    window.closeAllDrawers=closeAllDrawers;
-  </script>
 </body>
 </html>
