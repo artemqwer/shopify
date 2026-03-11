@@ -339,6 +339,90 @@
     // Close on specific buttons
     closeBtns.forEach(btn => btn.addEventListener('click', closeAll));
 
+    // ==========================================
+    // 4. FILTER DRAWER INTERACTIVITY
+    // ==========================================
+    const filterDrawer = document.getElementById('filter-drawer');
+    if(filterDrawer) {
+      
+      // 4a. Accordions (Category & Material headers)
+      const accordionHeaders = filterDrawer.querySelectorAll('.mb-6 > .flex.items-center.justify-between');
+      accordionHeaders.forEach(header => {
+        const icon = header.querySelector('svg');
+        if(icon) icon.style.transition = 'transform 0.3s ease';
+        
+        header.addEventListener('click', () => {
+          const content = header.nextElementSibling;
+          if(!content) return;
+          
+          if (content.style.display === 'none' || content.classList.contains('hidden')) {
+            content.style.display = 'block';
+            content.classList.remove('hidden');
+            if(icon) icon.style.transform = 'rotate(0deg)';
+          } else {
+            content.style.display = 'none';
+            if(icon) icon.style.transform = 'rotate(180deg)';
+          }
+        });
+      });
+
+      // 4b. Custom Checkboxes
+      const labels = filterDrawer.querySelectorAll('label.flex.items-center');
+      labels.forEach(label => {
+        label.addEventListener('click', (e) => {
+          e.preventDefault(); // prevent default behavior to avoid erratic scrolling if forms are added
+          const box = label.querySelector('div.relative');
+          const svg = label.querySelector('svg');
+          if(!box) return;
+          
+          if (box.classList.contains('bg-[#e61a7a]')) {
+            // Deactivate
+            box.classList.remove('bg-[#e61a7a]', 'border-[#e61a7a]');
+            box.classList.add('border-[#222]', 'group-hover:border-[#e61a7a]');
+            if(svg) {
+                svg.classList.add('hidden');
+            }
+          } else {
+            // Activate
+            box.classList.add('bg-[#e61a7a]', 'border-[#e61a7a]');
+            box.classList.remove('border-[#222]', 'group-hover:border-[#e61a7a]');
+            if(svg) {
+                svg.classList.remove('hidden');
+            }
+          }
+        });
+      });
+
+      // 4c. Size Buttons
+      const rootDivs = filterDrawer.querySelectorAll(':scope > div.flex-1 > div.mb-6');
+      if(rootDivs.length > 0) {
+        const sizeBtns = rootDivs[0].querySelectorAll('button');
+        sizeBtns.forEach(btn => {
+          btn.addEventListener('click', () => {
+            if (btn.classList.contains('border-black')) {
+              btn.classList.remove('border-black', 'text-black', 'font-medium');
+              btn.classList.add('border-[#d1d1d1]', 'text-[#444]');
+            } else {
+              btn.classList.remove('border-[#d1d1d1]', 'text-[#444]');
+              btn.classList.add('border-black', 'text-black', 'font-medium');
+            }
+          });
+        });
+      }
+
+      // 4d. Color Buttons
+      if(rootDivs.length > 2) {
+        const colorBtns = rootDivs[2].querySelectorAll('button');
+        colorBtns.forEach(btn => {
+          btn.addEventListener('click', () => {
+            btn.classList.toggle('ring-2');
+            btn.classList.toggle('ring-gray-400');
+            btn.classList.toggle('ring-offset-2');
+          });
+        });
+      }
+    }
+
     // Export functions to window if needed for inline use
     window.ShopifyDrawer = { open: openDrawer, close: closeAll };
   })();
