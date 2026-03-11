@@ -14,53 +14,6 @@
   <!-- Add Tailwind CDN for exact pixel-perfect match without build steps -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Global Drawers Logic -->
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const overlay = document.getElementById('drawer-overlay');
-      
-      const openDrawer = (id) => {
-        const drawer = document.getElementById(id);
-        if (!drawer || !overlay) return;
-        overlay.style.display = 'block';
-        document.body.style.overflow = 'hidden';
-        setTimeout(() => {
-          overlay.style.opacity = '1';
-          drawer.style.transform = 'translateX(0)';
-          drawer.classList.add('is-open');
-        }, 10);
-      };
-
-      const closeAll = () => {
-        const openDrawers = document.querySelectorAll('.side-drawer.is-open');
-        openDrawers.forEach(d => {
-          d.style.transform = 'translateX(100%)';
-          d.classList.remove('is-open');
-        });
-        if (overlay) overlay.style.opacity = '0';
-        document.body.style.overflow = '';
-        setTimeout(() => {
-          if (overlay) overlay.style.display = 'none';
-        }, 400);
-      };
-
-      document.addEventListener('click', function(e) {
-        const trigger = e.target.closest('[data-drawer-trigger]');
-        if (trigger) {
-          e.preventDefault();
-          openDrawer(trigger.dataset.drawerTrigger);
-        }
-        
-        if (e.target.closest('[data-drawer-close]') || e.target === overlay) {
-          closeAll();
-        }
-      });
-
-      // Expose to window for legacy support
-      window.openCart = () => openDrawer('cart-drawer');
-      window.closeAllDrawers = closeAll;
-    });
-  </script>
 
   {{ content_for_header }}
   
@@ -140,5 +93,57 @@
   </div>
 
   {% section 'drawers' %}
+
+  <script>
+    // Universal Drawer Logic (Global Scope)
+    function openDrawer(id) {
+      var d = document.getElementById(id);
+      var o = document.getElementById('drawer-overlay');
+      if (!d || !o) {
+        console.error('Drawer Error: Missing element', id);
+        return;
+      }
+      o.style.display = 'block';
+      document.body.style.overflow = 'hidden';
+      setTimeout(function() {
+        o.style.opacity = '1';
+        d.style.transform = 'translateX(0)';
+        d.classList.add('is-open');
+      }, 10);
+    }
+
+    function closeAllDrawers() {
+      var o = document.getElementById('drawer-overlay');
+      var drawers = document.querySelectorAll('.side-drawer');
+      drawers.forEach(function(d) {
+        d.style.transform = 'translateX(100%)';
+        d.classList.remove('is-open');
+      });
+      if (o) o.style.opacity = '0';
+      document.body.style.overflow = '';
+      setTimeout(function() {
+        if (o) o.style.display = 'none';
+      }, 400);
+    }
+
+    // Export to window for global access
+    window.openCart = function() { openDrawer('cart-drawer'); };
+    window.openFilter = function() { openDrawer('filter-drawer'); };
+    window.closeCart = closeAllDrawers;
+    window.closeFilter = closeAllDrawers;
+    window.closeAllDrawers = closeAllDrawers;
+
+    // Click delegation for any dynamic triggers
+    document.addEventListener('click', function(e) {
+      var t = e.target.closest('[data-drawer-trigger]');
+      if (t) {
+        e.preventDefault();
+        var targetId = t.getAttribute('data-drawer-trigger');
+        openDrawer(targetId);
+      }
+    });
+
+    console.log('Drawers Loaded Successfully');
+  </script>
 </body>
 </html>
