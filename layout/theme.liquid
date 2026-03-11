@@ -14,6 +14,54 @@
   <!-- Add Tailwind CDN for exact pixel-perfect match without build steps -->
   <script src="https://cdn.tailwindcss.com"></script>
 
+  <!-- Global Drawers Logic -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const overlay = document.getElementById('drawer-overlay');
+      
+      const openDrawer = (id) => {
+        const drawer = document.getElementById(id);
+        if (!drawer || !overlay) return;
+        overlay.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+        setTimeout(() => {
+          overlay.style.opacity = '1';
+          drawer.style.transform = 'translateX(0)';
+          drawer.classList.add('is-open');
+        }, 10);
+      };
+
+      const closeAll = () => {
+        const openDrawers = document.querySelectorAll('.side-drawer.is-open');
+        openDrawers.forEach(d => {
+          d.style.transform = 'translateX(100%)';
+          d.classList.remove('is-open');
+        });
+        if (overlay) overlay.style.opacity = '0';
+        document.body.style.overflow = '';
+        setTimeout(() => {
+          if (overlay) overlay.style.display = 'none';
+        }, 400);
+      };
+
+      document.addEventListener('click', function(e) {
+        const trigger = e.target.closest('[data-drawer-trigger]');
+        if (trigger) {
+          e.preventDefault();
+          openDrawer(trigger.dataset.drawerTrigger);
+        }
+        
+        if (e.target.closest('[data-drawer-close]') || e.target === overlay) {
+          closeAll();
+        }
+      });
+
+      // Expose to window for legacy support
+      window.openCart = () => openDrawer('cart-drawer');
+      window.closeAllDrawers = closeAll;
+    });
+  </script>
+
   {{ content_for_header }}
   
   <style>
