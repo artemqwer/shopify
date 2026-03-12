@@ -60,105 +60,58 @@
     display: flex;
   }
   #size-guide-modal {
-    background: #fff;
-    width: 100%;
-    max-width: 860px;
-    position: relative;
-    overflow: hidden;
+    background: #fff; width: 100%; max-width: 860px;
+    position: relative; overflow: hidden;
   }
-  #size-guide-modal .sg-header {
-    background: #222;
-    color: #fff;
-    padding: 12px 20px;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-family: var(--font-montserrat), Montserrat, sans-serif;
-  }
-  #size-guide-modal .sg-header svg { flex-shrink: 0; }
   #size-guide-modal .sg-close {
-    position: absolute;
-    top: 10px;
-    right: 16px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 22px;
-    font-weight: 300;
-    color: #fff;
-    line-height: 1;
-    padding: 0;
-    z-index: 1;
+    position: absolute; top: 16px;
+    background: none; border: none; cursor: pointer;
+    padding: 8px; z-index: 10; display: flex; align-items: center; justify-content: center;
   }
-  #size-guide-modal .sg-body {
-    display: flex;
-    gap: 0;
-    min-height: 320px;
-  }
+  #size-guide-overlay[dir="ltr"] .sg-close { right: 16px; }
+  #size-guide-overlay[dir="rtl"] .sg-close { left: 16px; }
+
+  #size-guide-modal .sg-body { display: flex; min-height: 420px; position: relative; }
   #size-guide-modal .sg-left {
-    flex: 1;
-    padding: 40px 48px 40px 40px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex: 1; padding: 60px 40px 60px 60px;
+    display: flex; flex-direction: column; justify-content: center;
   }
+  #size-guide-overlay[dir="rtl"] .sg-left { padding: 60px 60px 60px 40px; }
+
   #size-guide-modal .sg-right {
-    width: 320px;
-    flex-shrink: 0;
-    background: #111;
-    position: relative;
-    overflow: hidden;
-    min-height: 280px;
+    width: 320px; flex-shrink: 0; 
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 60px 40px;
   }
+  #size-guide-overlay[dir="rtl"] .sg-right { padding: 60px 40px; }
+
   #size-guide-modal .sg-right img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center top;
-    opacity: 0.85;
+    width: 100%; height: auto; display: block;
+    mix-blend-mode: multiply;
   }
   #size-guide-modal .sg-right-label {
-    position: absolute;
-    top: 16px;
-    left: 0;
-    right: 0;
-    text-align: center;
-    color: #fff;
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 0.15em;
+    text-align: center; color: #555; font-size: 11px;
+    font-weight: 500; letter-spacing: 0.05em; margin-bottom: 12px;
     text-transform: uppercase;
     font-family: var(--font-montserrat), Montserrat, sans-serif;
   }
   #size-guide-modal h2.sg-title {
-    font-size: 20px;
-    font-weight: 700;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    color: #111;
-    margin: 0 0 24px;
-    line-height: 1.2;
-    font-family: var(--font-montserrat), Montserrat, sans-serif;
+    font-size: 22px; font-weight: 600; letter-spacing: 0.04em;
+    text-transform: uppercase; color: #111; margin: 0 0 32px;
+    line-height: 1.2; font-family: var(--font-montserrat), Montserrat, sans-serif;
   }
   #size-guide-modal .sg-row {
-    border: 1.5px solid #d8d8d8;
-    padding: 14px 20px;
-    font-size: 14px;
-    font-weight: 500;
-    color: #222;
-    text-align: center;
-    margin-bottom: 8px;
-    font-family: var(--font-montserrat), Montserrat, sans-serif;
-    letter-spacing: 0.03em;
+    border: 1px solid #ccc; padding: 16px 20px;
+    font-size: 16px; font-weight: 400; color: #111;
+    text-align: center; margin-bottom: 12px;
+    font-family: var(--font-montserrat), Montserrat, sans-serif; letter-spacing: 0.03em;
   }
-  @media (max-width: 600px) {
+  @media (max-width: 768px) {
     #size-guide-modal .sg-body { flex-direction: column; }
-    #size-guide-modal .sg-right { width: 100%; min-height: 200px; }
-    #size-guide-modal .sg-left { padding: 24px 20px; }
+    #size-guide-modal .sg-right { width: 100%; padding: 20px 40px 40px; }
+    #size-guide-modal .sg-left { padding: 40px 20px 20px; align-items: center; }
+    #size-guide-modal h2.sg-title { text-align: center; font-size: 18px; }
+    #size-guide-modal .sg-row { width: 100%; max-width: 300px; }
   }
 
   /* Buttons */
@@ -456,26 +409,18 @@
 <!-- ═══ SIZE GUIDE MODAL ═══ -->
 <div id="size-guide-overlay" onclick="if(event.target===this)closeSizeGuide()" dir="{% if request.locale.iso_code == 'he' %}rtl{% else %}ltr{% endif %}">
   <div id="size-guide-modal">
-    <!-- Header bar -->
-    <div class="sg-header">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
-      {% if request.locale.iso_code == 'he' %}מידות{% else %}SIZE GUIDE{% endif %}
-    </div>
-    <button class="sg-close" onclick="closeSizeGuide()" aria-label="Close">✕</button>
-
-    <!-- Body -->
+    <button class="sg-close" onclick="closeSizeGuide()" aria-label="Close">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
     <div class="sg-body">
-      <!-- Left: size table -->
       <div class="sg-left">
         <h2 class="sg-title">
           {% if request.locale.iso_code == 'he' %}מידה – היקף ראש{% else %}SIZE — HEAD CIRCUMFERENCE{% endif %}
         </h2>
-        <div class="sg-row">S — {% if request.locale.iso_code == 'he' %}56 ס"מ{% else %}56 cm{% endif %}</div>
-        <div class="sg-row">M — {% if request.locale.iso_code == 'he' %}57 ס"מ{% else %}57 cm{% endif %}</div>
-        <div class="sg-row">L — {% if request.locale.iso_code == 'he' %}58 ס"מ{% else %}58 cm{% endif %}</div>
+        <div class="sg-row" dir="ltr">S - 56 {% if request.locale.iso_code == 'he' %}ס"מ{% else %}cm{% endif %}</div>
+        <div class="sg-row" dir="ltr">M - 57 {% if request.locale.iso_code == 'he' %}ס"מ{% else %}cm{% endif %}</div>
+        <div class="sg-row" dir="ltr">L - 58 {% if request.locale.iso_code == 'he' %}ס"מ{% else %}cm{% endif %}</div>
       </div>
-
-      <!-- Right: photo -->
       <div class="sg-right">
         <div class="sg-right-label">
           {% if request.locale.iso_code == 'he' %}מדוד לפי הקו הזה{% else %}MEASURE ALONG THIS LINE{% endif %}
