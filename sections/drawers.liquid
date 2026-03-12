@@ -44,6 +44,13 @@
     width: 100%;
   }
 
+  #filter-drawer {
+    height: auto !important;
+    max-height: 100vh;
+    border-bottom: 1px solid #f0f0f0;
+    box-shadow: -5px 15px 30px rgba(0,0,0,0.08);
+  }
+
   @media (min-width: 640px) {
     #cart-drawer { width: 500px; }
     #filter-drawer { width: 455px; }
@@ -430,11 +437,23 @@
   /* ── Drawer open / close ─────────────── */
   function openDrawer(id) {
     const drawer = document.getElementById(id);
-    if (!drawer || !overlay) return;
-    overlay.style.display = 'block';
-    document.body.style.overflow = 'hidden';
+    if (!drawer) return;
+    
+    // For filter drawer, skip the overlay and body lock — treat it like a floating small window.
+    if (id === 'filter-drawer') {
+      drawer.classList.add('is-open');
+      return;
+    }
+    
+    // For other drawers (like Cart), show the overlay and block scrolling
+    if (overlay) {
+      overlay.style.display = 'block';
+      document.body.style.overflow = 'hidden';
+      setTimeout(() => {
+        overlay.style.opacity = '1';
+      }, 30);
+    }
     setTimeout(() => {
-      overlay.style.opacity = '1';
       drawer.classList.add('is-open');
     }, 30);
   }
