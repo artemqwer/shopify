@@ -47,25 +47,25 @@
           </span>
           <span class="text-gray-300 text-[11px] font-bold">‹</span>
         {% endunless %}
-        <a href="/collections/all"
+        <a href="{{ routes.root_url }}collections/all"
            class="text-[11px] font-medium tracking-[0.15em] uppercase {% if collection.handle == 'all' %}text-gray-900{% else %}text-gray-400 hover:text-gray-700{% endif %} transition-colors"
            style="font-family: var(--font-montserrat), Montserrat, sans-serif;">
-          {{ 'header.catalog' | t }}
+           {{ 'header.catalog' | t }}
         </a>
         <span class="text-gray-300 text-[11px] font-bold">‹</span>
-        <a href="/"
+        <a href="{{ routes.root_url }}"
            class="text-[11px] font-medium tracking-[0.15em] uppercase text-gray-400 hover:text-gray-700 transition-colors"
            style="font-family: var(--font-montserrat), Montserrat, sans-serif;">
           {{ 'header.home' | t }}
         </a>
       {% else %}
-        <a href="/"
+        <a href="{{ routes.root_url }}"
            class="text-[11px] font-medium tracking-[0.15em] uppercase text-gray-400 hover:text-gray-700 transition-colors"
            style="font-family: var(--font-montserrat), Montserrat, sans-serif;">
           {{ 'header.home' | t }}
         </a>
         <span class="text-gray-300 text-[11px] font-bold">›</span>
-        <a href="/collections/all"
+        <a href="{{ routes.root_url }}collections/all"
            class="text-[11px] font-medium tracking-[0.15em] uppercase {% if collection.handle == 'all' %}text-gray-900{% else %}text-gray-400 hover:text-gray-700{% endif %} transition-colors"
            style="font-family: var(--font-montserrat), Montserrat, sans-serif;">
           {{ 'header.catalog' | t }}
@@ -179,7 +179,7 @@
 
       {% for i in (1..12) %}
         {% assign idx = forloop.index0 | modulo: 4 %}
-        <a href="/search?view=demo&product={{ placeholder_slugs[idx] }}" class="catalog-card cursor-pointer flex flex-col group no-underline">
+        <a href="{{ routes.search_url }}?view=demo&product={{ placeholder_slugs[idx] }}" class="catalog-card cursor-pointer flex flex-col group no-underline">
           <div class="relative aspect-[3/4] mb-3 md:mb-4 overflow-hidden w-full bg-gray-100">
             <img
               src="{{ placeholder_images[idx] | asset_url }}"
@@ -195,7 +195,7 @@
             </h3>
             <p class="text-[12px] font-medium md:text-[13px] md:font-light text-gray-800 md:text-gray-500"
                style="font-family: var(--font-montserrat), Montserrat, sans-serif;">
-              $ 80
+              {% if request.locale.iso_code == 'he' %}₪ 80{% else %}$ 80{% endif %}
             </p>
           </div>
         </a>
@@ -204,12 +204,12 @@
 
     <!-- Static pagination for placeholder layout -->
     <div class="flex items-center justify-center gap-1 mt-[64px] md:mt-[80px]">
-      <a href="/collections/all?page=1" class="pagination-link current">1</a>
-      <a href="/collections/all?page=2" class="pagination-link">2</a>
-      <a href="/collections/all?page=3" class="pagination-link">3</a>
+      <a href="{{ routes.root_url }}collections/all?page=1" class="pagination-link current">1</a>
+      <a href="{{ routes.root_url }}collections/all?page=2" class="pagination-link">2</a>
+      <a href="{{ routes.root_url }}collections/all?page=3" class="pagination-link">3</a>
       <span class="pagination-dots">&hellip;</span>
-      <a href="/collections/all?page=12" class="pagination-link">12</a>
-      <a href="/collections/all?page=2" class="pagination-link ml-1" aria-label="Next">&rsaquo;</a>
+      <a href="{{ routes.root_url }}collections/all?page=12" class="pagination-link">12</a>
+      <a href="{{ routes.root_url }}collections/all?page=2" class="pagination-link ml-1" aria-label="Next">&rsaquo;</a>
     </div>
 
   {% endif %}

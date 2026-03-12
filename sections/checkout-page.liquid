@@ -141,74 +141,84 @@
 <div class="checkout-container w-full max-w-[1920px] mx-auto px-4 md:px-[160px] pb-[80px]">
   
   <!-- Breadcrumb -->
-  <div class="flex justify-center items-center py-[24px]">
-    <span class="text-[11px] tracking-[0.15em] uppercase text-gray-400">HOME</span>
-    <span class="mx-2 text-[11px] text-gray-300">›</span>
-    <span class="text-[11px] tracking-[0.15em] uppercase text-gray-800 font-medium">CHECKOUT</span>
+  <div class="flex justify-center items-center py-[24px]" {% if request.locale.iso_code == 'he' %}style="direction: rtl;"{% endif %}>
+    <a href="{{ routes.root_url }}" class="text-[11px] tracking-[0.15em] uppercase text-gray-400 hover:text-gray-700 transition-colors">
+      {% if request.locale.iso_code == 'he' %}בית{% else %}HOME{% endif %}
+    </a>
+    <span class="mx-2 text-[11px] text-gray-300">{% if request.locale.iso_code == 'he' %}‹{% else %}›{% endif %}</span>
+    <span class="text-[11px] tracking-[0.15em] uppercase text-gray-800 font-medium">
+      {% if request.locale.iso_code == 'he' %}לתשלום{% else %}CHECKOUT{% endif %}
+    </span>
   </div>
 
-  <div class="flex flex-col lg:flex-row gap-[48px] lg:gap-[100px] mt-8">
+  <div class="flex flex-col lg:flex-row gap-[48px] lg:gap-[100px] mt-8" {% if request.locale.iso_code == 'he' %}style="direction: rtl; text-align: right;"{% endif %}>
     
     <!-- LEFT COLUMN: Forms -->
     <div class="flex-1 max-w-[600px]">
       
       <!-- Customer Details -->
-      <h2 class="text-[26px] md:text-[32px] font-medium text-[#222] tracking-wide mb-8">Customer Details</h2>
+      <h2 class="text-[26px] md:text-[32px] font-medium text-[#222] tracking-wide mb-8">
+        {% if request.locale.iso_code == 'he' %}פרטי לקוח{% else %}Customer Details{% endif %}
+      </h2>
       
       <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6 mb-6">
         <div>
-          <input type="text" class="chk-input" placeholder="Last Name*" required>
+          <input type="text" class="chk-input" placeholder="{% if request.locale.iso_code == 'he' %}שם משפחה*{% else %}Last Name*{% endif %}" required>
         </div>
         <div>
-          <input type="text" class="chk-input" placeholder="First Name*" required>
+          <input type="text" class="chk-input" placeholder="{% if request.locale.iso_code == 'he' %}שם פרטי*{% else %}First Name*{% endif %}" required>
         </div>
         <div>
-          <input type="tel" class="chk-input" placeholder="Phone Number*" required>
+          <input type="tel" class="chk-input" placeholder="{% if request.locale.iso_code == 'he' %}מספר טלפון*{% else %}Phone Number*{% endif %}" required>
         </div>
         <div>
-          <input type="email" class="chk-input" placeholder="Email*" required>
+          <input type="email" class="chk-input" placeholder="{% if request.locale.iso_code == 'he' %}אימייל*{% else %}Email*{% endif %}" required>
         </div>
       </div>
       
-      <div class="mb-5 chk-select-wrapper">
-        <select class="chk-select" required>
-          <option value="" disabled hidden>Region*</option>
-          <option value="UKR" selected>Ukraine</option>
-          <option value="INT">International</option>
+      <div class="mb-5 chk-select-wrapper" {% if request.locale.iso_code == 'he' %}style="direction: ltr; text-align: right;"{% endif %}>
+        <select class="chk-select" required {% if request.locale.iso_code == 'he' %}style="direction: rtl;"{% endif %}>
+          <option value="" disabled hidden>{% if request.locale.iso_code == 'he' %}אזור*{% else %}Region*{% endif %}</option>
+          <option value="UKR" selected>{% if request.locale.iso_code == 'he' %}אוקראינה{% else %}Ukraine{% endif %}</option>
+          <option value="INT">{% if request.locale.iso_code == 'he' %}בינלאומי{% else %}International{% endif %}</option>
         </select>
       </div>
       
       <div class="flex items-center gap-2 mb-14">
         <input type="checkbox" id="chk-order-details" class="chk-checkbox">
-        <label for="chk-order-details" class="text-[12px] text-gray-500 cursor-pointer">Contact me for order details</label>
+        <label for="chk-order-details" class="text-[12px] text-gray-500 cursor-pointer">
+          {% if request.locale.iso_code == 'he' %}צרו קשר לפרטי הזמנה{% else %}Contact me for order details{% endif %}
+        </label>
       </div>
 
       <!-- Delivery -->
-      <h2 class="text-[26px] md:text-[32px] font-medium text-[#222] tracking-wide mb-8">Delivery</h2>
+      <h2 class="text-[26px] md:text-[32px] font-medium text-[#222] tracking-wide mb-8">
+        {% if request.locale.iso_code == 'he' %}משלוח{% else %}Delivery{% endif %}
+      </h2>
       
       <div class="space-y-6 mb-12">
-        <div class="chk-select-wrapper">
-          <select class="chk-select" required>
-            <option value="" disabled selected hidden>City</option>
-            <option value="Kyiv">Kyiv</option>
-            <option value="Lviv">Lviv</option>
-            <option value="Odesa">Odesa</option>
-            <option value="Dnipro">Dnipro</option>
-            <option value="Kharkiv">Kharkiv</option>
+        <div class="chk-select-wrapper" {% if request.locale.iso_code == 'he' %}style="direction: ltr; text-align: right;"{% endif %}>
+          <select class="chk-select" required {% if request.locale.iso_code == 'he' %}style="direction: rtl;"{% endif %}>
+            <option value="" disabled selected hidden>{% if request.locale.iso_code == 'he' %}עיר{% else %}City{% endif %}</option>
+            <option value="Kyiv">{% if request.locale.iso_code == 'he' %}קייב{% else %}Kyiv{% endif %}</option>
+            <option value="Lviv">{% if request.locale.iso_code == 'he' %}לבוב{% else %}Lviv{% endif %}</option>
+            <option value="Odesa">{% if request.locale.iso_code == 'he' %}אודסה{% else %}Odesa{% endif %}</option>
+            <option value="Dnipro">{% if request.locale.iso_code == 'he' %}דניפרו{% else %}Dnipro{% endif %}</option>
+            <option value="Kharkiv">{% if request.locale.iso_code == 'he' %}חרקוב{% else %}Kharkiv{% endif %}</option>
           </select>
         </div>
         
-        <div class="chk-select-wrapper">
-          <select class="chk-select" required>
-            <option value="" disabled selected hidden>Branch</option>
-            <option value="1">Branch #1</option>
-            <option value="2">Branch #2</option>
-            <option value="3">Branch #3</option>
+        <div class="chk-select-wrapper" {% if request.locale.iso_code == 'he' %}style="direction: ltr; text-align: right;"{% endif %}>
+          <select class="chk-select" required {% if request.locale.iso_code == 'he' %}style="direction: rtl;"{% endif %}>
+            <option value="" disabled selected hidden>{% if request.locale.iso_code == 'he' %}סניף{% else %}Branch{% endif %}</option>
+            <option value="1">{% if request.locale.iso_code == 'he' %}סניף 1{% else %}Branch #1{% endif %}</option>
+            <option value="2">{% if request.locale.iso_code == 'he' %}סניף 2{% else %}Branch #2{% endif %}</option>
+            <option value="3">{% if request.locale.iso_code == 'he' %}סניף 3{% else %}Branch #3{% endif %}</option>
           </select>
         </div>
         
         <div>
-          <input type="text" class="chk-input" placeholder="Order notes (optional)">
+          <input type="text" class="chk-input" placeholder="{% if request.locale.iso_code == 'he' %}הערות להזמנה (לא חובה){% else %}Order notes (optional){% endif %}">
         </div>
       </div>
       
@@ -220,12 +230,16 @@
         
         <!-- Promo Code -->
         <div class="flex items-center justify-between border-b border-[#e5e5e5] pb-4 mb-6 cursor-pointer group">
-          <span class="text-[13px] font-semibold tracking-wider text-[#222]">PROMO CODE</span>
+          <span class="text-[13px] font-semibold tracking-wider text-[#222]">
+            {% if request.locale.iso_code == 'he' %}קוד קופון{% else %}PROMO CODE{% endif %}
+          </span>
           <span class="text-[18px] font-light text-[#222] group-hover:text-gray-500 transition-colors">+</span>
         </div>
         
         <!-- Your Order -->
-        <h3 class="text-[14px] font-semibold tracking-wider text-[#222] mb-4 uppercase">Your Order</h3>
+        <h3 class="text-[14px] font-semibold tracking-wider text-[#222] mb-4 uppercase">
+          {% if request.locale.iso_code == 'he' %}ההזמנה שלך{% else %}Your Order{% endif %}
+        </h3>
         
         <!-- Items Container (Dynamic via JS, falling back to static HTML if empty/loading) -->
         <div id="checkout-items-container" class="space-y-3 mb-6">
@@ -237,50 +251,66 @@
         
         <!-- Subtotal -->
         <div class="flex items-center justify-between border-b border-[#e5e5e5] pb-5 mb-6 text-[12px] text-[#222]">
-          <span class="tracking-widest uppercase">Subtotal</span>
+          <span class="tracking-widest uppercase">
+            {% if request.locale.iso_code == 'he' %}סכום ביניים{% else %}Subtotal{% endif %}
+          </span>
           <span id="checkout-subtotal" class="font-medium">$0</span>
         </div>
         
         <!-- Payment Method -->
-        <h3 class="text-[14px] font-semibold tracking-wider text-[#222] mb-4 uppercase">Payment Method</h3>
+        <h3 class="text-[14px] font-semibold tracking-wider text-[#222] mb-4 uppercase">
+          {% if request.locale.iso_code == 'he' %}תשלום{% else %}Payment Method{% endif %}
+        </h3>
         <div class="space-y-3 mb-6">
           <label class="flex items-center gap-3 cursor-pointer">
             <input type="radio" name="payment_method" class="chk-radio-box" checked>
-            <span class="text-[12px] text-[#555]">Card payment, Apple Pay, Google Pay</span>
+            <span class="text-[12px] text-[#555]">
+              {% if request.locale.iso_code == 'he' %}כרטיס אשראי, Apple Pay, Google Pay{% else %}Card payment, Apple Pay, Google Pay{% endif %}
+            </span>
           </label>
           <label class="flex items-center gap-3 cursor-pointer border-b border-[#e5e5e5] pb-5">
             <input type="radio" name="payment_method" class="chk-radio-box">
-            <span class="text-[12px] text-[#555]">Cash on delivery</span>
+            <span class="text-[12px] text-[#555]">
+              {% if request.locale.iso_code == 'he' %}תשלום במזומן במועד האספקה{% else %}Cash on delivery{% endif %}
+            </span>
           </label>
         </div>
         
         <!-- Shipping -->
-        <h3 class="text-[14px] font-semibold tracking-wider text-[#222] mb-4 uppercase">Shipping</h3>
+        <h3 class="text-[14px] font-semibold tracking-wider text-[#222] mb-4 uppercase">
+          {% if request.locale.iso_code == 'he' %}משלוח{% else %}Shipping{% endif %}
+        </h3>
         <div class="space-y-3 mb-6 border-b border-[#e5e5e5] pb-5">
           <label class="flex items-center gap-3 cursor-pointer">
             <input type="radio" name="shipping_method" class="chk-radio-box" checked>
-            <span class="text-[12px] text-[#555]">Nova Poshta</span>
+            <span class="text-[12px] text-[#555]">
+              {% if request.locale.iso_code == 'he' %}נובה פושטה{% else %}Nova Poshta{% endif %}
+            </span>
           </label>
         </div>
         
         <!-- Total -->
         <div class="flex items-center justify-between mb-6">
-          <span class="text-[14px] font-semibold tracking-wider text-[#222] uppercase">Total to pay</span>
+          <span class="text-[14px] font-semibold tracking-wider text-[#222] uppercase">
+            {% if request.locale.iso_code == 'he' %}סך הכל לתשלום{% else %}Total to pay{% endif %}
+          </span>
           <span id="checkout-total" class="font-bold text-[16px] text-[#222]">$0</span>
         </div>
         
         <!-- Info & Consent -->
         <p class="text-[11px] text-[#888] leading-[1.6] mb-5">
-          Your personal data will be used to process your order, support your experience throughout this website, and for other purposes described in our privacy policy.
+          {% if request.locale.iso_code == 'he' %}המידע האישי שלך ישמש לעיבוד ההזמנה, לשיפור חווית המשתמש ולמטרות נוספות המתוארות במדיניות הפרטיות.{% else %}Your personal data will be used to process your order, support your experience throughout this website, and for other purposes described in our privacy policy.{% endif %}
         </p>
         <div class="flex items-start gap-2 mb-8">
           <input type="checkbox" id="chk-terms" class="chk-checkbox mt-0.5">
           <label for="chk-terms" class="text-[11px] text-[#888] cursor-pointer leading-tight">
-            I have read and agree to the website terms and conditions*
+            {% if request.locale.iso_code == 'he' %}קראתי והסכמתי לתנאי האתר*{% else %}I have read and agree to the website terms and conditions*{% endif %}
           </label>
         </div>
         
-        <button type="button" class="btn-confirm" onclick="confirmOrder()">Confirm Order</button>
+        <button type="button" class="btn-confirm" onclick="confirmOrder()">
+          {% if request.locale.iso_code == 'he' %}אישור הזמנה{% else %}Confirm Order{% endif %}
+        </button>
       </div>
     </div>
     
@@ -367,24 +397,24 @@
   function confirmOrder() {
     const terms = document.getElementById('chk-terms');
     if (!terms.checked) {
-      alert("Please agree to the terms and conditions before proceeding.");
+      alert(document.dir === 'rtl' ? "אנא אשר את תנאי האתר" : "Please agree to the terms and conditions before proceeding.");
       return;
     }
     
     const btn = document.querySelector('.btn-confirm');
     const og = btn.textContent;
-    btn.textContent = 'Processing...';
+    btn.textContent = document.dir === 'rtl' ? 'מעבד...' : 'Processing...';
     btn.disabled = true;
     
     setTimeout(() => {
-      alert("Thank you for your order! This is a custom demo checkout.");
+      alert(document.dir === 'rtl' ? "תודה על ההזמנה! זו הדגמה." : "Thank you for your order! This is a custom demo checkout.");
       
       // Clear mock cart as demo
       localStorage.removeItem('ester_mock_cart');
       
       // Clear Shopify cart and redirect
-      fetch('/cart/clear.js', { method: 'POST' }).finally(() => {
-        window.location.href = '/';
+      fetch('{{ routes.cart_clear_url }}', { method: 'POST' }).finally(() => {
+        window.location.href = '{{ routes.root_url }}';
       });
     }, 1500);
   }

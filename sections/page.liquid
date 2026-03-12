@@ -138,16 +138,16 @@
     {% if request.locale.iso_code == 'he' %}
       <span class="text-[10px] tracking-[0.12em] uppercase text-gray-800">{{ ui_title | upcase }}</span>
       <span class="text-gray-300 text-[10px]">‹</span>
-      <a href="/collections/all"
+      <a href="{{ routes.root_url }}collections/all"
          class="text-[10px] tracking-[0.12em] uppercase text-gray-400 hover:text-gray-700 transition-colors">{{ txt_catalog }}</a>
       <span class="text-gray-300 text-[10px]">‹</span>
-      <a href="/"
+      <a href="{{ routes.root_url }}"
          class="text-[10px] tracking-[0.12em] uppercase text-gray-400 hover:text-gray-700 transition-colors">{{ txt_home }}</a>
     {% else %}
-      <a href="/"
+      <a href="{{ routes.root_url }}"
          class="text-[10px] tracking-[0.12em] uppercase text-gray-400 hover:text-gray-700 transition-colors">{{ txt_home }}</a>
       <span class="text-gray-300 text-[10px]">›</span>
-      <a href="/collections/all"
+      <a href="{{ routes.root_url }}collections/all"
          class="text-[10px] tracking-[0.12em] uppercase text-gray-400 hover:text-gray-700 transition-colors">{{ txt_catalog }}</a>
       <span class="text-gray-300 text-[10px]">›</span>
       <span class="text-gray-400 text-[10px] tracking-[0.12em] uppercase">{{ txt_catalog }}</span>

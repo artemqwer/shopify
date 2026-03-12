@@ -173,13 +173,13 @@
       <span class="text-gray-300 text-[10px]">‹</span>
       <span class="text-[10px] tracking-[0.12em] uppercase text-gray-400">{{ txt_scarf }}</span>
       <span class="text-gray-300 text-[10px]">‹</span>
-      <a href="/collections/all" class="text-[10px] tracking-[0.12em] uppercase text-gray-400 hover:text-gray-700 transition-colors">{{ txt_catalog }}</a>
+      <a href="{{ routes.root_url }}collections/all" class="text-[10px] tracking-[0.12em] uppercase text-gray-400 hover:text-gray-700 transition-colors">{{ txt_catalog }}</a>
       <span class="text-gray-300 text-[10px]">‹</span>
-      <a href="/" class="text-[10px] tracking-[0.12em] uppercase text-gray-400 hover:text-gray-700 transition-colors">{{ txt_home }}</a>
+      <a href="{{ routes.root_url }}" class="text-[10px] tracking-[0.12em] uppercase text-gray-400 hover:text-gray-700 transition-colors">{{ txt_home }}</a>
     {% else %}
-      <a href="/" class="text-[10px] tracking-[0.12em] uppercase text-gray-400 hover:text-gray-700 transition-colors">{{ txt_home }}</a>
+      <a href="{{ routes.root_url }}" class="text-[10px] tracking-[0.12em] uppercase text-gray-400 hover:text-gray-700 transition-colors">{{ txt_home }}</a>
       <span class="text-gray-300 text-[10px]">›</span>
-      <a href="/collections/all" class="text-[10px] tracking-[0.12em] uppercase text-gray-400 hover:text-gray-700 transition-colors">{{ txt_catalog }}</a>
+      <a href="{{ routes.root_url }}collections/all" class="text-[10px] tracking-[0.12em] uppercase text-gray-400 hover:text-gray-700 transition-colors">{{ txt_catalog }}</a>
       <span class="text-gray-300 text-[10px]">›</span>
       <span class="text-[10px] tracking-[0.12em] uppercase text-gray-400">{{ txt_scarf }}</span>
       <span class="text-gray-300 text-[10px]">›</span>

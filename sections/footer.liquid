@@ -36,10 +36,10 @@
         <div class="w-full md:w-[240px]">
           <h3 class="text-gray-400 text-[11px] font-medium tracking-widest uppercase mb-[24px]" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">{{ 'footer.navigation' | t }}</h3>
           <ul class="space-y-[24px]">
-            <li><a href="/" class="text-[13px] font-normal text-black hover:text-gray-500 transition-colors">{{ 'footer.home' | t }}</a></li>
-            <li><a href="/collections/all" class="text-[13px] font-normal text-black hover:text-gray-500 transition-colors">{{ 'footer.catalog' | t }}</a></li>
-            <li><a href="/popular" class="text-[13px] font-normal text-black hover:text-gray-500 transition-colors">{{ 'footer.popular' | t }}</a></li>
-            <li><a href="/about" class="text-[13px] font-normal text-black hover:text-gray-500 transition-colors">{{ 'footer.about' | t }}</a></li>
+            <li><a href="{{ routes.root_url }}" class="text-[13px] font-normal text-black hover:text-gray-500 transition-colors">{{ 'footer.home' | t }}</a></li>
+            <li><a href="{{ routes.root_url }}collections/all" class="text-[13px] font-normal text-black hover:text-gray-500 transition-colors">{{ 'footer.catalog' | t }}</a></li>
+            <li><a href="{{ routes.root_url }}popular" class="text-[13px] font-normal text-black hover:text-gray-500 transition-colors">{{ 'footer.popular' | t }}</a></li>
+            <li><a href="{{ routes.root_url }}about" class="text-[13px] font-normal text-black hover:text-gray-500 transition-colors">{{ 'footer.about' | t }}</a></li>
           </ul>
         </div>
 
@@ -57,9 +57,9 @@
         <div class="w-full md:w-[240px]">
           <h3 class="text-gray-400 text-[11px] font-medium tracking-widest uppercase mb-[24px]" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">{{ 'footer.legal' | t }}</h3>
           <ul class="space-y-[24px]">
-            <li><a href="/public-offer" class="text-[13px] font-normal text-black hover:text-gray-500 transition-colors">{{ 'footer.public_offer' | t }}</a></li>
-            <li><a href="/privacy" class="text-[13px] font-normal text-black hover:text-gray-500 transition-colors">{{ 'footer.privacy' | t }}</a></li>
-            <li><a href="/shipping" class="text-[13px] font-normal text-black hover:text-gray-500 transition-colors">{{ 'footer.shipping' | t }}</a></li>
+            <li><a href="{{ routes.root_url }}public-offer" class="text-[13px] font-normal text-black hover:text-gray-500 transition-colors">{{ 'footer.public_offer' | t }}</a></li>
+            <li><a href="{{ routes.root_url }}privacy" class="text-[13px] font-normal text-black hover:text-gray-500 transition-colors">{{ 'footer.privacy' | t }}</a></li>
+            <li><a href="{{ routes.root_url }}shipping" class="text-[13px] font-normal text-black hover:text-gray-500 transition-colors">{{ 'footer.shipping' | t }}</a></li>
           </ul>
         </div>
       </div>
@@ -119,10 +119,10 @@
         </summary>
         <div class="pt-6">
           <ul class="space-y-[20px]">
-            <li><a href="/" class="text-[13px] font-normal text-black">{{ 'footer.home' | t }}</a></li>
-            <li><a href="/collections/all" class="text-[13px] font-normal text-black">{{ 'footer.catalog' | t }}</a></li>
-            <li><a href="/popular" class="text-[13px] font-normal text-black">{{ 'footer.popular' | t }}</a></li>
-            <li><a href="/about" class="text-[13px] font-normal text-black">{{ 'footer.about' | t }}</a></li>
+            <li><a href="{{ routes.root_url }}" class="text-[13px] font-normal text-black">{{ 'footer.home' | t }}</a></li>
+            <li><a href="{{ routes.root_url }}collections/all" class="text-[13px] font-normal text-black">{{ 'footer.catalog' | t }}</a></li>
+            <li><a href="{{ routes.root_url }}popular" class="text-[13px] font-normal text-black">{{ 'footer.popular' | t }}</a></li>
+            <li><a href="{{ routes.root_url }}about" class="text-[13px] font-normal text-black">{{ 'footer.about' | t }}</a></li>
           </ul>
         </div>
       </details>
@@ -150,9 +150,9 @@
         </summary>
         <div class="pt-6">
           <ul class="space-y-[20px]">
-            <li><a href="/public-offer" class="text-[13px] font-normal text-black">{{ 'footer.public_offer' | t }}</a></li>
-            <li><a href="/privacy" class="text-[13px] font-normal text-black">{{ 'footer.privacy' | t }}</a></li>
-            <li><a href="/shipping" class="text-[13px] font-normal text-black">{{ 'footer.shipping' | t }}</a></li>
+            <li><a href="{{ routes.root_url }}public-offer" class="text-[13px] font-normal text-black">{{ 'footer.public_offer' | t }}</a></li>
+            <li><a href="{{ routes.root_url }}privacy" class="text-[13px] font-normal text-black">{{ 'footer.privacy' | t }}</a></li>
+            <li><a href="{{ routes.root_url }}shipping" class="text-[13px] font-normal text-black">{{ 'footer.shipping' | t }}</a></li>
           </ul>
         </div>
       </details>
