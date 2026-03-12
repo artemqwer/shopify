@@ -188,6 +188,9 @@
     border: 1.5px solid #222;
     cursor: pointer;
     transition: background 0.2s, color 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   .btn-buy:hover { background: #222; color: #fff; }
 
@@ -414,7 +417,7 @@
                 onclick="handleAddToCart(this)">
           {{ txt_add_cart }}
         </button>
-        <button type="button" class="btn-buy">{{ txt_buy_now }}</button>
+        <a href="{{ routes.search_url }}?view=order" class="btn-buy">{{ txt_buy_now }}</a>
       </div>
 
       <!-- Accordion: Material -->

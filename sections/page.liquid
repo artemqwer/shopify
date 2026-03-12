@@ -95,6 +95,8 @@
   .btn-cart:hover { background: #222; }
   .btn-buy {
     width: 100%; background: transparent; color: #222; height: 52px;
+    display: flex; align-items: center; justify-content: center;
+    text-align: center; text-decoration: none;
     font-size: 14px; letter-spacing: 0.08em;
     font-family: var(--font-montserrat), Montserrat, sans-serif;
     font-weight: 600; border: 1.5px solid #222; cursor: pointer;
@@ -296,7 +298,7 @@
                 data-price="$ 80"
                 data-image="{{ img_main | asset_url }}"
                 onclick="handlePageAddToCart(this)">{{ txt_add_cart }}</button>
-        <button type="button" class="btn-buy">{{ txt_buy_now }}</button>
+        <a href="{{ routes.search_url }}?view=order" class="btn-buy">{{ txt_buy_now }}</a>
       </div>
 
       <!-- Accordion: Material -->
