@@ -21,13 +21,9 @@
     transition: border-color 0.2s;
     outline: none;
   }
-  .chk-input::placeholder {
-    color: #888;
-  }
-  .chk-input:focus {
-    border-bottom-color: #222;
-  }
-  
+  .chk-input::placeholder { color: #888; }
+  .chk-input:focus { border-bottom-color: #222; }
+
   /* Select dropdown */
   .chk-select {
     width: 100%;
@@ -43,82 +39,67 @@
     outline: none;
     cursor: pointer;
   }
-  .chk-select-wrapper {
-    position: relative;
-  }
+  .chk-select-wrapper { position: relative; }
   .chk-select-wrapper::after {
     content: '';
     position: absolute;
-    right: 0;
-    top: 50%;
+    right: 0; top: 50%;
     transform: translateY(-20%);
     border-left: 4px solid transparent;
     border-right: 4px solid transparent;
     border-top: 4px solid #222;
     pointer-events: none;
   }
-  
+
   /* Custom Radio/Checkboxes */
   .chk-radio-box {
     appearance: none;
-    width: 16px;
-    height: 16px;
+    width: 16px; height: 16px;
     border: 1.5px solid #d1d1d1;
     border-radius: 50%;
-    outline: none;
-    cursor: pointer;
-    position: relative;
-    top: 2px;
+    outline: none; cursor: pointer;
+    position: relative; top: 2px; flex-shrink: 0;
   }
-  .chk-radio-box:checked {
-    border-color: #e61a7a;
-  }
+  .chk-radio-box:checked { border-color: #e61a7a; }
   .chk-radio-box:checked::after {
     content: '';
     position: absolute;
-    top: 50%;
-    left: 50%;
+    top: 50%; left: 50%;
     transform: translate(-50%, -50%);
-    width: 8px;
-    height: 8px;
+    width: 8px; height: 8px;
     background-color: #e61a7a;
     border-radius: 50%;
   }
-  
+
   .chk-checkbox {
     appearance: none;
-    width: 14px;
-    height: 14px;
+    width: 14px; height: 14px;
     border: 1px solid #d1d1d1;
     border-radius: 0;
-    outline: none;
-    cursor: pointer;
-    position: relative;
-    top: 2px;
+    outline: none; cursor: pointer;
+    position: relative; top: 2px; flex-shrink: 0;
   }
-  .chk-checkbox:checked {
-    background-color: transparent;
-    border-color: #222;
-  }
+  .chk-checkbox:checked { background-color: transparent; border-color: #222; }
   .chk-checkbox:checked::after {
     content: '';
     position: absolute;
-    left: 4px;
-    top: 0px;
-    width: 4px;
-    height: 9px;
+    left: 4px; top: 0px;
+    width: 4px; height: 9px;
     border: solid #222;
     border-width: 0 2px 2px 0;
     transform: rotate(45deg);
   }
-  
+
   /* Order Summary Block */
   .order-summary-box {
     border: 1px solid #e5e5e5;
     background: #fff;
-    padding: 32px;
+    padding: 24px;
   }
-  
+  @media (min-width: 640px) {
+    .order-summary-box { padding: 32px; }
+  }
+
   .btn-confirm {
     width: 100%;
     background: #000;
@@ -133,12 +114,17 @@
     transition: background 0.2s;
     text-transform: uppercase;
   }
-  .btn-confirm:hover {
-    background: #444;
+  .btn-confirm:hover { background: #444; }
+
+  /* Mobile: summary first, then form */
+  @media (max-width: 1023px) {
+    .checkout-cols { flex-direction: column !important; }
+    .checkout-form-col { order: 2; }
+    .checkout-summary-col { order: 1; width: 100% !important; }
   }
 </style>
 
-<div class="checkout-container w-full max-w-[1920px] mx-auto px-4 md:px-[160px] pb-[80px]">
+<div class="checkout-container w-full max-w-[1920px] mx-auto px-4 md:px-[80px] lg:px-[160px] pb-[80px]">
   
   <!-- Breadcrumb -->
   <div class="flex justify-center items-center py-[24px]" {% if request.locale.iso_code == 'he' %}style="direction: rtl;"{% endif %}>
@@ -151,13 +137,13 @@
     </span>
   </div>
 
-  <div class="flex flex-col lg:flex-row gap-[48px] lg:gap-[100px] mt-8" {% if request.locale.iso_code == 'he' %}style="direction: rtl; text-align: right;"{% endif %}>
+  <div class="checkout-cols flex flex-col lg:flex-row gap-[32px] lg:gap-[100px] mt-8" {% if request.locale.iso_code == 'he' %}style="direction: rtl; text-align: right;"{% endif %}>
     
     <!-- LEFT COLUMN: Forms -->
-    <div class="flex-1 max-w-[600px]">
+    <div class="checkout-form-col flex-1 max-w-full lg:max-w-[600px]">
       
       <!-- Customer Details -->
-      <h2 class="text-[26px] md:text-[32px] font-medium text-[#222] tracking-wide mb-8">
+      <h2 class="text-[22px] md:text-[32px] font-medium text-[#222] tracking-wide mb-6 md:mb-8">
         {% if request.locale.iso_code == 'he' %}פרטי לקוח{% else %}Customer Details{% endif %}
       </h2>
       
@@ -192,7 +178,7 @@
       </div>
 
       <!-- Delivery -->
-      <h2 class="text-[26px] md:text-[32px] font-medium text-[#222] tracking-wide mb-8">
+      <h2 class="text-[22px] md:text-[32px] font-medium text-[#222] tracking-wide mb-6 md:mb-8">
         {% if request.locale.iso_code == 'he' %}משלוח{% else %}Delivery{% endif %}
       </h2>
       
@@ -225,7 +211,7 @@
     </div>
 
     <!-- RIGHT COLUMN: Order Summary -->
-    <div class="w-full lg:w-[480px]">
+    <div class="checkout-summary-col w-full lg:w-[440px] flex-shrink-0">
       <div class="order-summary-box shadow-sm">
         
         <!-- Promo Code -->

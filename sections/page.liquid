@@ -17,7 +17,7 @@
   }
   .color-swatch.active, .color-swatch:hover { border-color: #222; }
   .size-btn {
-    min-width: 36px; height: 36px; padding: 0 10px;
+    min-width: 40px; height: 40px; padding: 0 10px;
     border: 1.5px solid #d1d1d1; font-size: 13px; cursor: pointer;
     transition: border-color 0.2s, background 0.2s; background: transparent;
     display: flex; align-items: center; justify-content: center;
@@ -28,16 +28,18 @@
   .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
   .accordion-content.open { max-height: 600px; }
   .accordion-icon { transition: transform 0.3s; font-style: normal; }
-  /* Size Guide Modal */
+
+  /* ── Size Guide Modal ── */
   #size-guide-overlay {
     position: fixed; inset: 0; background: rgba(0,0,0,0.55);
     z-index: 99990; display: none;
-    align-items: center; justify-content: center; padding: 16px;
+    align-items: center; justify-content: center;
+    padding: 16px; overflow-y: auto;
   }
   #size-guide-overlay.active { display: flex; }
   #size-guide-modal {
     background: #fff; width: 100%; max-width: 860px;
-    position: relative; overflow: hidden;
+    position: relative; overflow: hidden; margin: auto;
   }
   #size-guide-modal .sg-close {
     position: absolute; top: 16px;
@@ -46,25 +48,18 @@
   }
   #size-guide-overlay[dir="ltr"] .sg-close { right: 16px; }
   #size-guide-overlay[dir="rtl"] .sg-close { left: 16px; }
-
   #size-guide-modal .sg-body { display: flex; min-height: 420px; position: relative; }
   #size-guide-modal .sg-left {
     flex: 1; padding: 60px 40px 60px 60px;
     display: flex; flex-direction: column; justify-content: center;
   }
   #size-guide-overlay[dir="rtl"] .sg-left { padding: 60px 60px 60px 40px; }
-
   #size-guide-modal .sg-right {
-    width: 320px; flex-shrink: 0; 
+    width: 320px; flex-shrink: 0;
     display: flex; flex-direction: column; align-items: center; justify-content: center;
     padding: 60px 40px;
   }
-  #size-guide-overlay[dir="rtl"] .sg-right { padding: 60px 40px; }
-
-  #size-guide-modal .sg-right img {
-    width: 100%; height: auto; display: block;
-    mix-blend-mode: multiply; /* Helps blend with white BG if needed */
-  }
+  #size-guide-modal .sg-right img { width: 100%; height: auto; display: block; mix-blend-mode: multiply; }
   #size-guide-modal .sg-right-label {
     text-align: center; color: #555; font-size: 11px;
     font-weight: 500; letter-spacing: 0.05em; margin-bottom: 12px;
@@ -73,22 +68,29 @@
   }
   #size-guide-modal h2.sg-title {
     font-size: 22px; font-weight: 600; letter-spacing: 0.04em;
-    text-transform: uppercase; color: #111; margin: 0 0 32px;
+    text-transform: uppercase; color: #111; margin: 0 0 28px;
     line-height: 1.2; font-family: var(--font-montserrat), Montserrat, sans-serif;
   }
   #size-guide-modal .sg-row {
-    border: 1px solid #ccc; padding: 16px 20px;
-    font-size: 16px; font-weight: 400; color: #111;
-    text-align: center; margin-bottom: 12px;
+    border: 1px solid #ccc; padding: 14px 20px;
+    font-size: 15px; font-weight: 400; color: #111;
+    text-align: center; margin-bottom: 10px;
     font-family: var(--font-montserrat), Montserrat, sans-serif; letter-spacing: 0.03em;
   }
-  @media (max-width: 768px) {
-    #size-guide-modal .sg-body { flex-direction: column; }
-    #size-guide-modal .sg-right { width: 100%; padding: 20px 40px 40px; }
-    #size-guide-modal .sg-left { padding: 40px 20px 20px; align-items: center; }
-    #size-guide-modal h2.sg-title { text-align: center; font-size: 18px; }
-    #size-guide-modal .sg-row { width: 100%; max-width: 300px; }
+  @media (max-width: 640px) {
+    #size-guide-modal .sg-body { flex-direction: column; min-height: unset; }
+    #size-guide-modal .sg-left { padding: 52px 24px 24px; align-items: flex-start; order: 1; }
+    #size-guide-overlay[dir="rtl"] .sg-left { padding: 52px 24px 24px; }
+    #size-guide-modal h2.sg-title { font-size: 16px; margin-bottom: 20px; }
+    #size-guide-modal .sg-row { font-size: 13px; padding: 12px 16px; }
+    #size-guide-modal .sg-right { width: 100%; padding: 0 24px 32px; order: 2; }
+    #size-guide-modal .sg-right-label { font-size: 10px; }
+    #size-guide-modal .sg-close { top: 10px; }
+    #size-guide-overlay[dir="ltr"] .sg-close { right: 10px; }
+    #size-guide-overlay[dir="rtl"] .sg-close { left: 10px; }
   }
+
+  /* ── Action Buttons ── */
   .btn-cart {
     width: 100%; background: #e61a7a; color: #fff; height: 52px;
     font-size: 14px; letter-spacing: 0.08em;
@@ -106,10 +108,37 @@
     transition: background 0.2s, color 0.2s;
   }
   .btn-buy:hover { background: #222; color: #fff; }
+
+  /* ── Layout ── */
+  .product-layout { display: flex; gap: 48px; }
   @media (max-width: 768px) {
-    .product-layout { flex-direction: column !important; }
+    .product-layout { flex-direction: column !important; gap: 0; }
     .product-gallery-col, .product-info-col { width: 100% !important; }
-    .product-info-col { padding-top: 24px; }
+    .product-info-col { padding-top: 20px; }
+    .product-info-col h1 { font-size: 22px !important; }
+  }
+
+  /* ── Mobile gallery dots ── */
+  .gallery-dots {
+    display: none;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 10px;
+  }
+  .gallery-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: #ccc; border: none; padding: 0;
+    cursor: pointer; transition: background 0.2s; flex-shrink: 0;
+  }
+  .gallery-dot.active { background: #222; }
+  @media (max-width: 768px) {
+    .gallery-dots { display: flex; }
+    .product-thumbs-row { display: none !important; }
+    .product-gallery-main {
+      margin-left: -1rem;
+      margin-right: -1rem;
+      width: calc(100% + 2rem) !important;
+    }
   }
 </style>
 
@@ -220,7 +249,7 @@
   </nav>
 
   <!-- Main Product Layout -->
-  <div class="flex gap-[48px] lg:gap-[64px] product-layout">
+  <div class="product-layout">
 
     <!-- ══ LEFT: GALLERY ══ -->
     <div class="product-gallery-col w-full md:w-[55%] flex-shrink-0">
@@ -234,9 +263,12 @@
              loading="eager" />
       </div>
 
-      <!-- Thumbnails (if any) -->
+      <!-- Mobile dot indicators -->
+      <div class="gallery-dots" id="page-gallery-dots"></div>
+
+      <!-- Thumbnails (if any) — hidden on mobile -->
       {% if img_thumbs != '' %}
-        <div class="grid gap-3" style="grid-template-columns: repeat({{ thumbs_arr.size }}, 1fr);">
+        <div class="product-thumbs-row grid gap-3" style="grid-template-columns: repeat({{ thumbs_arr.size }}, 1fr);">
           {% for thumb in thumbs_arr %}
             <div class="product-thumb relative overflow-hidden"
                  style="aspect-ratio: 1/1;"
@@ -255,7 +287,7 @@
     <div class="product-info-col flex-1 flex flex-col pt-0">
 
       <!-- Title -->
-      <h1 class="text-[28px] md:text-[32px] font-bold text-[#222] tracking-wider uppercase mb-1"
+      <h1 class="text-[22px] md:text-[32px] font-bold text-[#222] tracking-wider uppercase mb-1"
           style="font-family: var(--font-montserrat), Montserrat, sans-serif;">
         {{ ui_title }}
       </h1>
@@ -347,6 +379,48 @@
     if (thumbEl) thumbEl.classList.add('active');
   }
 
+  /* ── Mobile gallery: collect all images and build dot slider ── */
+  (function() {
+    var mainImg = document.getElementById('page-main-img');
+    var dotsEl  = document.getElementById('page-gallery-dots');
+    if (!mainImg || !dotsEl) return;
+
+    // Build image list: main + thumbs
+    var images = [mainImg.src];
+    document.querySelectorAll('.product-thumbs-row img').forEach(function(img) {
+      images.push(img.src);
+    });
+    if (images.length <= 1) return;
+
+    var current = 0;
+    function goTo(idx) {
+      current = idx;
+      mainImg.style.opacity = '0';
+      setTimeout(function() { mainImg.src = images[idx]; mainImg.style.opacity = '1'; }, 180);
+      dotsEl.querySelectorAll('.gallery-dot').forEach(function(d, i) {
+        d.classList.toggle('active', i === idx);
+      });
+    }
+
+    images.forEach(function(_, i) {
+      var d = document.createElement('button');
+      d.className = 'gallery-dot' + (i === 0 ? ' active' : '');
+      d.setAttribute('aria-label', 'Image ' + (i + 1));
+      d.addEventListener('click', function() { goTo(i); });
+      dotsEl.appendChild(d);
+    });
+
+    // Touch swipe support
+    var startX = 0;
+    mainImg.addEventListener('touchstart', function(e) { startX = e.touches[0].clientX; }, { passive: true });
+    mainImg.addEventListener('touchend', function(e) {
+      var dx = e.changedTouches[0].clientX - startX;
+      if (Math.abs(dx) < 40) return;
+      if (dx < 0 && current < images.length - 1) goTo(current + 1);
+      else if (dx > 0 && current > 0) goTo(current - 1);
+    });
+  })();
+
   function sizeClick(btn) {
     document.querySelectorAll('.size-btn').forEach(function(b){ b.classList.remove('active'); });
     btn.classList.add('active');
@@ -391,7 +465,6 @@
         .catch(restore)
         .finally(restore);
     } else {
-      // EsterCart not yet loaded — retry after a moment
       setTimeout(function() {
         if (window.EsterCart) {
           window.EsterCart.add('', 1, { title: title, price: price, image: image })
