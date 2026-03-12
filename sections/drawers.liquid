@@ -672,7 +672,8 @@
   function updateCartBadge(count) {
     document.querySelectorAll('[data-cart-count]').forEach(el => {
       el.textContent = count;
-      el.style.display = count > 0 ? '' : 'none';
+      // Always show the number, so it displays (0) instead of ()
+      el.style.display = '';
     });
   }
 
