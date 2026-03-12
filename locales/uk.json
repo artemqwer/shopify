@@ -1,0 +1,55 @@
+{
+  "general": {
+    "password_page": {
+      "login_form_heading": "Введіть пароль для входу в магазин"
+    }
+  },
+  "header": {
+    "home": "Головна",
+    "catalog": "Каталог",
+    "popular": "Популярне",
+    "search": "Пошук",
+    "cart": "Кошик",
+    "language": "UA",
+    "menu": {
+      "all": "Всі товари",
+      "bestsellers": "Хіти продажів",
+      "kepi": "Кепі",
+      "hats": "Капелюхи",
+      "beretes": "Берети",
+      "beanies": "Біні",
+      "caps": "Кепки",
+      "panamas": "Панами",
+      "scarves": "Шарфи",
+      "scarfs": "Хустки",
+      "headbands": "Обручі",
+      "sets": "Набори"
+    }
+  },
+  "footer": {
+    "navigation": "НАВІГАЦІЯ",
+    "contacts": "КОНТАКТИ",
+    "legal": "ПРАВОВА ІНФОРМАЦІЯ",
+    "home": "Головна",
+    "catalog": "Каталог",
+    "popular": "Популярне",
+    "about": "Про нас",
+    "phone": "+38 (345) 78 95",
+    "email": "info@hoops.com.ua",
+    "instagram": "Instagram",
+    "public_offer": "Публічна оферта",
+    "privacy": "Політика конфіденційності",
+    "shipping": "Доставка та оплата",
+    "copyright": "© 2026 ESTER WUGMAN"
+  },
+  "products": {
+    "recommended_heading": "Вам також може сподобатися",
+    "product_1": "Хустка Леопард",
+    "product_2": "Блакитна шовкова хустка",
+    "product_3": "Рожева хустка",
+    "product_4": "Хустка Вінтаж"
+  },
+  "catalog": {
+    "filter": "Фільтр"
+  }
+}

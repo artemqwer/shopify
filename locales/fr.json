@@ -1,0 +1,55 @@
+{
+  "general": {
+    "password_page": {
+      "login_form_heading": "Entrez dans la boutique avec un mot de passe"
+    }
+  },
+  "header": {
+    "home": "Accueil",
+    "catalog": "Catalogue",
+    "popular": "Populaire",
+    "search": "Recherche",
+    "cart": "Panier",
+    "language": "FR",
+    "menu": {
+      "all": "Tous les produits",
+      "bestsellers": "Meilleures ventes",
+      "kepi": "Képi",
+      "hats": "Chapeaux",
+      "beretes": "Bérets",
+      "beanies": "Bonnets",
+      "caps": "Casquettes",
+      "panamas": "Panamas",
+      "scarves": "Écharpes",
+      "scarfs": "Foulards",
+      "headbands": "Bandeaux",
+      "sets": "Ensembles"
+    }
+  },
+  "footer": {
+    "navigation": "NAVIGATION",
+    "contacts": "CONTACTS",
+    "legal": "MENTIONS LÉGALES",
+    "home": "Accueil",
+    "catalog": "Catalogue",
+    "popular": "Populaire",
+    "about": "À propos",
+    "phone": "+38 (345) 78 95",
+    "email": "info@hoops.com.ua",
+    "instagram": "Instagram",
+    "public_offer": "Offre publique",
+    "privacy": "Politique de confidentialité",
+    "shipping": "Livraison et paiement",
+    "copyright": "© 2026 ESTER WUGMAN"
+  },
+  "products": {
+    "recommended_heading": "Vous aimerez aussi",
+    "product_1": "Foulard Léopard",
+    "product_2": "Foulard en soie bleue",
+    "product_3": "Foulard rose",
+    "product_4": "Foulard Vintage"
+  },
+  "catalog": {
+    "filter": "Filtrer"
+  }
+}
