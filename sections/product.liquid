@@ -156,16 +156,24 @@
 </style>
 
 {% comment %} ───────── DATA MAPPING ─────────────────────────────
-  Map product handle → gallery images (fallback to asset images)
-  When real Shopify products are set up, product.images is used automatically.
+  When a real Shopify product is linked (product.id != blank),
+  we use product.title, product.description, product.price, product.images.
+  Otherwise we fall through to demo asset-based images + hardcoded copy.
 {% endcomment %}
+
+{% comment %} Detect real product vs demo placeholder {% endcomment %}
+{% if product.id != blank and product.id != 0 %}
+  {% assign use_real_product = true %}
+{% else %}
+  {% assign use_real_product = false %}
+{% endif %}
 
 {% assign p1_imgs = "product-image-1.png" | split: "," %}
 {% assign p2_imgs = "product-image-2.png" | split: "," %}
 {% assign p3_imgs = "product-image-3.png" | split: "," %}
 {% assign p4_imgs = "product-image-4.png,product-image-5.png,product-image-6.png" | split: "," %}
 
-{% comment %} Choose gallery based on handle {% endcomment %}
+{% comment %} Choose demo gallery based on handle {% endcomment %}
 {% if product.handle == 'leopard-print-scarf' or product.handle == 'leopard-scarf' %}
   {% assign gallery_imgs = p1_imgs %}
   {% assign ui_title_en = "Leopard Scarf" %}
@@ -194,8 +202,13 @@
 
 {% comment %} Locale-aware texts {% endcomment %}
 {% if request.locale.iso_code == 'he' %}
-  {% assign ui_title = ui_title_he %}
-  {% assign ui_desc = ui_desc_he %}
+  {% if use_real_product %}
+    {% assign ui_title = product.title %}
+    {% assign ui_desc = product.description | strip_html %}
+  {% else %}
+    {% assign ui_title = ui_title_he %}
+    {% assign ui_desc = ui_desc_he %}
+  {% endif %}
   {% assign txt_home = "דף הבית" %}
   {% assign txt_catalog = "קטלוג" %}
   {% assign txt_scarf = "מטפחת" %}
@@ -208,8 +221,13 @@
   {% assign care_text = "- אל תכבסו במכונת כביסה; השתמשו בניקוי יבש או הלבנה עדינה בידיים עם מגבת לחה לסיבים.\n- ייבשו שטוחים ואל תייבשו במייבש; צאו לאוויר הפתוח בצורה מרווחת לשמור על צורתו.\n- אחסנו בצורה מקופלת ולא תלויה, כדי למנוע עיוות.\n- לטיפול מהיר: כאשר אתם מגהצים את החומר, השתמשו בנייר בין הברזל לבד, ואל תגעו בברזל ישירות." %}
   {% assign material_text = "משי טבעי 100%" %}
 {% else %}
-  {% assign ui_title = ui_title_en %}
-  {% assign ui_desc = ui_desc_en %}
+  {% if use_real_product %}
+    {% assign ui_title = product.title %}
+    {% assign ui_desc = product.description | strip_html %}
+  {% else %}
+    {% assign ui_title = ui_title_en %}
+    {% assign ui_desc = ui_desc_en %}
+  {% endif %}
   {% assign txt_home = "Home" %}
   {% assign txt_catalog = "Catalog" %}
   {% assign txt_scarf = "Scarf" %}
@@ -224,8 +242,9 @@
 {% endif %}
 
 {% comment %} ─── PRICE ─── {% endcomment %}
-{% assign product_price = product.price | money %}
-{% if product.price == 0 or product.price == blank %}
+{% if use_real_product and product.price > 0 %}
+  {% assign product_price = product.price | money %}
+{% else %}
   {% assign product_price = "$ 80" %}
 {% endif %}
 
@@ -370,7 +389,7 @@
                 onclick="handleAddToCart(this)">
           {{ txt_add_cart }}
         </button>
-        <a href="{{ routes.search_url }}?view=order" class="btn-buy">{{ txt_buy_now }}</a>
+        <a href="{% if use_real_product and product.variants.first.id != blank %}{{ routes.search_url }}?view=order{% else %}{{ routes.search_url }}?view=order{% endif %}" class="btn-buy">{{ txt_buy_now }}</a>
       </div>
 
       <!-- Accordion: Material -->

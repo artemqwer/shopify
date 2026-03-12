@@ -14,9 +14,9 @@
   }
 </style>
 
-<section class="w-full px-4 md:px-12 lg:px-[160px]">
+<section class="w-full px-4 md:px-12 lg:px-[160px] pb-[60px] md:pb-[120px]">
   <div class="text-center mb-[32px] md:mb-[48px] flex justify-center">
-    <h2 
+    <h2
       class="text-[20px] md:text-[40px] font-light md:font-extralight text-black"
       style="font-family: var(--font-montserrat), Montserrat, sans-serif; line-height: 1.2;"
     >
@@ -26,65 +26,141 @@
 
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-8 md:gap-6">
 
-    <!-- Product 1 -->
-    <a href="{{ routes.search_url }}?view=demo&product=leopard-print-scarf" class="product-card cursor-pointer flex flex-col group no-underline">
-      <div class="relative aspect-[3/4] mb-4 overflow-hidden w-full bg-gray-100">
-        <img 
-          src="{{ 'product-image-1.png' | asset_url }}" 
-          alt="Leopard Print Scarf" 
-          class="product-card-img absolute inset-0 w-full h-full object-cover"
-        />
-      </div>
-      <div class="flex flex-col space-y-1.5 px-1 {% if request.locale.iso_code == 'he' %}text-right{% endif %}" {% if request.locale.iso_code == 'he' %}dir="rtl" style="text-align: right;"{% endif %}>
-        <h3 class="text-[13px] font-semibold text-gray-900 tracking-wide group-hover:text-gray-500 transition-colors" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">{{ 'products.product_1' | t }}</h3>
-        <p class="text-[13px] text-gray-500 font-light" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">$ 80</p>
-      </div>
-    </a>
+    {% comment %}
+    ════════════════════════════════════════════════════════
+    REAL MODE: When the store has actual products, 
+    Shopify's product_recommendations API will inject
+    real products. The section will render them automatically.
+    ════════════════════════════════════════════════════════
+    {% endcomment %}
 
-    <!-- Product 2 -->
-    <a href="{{ routes.search_url }}?view=demo&product=blue-silk-scarf" class="product-card cursor-pointer flex flex-col group no-underline">
-      <div class="relative aspect-[3/4] mb-4 overflow-hidden w-full bg-gray-100">
-        <img 
-          src="{{ 'product-image-2.png' | asset_url }}" 
-          alt="Blue Silk Scarf" 
-          class="product-card-img absolute inset-0 w-full h-full object-cover"
-        />
-      </div>
-      <div class="flex flex-col space-y-1.5 px-1 {% if request.locale.iso_code == 'he' %}text-right{% endif %}" {% if request.locale.iso_code == 'he' %}dir="rtl" style="text-align: right;"{% endif %}>
-        <h3 class="text-[13px] font-semibold text-gray-900 tracking-wide group-hover:text-gray-500 transition-colors" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">{{ 'products.product_2' | t }}</h3>
-        <p class="text-[13px] text-gray-500 font-light" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">$ 80</p>
-      </div>
-    </a>
+    {% if recommendations.performed and recommendations.products.size > 0 %}
 
-    <!-- Product 3 -->
-    <a href="{{ routes.search_url }}?view=demo&product=pink-scarf" class="product-card cursor-pointer flex flex-col group no-underline">
-      <div class="relative aspect-[3/4] mb-4 overflow-hidden w-full bg-gray-100">
-        <img 
-          src="{{ 'product-image-3.png' | asset_url }}" 
-          alt="Pink Scarf" 
-          class="product-card-img absolute inset-0 w-full h-full object-cover"
-        />
-      </div>
-      <div class="flex flex-col space-y-1.5 px-1 {% if request.locale.iso_code == 'he' %}text-right{% endif %}" {% if request.locale.iso_code == 'he' %}dir="rtl" style="text-align: right;"{% endif %}>
-        <h3 class="text-[13px] font-semibold text-gray-900 tracking-wide group-hover:text-gray-500 transition-colors" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">{{ 'products.product_3' | t }}</h3>
-        <p class="text-[13px] text-gray-500 font-light" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">$ 80</p>
-      </div>
-    </a>
+      {% for rec in recommendations.products %}
+        <a href="{{ rec.url }}" class="product-card cursor-pointer flex flex-col group no-underline">
+          <div class="relative aspect-[3/4] mb-4 overflow-hidden w-full bg-gray-100">
+            {% if rec.featured_image %}
+              <img
+                src="{{ rec.featured_image | image_url: width: 600 }}"
+                alt="{{ rec.featured_image.alt | default: rec.title | escape }}"
+                class="product-card-img absolute inset-0 w-full h-full object-cover"
+                loading="lazy"
+              />
+            {% else %}
+              {% assign fb = forloop.index0 | modulo: 4 | plus: 1 %}
+              <img
+                src="{{ 'product-image-' | append: fb | append: '.png' | asset_url }}"
+                alt="{{ rec.title | escape }}"
+                class="product-card-img absolute inset-0 w-full h-full object-cover"
+                loading="lazy"
+              />
+            {% endif %}
+          </div>
+          <div class="flex flex-col space-y-1.5 px-1" {% if request.locale.iso_code == 'he' %}dir="rtl" style="text-align: right;"{% endif %}>
+            <h3 class="text-[13px] font-semibold text-gray-900 tracking-wide group-hover:text-gray-500 transition-colors whitespace-nowrap overflow-hidden text-ellipsis"
+                style="font-family: var(--font-montserrat), Montserrat, sans-serif;">
+              {{ rec.title }}
+            </h3>
+            <p class="text-[13px] text-gray-500 font-light" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">
+              {{ rec.price | money }}
+            </p>
+          </div>
+        </a>
+      {% endfor %}
 
-    <!-- Product 4 -->
-    <a href="{{ routes.search_url }}?view=demo&product=vintage-scarf" class="product-card cursor-pointer flex flex-col group no-underline">
-      <div class="relative aspect-[3/4] mb-4 overflow-hidden w-full bg-gray-100">
-        <img 
-          src="{{ 'product-image-4.png' | asset_url }}" 
-          alt="Vintage Scarf" 
-          class="product-card-img absolute inset-0 w-full h-full object-cover"
-        />
+    {% elsif product.id %}
+      {% comment %}
+      ════════════════════════════════════════════════════════
+      TRANSITIONAL: On a real product page but before 
+      recommendations engine warms up — use JS to load them.
+      ════════════════════════════════════════════════════════
+      {% endcomment %}
+      <div id="rec-products-container" class="contents">
+        {% comment %} DEMO FALLBACK while async loads {% endcomment %}
+        {% assign demo_names = "products.product_1,products.product_2,products.product_3,products.product_4" | split: "," %}
+        {% assign demo_imgs  = "product-image-1.png,product-image-2.png,product-image-3.png,product-image-4.png" | split: "," %}
+        {% assign demo_slugs = "leopard-print-scarf,blue-silk-scarf,pink-scarf,vintage-scarf" | split: "," %}
+        {% for i in (0..3) %}
+          <a href="{{ routes.search_url }}?view=demo&product={{ demo_slugs[i] }}"
+             class="product-card cursor-pointer flex flex-col group no-underline" data-demo-card>
+            <div class="relative aspect-[3/4] mb-4 overflow-hidden w-full bg-gray-100">
+              <img src="{{ demo_imgs[i] | asset_url }}" alt="{{ demo_names[i] | t }}"
+                   class="product-card-img absolute inset-0 w-full h-full object-cover" loading="lazy"/>
+            </div>
+            <div class="flex flex-col space-y-1.5 px-1" {% if request.locale.iso_code == 'he' %}dir="rtl" style="text-align:right;"{% endif %}>
+              <h3 class="text-[13px] font-semibold text-gray-900 tracking-wide group-hover:text-gray-500 transition-colors"
+                  style="font-family: var(--font-montserrat), Montserrat, sans-serif;">{{ demo_names[i] | t }}</h3>
+              <p class="text-[13px] text-gray-500 font-light" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">$ 80</p>
+            </div>
+          </a>
+        {% endfor %}
       </div>
-      <div class="flex flex-col space-y-1.5 px-1 {% if request.locale.iso_code == 'he' %}text-right{% endif %}" {% if request.locale.iso_code == 'he' %}dir="rtl" style="text-align: right;"{% endif %}>
-        <h3 class="text-[13px] font-semibold text-gray-900 tracking-wide group-hover:text-gray-500 transition-colors" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">{{ 'products.product_4' | t }}</h3>
-        <p class="text-[13px] text-gray-500 font-light" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">$ 80</p>
-      </div>
-    </a>
+
+      <script>
+      (function() {
+        const productId = {{ product.id | json }};
+        const sectionId = '{{ section.id }}';
+        const locale    = '{{ request.locale.iso_code }}';
+        if (!productId) return;
+        fetch(`/recommendations/products.json?product_id=${productId}&limit=4&section_id=${sectionId}`)
+          .then(r => r.ok ? r.json() : null)
+          .then(data => {
+            if (!data || !data.products || data.products.length === 0) return;
+            const container = document.getElementById('rec-products-container');
+            if (!container) return;
+            const isHe = locale === 'he';
+            container.innerHTML = data.products.map(p => {
+              const img = p.featured_image ? p.featured_image.url.replace('http:', 'https:') : '';
+              const price = p.price ? ('$' + (p.price / 100).toFixed(2).replace(/\.00$/, '')) : '';
+              return `<a href="${p.url}" class="product-card cursor-pointer flex flex-col group no-underline">
+                <div class="relative aspect-[3/4] mb-4 overflow-hidden w-full bg-gray-100">
+                  ${img ? `<img src="${img}&width=600" alt="${p.title}" class="product-card-img absolute inset-0 w-full h-full object-cover" loading="lazy"/>` : ''}
+                </div>
+                <div class="flex flex-col space-y-1.5 px-1" ${isHe ? 'dir="rtl" style="text-align:right;"' : ''}>
+                  <h3 class="text-[13px] font-semibold text-gray-900 tracking-wide group-hover:text-gray-500 transition-colors whitespace-nowrap overflow-hidden text-ellipsis"
+                      style="font-family: var(--font-montserrat), Montserrat, sans-serif;">${p.title}</h3>
+                  <p class="text-[13px] text-gray-500 font-light" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">${price}</p>
+                </div>
+              </a>`;
+            }).join('');
+          })
+          .catch(() => { /* keep demo cards */ });
+      })();
+      </script>
+
+    {% else %}
+      {% comment %}
+      ════════════════════════════════════════════════════════
+      DEMO MODE: No real products exist yet.
+      Shows 4 placeholder product cards.
+      Replace these with real products by adding items to
+      Shopify Admin → Products → Collections.
+      ════════════════════════════════════════════════════════
+      {% endcomment %}
+      {% assign demo_names = "products.product_1,products.product_2,products.product_3,products.product_4" | split: "," %}
+      {% assign demo_imgs  = "product-image-1.png,product-image-2.png,product-image-3.png,product-image-4.png" | split: "," %}
+      {% assign demo_slugs = "leopard-print-scarf,blue-silk-scarf,pink-scarf,vintage-scarf" | split: "," %}
+
+      {% for i in (0..3) %}
+        <a href="{{ routes.search_url }}?view=demo&product={{ demo_slugs[i] }}"
+           class="product-card cursor-pointer flex flex-col group no-underline">
+          <div class="relative aspect-[3/4] mb-4 overflow-hidden w-full bg-gray-100">
+            <img
+              src="{{ demo_imgs[i] | asset_url }}"
+              alt="{{ demo_names[i] | t }}"
+              class="product-card-img absolute inset-0 w-full h-full object-cover"
+              loading="lazy"
+            />
+          </div>
+          <div class="flex flex-col space-y-1.5 px-1" {% if request.locale.iso_code == 'he' %}dir="rtl" style="text-align: right;"{% endif %}>
+            <h3 class="text-[13px] font-semibold text-gray-900 tracking-wide group-hover:text-gray-500 transition-colors"
+                style="font-family: var(--font-montserrat), Montserrat, sans-serif;">{{ demo_names[i] | t }}</h3>
+            <p class="text-[13px] text-gray-500 font-light" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">$ 80</p>
+          </div>
+        </a>
+      {% endfor %}
+
+    {% endif %}
 
   </div>
 </section>
