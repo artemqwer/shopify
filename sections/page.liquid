@@ -233,8 +233,12 @@
 
       <!-- Action buttons -->
       <div class="flex flex-col gap-3 mb-8">
-        <button type="button" class="btn-cart" onclick="alert('{{ txt_add_cart }}')">{{ txt_add_cart }}</button>
-        <button type="button" class="btn-buy" onclick="alert('{{ txt_buy_now }}')">{{ txt_buy_now }}</button>
+        <button type="button" class="btn-cart"
+                data-title="{{ ui_title | escape }}"
+                data-price="$ 80"
+                data-image="{{ img_main | asset_url }}"
+                onclick="handlePageAddToCart(this)">{{ txt_add_cart }}</button>
+        <button type="button" class="btn-buy">{{ txt_buy_now }}</button>
       </div>
 
       <!-- Accordion: Material -->
@@ -302,6 +306,35 @@
       } else {
         icon.style.color = isOpen ? '#222' : '#e61a7a';
       }
+    }
+  }
+
+  // Add to cart for page (placeholder) products
+  function handlePageAddToCart(btn) {
+    var title = btn.dataset.title || 'Product';
+    var price = btn.dataset.price || '$80';
+    var image = btn.dataset.image || '';
+    var original = btn.textContent.trim();
+    btn.textContent = '...';
+    btn.disabled = true;
+    btn.style.opacity = '0.7';
+    var restore = function() {
+      btn.textContent = original;
+      btn.disabled = false;
+      btn.style.opacity = '';
+    };
+    if (window.EsterCart) {
+      window.EsterCart.add('', 1, { title: title, price: price, image: image })
+        .catch(restore)
+        .finally(restore);
+    } else {
+      // EsterCart not yet loaded — retry after a moment
+      setTimeout(function() {
+        if (window.EsterCart) {
+          window.EsterCart.add('', 1, { title: title, price: price, image: image })
+            .catch(restore).finally(restore);
+        } else { restore(); }
+      }, 500);
     }
   }
 </script>
