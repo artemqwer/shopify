@@ -1,0 +1,391 @@
+{% schema %}
+{
+  "name": "Custom Checkout",
+  "settings": []
+}
+{% endschema %}
+
+<style>
+  /* Base fonts and forms */
+  .checkout-container {
+    font-family: var(--font-montserrat), Montserrat, sans-serif;
+  }
+  .chk-input {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #d1d1d1;
+    padding: 12px 0 8px 0;
+    font-size: 13px;
+    color: #222;
+    background: transparent;
+    transition: border-color 0.2s;
+    outline: none;
+  }
+  .chk-input::placeholder {
+    color: #888;
+  }
+  .chk-input:focus {
+    border-bottom-color: #222;
+  }
+  
+  /* Select dropdown */
+  .chk-select {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #d1d1d1;
+    padding: 12px 24px 8px 0;
+    font-size: 13px;
+    color: #222;
+    background: transparent;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    outline: none;
+    cursor: pointer;
+  }
+  .chk-select-wrapper {
+    position: relative;
+  }
+  .chk-select-wrapper::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-20%);
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 4px solid #222;
+    pointer-events: none;
+  }
+  
+  /* Custom Radio/Checkboxes */
+  .chk-radio-box {
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border: 1.5px solid #d1d1d1;
+    border-radius: 50%;
+    outline: none;
+    cursor: pointer;
+    position: relative;
+    top: 2px;
+  }
+  .chk-radio-box:checked {
+    border-color: #e61a7a;
+  }
+  .chk-radio-box:checked::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 8px;
+    height: 8px;
+    background-color: #e61a7a;
+    border-radius: 50%;
+  }
+  
+  .chk-checkbox {
+    appearance: none;
+    width: 14px;
+    height: 14px;
+    border: 1px solid #d1d1d1;
+    border-radius: 0;
+    outline: none;
+    cursor: pointer;
+    position: relative;
+    top: 2px;
+  }
+  .chk-checkbox:checked {
+    background-color: transparent;
+    border-color: #222;
+  }
+  .chk-checkbox:checked::after {
+    content: '';
+    position: absolute;
+    left: 4px;
+    top: 0px;
+    width: 4px;
+    height: 9px;
+    border: solid #222;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+  }
+  
+  /* Order Summary Block */
+  .order-summary-box {
+    border: 1px solid #e5e5e5;
+    background: #fff;
+    padding: 32px;
+  }
+  
+  .btn-confirm {
+    width: 100%;
+    background: #000;
+    color: #fff;
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+    padding: 16px 0;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+    text-transform: uppercase;
+  }
+  .btn-confirm:hover {
+    background: #444;
+  }
+</style>
+
+<div class="checkout-container w-full max-w-[1920px] mx-auto px-4 md:px-[160px] pb-[80px]">
+  
+  <!-- Breadcrumb -->
+  <div class="flex justify-center items-center py-[24px]">
+    <span class="text-[11px] tracking-[0.15em] uppercase text-gray-400">HOME</span>
+    <span class="mx-2 text-[11px] text-gray-300">›</span>
+    <span class="text-[11px] tracking-[0.15em] uppercase text-gray-800 font-medium">CHECKOUT</span>
+  </div>
+
+  <div class="flex flex-col lg:flex-row gap-[48px] lg:gap-[100px] mt-8">
+    
+    <!-- LEFT COLUMN: Forms -->
+    <div class="flex-1 max-w-[600px]">
+      
+      <!-- Customer Details -->
+      <h2 class="text-[26px] md:text-[32px] font-medium text-[#222] tracking-wide mb-8">Customer Details</h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6 mb-6">
+        <div>
+          <input type="text" class="chk-input" placeholder="Last Name*" required>
+        </div>
+        <div>
+          <input type="text" class="chk-input" placeholder="First Name*" required>
+        </div>
+        <div>
+          <input type="tel" class="chk-input" placeholder="Phone Number*" required>
+        </div>
+        <div>
+          <input type="email" class="chk-input" placeholder="Email*" required>
+        </div>
+      </div>
+      
+      <div class="mb-5 chk-select-wrapper">
+        <select class="chk-select" required>
+          <option value="" disabled hidden>Region*</option>
+          <option value="UKR" selected>Ukraine</option>
+          <option value="INT">International</option>
+        </select>
+      </div>
+      
+      <div class="flex items-center gap-2 mb-14">
+        <input type="checkbox" id="chk-order-details" class="chk-checkbox">
+        <label for="chk-order-details" class="text-[12px] text-gray-500 cursor-pointer">Contact me for order details</label>
+      </div>
+
+      <!-- Delivery -->
+      <h2 class="text-[26px] md:text-[32px] font-medium text-[#222] tracking-wide mb-8">Delivery</h2>
+      
+      <div class="space-y-6 mb-12">
+        <div class="chk-select-wrapper">
+          <select class="chk-select" required>
+            <option value="" disabled selected hidden>City</option>
+            <option value="Kyiv">Kyiv</option>
+            <option value="Lviv">Lviv</option>
+            <option value="Odesa">Odesa</option>
+            <option value="Dnipro">Dnipro</option>
+            <option value="Kharkiv">Kharkiv</option>
+          </select>
+        </div>
+        
+        <div class="chk-select-wrapper">
+          <select class="chk-select" required>
+            <option value="" disabled selected hidden>Branch</option>
+            <option value="1">Branch #1</option>
+            <option value="2">Branch #2</option>
+            <option value="3">Branch #3</option>
+          </select>
+        </div>
+        
+        <div>
+          <input type="text" class="chk-input" placeholder="Order notes (optional)">
+        </div>
+      </div>
+      
+    </div>
+
+    <!-- RIGHT COLUMN: Order Summary -->
+    <div class="w-full lg:w-[480px]">
+      <div class="order-summary-box shadow-sm">
+        
+        <!-- Promo Code -->
+        <div class="flex items-center justify-between border-b border-[#e5e5e5] pb-4 mb-6 cursor-pointer group">
+          <span class="text-[13px] font-semibold tracking-wider text-[#222]">PROMO CODE</span>
+          <span class="text-[18px] font-light text-[#222] group-hover:text-gray-500 transition-colors">+</span>
+        </div>
+        
+        <!-- Your Order -->
+        <h3 class="text-[14px] font-semibold tracking-wider text-[#222] mb-4 uppercase">Your Order</h3>
+        
+        <!-- Items Container (Dynamic via JS, falling back to static HTML if empty/loading) -->
+        <div id="checkout-items-container" class="space-y-3 mb-6">
+          <div class="flex items-center justify-between text-[12px] text-[#555]">
+            <span class="truncate pr-4">Loading order...</span>
+            <span class="flex-shrink-0">...</span>
+          </div>
+        </div>
+        
+        <!-- Subtotal -->
+        <div class="flex items-center justify-between border-b border-[#e5e5e5] pb-5 mb-6 text-[12px] text-[#222]">
+          <span class="tracking-widest uppercase">Subtotal</span>
+          <span id="checkout-subtotal" class="font-medium">$0</span>
+        </div>
+        
+        <!-- Payment Method -->
+        <h3 class="text-[14px] font-semibold tracking-wider text-[#222] mb-4 uppercase">Payment Method</h3>
+        <div class="space-y-3 mb-6">
+          <label class="flex items-center gap-3 cursor-pointer">
+            <input type="radio" name="payment_method" class="chk-radio-box" checked>
+            <span class="text-[12px] text-[#555]">Card payment, Apple Pay, Google Pay</span>
+          </label>
+          <label class="flex items-center gap-3 cursor-pointer border-b border-[#e5e5e5] pb-5">
+            <input type="radio" name="payment_method" class="chk-radio-box">
+            <span class="text-[12px] text-[#555]">Cash on delivery</span>
+          </label>
+        </div>
+        
+        <!-- Shipping -->
+        <h3 class="text-[14px] font-semibold tracking-wider text-[#222] mb-4 uppercase">Shipping</h3>
+        <div class="space-y-3 mb-6 border-b border-[#e5e5e5] pb-5">
+          <label class="flex items-center gap-3 cursor-pointer">
+            <input type="radio" name="shipping_method" class="chk-radio-box" checked>
+            <span class="text-[12px] text-[#555]">Nova Poshta</span>
+          </label>
+        </div>
+        
+        <!-- Total -->
+        <div class="flex items-center justify-between mb-6">
+          <span class="text-[14px] font-semibold tracking-wider text-[#222] uppercase">Total to pay</span>
+          <span id="checkout-total" class="font-bold text-[16px] text-[#222]">$0</span>
+        </div>
+        
+        <!-- Info & Consent -->
+        <p class="text-[11px] text-[#888] leading-[1.6] mb-5">
+          Your personal data will be used to process your order, support your experience throughout this website, and for other purposes described in our privacy policy.
+        </p>
+        <div class="flex items-start gap-2 mb-8">
+          <input type="checkbox" id="chk-terms" class="chk-checkbox mt-0.5">
+          <label for="chk-terms" class="text-[11px] text-[#888] cursor-pointer leading-tight">
+            I have read and agree to the website terms and conditions*
+          </label>
+        </div>
+        
+        <button type="button" class="btn-confirm" onclick="confirmOrder()">Confirm Order</button>
+      </div>
+    </div>
+    
+  </div>
+</div>
+
+<script>
+  function formatMoney(cents) {
+    if (typeof cents === 'string' && cents.indexOf('$') !== -1) return cents;
+    return '$' + (cents / 100).toFixed(2).replace(/\.00$/, '');
+  }
+  
+  function getMockCart() {
+    try { return JSON.parse(localStorage.getItem('ester_mock_cart')) || []; } catch(e) { return []; }
+  }
+
+  function renderCheckout(cart, mockItems) {
+    const container = document.getElementById('checkout-items-container');
+    const subtotalEl = document.getElementById('checkout-subtotal');
+    const totalEl = document.getElementById('checkout-total');
+    
+    let html = '';
+    let realCents = cart ? cart.total_price : 0;
+    
+    // 1. Render Real Items
+    if (cart && cart.items && cart.items.length > 0) {
+      cart.items.forEach(item => {
+        const title = item.product_title + (item.variant_title ? ' - ' + item.variant_title : '');
+        html += `
+          <div class="flex justify-between items-center text-[12px] text-[#555] mb-2">
+            <div class="truncate pr-4">${title} ${item.quantity > 1 ? `<span class="text-gray-400">x${item.quantity}</span>` : ''}</div>
+            <div class="flex-shrink-0">${formatMoney(item.original_line_price)}</div>
+          </div>
+        `;
+      });
+    }
+    
+    // 2. Render Mock Items
+    let mockTotalVal = 0;
+    if (mockItems && mockItems.length > 0) {
+      mockItems.forEach(item => {
+        const valStr = String(item.price).replace(/[^0-9.]/g, '');
+        const unitVal = parseFloat(valStr) || 0;
+        const lineVal = unitVal * item.quantity;
+        mockTotalVal += lineVal;
+        
+        const title = item.product_title + (item.variant_title ? ' - ' + item.variant_title : '');
+        html += `
+          <div class="flex justify-between items-center text-[12px] text-[#555] mb-2">
+            <div class="truncate pr-4">${title} ${item.quantity > 1 ? `<span class="text-gray-400">x${item.quantity}</span>` : ''}</div>
+            <div class="flex-shrink-0">$${lineVal}</div>
+          </div>
+        `;
+      });
+    }
+    
+    if (html === '') {
+      html = '<div class="text-[12px] text-[#888]">Your cart is empty.</div>';
+    }
+    
+    container.innerHTML = html;
+    
+    // 3. Totals
+    const finalTotal = (realCents / 100) + mockTotalVal;
+    const finalTotalStr = '$' + finalTotal.toFixed(2).replace(/\.00$/, '');
+    
+    subtotalEl.textContent = finalTotalStr;
+    totalEl.textContent = finalTotalStr;
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    const mockItems = getMockCart();
+    
+    fetch('/cart.js')
+      .then(r => r.json())
+      .then(cart => {
+        renderCheckout(cart, mockItems);
+      })
+      .catch(() => {
+        renderCheckout(null, mockItems);
+      });
+  });
+
+  function confirmOrder() {
+    const terms = document.getElementById('chk-terms');
+    if (!terms.checked) {
+      alert("Please agree to the terms and conditions before proceeding.");
+      return;
+    }
+    
+    const btn = document.querySelector('.btn-confirm');
+    const og = btn.textContent;
+    btn.textContent = 'Processing...';
+    btn.disabled = true;
+    
+    setTimeout(() => {
+      alert("Thank you for your order! This is a custom demo checkout.");
+      
+      // Clear mock cart as demo
+      localStorage.removeItem('ester_mock_cart');
+      
+      // Clear Shopify cart and redirect
+      fetch('/cart/clear.js', { method: 'POST' }).finally(() => {
+        window.location.href = '/';
+      });
+    }, 1500);
+  }
+</script>
