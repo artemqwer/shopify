@@ -45,6 +45,122 @@
   .accordion-icon { transition: transform 0.3s; }
   .accordion-icon.open { transform: rotate(45deg); }
 
+  /* Size Guide Modal */
+  #size-guide-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.55);
+    z-index: 99990;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+  }
+  #size-guide-overlay.active {
+    display: flex;
+  }
+  #size-guide-modal {
+    background: #fff;
+    width: 100%;
+    max-width: 860px;
+    position: relative;
+    overflow: hidden;
+  }
+  #size-guide-modal .sg-header {
+    background: #222;
+    color: #fff;
+    padding: 12px 20px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-montserrat), Montserrat, sans-serif;
+  }
+  #size-guide-modal .sg-header svg { flex-shrink: 0; }
+  #size-guide-modal .sg-close {
+    position: absolute;
+    top: 10px;
+    right: 16px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 22px;
+    font-weight: 300;
+    color: #fff;
+    line-height: 1;
+    padding: 0;
+    z-index: 1;
+  }
+  #size-guide-modal .sg-body {
+    display: flex;
+    gap: 0;
+    min-height: 320px;
+  }
+  #size-guide-modal .sg-left {
+    flex: 1;
+    padding: 40px 48px 40px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  #size-guide-modal .sg-right {
+    width: 320px;
+    flex-shrink: 0;
+    background: #111;
+    position: relative;
+    overflow: hidden;
+    min-height: 280px;
+  }
+  #size-guide-modal .sg-right img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    opacity: 0.85;
+  }
+  #size-guide-modal .sg-right-label {
+    position: absolute;
+    top: 16px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    color: #fff;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-family: var(--font-montserrat), Montserrat, sans-serif;
+  }
+  #size-guide-modal h2.sg-title {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #111;
+    margin: 0 0 24px;
+    line-height: 1.2;
+    font-family: var(--font-montserrat), Montserrat, sans-serif;
+  }
+  #size-guide-modal .sg-row {
+    border: 1.5px solid #d8d8d8;
+    padding: 14px 20px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #222;
+    text-align: center;
+    margin-bottom: 8px;
+    font-family: var(--font-montserrat), Montserrat, sans-serif;
+    letter-spacing: 0.03em;
+  }
+  @media (max-width: 600px) {
+    #size-guide-modal .sg-body { flex-direction: column; }
+    #size-guide-modal .sg-right { width: 100%; min-height: 200px; }
+    #size-guide-modal .sg-left { padding: 24px 20px; }
+  }
+
   /* Buttons */
   .btn-cart {
     width: 100%;
@@ -281,11 +397,11 @@
       </div>
 
       <!-- Size guide link -->
-      <div class="mb-7 {% if request.locale.iso_code == 'he' %}text-right{% else %}text-right{% endif %}">
-        <a href="#" class="text-[12px] text-[#888] underline hover:text-[#333] transition-colors"
+      <div class="mb-7 text-right" {% if request.locale.iso_code == 'he' %}style="text-align:left"{% endif %}>
+        <button type="button" onclick="openSizeGuide()" class="text-[12px] text-[#888] underline hover:text-[#333] transition-colors bg-transparent border-none cursor-pointer p-0"
            style="font-family: var(--font-montserrat), Montserrat, sans-serif;">
           {{ txt_size_guide }}
-        </a>
+        </button>
       </div>
 
       <!-- Add to cart -->
@@ -334,7 +450,53 @@
   </div><!-- /flex layout -->
 </div>
 
+<!-- ═══ SIZE GUIDE MODAL ═══ -->
+<div id="size-guide-overlay" onclick="if(event.target===this)closeSizeGuide()" dir="{% if request.locale.iso_code == 'he' %}rtl{% else %}ltr{% endif %}">
+  <div id="size-guide-modal">
+    <!-- Header bar -->
+    <div class="sg-header">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+      {% if request.locale.iso_code == 'he' %}מידות{% else %}РОЗМІР{% endif %}
+    </div>
+    <button class="sg-close" onclick="closeSizeGuide()" aria-label="Close">✕</button>
+
+    <!-- Body -->
+    <div class="sg-body">
+      <!-- Left: size table -->
+      <div class="sg-left">
+        <h2 class="sg-title">
+          {% if request.locale.iso_code == 'he' %}מידה – היקף ראש{% else %}РОЗМІР — ОБХВАТ ГОЛОВИ{% endif %}
+        </h2>
+        <div class="sg-row">S — {% if request.locale.iso_code == 'he' %}56 ס"מ{% else %}56 см{% endif %}</div>
+        <div class="sg-row">M — {% if request.locale.iso_code == 'he' %}57 ס"מ{% else %}57 см{% endif %}</div>
+        <div class="sg-row">L — {% if request.locale.iso_code == 'he' %}58 ס"מ{% else %}58 см{% endif %}</div>
+      </div>
+
+      <!-- Right: photo -->
+      <div class="sg-right">
+        <div class="sg-right-label">
+          {% if request.locale.iso_code == 'he' %}מדוד לפי הקו הזה{% else %}ЗАМІРЯЙ ПО ЦІЙ ЛІНІЇ{% endif %}
+        </div>
+        <img src="{{ 'product-image-5.png' | asset_url }}" alt="{% if request.locale.iso_code == 'he' %}מדידת ראש{% else %}Вимірювання{% endif %}" loading="lazy">
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
+  // Size Guide modal
+  function openSizeGuide() {
+    const el = document.getElementById('size-guide-overlay');
+    if (el) { el.classList.add('active'); document.body.style.overflow = 'hidden'; }
+  }
+  function closeSizeGuide() {
+    const el = document.getElementById('size-guide-overlay');
+    if (el) { el.classList.remove('active'); document.body.style.overflow = ''; }
+  }
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeSizeGuide();
+  });
+
   // Gallery switcher
   function setMainImg(src, thumbEl) {
     const main = document.getElementById('gallery-main-img');
