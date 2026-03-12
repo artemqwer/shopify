@@ -47,7 +47,7 @@
           </span>
           <span class="text-gray-300 text-[11px] font-bold">‹</span>
         {% endunless %}
-        <a href="{{ routes.root_url }}collections/all"
+        <a href="{{ routes.all_products_collection_url }}"
            class="text-[11px] font-medium tracking-[0.15em] uppercase {% if collection.handle == 'all' %}text-gray-900{% else %}text-gray-400 hover:text-gray-700{% endif %} transition-colors"
            style="font-family: var(--font-montserrat), Montserrat, sans-serif;">
            {{ 'header.catalog' | t }}
@@ -65,7 +65,7 @@
           {{ 'header.home' | t }}
         </a>
         <span class="text-gray-300 text-[11px] font-bold">›</span>
-        <a href="{{ routes.root_url }}collections/all"
+        <a href="{{ routes.all_products_collection_url }}"
            class="text-[11px] font-medium tracking-[0.15em] uppercase {% if collection.handle == 'all' %}text-gray-900{% else %}text-gray-400 hover:text-gray-700{% endif %} transition-colors"
            style="font-family: var(--font-montserrat), Montserrat, sans-serif;">
           {{ 'header.catalog' | t }}
@@ -204,12 +204,12 @@
 
     <!-- Static pagination for placeholder layout -->
     <div class="flex items-center justify-center gap-1 mt-[64px] md:mt-[80px]">
-      <a href="{{ routes.root_url }}collections/all?page=1" class="pagination-link current">1</a>
-      <a href="{{ routes.root_url }}collections/all?page=2" class="pagination-link">2</a>
-      <a href="{{ routes.root_url }}collections/all?page=3" class="pagination-link">3</a>
+      <a href="{{ routes.all_products_collection_url }}?page=1" class="pagination-link current">1</a>
+      <a href="{{ routes.all_products_collection_url }}?page=2" class="pagination-link">2</a>
+      <a href="{{ routes.all_products_collection_url }}?page=3" class="pagination-link">3</a>
       <span class="pagination-dots">&hellip;</span>
-      <a href="{{ routes.root_url }}collections/all?page=12" class="pagination-link">12</a>
-      <a href="{{ routes.root_url }}collections/all?page=2" class="pagination-link ml-1" aria-label="Next">&rsaquo;</a>
+      <a href="{{ routes.all_products_collection_url }}?page=12" class="pagination-link">12</a>
+      <a href="{{ routes.all_products_collection_url }}?page=2" class="pagination-link ml-1" aria-label="Next">&rsaquo;</a>
     </div>
 
   {% endif %}

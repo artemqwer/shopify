@@ -127,34 +127,34 @@
 {% if h == 'leopard-print-scarf' %}
   {% assign img_main   = 'product-image-1.png' %}
   {% assign img_thumbs = '' %}
-  {% assign title_uk   = 'Хустка Леопард' %}
+  {% assign title_en   = 'Leopard Scarf' %}
   {% assign title_he   = 'מטפחת מנומרת' %}
-  {% assign desc_uk    = 'Відкрийте стихію дикої природи з нашою хусткою Леопард. Виконана з преміальних матеріалів, вона має благородний матовий блиск та неймовірно приємну на дотик текстуру. Унікальний принт та глибока палітра роблять її не просто аксесуаром, а центральним елементом вашого образу — від ділового костюма до розкішного виходу у світ.' %}
+  {% assign desc_en    = 'Discover the element of wildlife with our Leopard Scarf. Made of premium materials, it has a noble matte sheen and an incredibly pleasant texture. The unique print and deep palette make it not just an accessory, but the centerpiece of your look — from a business suit to a luxurious evening outfit.' %}
   {% assign desc_he    = 'פתחו את עולם הטבע הפראי עם המטפחת המנומרת שלנו. עשויה מחומרים פרמיה עם ברק מט ומרקם נעים במיוחד למגע. הדוגמה הייחודית ופלטת הצבעים העמוקה הופכות אותה לאקסססוריז מרכזי בכל לוק.' %}
 
 {% elsif h == 'blue-silk-scarf' %}
   {% assign img_main   = 'product-image-2.png' %}
   {% assign img_thumbs = '' %}
-  {% assign title_uk   = 'Хустка Синій шовк' %}
+  {% assign title_en   = 'Blue Silk Scarf' %}
   {% assign title_he   = 'מטפחת משי כחולה' %}
-  {% assign desc_uk    = 'Витончений синій шовк у чистому вигляді. Ця хустка виготовлена з натурального шовку. Приємна на дотик і неймовірно елегантна — ідеальний вибір для тих, хто цінує якість і стиль.' %}
+  {% assign desc_en    = 'Refined blue silk in its purest form. This scarf is made of natural silk. Pleasant to the touch and incredibly elegant — the perfect choice for those who appreciate quality and style.' %}
   {% assign desc_he    = 'משי כחול מעודן בצורתו הטהורה. מטפחת זו עשויה ממשי טבעי. נעימה למגע ואלגנטית להפליא — הבחירה האידיאלית לאלה המעריכים איכות וסטייל.' %}
 
 {% elsif h == 'pink-scarf' %}
   {% assign img_main   = 'product-image-3.png' %}
   {% assign img_thumbs = '' %}
-  {% assign title_uk   = 'Хустка Рожева' %}
+  {% assign title_en   = 'Pink Scarf' %}
   {% assign title_he   = 'מטפחת וורודה' %}
-  {% assign desc_uk    = 'Яскрава та енергійна — рожева хустка стане найкращим акцентом вашого образу. Виконана з якісного атласу, вона ідеально лягає та зберігає форму протягом усього дня.' %}
+  {% assign desc_en    = 'Bright and energetic — the pink scarf will be the best accent of your look. Made of high-quality satin, it drapes perfectly and keeps its shape all day long.' %}
   {% assign desc_he    = 'עזה ואנרגטית — המטפחת הוורודה תהיה האקסנט הטוב ביותר בלוקים שלכם. עשויה מסאטן איכותי, שומרת על צורתה לאורך כל היום.' %}
 
 {% else %}
   {% comment %} Default: vintage-scarf {% endcomment %}
   {% assign img_main   = 'product-image-4.png' %}
   {% assign img_thumbs = 'product-image-5.png,product-image-6.png' %}
-  {% assign title_uk   = 'Хустинка Вінтаж' %}
+  {% assign title_en   = 'Vintage Scarf' %}
   {% assign title_he   = "מטפחת וינטג'" %}
-  {% assign desc_uk    = 'Відчуйте естетику минулих десятиліть у сучасному виконанні. Ця хустка натхненна класичними образами 60-х років. Виконана з преміального натурального шовку, вона має благородний матовий блиск та неймовірно приємну на дотик текстуру. Унікальний принт та глибока палітра роблять її не просто аксесуаром, а центральним елементом вашого образу — від ділового костюма до розкішного виходу у світ.' %}
+  {% assign desc_en    = 'Feel the aesthetics of past decades in a modern execution. This scarf is inspired by classic 60s looks. Made of premium natural silk, it has a noble matte sheen and an incredibly pleasant texture. The unique print and deep palette make it not just an accessory, but a centerpiece of your look.' %}
   {% assign desc_he    = "חוו את אסתטיקת העשורים האחרונים בביצוע מודרני. מטפחת זו בהשראת לוקים קלאסיים של שנות ה-60. עשויה ממשי טבעי פרמיה, יש לה ברק מט אצילי ומרקם נעים להפליא למגע. הדוגמה הייחודית ופלטת הצבעים העמוקה הופכות אותה לאלמנט מרכזי של הלוק שלכם." %}
 {% endif %}
 
@@ -172,17 +172,17 @@
   {% assign care_text     = "- אל תכבסו במכונת כביסה; השתמשו בניקוי יבש או הלבנה עדינה בידיים עם מגבת לחה לסיבים.\n- ייבשו שטוחים ואל תייבשו במייבש; אווררו מרווחים לשמור על הצורה.\n- אחסנו קפוץ ולא תלוי, כדי למנוע עיוות.\n- לגיהוץ: השתמשו בנייר בין הברזל לחומר, ואל תנגעו ישירות בברזל." %}
   {% assign material_text = 'משי טבעי 100%' %}
 {% else %}
-  {% assign ui_title      = title_uk %}
-  {% assign ui_desc       = desc_uk %}
-  {% assign txt_home      = 'Головна' %}
-  {% assign txt_catalog   = 'Каталог' %}
-  {% assign txt_add_cart  = 'Додати в кошик' %}
-  {% assign txt_buy_now   = 'Оформити покупку' %}
-  {% assign txt_size_guide= 'Розмірна сітка' %}
-  {% assign txt_material  = 'Матеріал' %}
-  {% assign txt_care      = 'Догляд' %}
-  {% assign care_text     = "- Очищення: не прати у машинці; використовуйте сухе чищення або акуратне видалення забруднень вологою серветкою.\n- Сушка: не сушити на батареї; залишайте лежати у добре провітрюваному місці, зберігаючи форму.\n- Зберігайте у сухому місці, подалі від прямого сонця; бажано у коробці, щоб уникнути деформації.\n- Догляд за тканиною: освіжайте матеріал паром з відстані; не торкайтеся праскою безпосередньо." %}
-  {% assign material_text = '100% натуральний шовк' %}
+  {% assign ui_title      = title_en %}
+  {% assign ui_desc       = desc_en %}
+  {% assign txt_home      = 'Home' %}
+  {% assign txt_catalog   = 'Catalog' %}
+  {% assign txt_add_cart  = 'Add to cart' %}
+  {% assign txt_buy_now   = 'Buy Now' %}
+  {% assign txt_size_guide= 'Size Guide' %}
+  {% assign txt_material  = 'Material' %}
+  {% assign txt_care      = 'Care' %}
+  {% assign care_text     = "- Cleaning: do not machine wash; use dry cleaning or gently remove dirt with a damp cloth.\n- Drying: do not dry on a radiator; leave it to rest in a well-ventilated area, keeping its shape.\n- Store in a dry place, away from direct sunlight; preferably in a box to prevent deformation.\n- Fabric care: refresh the material with steam from a distance occasionally; do not touch directly with an iron." %}
+  {% assign material_text = '100% natural silk' %}
 {% endif %}
 
 {% assign thumbs_arr = img_thumbs | split: ',' %}
@@ -196,7 +196,7 @@
     {% if request.locale.iso_code == 'he' %}
       <span class="text-[10px] tracking-[0.12em] uppercase text-gray-800">{{ ui_title | upcase }}</span>
       <span class="text-gray-300 text-[10px]">‹</span>
-      <a href="{{ routes.root_url }}collections/all"
+      <a href="{{ routes.all_products_collection_url }}"
          class="text-[10px] tracking-[0.12em] uppercase text-gray-400 hover:text-gray-700 transition-colors">{{ txt_catalog }}</a>
       <span class="text-gray-300 text-[10px]">‹</span>
       <a href="{{ routes.root_url }}"
@@ -205,7 +205,7 @@
       <a href="{{ routes.root_url }}"
          class="text-[10px] tracking-[0.12em] uppercase text-gray-400 hover:text-gray-700 transition-colors">{{ txt_home }}</a>
       <span class="text-gray-300 text-[10px]">›</span>
-      <a href="{{ routes.root_url }}collections/all"
+      <a href="{{ routes.all_products_collection_url }}"
          class="text-[10px] tracking-[0.12em] uppercase text-gray-400 hover:text-gray-700 transition-colors">{{ txt_catalog }}</a>
       <span class="text-gray-300 text-[10px]">›</span>
       <span class="text-gray-400 text-[10px] tracking-[0.12em] uppercase">{{ txt_catalog }}</span>
@@ -413,23 +413,23 @@
   <div id="size-guide-modal">
     <div class="sg-header">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
-      {% if request.locale.iso_code == 'he' %}מידות{% else %}РОЗМІР{% endif %}
+      {% if request.locale.iso_code == 'he' %}מידות{% else %}SIZE GUIDE{% endif %}
     </div>
     <button class="sg-close" onclick="closeSizeGuide()" aria-label="Close">✕</button>
     <div class="sg-body">
       <div class="sg-left">
         <h2 class="sg-title">
-          {% if request.locale.iso_code == 'he' %}מידה – היקף ראש{% else %}РОЗМІР — ОБХВАТ ГОЛОВИ{% endif %}
+          {% if request.locale.iso_code == 'he' %}מידה – היקף ראש{% else %}SIZE — HEAD CIRCUMFERENCE{% endif %}
         </h2>
-        <div class="sg-row">S — {% if request.locale.iso_code == 'he' %}56 ס"מ{% else %}56 см{% endif %}</div>
-        <div class="sg-row">M — {% if request.locale.iso_code == 'he' %}57 ס"מ{% else %}57 см{% endif %}</div>
-        <div class="sg-row">L — {% if request.locale.iso_code == 'he' %}58 ס"מ{% else %}58 см{% endif %}</div>
+        <div class="sg-row">S — {% if request.locale.iso_code == 'he' %}56 ס"מ{% else %}56 cm{% endif %}</div>
+        <div class="sg-row">M — {% if request.locale.iso_code == 'he' %}57 ס"מ{% else %}57 cm{% endif %}</div>
+        <div class="sg-row">L — {% if request.locale.iso_code == 'he' %}58 ס"מ{% else %}58 cm{% endif %}</div>
       </div>
       <div class="sg-right">
         <div class="sg-right-label">
-          {% if request.locale.iso_code == 'he' %}מדוד לפי הקו הזה{% else %}ЗАМІРЯЙ ПО ЦІЙ ЛІНІЇ{% endif %}
+          {% if request.locale.iso_code == 'he' %}מדוד לפי הקו הזה{% else %}MEASURE ALONG THIS LINE{% endif %}
         </div>
-        <img src="{{ 'product-image-5.png' | asset_url }}" alt="{% if request.locale.iso_code == 'he' %}מדידת ראש{% else %}Вимірювання{% endif %}" loading="lazy">
+        <img src="{{ 'product-image-5.png' | asset_url }}" alt="{% if request.locale.iso_code == 'he' %}מדידת ראש{% else %}Measurement{% endif %}" loading="lazy">
       </div>
     </div>
   </div>
