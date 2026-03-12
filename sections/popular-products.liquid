@@ -1,0 +1,89 @@
+{% schema %}
+{
+  "name": "Popular Products",
+  "settings": []
+}
+{% endschema %}
+
+<style>
+  .popular-card-img {
+    transition: transform 0.7s ease;
+  }
+  .popular-card:hover .popular-card-img {
+    transform: scale(1.05);
+  }
+</style>
+
+<div class="w-full max-w-[1920px] mx-auto px-4 md:px-[80px] lg:px-[160px] pb-[80px] pt-[32px] md:pt-[48px]">
+  <div class="grid grid-cols-2 lg:grid-cols-4 gap-x-[12px] gap-y-[32px] md:gap-x-6 md:gap-y-[64px]">
+
+    <!-- Product 1: Leopard -->
+    <a href="{{ routes.search_url }}?view=demo&product=leopard-print-scarf" class="popular-card cursor-pointer flex flex-col group no-underline">
+      <div class="relative aspect-[3/4] mb-3 md:mb-4 overflow-hidden w-full bg-gray-100">
+        <img src="{{ 'product-image-1.png' | asset_url }}" alt="{{ 'products.product_1' | t }}"
+             class="popular-card-img absolute inset-0 w-full h-full object-cover" loading="lazy" />
+      </div>
+      <div class="flex flex-col space-y-1 md:space-y-1.5 px-0.5 md:px-1" {% if request.locale.iso_code == 'he' %}style="text-align: right; direction: rtl;"{% endif %}>
+        <h3 class="text-[11px] md:text-[13px] font-semibold text-gray-900 tracking-wide group-hover:text-gray-500 transition-colors"
+            style="font-family: var(--font-montserrat), Montserrat, sans-serif;">
+          {{ 'products.product_1' | t }}
+        </h3>
+        <p class="text-[11px] font-medium md:text-[13px] md:font-light text-gray-500" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">
+          $ 80
+        </p>
+      </div>
+    </a>
+
+    <!-- Product 2: Vintage -->
+    <a href="{{ routes.search_url }}?view=demo&product=vintage-scarf" class="popular-card cursor-pointer flex flex-col group no-underline">
+      <div class="relative aspect-[3/4] mb-3 md:mb-4 overflow-hidden w-full bg-gray-100">
+        <img src="{{ 'product-image-4.png' | asset_url }}" alt="{{ 'products.product_4' | t }}"
+             class="popular-card-img absolute inset-0 w-full h-full object-cover" loading="lazy" />
+      </div>
+      <div class="flex flex-col space-y-1 md:space-y-1.5 px-0.5 md:px-1" {% if request.locale.iso_code == 'he' %}style="text-align: right; direction: rtl;"{% endif %}>
+        <h3 class="text-[11px] md:text-[13px] font-semibold text-gray-900 tracking-wide group-hover:text-gray-500 transition-colors"
+            style="font-family: var(--font-montserrat), Montserrat, sans-serif;">
+          {{ 'products.product_4' | t }}
+        </h3>
+        <p class="text-[11px] font-medium md:text-[13px] md:font-light text-gray-500" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">
+          $ 80
+        </p>
+      </div>
+    </a>
+
+    <!-- Product 3: Powder / Pink -->
+    <a href="{{ routes.search_url }}?view=demo&product=pink-scarf" class="popular-card cursor-pointer flex flex-col group no-underline">
+      <div class="relative aspect-[3/4] mb-3 md:mb-4 overflow-hidden w-full bg-gray-100">
+        <img src="{{ 'product-image-3.png' | asset_url }}" alt="{{ 'products.product_3' | t }}"
+             class="popular-card-img absolute inset-0 w-full h-full object-cover" loading="lazy" />
+      </div>
+      <div class="flex flex-col space-y-1 md:space-y-1.5 px-0.5 md:px-1" {% if request.locale.iso_code == 'he' %}style="text-align: right; direction: rtl;"{% endif %}>
+        <h3 class="text-[11px] md:text-[13px] font-semibold text-gray-900 tracking-wide group-hover:text-gray-500 transition-colors"
+            style="font-family: var(--font-montserrat), Montserrat, sans-serif;">
+          {{ 'products.product_3' | t }}
+        </h3>
+        <p class="text-[11px] font-medium md:text-[13px] md:font-light text-gray-500" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">
+          $ 80
+        </p>
+      </div>
+    </a>
+
+    <!-- Product 4: Blue -->
+    <a href="{{ routes.search_url }}?view=demo&product=blue-silk-scarf" class="popular-card cursor-pointer flex flex-col group no-underline">
+      <div class="relative aspect-[3/4] mb-3 md:mb-4 overflow-hidden w-full bg-gray-100">
+        <img src="{{ 'product-image-2.png' | asset_url }}" alt="{{ 'products.product_2' | t }}"
+             class="popular-card-img absolute inset-0 w-full h-full object-cover" loading="lazy" />
+      </div>
+      <div class="flex flex-col space-y-1 md:space-y-1.5 px-0.5 md:px-1" {% if request.locale.iso_code == 'he' %}style="text-align: right; direction: rtl;"{% endif %}>
+        <h3 class="text-[11px] md:text-[13px] font-semibold text-gray-900 tracking-wide group-hover:text-gray-500 transition-colors"
+            style="font-family: var(--font-montserrat), Montserrat, sans-serif;">
+          {{ 'products.product_2' | t }}
+        </h3>
+        <p class="text-[11px] font-medium md:text-[13px] md:font-light text-gray-500" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">
+          $ 80
+        </p>
+      </div>
+    </a>
+
+  </div>
+</div>
