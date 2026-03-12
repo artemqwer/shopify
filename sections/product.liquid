@@ -292,6 +292,9 @@
       <div class="flex flex-col gap-3 mb-8">
         <button type="button" id="btn-add-cart" class="btn-cart"
                 data-variant-id="{{ product.variants.first.id }}"
+                data-title="{{ ui_title | escape }}"
+                data-price="{{ product_price | escape }}"
+                data-image="{% if use_shopify_imgs %}{{ product.images[0] | image_url: width: 400 }}{% else %}{{ gallery_imgs[0] | asset_url }}{% endif %}"
                 onclick="handleAddToCart(this)">
           {{ txt_add_cart }}
         </button>
@@ -372,39 +375,30 @@
     }
   }
 
-  // Add to cart via AJAX
+  // Add to cart (real Shopify product OR demo mock)
   function handleAddToCart(btn) {
     const variantId = btn.dataset.variantId;
-    if (!variantId || variantId === '') {
-      // No real variant (placeholder page) — just open the cart drawer in empty state
-      if (window.ShopifyDrawer) window.ShopifyDrawer.open('cart-drawer');
-      return;
-    }
+    const title     = btn.dataset.title  || 'Product';
+    const price     = btn.dataset.price  || '$0';
+    const image     = btn.dataset.image  || '';
+
     const original = btn.textContent.trim();
     btn.textContent = '...';
     btn.disabled = true;
     btn.style.opacity = '0.7';
 
+    const restore = () => {
+      btn.textContent = original;
+      btn.disabled = false;
+      btn.style.opacity = '';
+    };
+
     if (window.EsterCart) {
-      window.EsterCart.add(variantId, 1).catch(() => {
-        btn.textContent = original;
-        btn.disabled = false;
-        btn.style.opacity = '';
-      }).finally(() => {
-        btn.textContent = original;
-        btn.disabled = false;
-        btn.style.opacity = '';
-      });
+      window.EsterCart.add(variantId, 1, { title, price, image })
+        .catch(restore)
+        .finally(restore);
     } else {
-      // Fallback: standard form submit
-      const form = document.createElement('form');
-      form.method = 'post';
-      form.action = '/cart/add';
-      const inp = document.createElement('input');
-      inp.type = 'hidden'; inp.name = 'id'; inp.value = variantId;
-      form.appendChild(inp);
-      document.body.appendChild(form);
-      form.submit();
+      restore();
     }
   }
 </script>

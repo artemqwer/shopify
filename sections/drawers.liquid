@@ -461,7 +461,42 @@
   closeBtns.forEach(btn => btn.addEventListener('click', closeAll));
 
   /* ══════════════════════════════════════
-     AJAX CART
+     MOCK CART (localStorage for demo/placeholders)
+  ══════════════════════════════════════ */
+  const MOCK_KEY = 'ester_mock_cart';
+
+  function mockGet() {
+    try { return JSON.parse(localStorage.getItem(MOCK_KEY)) || []; } catch(e) { return []; }
+  }
+  function mockSave(items) {
+    localStorage.setItem(MOCK_KEY, JSON.stringify(items));
+  }
+  function mockAdd(meta) {
+    const items = mockGet();
+    const key = 'mock_' + meta.title.replace(/\s+/g,'_').toLowerCase();
+    const existing = items.find(i => i.key === key);
+    if (existing) { existing.quantity += 1; }
+    else { items.push({ key, product_title: meta.title, variant_title: '', price: meta.price, image: meta.image, quantity: 1, isMock: true }); }
+    mockSave(items);
+    return items;
+  }
+  function mockChange(key, qty) {
+    let items = mockGet();
+    if (qty <= 0) { items = items.filter(i => i.key !== key); }
+    else { const it = items.find(i => i.key === key); if (it) it.quantity = qty; }
+    mockSave(items);
+    return items;
+  }
+  function mockTotal(items) {
+    return items.reduce((sum, i) => {
+      const num = parseFloat(String(i.price).replace(/[^0-9.]/g, '')) || 0;
+      return sum + num * i.quantity;
+    }, 0);
+  }
+  function mockCount(items) { return items.reduce((s,i) => s + i.quantity, 0); }
+
+  /* ══════════════════════════════════════
+     UNIFIED CART DISPLAY
   ══════════════════════════════════════ */
   const elLoading  = document.getElementById('cart-loading');
   const elEmpty    = document.getElementById('cart-empty');
@@ -470,19 +505,15 @@
   const elSubtotal = document.getElementById('cart-subtotal');
   const elCount    = document.getElementById('cart-count-label');
 
-  /* Money formatting */
-  function money(cents) {
-    return '$' + (cents / 100).toFixed(2).replace(/\.00$/, '');
-  }
+  function moneyFromCents(cents) { return '$' + (cents / 100).toFixed(2).replace(/\.00$/, ''); }
+  function moneyFromFloat(f)     { return '$' + f.toFixed(2).replace(/\.00$/, ''); }
 
-  /* Show / hide cart states */
   function showLoading() {
     elLoading && (elLoading.style.display = 'flex');
     elEmpty   && elEmpty.classList.add('hidden');
     elList    && elList.classList.add('hidden');
     elFooter  && elFooter.classList.add('hidden');
   }
-
   function showEmpty() {
     elLoading && (elLoading.style.display = 'none');
     elEmpty   && elEmpty.classList.remove('hidden');
@@ -490,35 +521,35 @@
     elFooter  && elFooter.classList.add('hidden');
     if (elCount) { elCount.textContent = ''; elCount.classList.add('hidden'); }
   }
-
-  function showItems(cart) {
+  function showAll(allItems, subtotal, count) {
     elLoading && (elLoading.style.display = 'none');
     elEmpty   && elEmpty.classList.add('hidden');
     elList    && elList.classList.remove('hidden');
     elFooter  && elFooter.classList.remove('hidden');
-    if (elSubtotal) elSubtotal.textContent = money(cart.total_price);
+    if (elSubtotal) elSubtotal.textContent = subtotal;
     if (elCount) {
-      elCount.textContent = cart.item_count + ' item' + (cart.item_count !== 1 ? 's' : '');
+      elCount.textContent = count + ' item' + (count !== 1 ? 's' : '');
       elCount.classList.remove('hidden');
     }
-    renderItems(cart.items);
+    renderItems(allItems);
   }
 
-  /* Render item rows */
+  /* Render item rows (works for both real & mock items) */
   function renderItems(items) {
     if (!elList) return;
-    elList.innerHTML = items.map(item => `
-      <div class="flex py-5 border-b border-[#f0f0f0]" data-key="${item.key}">
-        <div class="w-[90px] h-[90px] flex-shrink-0 mr-4 bg-[#f8f8f8] overflow-hidden">
-          ${item.image
-            ? `<img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover">`
-            : '<div class="w-full h-full bg-[#f0f0f0]"></div>'}
-        </div>
+    elList.innerHTML = items.map(item => {
+      const priceStr = item.isMock ? item.price : moneyFromCents(item.price);
+      const imgHtml  = item.image
+        ? `<img src="${item.image}" alt="${item.product_title}" class="w-full h-full object-cover">`
+        : '<div class="w-full h-full bg-[#eee]"></div>';
+      return `
+      <div class="flex py-5 border-b border-[#f0f0f0]" data-key="${item.key}" data-mock="${item.isMock ? '1' : ''}">
+        <div class="w-[90px] h-[90px] flex-shrink-0 mr-4 bg-[#f8f8f8] overflow-hidden">${imgHtml}</div>
         <div class="flex-1 flex flex-col justify-between min-w-0">
           <div>
             <p class="text-[14px] font-medium text-[#222] truncate" style="font-family:var(--font-montserrat)">${item.product_title}</p>
             ${item.variant_title ? `<p class="text-[12px] text-[#aaa] mt-0.5" style="font-family:var(--font-montserrat)">${item.variant_title}</p>` : ''}
-            <p class="text-[13px] text-[#888] mt-1" style="font-family:var(--font-montserrat)">${money(item.price)}</p>
+            <p class="text-[13px] text-[#888] mt-1" style="font-family:var(--font-montserrat)">${priceStr}</p>
           </div>
           <div class="flex items-center justify-between mt-2">
             <div class="flex items-center border border-[#e5e5e5] h-7" style="direction:ltr">
@@ -537,59 +568,85 @@
             </button>
           </div>
         </div>
-      </div>
-    `).join('');
+      </div>`;
+    }).join('');
 
-    /* Quantity buttons */
     elList.querySelectorAll('.cart-qty-btn').forEach(btn => {
       btn.addEventListener('click', () => {
-        const key   = btn.dataset.key;
+        const key = btn.dataset.key;
         const delta = parseInt(btn.dataset.delta);
-        const row   = elList.querySelector(`[data-key="${key}"]`);
+        const row = elList.querySelector(`[data-key="${key}"]`);
+        const isMock = row && row.dataset.mock === '1';
         const qtyEl = row && row.querySelector('span');
         const curQty = qtyEl ? parseInt(qtyEl.textContent) : 1;
         const newQty = Math.max(0, curQty + delta);
-        updateCartItem(key, newQty);
+        if (isMock) { mockChange(key, newQty); loadCart(); }
+        else updateRealCartItem(key, newQty);
       });
     });
-
-    /* Remove buttons */
     elList.querySelectorAll('.cart-remove-btn').forEach(btn => {
-      btn.addEventListener('click', () => updateCartItem(btn.dataset.key, 0));
+      btn.addEventListener('click', () => {
+        const key = btn.dataset.key;
+        const row = elList.querySelector(`[data-key="${key}"]`);
+        const isMock = row && row.dataset.mock === '1';
+        if (isMock) { mockChange(key, 0); loadCart(); }
+        else updateRealCartItem(key, 0);
+      });
     });
   }
 
-  /* Fetch cart data */
+  /* Load & merge real + mock carts */
   function loadCart() {
     showLoading();
-    fetch('/cart.js', { headers: { 'Content-Type': 'application/json' } })
+    fetch('/cart.js')
       .then(r => r.json())
-      .then(cart => {
-        if (cart.item_count === 0) showEmpty();
-        else showItems(cart);
+      .then(realCart => {
+        const mockItems = mockGet();
+        const allItems  = [...realCart.items, ...mockItems];
+        const mockSub   = mockTotal(mockItems);
+        const realSub   = realCart.total_price / 100;
+        const totalSub  = moneyFromFloat(realSub + mockSub);
+        const totalCount = realCart.item_count + mockCount(mockItems);
+        updateCartBadge(totalCount);
+        if (allItems.length === 0) showEmpty();
+        else showAll(allItems, totalSub, totalCount);
       })
-      .catch(() => showEmpty());
+      .catch(() => {
+        // Offline / no Shopify — show only mock cart
+        const mockItems = mockGet();
+        const sub = moneyFromFloat(mockTotal(mockItems));
+        const cnt = mockCount(mockItems);
+        updateCartBadge(cnt);
+        if (mockItems.length === 0) showEmpty();
+        else showAll(mockItems, sub, cnt);
+      });
   }
 
-  /* Update item qty (0 = remove) */
-  function updateCartItem(key, qty) {
+  /* Update real Shopify cart item */
+  function updateRealCartItem(key, qty) {
     fetch('/cart/change.js', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ id: key, quantity: qty })
-    })
-    .then(r => r.json())
-    .then(cart => {
-      updateCartBadge(cart.item_count);
-      if (cart.item_count === 0) showEmpty();
-      else showItems(cart);
-    });
+    }).then(() => loadCart());
   }
 
-  /* Add to cart — called by product page */
+  /* EsterCart — used by product page */
   window.EsterCart = {
-    add: function(variantId, qty) {
+    add: function(variantId, qty, meta) {
       qty = qty || 1;
+      meta = meta || {};
+      // If no real variant → mock cart
+      if (!variantId || variantId === '' || variantId === '0') {
+        mockAdd({ title: meta.title || 'Product', price: meta.price || '$0', image: meta.image || '' });
+        const mockItems = mockGet();
+        const cnt = mockCount(mockItems);
+        updateCartBadge(cnt);
+        openDrawer('cart-drawer');
+        loadCart();
+        return Promise.resolve();
+      }
+      // Real Shopify product
       return fetch('/cart/add.js', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -597,16 +654,21 @@
       })
       .then(r => r.json())
       .then(() => {
-        return fetch('/cart.js').then(r => r.json()).then(cart => {
-          updateCartBadge(cart.item_count);
-          openDrawer('cart-drawer');
-          showItems(cart);
-        });
+        openDrawer('cart-drawer');
+        loadCart();
+      })
+      .catch(() => {
+        // If add fails (e.g. invalid ID) → treat as mock
+        mockAdd({ title: meta.title || 'Product', price: meta.price || '$0', image: meta.image || '' });
+        const cnt = mockCount(mockGet());
+        updateCartBadge(cnt);
+        openDrawer('cart-drawer');
+        loadCart();
       });
     }
   };
 
-  /* Cart badge in navbar */
+  /* Badge */
   function updateCartBadge(count) {
     document.querySelectorAll('[data-cart-count]').forEach(el => {
       el.textContent = count;
@@ -614,8 +676,14 @@
     });
   }
 
-  /* Load badge on page load */
-  fetch('/cart.js').then(r => r.json()).then(c => updateCartBadge(c.item_count)).catch(() => {});
+  /* Init badge on load */
+  fetch('/cart.js')
+    .then(r => r.json())
+    .then(c => {
+      const total = c.item_count + mockCount(mockGet());
+      updateCartBadge(total);
+    })
+    .catch(() => updateCartBadge(mockCount(mockGet())));
 
   /* ══════════════════════════════════════
      FILTER DRAWER INTERACTIVITY
