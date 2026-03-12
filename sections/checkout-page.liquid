@@ -124,87 +124,213 @@
   }
 </style>
 
-<div class="checkout-container w-full max-w-[1920px] mx-auto px-4 md:px-[80px] lg:px-[160px] pb-[80px]">
+{% comment %} ─── Locale strings for checkout ─── {% endcomment %}
+{% if request.locale.iso_code == 'he' %}
+  {% assign chk_dir         = 'rtl' %}
+  {% assign txt_home        = 'בית' %}
+  {% assign txt_checkout    = 'לתשלום' %}
+  {% assign txt_details     = 'פרטי לקוח' %}
+  {% assign txt_last        = 'שם משפחה*' %}
+  {% assign txt_first       = 'שם פרטי*' %}
+  {% assign txt_phone       = 'מספר טלפון*' %}
+  {% assign txt_email       = 'אימייל*' %}
+  {% assign txt_region      = 'אזור*' %}
+  {% assign txt_ukraine     = 'אוקראינה' %}
+  {% assign txt_intl        = 'בינלאומי' %}
+  {% assign txt_contact_me  = 'צרו קשר לפרטי הזמנה' %}
+  {% assign txt_delivery    = 'משלוח' %}
+  {% assign txt_city        = 'עיר' %}
+  {% assign txt_branch      = 'סניף' %}
+  {% assign txt_notes       = 'הערות להזמנה (לא חובה)' %}
+  {% assign txt_promo       = 'קוד קופון' %}
+  {% assign txt_your_order  = 'ההזמנה שלך' %}
+  {% assign txt_subtotal    = 'סכום ביניים' %}
+  {% assign txt_payment     = 'תשלום' %}
+  {% assign txt_card        = 'כרטיס אשראי, Apple Pay, Google Pay' %}
+  {% assign txt_cod         = 'תשלום במזומן במועד האספקה' %}
+  {% assign txt_shipping    = 'משלוח' %}
+  {% assign txt_nova        = 'נובה פושטה' %}
+  {% assign txt_total       = 'סך הכל לתשלום' %}
+  {% assign txt_privacy_msg = 'המידע האישי שלך ישמש לעיבוד ההזמנה, לשיפור חווית המשתמש ולמטרות נוספות המתוארות במדיניות הפרטיות.' %}
+  {% assign txt_agree       = 'קראתי והסכמתי לתנאי האתר*' %}
+  {% assign txt_confirm     = 'אישור הזמנה' %}
+  {% assign txt_chevron     = '‹' %}
+{% elsif request.locale.iso_code == 'uk' %}
+  {% assign chk_dir         = 'ltr' %}
+  {% assign txt_home        = 'Головна' %}
+  {% assign txt_checkout    = 'Оформлення' %}
+  {% assign txt_details     = 'Контактні дані' %}
+  {% assign txt_last        = 'Прізвище*' %}
+  {% assign txt_first       = 'Ім&#x27;я*' %}
+  {% assign txt_phone       = 'Номер телефону*' %}
+  {% assign txt_email       = 'Пошта*' %}
+  {% assign txt_region      = 'Країна/Регіон*' %}
+  {% assign txt_ukraine     = 'Україна' %}
+  {% assign txt_intl        = 'Міжнародний' %}
+  {% assign txt_contact_me  = 'Зв&#x27;язатися зі мною' %}
+  {% assign txt_delivery    = 'Доставка' %}
+  {% assign txt_city        = 'Місто' %}
+  {% assign txt_branch      = 'Відділення' %}
+  {% assign txt_notes       = 'Примітки до замовлення (необов&#x27;язково)' %}
+  {% assign txt_promo       = 'ПРОМОКОД' %}
+  {% assign txt_your_order  = 'Ваше замовлення' %}
+  {% assign txt_subtotal    = 'Проміжний підсумок' %}
+  {% assign txt_payment     = 'Спосіб оплати' %}
+  {% assign txt_card        = 'Картка, Apple Pay, Google Pay' %}
+  {% assign txt_cod         = 'Оплата при отриманні' %}
+  {% assign txt_shipping    = 'Доставка' %}
+  {% assign txt_nova        = 'Нова пошта' %}
+  {% assign txt_total       = 'До сплати' %}
+  {% assign txt_privacy_msg = 'Ваші персональні дані будуть використані для обробки замовлення, підтримки вашого досвіду на цьому сайті та для інших цілей, описаних у нашій політиці конфіденційності.' %}
+  {% assign txt_agree       = 'Я прочитав(ла) і погоджуюся з умовами сайту*' %}
+  {% assign txt_confirm     = 'Підтвердити замовлення' %}
+  {% assign txt_chevron     = '›' %}
+{% elsif request.locale.iso_code == 'fr' %}
+  {% assign chk_dir         = 'ltr' %}
+  {% assign txt_home        = 'Accueil' %}
+  {% assign txt_checkout    = 'Commande' %}
+  {% assign txt_details     = 'Coordonnées' %}
+  {% assign txt_last        = 'Nom*' %}
+  {% assign txt_first       = 'Prénom*' %}
+  {% assign txt_phone       = 'Téléphone*' %}
+  {% assign txt_email       = 'Email*' %}
+  {% assign txt_region      = 'Région*' %}
+  {% assign txt_ukraine     = 'Ukraine' %}
+  {% assign txt_intl        = 'International' %}
+  {% assign txt_contact_me  = 'Me contacter pour les détails' %}
+  {% assign txt_delivery    = 'Livraison' %}
+  {% assign txt_city        = 'Ville' %}
+  {% assign txt_branch      = 'Agence' %}
+  {% assign txt_notes       = 'Notes de commande (facultatif)' %}
+  {% assign txt_promo       = 'CODE PROMO' %}
+  {% assign txt_your_order  = 'Votre commande' %}
+  {% assign txt_subtotal    = 'Sous-total' %}
+  {% assign txt_payment     = 'Méthode de paiement' %}
+  {% assign txt_card        = 'Carte, Apple Pay, Google Pay' %}
+  {% assign txt_cod         = 'Paiement à la livraison' %}
+  {% assign txt_shipping    = 'Livraison' %}
+  {% assign txt_nova        = 'Nova Poshta' %}
+  {% assign txt_total       = 'Total à payer' %}
+  {% assign txt_privacy_msg = 'Vos données personnelles seront utilisées pour traiter votre commande, améliorer votre expérience sur ce site et pour d&#x27;autres finalités décrites dans notre politique de confidentialité.' %}
+  {% assign txt_agree       = 'J&#x27;ai lu et j&#x27;accepte les conditions générales*' %}
+  {% assign txt_confirm     = 'Confirmer la commande' %}
+  {% assign txt_chevron     = '›' %}
+{% else %}
+  {% assign chk_dir         = 'ltr' %}
+  {% assign txt_home        = 'HOME' %}
+  {% assign txt_checkout    = 'CHECKOUT' %}
+  {% assign txt_details     = 'Customer Details' %}
+  {% assign txt_last        = 'Last Name*' %}
+  {% assign txt_first       = 'First Name*' %}
+  {% assign txt_phone       = 'Phone Number*' %}
+  {% assign txt_email       = 'Email*' %}
+  {% assign txt_region      = 'Region*' %}
+  {% assign txt_ukraine     = 'Ukraine' %}
+  {% assign txt_intl        = 'International' %}
+  {% assign txt_contact_me  = 'Contact me for order details' %}
+  {% assign txt_delivery    = 'Delivery' %}
+  {% assign txt_city        = 'City' %}
+  {% assign txt_branch      = 'Branch' %}
+  {% assign txt_notes       = 'Order notes (optional)' %}
+  {% assign txt_promo       = 'PROMO CODE' %}
+  {% assign txt_your_order  = 'Your Order' %}
+  {% assign txt_subtotal    = 'Subtotal' %}
+  {% assign txt_payment     = 'Payment Method' %}
+  {% assign txt_card        = 'Card payment, Apple Pay, Google Pay' %}
+  {% assign txt_cod         = 'Cash on delivery' %}
+  {% assign txt_shipping    = 'Shipping' %}
+  {% assign txt_nova        = 'Nova Poshta' %}
+  {% assign txt_total       = 'Total to pay' %}
+  {% assign txt_privacy_msg = 'Your personal data will be used to process your order, support your experience throughout this website, and for other purposes described in our privacy policy.' %}
+  {% assign txt_agree       = 'I have read and agree to the website terms and conditions*' %}
+  {% assign txt_confirm     = 'Confirm Order' %}
+  {% assign txt_chevron     = '›' %}
+{% endif %}
+
+<div class="checkout-container w-full max-w-[1920px] mx-auto px-4 md:px-[80px] lg:px-[160px] pb-[80px]" dir="{{ chk_dir }}">
   
   <!-- Breadcrumb -->
-  <div class="flex justify-center items-center py-[24px]" {% if request.locale.iso_code == 'he' %}style="direction: rtl;"{% endif %}>
+  <div class="flex justify-center items-center py-[24px]">
     <a href="{{ routes.root_url }}" class="text-[11px] tracking-[0.15em] uppercase text-gray-400 hover:text-gray-700 transition-colors">
-      {% if request.locale.iso_code == 'he' %}בית{% else %}HOME{% endif %}
+      {{ txt_home }}
     </a>
-    <span class="mx-2 text-[11px] text-gray-300">{% if request.locale.iso_code == 'he' %}‹{% else %}›{% endif %}</span>
+    <span class="mx-2 text-[11px] text-gray-300">{{ txt_chevron }}</span>
     <span class="text-[11px] tracking-[0.15em] uppercase text-gray-800 font-medium">
-      {% if request.locale.iso_code == 'he' %}לתשלום{% else %}CHECKOUT{% endif %}
+      {{ txt_checkout }}
     </span>
   </div>
 
-  <div class="checkout-cols flex flex-col lg:flex-row gap-[32px] lg:gap-[100px] mt-8" {% if request.locale.iso_code == 'he' %}style="direction: rtl; text-align: right;"{% endif %}>
+  <div class="checkout-cols flex flex-col lg:flex-row gap-[32px] lg:gap-[100px] mt-8">
     
     <!-- LEFT COLUMN: Forms -->
     <div class="checkout-form-col flex-1 max-w-full lg:max-w-[600px]">
       
       <!-- Customer Details -->
       <h2 class="text-[22px] md:text-[32px] font-medium text-[#222] tracking-wide mb-6 md:mb-8">
-        {% if request.locale.iso_code == 'he' %}פרטי לקוח{% else %}Customer Details{% endif %}
+        {{ txt_details }}
       </h2>
       
       <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6 mb-6">
         <div>
-          <input type="text" class="chk-input" placeholder="{% if request.locale.iso_code == 'he' %}שם משפחה*{% else %}Last Name*{% endif %}" required>
+          <input type="text" class="chk-input" placeholder="{{ txt_last }}" required autocomplete="family-name">
         </div>
         <div>
-          <input type="text" class="chk-input" placeholder="{% if request.locale.iso_code == 'he' %}שם פרטי*{% else %}First Name*{% endif %}" required>
+          <input type="text" class="chk-input" placeholder="{{ txt_first }}" required autocomplete="given-name">
         </div>
         <div>
-          <input type="tel" class="chk-input" placeholder="{% if request.locale.iso_code == 'he' %}מספר טלפון*{% else %}Phone Number*{% endif %}" required>
+          <input type="tel" id="chk-phone" class="chk-input" placeholder="{{ txt_phone }}"
+                 inputmode="tel" autocomplete="tel"
+                 pattern="[\+\d][\d\s\-\(\)]{6,18}"
+                 maxlength="20" required>
         </div>
         <div>
-          <input type="email" class="chk-input" placeholder="{% if request.locale.iso_code == 'he' %}אימייל*{% else %}Email*{% endif %}" required>
+          <input type="email" class="chk-input" placeholder="{{ txt_email }}" required autocomplete="email">
         </div>
       </div>
       
-      <div class="mb-5 chk-select-wrapper" {% if request.locale.iso_code == 'he' %}style="direction: ltr; text-align: right;"{% endif %}>
-        <select class="chk-select" required {% if request.locale.iso_code == 'he' %}style="direction: rtl;"{% endif %}>
-          <option value="" disabled hidden>{% if request.locale.iso_code == 'he' %}אזור*{% else %}Region*{% endif %}</option>
-          <option value="UKR" selected>{% if request.locale.iso_code == 'he' %}אוקראינה{% else %}Ukraine{% endif %}</option>
-          <option value="INT">{% if request.locale.iso_code == 'he' %}בינלאומי{% else %}International{% endif %}</option>
+      <div class="mb-5 chk-select-wrapper">
+        <select class="chk-select" required>
+          <option value="" disabled hidden>{{ txt_region }}</option>
+          <option value="UKR" selected>{{ txt_ukraine }}</option>
+          <option value="INT">{{ txt_intl }}</option>
         </select>
       </div>
       
       <div class="flex items-center gap-2 mb-14">
         <input type="checkbox" id="chk-order-details" class="chk-checkbox">
         <label for="chk-order-details" class="text-[12px] text-gray-500 cursor-pointer">
-          {% if request.locale.iso_code == 'he' %}צרו קשר לפרטי הזמנה{% else %}Contact me for order details{% endif %}
+          {{ txt_contact_me }}
         </label>
       </div>
 
       <!-- Delivery -->
       <h2 class="text-[22px] md:text-[32px] font-medium text-[#222] tracking-wide mb-6 md:mb-8">
-        {% if request.locale.iso_code == 'he' %}משלוח{% else %}Delivery{% endif %}
+        {{ txt_delivery }}
       </h2>
       
       <div class="space-y-6 mb-12">
-        <div class="chk-select-wrapper" {% if request.locale.iso_code == 'he' %}style="direction: ltr; text-align: right;"{% endif %}>
-          <select class="chk-select" required {% if request.locale.iso_code == 'he' %}style="direction: rtl;"{% endif %}>
-            <option value="" disabled selected hidden>{% if request.locale.iso_code == 'he' %}עיר{% else %}City{% endif %}</option>
-            <option value="Kyiv">{% if request.locale.iso_code == 'he' %}קייב{% else %}Kyiv{% endif %}</option>
-            <option value="Lviv">{% if request.locale.iso_code == 'he' %}לבוב{% else %}Lviv{% endif %}</option>
-            <option value="Odesa">{% if request.locale.iso_code == 'he' %}אודסה{% else %}Odesa{% endif %}</option>
-            <option value="Dnipro">{% if request.locale.iso_code == 'he' %}דניפרו{% else %}Dnipro{% endif %}</option>
-            <option value="Kharkiv">{% if request.locale.iso_code == 'he' %}חרקוב{% else %}Kharkiv{% endif %}</option>
+        <div class="chk-select-wrapper">
+          <select class="chk-select" required>
+            <option value="" disabled selected hidden>{{ txt_city }}</option>
+            <option value="Kyiv">Kyiv</option>
+            <option value="Lviv">Lviv</option>
+            <option value="Odesa">Odesa</option>
+            <option value="Dnipro">Dnipro</option>
+            <option value="Kharkiv">Kharkiv</option>
           </select>
         </div>
         
-        <div class="chk-select-wrapper" {% if request.locale.iso_code == 'he' %}style="direction: ltr; text-align: right;"{% endif %}>
-          <select class="chk-select" required {% if request.locale.iso_code == 'he' %}style="direction: rtl;"{% endif %}>
-            <option value="" disabled selected hidden>{% if request.locale.iso_code == 'he' %}סניף{% else %}Branch{% endif %}</option>
-            <option value="1">{% if request.locale.iso_code == 'he' %}סניף 1{% else %}Branch #1{% endif %}</option>
-            <option value="2">{% if request.locale.iso_code == 'he' %}סניף 2{% else %}Branch #2{% endif %}</option>
-            <option value="3">{% if request.locale.iso_code == 'he' %}סניף 3{% else %}Branch #3{% endif %}</option>
+        <div class="chk-select-wrapper">
+          <select class="chk-select" required>
+            <option value="" disabled selected hidden>{{ txt_branch }}</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
           </select>
         </div>
         
         <div>
-          <input type="text" class="chk-input" placeholder="{% if request.locale.iso_code == 'he' %}הערות להזמנה (לא חובה){% else %}Order notes (optional){% endif %}">
+          <textarea class="chk-input" placeholder="{{ txt_notes }}" rows="3" style="resize:none; padding-top:12px;"></textarea>
         </div>
       </div>
       
@@ -216,16 +342,12 @@
         
         <!-- Promo Code -->
         <div class="flex items-center justify-between border-b border-[#e5e5e5] pb-4 mb-6 cursor-pointer group">
-          <span class="text-[13px] font-semibold tracking-wider text-[#222]">
-            {% if request.locale.iso_code == 'he' %}קוד קופון{% else %}PROMO CODE{% endif %}
-          </span>
+          <span class="text-[13px] font-semibold tracking-wider text-[#222]">{{ txt_promo }}</span>
           <span class="text-[18px] font-light text-[#222] group-hover:text-gray-500 transition-colors">+</span>
         </div>
         
         <!-- Your Order -->
-        <h3 class="text-[14px] font-semibold tracking-wider text-[#222] mb-4 uppercase">
-          {% if request.locale.iso_code == 'he' %}ההזמנה שלך{% else %}Your Order{% endif %}
-        </h3>
+        <h3 class="text-[14px] font-semibold tracking-wider text-[#222] mb-4 uppercase">{{ txt_your_order }}</h3>
         
         <!-- Items Container (Dynamic via JS, falling back to static HTML if empty/loading) -->
         <div id="checkout-items-container" class="space-y-3 mb-6">
@@ -237,66 +359,46 @@
         
         <!-- Subtotal -->
         <div class="flex items-center justify-between border-b border-[#e5e5e5] pb-5 mb-6 text-[12px] text-[#222]">
-          <span class="tracking-widest uppercase">
-            {% if request.locale.iso_code == 'he' %}סכום ביניים{% else %}Subtotal{% endif %}
-          </span>
+          <span class="tracking-widest uppercase">{{ txt_subtotal }}</span>
           <span id="checkout-subtotal" class="font-medium">$0</span>
         </div>
         
         <!-- Payment Method -->
-        <h3 class="text-[14px] font-semibold tracking-wider text-[#222] mb-4 uppercase">
-          {% if request.locale.iso_code == 'he' %}תשלום{% else %}Payment Method{% endif %}
-        </h3>
+        <h3 class="text-[14px] font-semibold tracking-wider text-[#222] mb-4 uppercase">{{ txt_payment }}</h3>
         <div class="space-y-3 mb-6">
           <label class="flex items-center gap-3 cursor-pointer">
             <input type="radio" name="payment_method" class="chk-radio-box" checked>
-            <span class="text-[12px] text-[#555]">
-              {% if request.locale.iso_code == 'he' %}כרטיס אשראי, Apple Pay, Google Pay{% else %}Card payment, Apple Pay, Google Pay{% endif %}
-            </span>
+            <span class="text-[12px] text-[#555]">{{ txt_card }}</span>
           </label>
           <label class="flex items-center gap-3 cursor-pointer border-b border-[#e5e5e5] pb-5">
             <input type="radio" name="payment_method" class="chk-radio-box">
-            <span class="text-[12px] text-[#555]">
-              {% if request.locale.iso_code == 'he' %}תשלום במזומן במועד האספקה{% else %}Cash on delivery{% endif %}
-            </span>
+            <span class="text-[12px] text-[#555]">{{ txt_cod }}</span>
           </label>
         </div>
         
         <!-- Shipping -->
-        <h3 class="text-[14px] font-semibold tracking-wider text-[#222] mb-4 uppercase">
-          {% if request.locale.iso_code == 'he' %}משלוח{% else %}Shipping{% endif %}
-        </h3>
+        <h3 class="text-[14px] font-semibold tracking-wider text-[#222] mb-4 uppercase">{{ txt_shipping }}</h3>
         <div class="space-y-3 mb-6 border-b border-[#e5e5e5] pb-5">
           <label class="flex items-center gap-3 cursor-pointer">
             <input type="radio" name="shipping_method" class="chk-radio-box" checked>
-            <span class="text-[12px] text-[#555]">
-              {% if request.locale.iso_code == 'he' %}נובה פושטה{% else %}Nova Poshta{% endif %}
-            </span>
+            <span class="text-[12px] text-[#555]">{{ txt_nova }}</span>
           </label>
         </div>
         
         <!-- Total -->
         <div class="flex items-center justify-between mb-6">
-          <span class="text-[14px] font-semibold tracking-wider text-[#222] uppercase">
-            {% if request.locale.iso_code == 'he' %}סך הכל לתשלום{% else %}Total to pay{% endif %}
-          </span>
+          <span class="text-[14px] font-semibold tracking-wider text-[#222] uppercase">{{ txt_total }}</span>
           <span id="checkout-total" class="font-bold text-[16px] text-[#222]">$0</span>
         </div>
         
         <!-- Info & Consent -->
-        <p class="text-[11px] text-[#888] leading-[1.6] mb-5">
-          {% if request.locale.iso_code == 'he' %}המידע האישי שלך ישמש לעיבוד ההזמנה, לשיפור חווית המשתמש ולמטרות נוספות המתוארות במדיניות הפרטיות.{% else %}Your personal data will be used to process your order, support your experience throughout this website, and for other purposes described in our privacy policy.{% endif %}
-        </p>
+        <p class="text-[11px] text-[#888] leading-[1.6] mb-5">{{ txt_privacy_msg }}</p>
         <div class="flex items-start gap-2 mb-8">
           <input type="checkbox" id="chk-terms" class="chk-checkbox mt-0.5">
-          <label for="chk-terms" class="text-[11px] text-[#888] cursor-pointer leading-tight">
-            {% if request.locale.iso_code == 'he' %}קראתי והסכמתי לתנאי האתר*{% else %}I have read and agree to the website terms and conditions*{% endif %}
-          </label>
+          <label for="chk-terms" class="text-[11px] text-[#888] cursor-pointer leading-tight">{{ txt_agree }}</label>
         </div>
         
-        <button type="button" class="btn-confirm" onclick="confirmOrder()">
-          {% if request.locale.iso_code == 'he' %}אישור הזמנה{% else %}Confirm Order{% endif %}
-        </button>
+        <button type="button" class="btn-confirm" onclick="confirmOrder()">{{ txt_confirm }}</button>
       </div>
     </div>
     
@@ -304,6 +406,56 @@
 </div>
 
 <script>
+  // ── Phone mask: only digits, +, spaces, dashes, parens ──
+  (function() {
+    var phoneEl = document.getElementById('chk-phone');
+    if (!phoneEl) return;
+
+    phoneEl.addEventListener('input', function(e) {
+      var raw = e.target.value;
+      // Strip everything except digits and leading +
+      var cleaned = raw.replace(/[^\d+]/g, '');
+      // If starts with + keep it, otherwise strip +'s anywhere inside
+      if (cleaned.charAt(0) === '+') {
+        cleaned = '+' + cleaned.slice(1).replace(/\+/g, '');
+      } else {
+        cleaned = cleaned.replace(/\+/g, '');
+      }
+      // Hard limit 15 digits (E.164 max) + possible +
+      var digits = cleaned.replace(/[^\d]/g, '');
+      if (digits.length > 15) {
+        cleaned = cleaned.slice(0, cleaned.length - (digits.length - 15));
+      }
+      e.target.value = cleaned;
+    });
+
+    // Block any non-phone keystrokes (except control keys)
+    phoneEl.addEventListener('keydown', function(e) {
+      var allow = [
+        'Backspace','Delete','Tab','Enter','Escape',
+        'ArrowLeft','ArrowRight','ArrowUp','ArrowDown',
+        'Home','End'
+      ];
+      if (allow.includes(e.key)) return;
+      if (e.ctrlKey || e.metaKey) return; // allow copy/paste/select-all
+      // Allow +, digits, space, dash, parens
+      if (!/[\d\+\-\s\(\)]/.test(e.key)) {
+        e.preventDefault();
+      }
+    });
+
+    // Clean on paste
+    phoneEl.addEventListener('paste', function(e) {
+      e.preventDefault();
+      var text = (e.clipboardData || window.clipboardData).getData('text');
+      var cleaned = text.replace(/[^\d+\-\s\(\)]/g, '');
+      var start = phoneEl.selectionStart;
+      var before = phoneEl.value.substring(0, start);
+      var after  = phoneEl.value.substring(phoneEl.selectionEnd);
+      phoneEl.value = (before + cleaned + after).substring(0, 20);
+    });
+  })();
+
   function formatMoney(cents) {
     if (typeof cents === 'string' && cents.indexOf('$') !== -1) return cents;
     return '$' + (cents / 100).toFixed(2).replace(/\.00$/, '');
@@ -321,20 +473,16 @@
     let html = '';
     let realCents = cart ? cart.total_price : 0;
     
-    // 1. Render Real Items
     if (cart && cart.items && cart.items.length > 0) {
       cart.items.forEach(item => {
         const title = item.product_title + (item.variant_title ? ' - ' + item.variant_title : '');
-        html += `
-          <div class="flex justify-between items-center text-[12px] text-[#555] mb-2">
-            <div class="truncate pr-4">${title} ${item.quantity > 1 ? `<span class="text-gray-400">x${item.quantity}</span>` : ''}</div>
-            <div class="flex-shrink-0">${formatMoney(item.original_line_price)}</div>
-          </div>
-        `;
+        html += `<div class="flex justify-between items-center text-[12px] text-[#555] mb-2">
+          <div class="truncate pr-4">${title}${item.quantity > 1 ? ` <span class="text-gray-400">x${item.quantity}</span>` : ''}</div>
+          <div class="flex-shrink-0">${formatMoney(item.original_line_price)}</div>
+        </div>`;
       });
     }
     
-    // 2. Render Mock Items
     let mockTotalVal = 0;
     if (mockItems && mockItems.length > 0) {
       mockItems.forEach(item => {
@@ -342,63 +490,45 @@
         const unitVal = parseFloat(valStr) || 0;
         const lineVal = unitVal * item.quantity;
         mockTotalVal += lineVal;
-        
         const title = item.product_title + (item.variant_title ? ' - ' + item.variant_title : '');
-        html += `
-          <div class="flex justify-between items-center text-[12px] text-[#555] mb-2">
-            <div class="truncate pr-4">${title} ${item.quantity > 1 ? `<span class="text-gray-400">x${item.quantity}</span>` : ''}</div>
-            <div class="flex-shrink-0">$${lineVal}</div>
-          </div>
-        `;
+        html += `<div class="flex justify-between items-center text-[12px] text-[#555] mb-2">
+          <div class="truncate pr-4">${title}${item.quantity > 1 ? ` <span class="text-gray-400">x${item.quantity}</span>` : ''}</div>
+          <div class="flex-shrink-0">$${lineVal}</div>
+        </div>`;
       });
     }
     
-    if (html === '') {
-      html = '<div class="text-[12px] text-[#888]">Your cart is empty.</div>';
-    }
-    
+    if (html === '') html = '<div class="text-[12px] text-[#888]">Your cart is empty.</div>';
     container.innerHTML = html;
     
-    // 3. Totals
     const finalTotal = (realCents / 100) + mockTotalVal;
     const finalTotalStr = '$' + finalTotal.toFixed(2).replace(/\.00$/, '');
-    
     subtotalEl.textContent = finalTotalStr;
     totalEl.textContent = finalTotalStr;
   }
 
   document.addEventListener('DOMContentLoaded', function() {
     const mockItems = getMockCart();
-    
     fetch('/cart.js')
       .then(r => r.json())
-      .then(cart => {
-        renderCheckout(cart, mockItems);
-      })
-      .catch(() => {
-        renderCheckout(null, mockItems);
-      });
+      .then(cart => renderCheckout(cart, mockItems))
+      .catch(() => renderCheckout(null, mockItems));
   });
 
   function confirmOrder() {
     const terms = document.getElementById('chk-terms');
+    const dir = document.documentElement.getAttribute('dir') || document.body.dir || 'ltr';
     if (!terms.checked) {
-      alert(document.dir === 'rtl' ? "אנא אשר את תנאי האתר" : "Please agree to the terms and conditions before proceeding.");
+      alert(dir === 'rtl' ? 'אנא אשר את תנאי האתר' : 'Please agree to the terms and conditions before proceeding.');
       return;
     }
-    
     const btn = document.querySelector('.btn-confirm');
     const og = btn.textContent;
-    btn.textContent = document.dir === 'rtl' ? 'מעבד...' : 'Processing...';
+    btn.textContent = dir === 'rtl' ? 'מעבד...' : 'Processing...';
     btn.disabled = true;
-    
     setTimeout(() => {
-      alert(document.dir === 'rtl' ? "תודה על ההזמנה! זו הדגמה." : "Thank you for your order! This is a custom demo checkout.");
-      
-      // Clear mock cart as demo
+      alert(dir === 'rtl' ? 'תודה על ההזמנה! זו הדגמה.' : 'Thank you for your order! This is a demo checkout.');
       localStorage.removeItem('ester_mock_cart');
-      
-      // Clear Shopify cart and redirect
       fetch('{{ routes.cart_clear_url }}', { method: 'POST' }).finally(() => {
         window.location.href = '{{ routes.root_url }}';
       });
