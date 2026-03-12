@@ -488,8 +488,7 @@
         <div class="sg-right-label">
           {% if request.locale.iso_code == 'he' %}מדוד לפי הקו הזה{% else %}MEASURE ALONG THIS LINE{% endif %}
         </div>
-        <img src="{{ 'image 2.png' | file_url }}" 
-             onerror="this.onerror=null; this.src='{{ 'image 2.jpg' | file_url }}'; this.onload=null; setTimeout(() => { if (!this.complete || this.naturalWidth === 0) this.src='{{ 'image_2.png' | file_url }}'; }, 50);" 
+        <img src="{{ 'image_2.svg' | asset_url }}" 
              alt="{% if request.locale.iso_code == 'he' %}מדידת ראש{% else %}Measurement{% endif %}" 
              loading="lazy">
       </div>
