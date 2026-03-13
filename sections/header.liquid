@@ -5,8 +5,7 @@
 }
 {% endschema %}
 
-<header id="site-header" class="fixed top-0 w-full z-50 transition-all duration-300 shadow-sm
-  {% if template.name == 'index' %} bg-transparent text-white border-transparent {% else %} bg-white text-gray-900 border-b-2 border-[#F5F5F5] {% endif %}">
+<header class="sticky top-0 w-full z-50 bg-white border-b-2 border-[#F5F5F5] transition-all duration-300 shadow-sm">
   <div class="w-full max-w-[1920px] mx-auto px-4 md:px-[160px]">
     <div class="flex justify-between items-center h-[60px] md:h-[102px]">
 
@@ -83,7 +82,7 @@
               alt="Ester Wugman Logo"
               width="128"
               height="62"
-              class="w-[80px] h-auto md:w-[128px] md:h-[62px] object-contain transition-all duration-300 {% if template.name == 'index' %}opacity-0 pointer-events-none{% endif %}"
+              class="w-[80px] h-auto md:w-[128px] md:h-[62px] object-contain transition-all duration-300"
             />
         </a>
       </div>
