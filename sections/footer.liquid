@@ -110,82 +110,48 @@
   </div>
 
   <!-- MOBILE FOOTER -->
-  <div class="flex flex-col md:hidden w-full px-5 relative pb-6 pt-2">
+  <div class="flex flex-col md:hidden w-full px-5 pb-8 pt-10 items-center text-center">
 
-    <!-- Flat links list as per reference -->
-    <ul class="flex flex-col gap-0 w-full">
-      <!-- Phone -->
-      <li class="border-b border-[#F5F5F5] py-[14px]">
-        <a href="tel:+383457895" class="text-[13px] font-normal text-black">{{ 'footer.phone' | t }}</a>
-      </li>
-      <!-- Instagram -->
-      <li class="border-b border-[#F5F5F5] py-[14px]">
-        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="text-[13px] font-normal text-black">{{ 'footer.instagram' | t }}</a>
-      </li>
-      <!-- Catalog -->
-      <li class="border-b border-[#F5F5F5] py-[14px]">
-        <a href="{{ routes.all_products_collection_url }}" class="text-[13px] font-normal text-black">{{ 'footer.catalog' | t }}</a>
-      </li>
-      <!-- About Us -->
-      <li class="border-b border-[#F5F5F5] py-[14px]">
-        <a href="{{ routes.root_url }}about" class="text-[13px] font-normal text-black">{{ 'footer.about' | t }}</a>
-      </li>
-      <!-- Public Offer -->
-      <li class="border-b border-[#F5F5F5] py-[14px]">
-        <a href="{{ routes.root_url }}public-offer" class="text-[13px] font-normal text-black">{{ 'footer.public_offer' | t }}</a>
-      </li>
-      <!-- Privacy Policy -->
-      <li class="border-b border-[#F5F5F5] py-[14px]">
-        <a href="{{ routes.root_url }}privacy" class="text-[13px] font-normal text-black">{{ 'footer.privacy' | t }}</a>
-      </li>
-      <!-- Shipping & Payment -->
-      <li class="border-b border-[#F5F5F5] py-[14px]">
-        <a href="{{ routes.root_url }}shipping" class="text-[13px] font-normal text-black">{{ 'footer.shipping' | t }}</a>
-      </li>
+    <!-- Contacts -->
+    <div class="flex flex-col gap-[18px] mb-[40px]">
+      <a href="tel:+383457895" class="text-[15px] font-normal text-black" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">+38 (345) 78 95</a>
+      <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="text-[15px] font-normal text-black" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">Instagram</a>
+      <a href="mailto:ESTERWUGMAN@gmail.com" class="text-[15px] font-normal text-black" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">ESTERWUGMAN@gmail.com</a>
+    </div>
+
+    <!-- Navigation Links -->
+    <ul class="flex flex-col gap-[18px] mb-[40px]">
+      <li><a href="{{ routes.root_url }}" class="text-[15px] font-normal text-black" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">Home</a></li>
+      <li><a href="{{ routes.all_products_collection_url }}" class="text-[15px] font-normal text-black" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">Catalog</a></li>
+      <li><a href="{{ routes.root_url }}about" class="text-[15px] font-normal text-black" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">About us</a></li>
+      <li><a href="{{ routes.root_url }}public-offer" class="text-[15px] font-normal text-black" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">Public Offer</a></li>
+      <li><a href="{{ routes.root_url }}privacy" class="text-[15px] font-normal text-black" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">Privacy Policy</a></li>
+      <li><a href="{{ routes.root_url }}shipping" class="text-[15px] font-normal text-black" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">Shipping & Payment</a></li>
     </ul>
 
-    <!-- Language Switcher -->
-    <div class="mt-[20px] mb-[6px]">
-      {% form 'localization', class: 'flex items-center gap-6' %}
-        <button type="submit" name="locale_code" value="en"
-                class="text-[13px] tracking-widest uppercase font-medium leading-none
-                       {% if request.locale.iso_code == 'en' %}text-[#e61a7a]{% else %}text-gray-800 hover:text-[#e61a7a]{% endif %}">
-          EN
+    <!-- Language Selector Vertical -->
+    <div class="flex flex-col gap-[18px] mb-[40px]">
+      {% form 'localization', class: 'flex flex-col items-center gap-[18px]' %}
+        <button type="submit" name="locale_code" value="en" class="flex items-center gap-1 text-[15px] uppercase font-medium {% if request.locale.iso_code == 'en' %}text-black{% else %}text-gray-400{% endif %}" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">
+          ENG <svg class="w-2.5 h-2.5" fill="none" viewBox="0 0 10 6"><path d="M1 5L5 1L9 5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
-        <button type="submit" name="locale_code" value="uk"
-                class="text-[13px] tracking-widest uppercase font-medium leading-none
-                       {% if request.locale.iso_code == 'uk' %}text-[#e61a7a]{% else %}text-gray-800 hover:text-[#e61a7a]{% endif %}">
-          UA
-        </button>
-        <button type="submit" name="locale_code" value="fr"
-                class="text-[13px] tracking-widest uppercase font-medium leading-none
-                       {% if request.locale.iso_code == 'fr' %}text-[#e61a7a]{% else %}text-gray-800 hover:text-[#e61a7a]{% endif %}">
-          FR
-        </button>
-        <button type="submit" name="locale_code" value="he"
-                class="text-[15px] font-medium leading-none
-                       {% if request.locale.iso_code == 'he' %}text-[#e61a7a]{% else %}text-gray-800 hover:text-[#e61a7a]{% endif %}">
-          עב
-        </button>
+        <button type="submit" name="locale_code" value="uk" class="text-[15px] uppercase font-medium {% if request.locale.iso_code == 'uk' %}text-[#e61a7a]{% else %}text-gray-400{% endif %}" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">UA</button>
+        <button type="submit" name="locale_code" value="fr" class="text-[15px] uppercase font-medium {% if request.locale.iso_code == 'fr' %}text-gray-400{% endif %}" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">FR</button>
+        <button type="submit" name="locale_code" value="he" class="text-[17px] font-medium {% if request.locale.iso_code == 'he' %}text-gray-400{% endif %}">עב</button>
       {% endform %}
     </div>
 
-    <!-- Payment Methods Mobile -->
-    <div class="mt-[24px] mb-[32px] flex flex-wrap justify-start items-center w-full gap-5">
-      <img src="{{ 'apple-pay.svg' | asset_url }}" alt="Apple Pay" width="56" height="20" class="h-[20px] w-auto object-contain" />
-      <img src="{{ 'mastercard.svg' | asset_url }}" alt="Mastercard" width="44" height="26" class="h-[26px] w-auto object-contain" />
-      <img src="{{ 'googlePay.svg' | asset_url }}" alt="Google Pay" width="55" height="20" class="h-[20px] w-auto object-contain" />
-      <img src="{{ 'visa.svg' | asset_url }}" alt="Visa" width="45" height="14" class="h-[14px] w-auto object-contain" />
-    </div>
-
-    <!-- Copyright Mobile -->
-    <div class="text-left w-full">
-      <p
-        class="text-[10px] font-light tracking-widest text-black uppercase"
-        style="font-family: var(--font-montserrat), Montserrat, sans-serif; direction: ltr;"
-      >
-        {{ 'footer.copyright' | t }}
+    <!-- Copyright and Payments -->
+    <div class="flex flex-col items-center gap-[12px] pt-4 w-full">
+      <p class="text-[10px] font-light tracking-[0.05em] text-[#999] uppercase" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">
+        © 2026 ESTER WUGMAN
       </p>
+      <div class="flex items-center justify-center gap-3">
+        <img src="{{ 'apple-pay.svg' | asset_url }}" alt="Apple Pay" width="34" height="14" class="h-[14px] w-auto object-contain" />
+        <img src="{{ 'mastercard.svg' | asset_url }}" alt="Mastercard" width="28" height="16" class="h-[16px] w-auto object-contain" />
+        <img src="{{ 'googlePay.svg' | asset_url }}" alt="Google Pay" width="34" height="14" class="h-[14px] w-auto object-contain" />
+        <img src="{{ 'visa.svg' | asset_url }}" alt="Visa" width="30" height="10" class="h-[10px] w-auto object-contain" />
+      </div>
     </div>
   </div>
 </footer>
