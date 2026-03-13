@@ -5,7 +5,7 @@
 }
 {% endschema %}
 
-<header class="sticky top-0 w-full z-50 bg-white border-b-2 border-[#F5F5F5] transition-all duration-300 shadow-sm">
+<header id="site-header" class="fixed top-0 w-full z-50 transition-all duration-300 {% if template.name == 'index' %}bg-transparent border-transparent{% else %}bg-white border-b-2 border-[#F5F5F5] shadow-sm{% endif %} text-gray-900">
   <div class="w-full max-w-[1920px] mx-auto px-4 md:px-[160px]">
     <div class="flex justify-between items-center h-[60px] md:h-[102px]">
 
@@ -239,5 +239,19 @@
       }
     }
     window.toggleMobileMenu = toggleMobileMenu;
+
+    {% if template.name == 'index' %}
+      const header = document.getElementById('site-header');
+      window.addEventListener('scroll', function() {
+        if (window.scrollY > 50) {
+          header.classList.remove('bg-transparent', 'border-transparent');
+          header.classList.add('bg-white', 'border-b-2', 'border-[#F5F5F5]', 'shadow-sm');
+        } else {
+          header.classList.add('bg-transparent', 'border-transparent');
+          header.classList.remove('bg-white', 'border-b-2', 'border-[#F5F5F5]', 'shadow-sm');
+        }
+      });
+    {% endif %}
+
   })();
 </script>
