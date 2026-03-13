@@ -5,12 +5,13 @@
 }
 {% endschema %}
 
-<header class="sticky top-0 w-full z-50 bg-white border-b-2 border-[#F5F5F5] transition-all duration-300 shadow-sm">
+<header id="site-header" class="fixed top-0 w-full z-50 transition-all duration-300 shadow-sm
+  {% if template.name == 'index' %} bg-transparent text-white border-transparent {% else %} bg-white text-gray-900 border-b-2 border-[#F5F5F5] {% endif %}">
   <div class="w-full max-w-[1920px] mx-auto px-4 md:px-[160px]">
     <div class="flex justify-between items-center h-[60px] md:h-[102px]">
 
       <div class="md:hidden flex-1 flex items-center" style="z-index: 60;">
-        <button type="button" class="mobile-menu-toggle relative w-6 h-6 text-gray-900 focus:outline-none" aria-label="Menu" onclick="toggleMobileMenu(this)">
+        <button type="button" class="mobile-menu-toggle relative w-6 h-6 focus:outline-none" aria-label="Menu" onclick="toggleMobileMenu(this)">
           <span class="absolute block h-[1.5px] w-6 bg-current transform transition duration-300 ease-in-out top-1/2 -translate-y-2"></span>
           <span class="absolute block h-[1.5px] w-6 bg-current transform transition duration-300 ease-in-out top-1/2"></span>
           <span class="absolute block h-[1.5px] w-6 bg-current transform transition duration-300 ease-in-out top-1/2 translate-y-2"></span>
@@ -77,11 +78,12 @@
       <div class="flex flex-[2] md:flex-1 justify-center relative">
         <a href="{{ routes.root_url }}" class="flex items-center justify-center">
             <img
+              id="header-logo"
               src="{{ 'logo-image.svg' | asset_url }}"
               alt="Ester Wugman Logo"
               width="128"
               height="62"
-              class="w-[80px] h-auto md:w-[128px] md:h-[62px] object-contain transition-all duration-300"
+              class="w-[80px] h-auto md:w-[128px] md:h-[62px] object-contain transition-all duration-300 {% if template.name == 'index' %}opacity-0 pointer-events-none{% endif %}"
             />
         </a>
       </div>
@@ -209,7 +211,7 @@
     }
     window.toggleLangMenu = toggleLangMenu;
 
-    // Close on outside click
+    // Close on outside click for language switcher
     document.addEventListener('click', function(e) {
       var switcher = document.getElementById('lang-switcher-desktop');
       if (switcher && !switcher.contains(e.target)) {
@@ -223,6 +225,11 @@
     });
 
     // Mobile Menu Toggle logic
+    function closeMobileMenu(menu, toggle) {
+      menu.style.maxHeight = '0px';
+      toggle.classList.remove('menu-open');
+    }
+
     function toggleMobileMenu(btn) {
       btn.classList.toggle('menu-open');
       const menu = document.getElementById('mobile-menu');

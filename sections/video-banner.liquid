@@ -1,0 +1,20 @@
+{% schema %}
+{
+  "name": "Video Banner",
+  "settings": []
+}
+{% endschema %}
+
+<section class="w-full mt-4 mb-[32px] md:mb-24">
+  <div class="relative w-full aspect-[390/500] md:aspect-[1600/640] overflow-hidden">
+    <video
+      autoplay
+      loop
+      muted
+      playsinline
+      class="absolute inset-0 w-full h-full object-cover"
+    >
+      <source src="{{ 'IMG_5141.MP4' | asset_url }}" type="video/mp4">
+    </video>
+  </div>
+</section>

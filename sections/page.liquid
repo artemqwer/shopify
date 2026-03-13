@@ -92,12 +92,12 @@
 
   /* ── Action Buttons ── */
   .btn-cart {
-    width: 100%; background: #e61a7a; color: #fff; height: 52px;
+    width: 100%; background: #111; color: #fff; height: 52px;
     font-size: 14px; letter-spacing: 0.08em;
     font-family: var(--font-montserrat), Montserrat, sans-serif;
     font-weight: 600; border: none; cursor: pointer; transition: background 0.2s;
   }
-  .btn-cart:hover { background: #222; }
+  .btn-cart:hover { background: #333; }
   .btn-buy {
     width: 100%; background: transparent; color: #222; height: 52px;
     display: flex; align-items: center; justify-content: center;
@@ -107,7 +107,7 @@
     font-weight: 600; border: 1.5px solid #222; cursor: pointer;
     transition: background 0.2s, color 0.2s;
   }
-  .btn-buy:hover { background: #222; color: #fff; }
+  .btn-buy:hover { background: #111; color: #fff; }
 
   /* ── Layout ── */
   .product-layout { display: flex; gap: 48px; }
@@ -121,16 +121,19 @@
   /* ── Mobile gallery dots ── */
   .gallery-dots {
     display: none;
-    justify-content: center;
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+    z-index: 10;
+    justify-content: flex-start;
     gap: 6px;
-    margin-top: 10px;
   }
   .gallery-dot {
     width: 6px; height: 6px; border-radius: 50%;
-    background: #ccc; border: none; padding: 0;
+    background: rgba(255, 255, 255, 0.7); border: none; padding: 0;
     cursor: pointer; transition: background 0.2s; flex-shrink: 0;
   }
-  .gallery-dot.active { background: #222; }
+  .gallery-dot.active { background: #e61a7a; }
   @media (max-width: 768px) {
     .gallery-dots { display: flex; }
     .product-thumbs-row { display: none !important; }

@@ -16,10 +16,20 @@
     "recommended": {
       "type": "recommended-products",
       "settings": {}
+    },
+    "video-banner": {
+      "type": "video-banner",
+      "settings": {}
+    },
+    "recommended-2": {
+      "type": "recommended-products",
+      "settings": {}
     }
   },
   "order": [
     "hero",
-    "recommended"
+    "recommended",
+    "video-banner",
+    "recommended-2"
   ]
 }

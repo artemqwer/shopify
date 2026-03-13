@@ -5,28 +5,25 @@
 }
 {% endschema %}
 
-<section class="px-4 md:px-12 lg:px-[160px] w-full mb-[32px] md:mb-24">
-  <div class="grid grid-cols-1 md:grid-cols-[552fr_515fr_533fr] w-full aspect-[390/500] md:aspect-[1600/640] overflow-hidden">
-        <div class="relative w-full h-full">
-          <img 
-            src="{{ 'hero-image-1.png' | asset_url }}" 
-            alt="Hero Image 1" 
-            class="absolute inset-0 w-full h-full object-cover"
-          />
-        </div>
-        <div class="relative hidden md:block w-full h-full">
-          <img 
-            src="{{ 'hero-image-2.png' | asset_url }}" 
-            alt="Hero Image 2" 
-            class="absolute inset-0 w-full h-full object-cover"
-          />
-        </div>
-        <div class="relative hidden md:block w-full h-full">
-          <img 
-            src="{{ 'hero-image-3.png' | asset_url }}" 
-            alt="Hero Image 3" 
-            class="absolute inset-0 w-full h-full object-cover"
-          />
-        </div>
+<section class="w-full relative h-[100dvh]">
+  <div class="absolute inset-0 w-full h-full overflow-hidden">
+    <video
+      autoplay
+      loop
+      muted
+      playsinline
+      class="w-full h-full object-cover"
+    >
+      <source src="{{ 'IMG_4334.MOV' | asset_url }}" type="video/mp4">
+    </video>
+  </div>
+
+  <div class="absolute inset-x-0 bottom-[40px] flex justify-center items-center gap-12 z-20">
+    <a href="{{ routes.all_products_collection_url }}" class="text-[14px] text-white opacity-90 border-b border-transparent hover:border-white transition-all uppercase tracking-widest font-light" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">
+      {% if request.locale.iso_code == 'he' %}בשבילה{% else %}Для неї{% endif %}
+    </a>
+    <a href="{{ routes.all_products_collection_url }}" class="text-[14px] text-white opacity-90 border-b border-transparent hover:border-white transition-all uppercase tracking-widest font-light" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">
+      {% if request.locale.iso_code == 'he' %}קלאסיקה{% else %}Класика{% endif %}
+    </a>
   </div>
 </section>
