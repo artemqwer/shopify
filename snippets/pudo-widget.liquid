@@ -1,0 +1,130 @@
+{%- comment -%}
+  ══════════════════════════════════════════════════════
+  SNIPPET: pudo-widget.liquid
+  PURPOSE: Render PUDO (Pick Up / Drop Off) carrier widget.
+           Supports Chita IT and HFD carriers.
+  DOCS:    HFD:   https://www.hfd.co.il/en/technological-solutions/
+           Chita: https://www.chita-it.co.il/ (API docs — request from manager)
+  ══════════════════════════════════════════════════════
+
+  USAGE (in cart page or checkout extension):
+    {% render 'pudo-widget' %}
+
+  REQUIRED SETTINGS (Theme customizer → Integrations → Logistics):
+    - pudo_provider       : 'chita' | 'hfd' | 'both'
+    - chita_api_key       : API key from Chita manager
+    - hfd_api_key         : API key from HFD portal
+    - pudo_sandbox_mode   : true/false
+{%- endcomment -%}
+
+{%- liquid
+  assign pudo_provider  = settings.pudo_provider | default: 'hfd'
+  assign chita_key      = settings.chita_api_key | default: ''
+  assign hfd_key        = settings.hfd_api_key | default: ''
+  assign pudo_sandbox   = settings.pudo_sandbox_mode
+
+  if pudo_sandbox
+    assign hfd_widget_url   = 'https://sandbox.hfd.co.il/widget/pudo.js'
+    assign chita_widget_url = 'https://sandbox-api.chita-it.co.il/widget.js'
+  else
+    assign hfd_widget_url   = 'https://widget.hfd.co.il/pudo.js'
+    assign chita_widget_url = 'https://api.chita-it.co.il/widget.js'
+  endif
+-%}
+
+<div id="pudo-widget-root"
+     data-provider="{{ pudo_provider }}"
+     data-locale="{{ request.locale.iso_code }}"
+     data-rtl="{% if request.locale.iso_code == 'he' %}true{% else %}false{% endif %}"
+     style="direction: {% if request.locale.iso_code == 'he' %}rtl{% else %}ltr{% endif %}">
+
+  <!-- ── HFD Widget ─────────────────────────────────── -->
+  {% if pudo_provider == 'hfd' or pudo_provider == 'both' %}
+    {% if hfd_key != '' %}
+      <script src="{{ hfd_widget_url }}" defer></script>
+      <div id="hfd-pudo-container"></div>
+    {% else %}
+      <!-- [DEV] HFD API key not configured in Theme Settings → Integrations -->
+    {% endif %}
+  {% endif %}
+
+  <!-- ── Chita Widget ───────────────────────────────── -->
+  {% if pudo_provider == 'chita' or pudo_provider == 'both' %}
+    {% if chita_key != '' %}
+      <script src="{{ chita_widget_url }}" defer></script>
+      <div id="chita-pudo-container"></div>
+    {% else %}
+      <!-- [DEV] Chita API key not configured in Theme Settings → Integrations -->
+    {% endif %}
+  {% endif %}
+
+  <!-- Hidden input: stores selected pickup point for order note -->
+  <input type="hidden" id="selected-pudo-point" name="attributes[pudo_point]" value="">
+  <input type="hidden" id="selected-pudo-provider" name="attributes[pudo_provider]" value="">
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const provider = document.getElementById('pudo-widget-root').dataset.provider;
+    const isRTL    = document.getElementById('pudo-widget-root').dataset.rtl === 'true';
+
+    // ────────────────────────────────────────────────────
+    // HFD PUDO Widget init
+    // TODO: Replace with actual HFD init call when API key is ready.
+    // Docs: https://www.hfd.co.il/en/technological-solutions/
+    // ────────────────────────────────────────────────────
+    if ((provider === 'hfd' || provider === 'both') && typeof HFDWidget !== 'undefined') {
+      HFDWidget.init({
+        apiKey     : '{{ hfd_key }}',
+        container  : '#hfd-pudo-container',
+        sandbox    : {{ pudo_sandbox | json }},
+        rtl        : isRTL,
+        language   : '{{ request.locale.iso_code }}',
+        onSelect   : function(point) {
+          document.getElementById('selected-pudo-point').value = point.id + ' | ' + point.name + ' | ' + point.address;
+          document.getElementById('selected-pudo-provider').value = 'hfd';
+          // Save to Shopify cart attributes
+          pudoSaveToCart(point, 'hfd');
+        }
+      });
+    }
+
+    // ────────────────────────────────────────────────────
+    // Chita PUDO Widget init
+    // TODO: Replace with actual Chita init call when API key is obtained from manager.
+    // Docs: request from Chita manager (https://www.chita-it.co.il/)
+    // ────────────────────────────────────────────────────
+    if ((provider === 'chita' || provider === 'both') && typeof ChitaWidget !== 'undefined') {
+      ChitaWidget.init({
+        apiKey     : '{{ chita_key }}',
+        container  : '#chita-pudo-container',
+        sandbox    : {{ pudo_sandbox | json }},
+        rtl        : isRTL,
+        language   : '{{ request.locale.iso_code }}',
+        onSelect   : function(point) {
+          document.getElementById('selected-pudo-point').value = point.id + ' | ' + point.name + ' | ' + point.address;
+          document.getElementById('selected-pudo-provider').value = 'chita';
+          pudoSaveToCart(point, 'chita');
+        }
+      });
+    }
+
+    // Save selected PUDO point to Shopify cart attributes
+    function pudoSaveToCart(point, provider) {
+      fetch('/cart/update.js', {
+        method  : 'POST',
+        headers : { 'Content-Type': 'application/json' },
+        body    : JSON.stringify({
+          attributes: {
+            pudo_provider  : provider,
+            pudo_point_id  : point.id,
+            pudo_point_name: point.name,
+            pudo_point_addr: point.address,
+          }
+        })
+      })
+      .then(function(r) { return r.json(); })
+      .catch(function(err) { console.error('[PUDO] Cart update failed:', err); });
+    }
+  });
+</script>

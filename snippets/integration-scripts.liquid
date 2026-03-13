@@ -1,0 +1,68 @@
+{%- comment -%}
+  ══════════════════════════════════════════════════════
+  SNIPPET: integration-scripts.liquid
+  PURPOSE: Centralized loader for all integration JS assets.
+           Include once in layout/theme.liquid inside <head> or before </body>.
+  ══════════════════════════════════════════════════════
+
+  USAGE: Add to layout/theme.liquid just before </body>:
+    {% render 'integration-scripts' %}
+{%- endcomment -%}
+
+{%- liquid
+  assign allpay_configured = false
+  if settings.allpay_terminal_number != blank and settings.allpay_public_key != blank
+    assign allpay_configured = true
+  endif
+
+  assign morning_configured = false
+  if settings.morning_api_id != blank and settings.morning_api_secret != blank
+    assign morning_configured = true
+  endif
+
+  assign pudo_configured = false
+  if settings.hfd_api_key != blank or settings.chita_api_key != blank
+    assign pudo_configured = true
+  endif
+-%}
+
+{%- comment -%} Inject ALLPAY_CONFIG for allpay.js {%- endcomment -%}
+{% if allpay_configured %}
+<script>
+  window.ALLPAY_CONFIG = {
+    terminal : {{ settings.allpay_terminal_number | json }},
+    sandbox  : {{ settings.allpay_sandbox_mode | json }},
+    locale   : {{ request.locale.iso_code | json }},
+    rtl      : {% if request.locale.iso_code == 'he' %}true{% else %}false{% endif %}
+  };
+</script>
+{{ 'allpay.js' | asset_url | script_tag }}
+{% endif %}
+
+{%- comment -%} Morning receipt helper {%- endcomment -%}
+{% if morning_configured %}
+{{ 'morning-receipt.js' | asset_url | script_tag }}
+{% endif %}
+
+{%- comment -%} PUDO tracking & widget helper {%- endcomment -%}
+{% if pudo_configured %}
+{{ 'pudo-tracking.js' | asset_url | script_tag }}
+{% endif %}
+
+{%- comment -%}
+  ── Webhook endpoints to register in Shopify Admin ──
+  (Admin → Settings → Notifications → Webhooks)
+  Or via Shopify App using REST/GraphQL:
+
+  Required webhooks:
+    orders/paid       → triggers Morning receipt creation
+    orders/fulfilled  → triggers PUDO shipping label + email
+    app/uninstalled   → cleanup (for Shopify App)
+
+  Endpoint base URL (Shopify App Proxy or external server):
+    https://api.yourdomain.com/webhooks/
+
+  Full webhook URLs:
+    orders/paid      → https://api.yourdomain.com/webhooks/orders/paid
+    orders/fulfilled → https://api.yourdomain.com/webhooks/orders/fulfilled
+{%- endcomment -%}

@@ -1,0 +1,119 @@
+{%- comment -%}
+  ══════════════════════════════════════════════════════
+  SNIPPET: allpay-hosted-fields.liquid
+  PURPOSE: Embed Allpay Hosted Fields secure payment form.
+  DOCS:    https://allpay.co.il/help/hosted-fields
+           https://www.allpay.co.il/en/api-reference
+  ══════════════════════════════════════════════════════
+
+  USAGE (in checkout extension or cart page):
+    {% render 'allpay-hosted-fields', amount: cart.total_price, currency: 'ILS' %}
+
+  REQUIRED SETTINGS (Theme customizer → Integrations → Allpay):
+    - allpay_terminal_number  : Terminal number from Allpay dashboard
+    - allpay_public_key       : Public key for hosted fields init
+    - allpay_sandbox_mode     : true/false
+{%- endcomment -%}
+
+{%- liquid
+  assign allpay_terminal  = settings.allpay_terminal_number | default: ''
+  assign allpay_public_key = settings.allpay_public_key | default: ''
+  assign allpay_sandbox   = settings.allpay_sandbox_mode
+  assign allpay_amount    = amount | default: 0
+  assign allpay_currency  = currency | default: 'ILS'
+
+  if allpay_sandbox
+    assign allpay_api_base = 'https://sandbox.allpay.co.il'
+    assign allpay_js_url   = 'https://sandbox.allpay.co.il/js/hosted-fields.js'
+  else
+    assign allpay_api_base = 'https://api.allpay.co.il'
+    assign allpay_js_url   = 'https://js.allpay.co.il/hosted-fields.js'
+  endif
+-%}
+
+{% if allpay_terminal != '' and allpay_public_key != '' %}
+
+  <!-- Allpay Hosted Fields SDK -->
+  <script src="{{ allpay_js_url }}" defer></script>
+
+  <div id="allpay-hosted-fields-container"
+       data-terminal="{{ allpay_terminal }}"
+       data-amount="{{ allpay_amount }}"
+       data-currency="{{ allpay_currency }}"
+       data-locale="{{ request.locale.iso_code }}"
+       data-rtl="{% if request.locale.iso_code == 'he' %}true{% else %}false{% endif %}">
+
+    <!-- Card number field injected by Allpay SDK -->
+    <div id="allpay-field-card-number"></div>
+    <!-- Expiry field injected by Allpay SDK -->
+    <div id="allpay-field-expiry"></div>
+    <!-- CVV field injected by Allpay SDK -->
+    <div id="allpay-field-cvv"></div>
+
+    <button type="button" id="allpay-submit-btn">
+      {%- if request.locale.iso_code == 'he' -%}שלם עכשיו{%- else -%}Pay Now{%- endif -%}
+    </button>
+
+    <div id="allpay-error-msg" role="alert" aria-live="polite"></div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // ──────────────────────────────────────────────────────
+      // TODO: Initialize Allpay Hosted Fields
+      // Replace with actual SDK init call once API keys are set.
+      // Reference: https://allpay.co.il/help/hosted-fields
+      // ──────────────────────────────────────────────────────
+      if (typeof AllpayHostedFields === 'undefined') {
+        console.warn('[Allpay] SDK not loaded yet.');
+        return;
+      }
+
+      const terminal  = document.getElementById('allpay-hosted-fields-container').dataset.terminal;
+      const amount    = document.getElementById('allpay-hosted-fields-container').dataset.amount;
+      const currency  = document.getElementById('allpay-hosted-fields-container').dataset.currency;
+      const isRTL     = document.getElementById('allpay-hosted-fields-container').dataset.rtl === 'true';
+
+      const hostedFields = AllpayHostedFields.init({
+        terminalNumber : terminal,
+        publicKey      : '{{ allpay_public_key }}',
+        sandbox        : {{ allpay_sandbox | json }},
+        locale         : '{{ request.locale.iso_code }}',
+        fields: {
+          cardNumber : '#allpay-field-card-number',
+          expiry     : '#allpay-field-expiry',
+          cvv        : '#allpay-field-cvv',
+        },
+        style: {
+          direction: isRTL ? 'rtl' : 'ltr',
+        }
+      });
+
+      document.getElementById('allpay-submit-btn').addEventListener('click', function() {
+        hostedFields.createToken({
+          amount   : parseFloat(amount) / 100,  // Shopify sends cents
+          currency : currency,
+        })
+        .then(function(token) {
+          // Send token to Shopify order notes or custom endpoint
+          return fetch('/cart/update.js', {
+            method  : 'POST',
+            headers : { 'Content-Type': 'application/json' },
+            body    : JSON.stringify({ attributes: { allpay_token: token.token } })
+          });
+        })
+        .then(function() {
+          // Proceed to Shopify checkout
+          window.location.href = '/checkout';
+        })
+        .catch(function(err) {
+          document.getElementById('allpay-error-msg').textContent =
+            err.message || 'Payment error. Please try again.';
+        });
+      });
+    });
+  </script>
+
+{% else %}
+  <!-- [DEV NOTE] Allpay credentials not configured in Theme Settings → Integrations -->
+{% endif %}

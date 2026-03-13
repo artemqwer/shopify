@@ -1,1 +1,122 @@
-[]
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Ester Wugman",
+    "theme_version": "1.0.0",
+    "theme_author": "Antigravity",
+    "theme_documentation_url": "",
+    "theme_support_url": ""
+  },
+  {
+    "name": "Integrations",
+    "settings": [
+
+      {
+        "type": "header",
+        "content": "💳 Allpay — Payment Gateway",
+        "info": "API Reference: https://www.allpay.co.il/en/api-reference | Hosted Fields: https://allpay.co.il/help/hosted-fields"
+      },
+      {
+        "type": "text",
+        "id": "allpay_terminal_number",
+        "label": "Allpay Terminal Number",
+        "info": "Found in your Allpay dashboard under Terminal Settings."
+      },
+      {
+        "type": "text",
+        "id": "allpay_public_key",
+        "label": "Allpay Public Key",
+        "info": "Used to initialize Hosted Fields on the client side."
+      },
+      {
+        "type": "text",
+        "id": "allpay_webhook_secret",
+        "label": "Allpay Webhook Secret",
+        "info": "Secret used to verify Allpay payment confirmation webhooks. Store this securely."
+      },
+      {
+        "type": "checkbox",
+        "id": "allpay_sandbox_mode",
+        "label": "Enable Allpay Sandbox Mode",
+        "default": true,
+        "info": "Turn OFF for production. Use sandbox until payment chain is fully tested."
+      },
+
+      {
+        "type": "header",
+        "content": "🧾 Morning (Green Invoice) — Fiscal Receipts",
+        "info": "API: https://greeninvoice.docs.apiary.io/"
+      },
+      {
+        "type": "text",
+        "id": "morning_api_id",
+        "label": "Morning API ID",
+        "info": "Found in Morning / Green Invoice account → API settings."
+      },
+      {
+        "type": "text",
+        "id": "morning_api_secret",
+        "label": "Morning API Secret",
+        "info": "Keep private — never expose client-side."
+      },
+      {
+        "type": "select",
+        "id": "morning_document_type",
+        "label": "Default Document Type",
+        "options": [
+          { "value": "300", "label": "Heshbonit Mas (Invoice + Receipt)" },
+          { "value": "400", "label": "Kabala (Receipt only)" },
+          { "value": "305", "label": "Heshbonit (Invoice only)" }
+        ],
+        "default": "300",
+        "info": "Type 300 (Heshbonit Mas) recommended for B2C."
+      },
+      {
+        "type": "text",
+        "id": "morning_sender_email",
+        "label": "Domain Email for Receipts",
+        "info": "Must be a verified domain email in Morning settings (e.g. orders@yourdomain.com)."
+      },
+      {
+        "type": "checkbox",
+        "id": "morning_sandbox_mode",
+        "label": "Enable Morning Sandbox Mode",
+        "default": true
+      },
+
+      {
+        "type": "header",
+        "content": "📦 Logistics — PUDO (Pickup Points)"
+      },
+      {
+        "type": "select",
+        "id": "pudo_provider",
+        "label": "PUDO Provider",
+        "options": [
+          { "value": "hfd",   "label": "HFD only" },
+          { "value": "chita", "label": "Chita IT only" },
+          { "value": "both",  "label": "Both (HFD + Chita)" }
+        ],
+        "default": "hfd"
+      },
+      {
+        "type": "text",
+        "id": "hfd_api_key",
+        "label": "HFD API Key",
+        "info": "Obtain from HFD portal: https://www.hfd.co.il/en/technological-solutions/"
+      },
+      {
+        "type": "text",
+        "id": "chita_api_key",
+        "label": "Chita IT API Key",
+        "info": "Request from Chita manager: https://www.chita-it.co.il/"
+      },
+      {
+        "type": "checkbox",
+        "id": "pudo_sandbox_mode",
+        "label": "Enable PUDO Sandbox Mode",
+        "default": true
+      }
+    ]
+  }
+]
