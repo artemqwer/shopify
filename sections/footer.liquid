@@ -110,17 +110,17 @@
   </div>
 
   <!-- MOBILE FOOTER -->
-  <div class="flex flex-col md:hidden w-full px-5 pb-8 pt-10 items-center text-center">
+  <div class="flex flex-col md:hidden w-full px-5 pb-12 pt-16 items-start text-left">
 
     <!-- Contacts -->
-    <div class="flex flex-col gap-[18px] mb-[40px]">
+    <div class="flex flex-col gap-[24px] mb-[48px]">
       <a href="tel:+383457895" class="text-[15px] font-normal text-black" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">+38 (345) 78 95</a>
       <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="text-[15px] font-normal text-black" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">Instagram</a>
       <a href="mailto:ESTERWUGMAN@gmail.com" class="text-[15px] font-normal text-black" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">ESTERWUGMAN@gmail.com</a>
     </div>
 
     <!-- Navigation Links -->
-    <ul class="flex flex-col gap-[18px] mb-[40px]">
+    <ul class="flex flex-col gap-[24px] mb-[48px]">
       <li><a href="{{ routes.root_url }}" class="text-[15px] font-normal text-black" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">Home</a></li>
       <li><a href="{{ routes.all_products_collection_url }}" class="text-[15px] font-normal text-black" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">Catalog</a></li>
       <li><a href="{{ routes.root_url }}about" class="text-[15px] font-normal text-black" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">About us</a></li>
@@ -130,12 +130,12 @@
     </ul>
 
     <!-- Language Selector Accordion -->
-    <div class="mb-[40px] w-full">
-      {% form 'localization', class: 'flex flex-col items-center' %}
-        <div class="relative inline-block">
+    <div class="mb-[48px] w-full">
+      {% form 'localization', class: 'flex flex-col items-start' %}
+        <div class="relative inline-block w-full">
           <button type="button" 
-                  onclick="document.getElementById('footer-lang-list').classList.toggle('hidden'); this.querySelector('svg').classList.toggle('rotate-180')"
-                  class="flex items-center justify-center gap-1.5 text-[15px] uppercase font-medium text-black focus:outline-none" 
+                  onclick="document.getElementById('footer-lang-list').classList.toggle('hidden')"
+                  class="flex items-center gap-2 text-[15px] uppercase font-medium text-black focus:outline-none" 
                   style="font-family: var(--font-montserrat), Montserrat, sans-serif;">
             {% case request.locale.iso_code %}
               {% when 'en' %}ENG
@@ -143,23 +143,23 @@
               {% when 'fr' %}FR
               {% when 'he' %}עב
             {% endcase %}
-            <svg class="w-3 h-3 transition-transform duration-300" fill="none" viewBox="0 0 10 6">
-              <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+            <svg class="w-3 h-3" fill="none" viewBox="0 0 10 6">
+              <path d="M1 5L5 1L9 5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </button>
           
-          <div id="footer-lang-list" class="hidden flex flex-col items-center gap-[18px] mt-[18px]">
-            {% if request.locale.iso_code != 'en' %}
-              <button type="submit" name="locale_code" value="en" class="text-[15px] uppercase font-medium text-gray-400 hover:text-black transition-colors" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">ENG</button>
-            {% endif %}
+          <div id="footer-lang-list" class="flex flex-col items-start gap-[24px] mt-[24px]">
             {% if request.locale.iso_code != 'uk' %}
-              <button type="submit" name="locale_code" value="uk" class="text-[15px] uppercase font-medium text-gray-400 hover:text-black transition-colors" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">UA</button>
+              <button type="submit" name="locale_code" value="uk" class="text-[15px] uppercase font-medium text-[#e61a7a] hover:opacity-80 transition-opacity" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">UA</button>
+            {% endif %}
+            {% if request.locale.iso_code != 'en' %}
+              <button type="submit" name="locale_code" value="en" class="text-[15px] uppercase font-medium text-black/40 hover:text-black transition-colors" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">ENG</button>
             {% endif %}
             {% if request.locale.iso_code != 'fr' %}
-              <button type="submit" name="locale_code" value="fr" class="text-[15px] uppercase font-medium text-gray-400 hover:text-black transition-colors" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">FR</button>
+              <button type="submit" name="locale_code" value="fr" class="text-[15px] uppercase font-medium text-black/40 hover:text-black transition-colors" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">FR</button>
             {% endif %}
             {% if request.locale.iso_code != 'he' %}
-              <button type="submit" name="locale_code" value="he" class="text-[17px] font-medium text-gray-400 hover:text-black transition-colors">עב</button>
+              <button type="submit" name="locale_code" value="he" class="text-[17px] font-medium text-black/40 hover:text-black transition-colors">עב</button>
             {% endif %}
           </div>
         </div>
@@ -167,11 +167,11 @@
     </div>
 
     <!-- Copyright and Payments -->
-    <div class="flex flex-col items-center gap-[12px] pt-4 w-full">
+    <div class="flex flex-col items-center gap-[12px] pt-8 w-full border-t border-[#F5F5F5]">
       <p class="text-[10px] font-light tracking-[0.05em] text-[#999] uppercase" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">
         © 2026 ESTER WUGMAN
       </p>
-      <div class="flex items-center justify-center gap-3">
+      <div class="flex items-center justify-center gap-5 scale-90">
         <img src="{{ 'apple-pay.svg' | asset_url }}" alt="Apple Pay" width="34" height="14" class="h-[14px] w-auto object-contain" />
         <img src="{{ 'mastercard.svg' | asset_url }}" alt="Mastercard" width="28" height="16" class="h-[16px] w-auto object-contain" />
         <img src="{{ 'googlePay.svg' | asset_url }}" alt="Google Pay" width="34" height="14" class="h-[14px] w-auto object-contain" />
