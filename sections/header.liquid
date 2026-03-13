@@ -10,7 +10,7 @@
     <div class="flex justify-between items-center h-[60px] md:h-[102px]">
 
       <div class="md:hidden flex-1 flex items-center" style="z-index: 60;">
-        <button type="button" class="mobile-menu-toggle relative w-6 h-6 text-gray-900 focus:outline-none" aria-label="Menu" onclick="document.getElementById('mobile-menu').classList.toggle('hidden'); this.classList.toggle('menu-open')">
+        <button type="button" class="mobile-menu-toggle relative w-6 h-6 text-gray-900 focus:outline-none" aria-label="Menu" onclick="toggleMobileMenu(this)">
           <span class="absolute block h-[1.5px] w-6 bg-current transform transition duration-300 ease-in-out top-1/2 -translate-y-2"></span>
           <span class="absolute block h-[1.5px] w-6 bg-current transform transition duration-300 ease-in-out top-1/2"></span>
           <span class="absolute block h-[1.5px] w-6 bg-current transform transition duration-300 ease-in-out top-1/2 translate-y-2"></span>
@@ -155,7 +155,7 @@
   </div>
 
   <!-- Mobile Menu -->
-  <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full bg-white border-t border-[#F5F5F5] shadow-lg z-50">
+  <div id="mobile-menu" class="md:hidden absolute top-full left-0 w-full bg-white shadow-lg z-40 max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
     <nav class="flex flex-col px-8 py-4 border-t border-[#F5F5F5]">
       <a href="{{ routes.root_url }}" class="py-4 text-[14px] font-medium tracking-widest text-gray-900 uppercase border-b border-[#F5F5F5] hover:text-[#d62873] transition-colors">{{ 'header.home' | t }}</a>
       <a href="{{ routes.all_products_collection_url }}" class="py-4 text-[14px] font-medium tracking-widest text-gray-900 uppercase border-b border-[#F5F5F5] hover:text-[#d62873] transition-colors">{{ 'header.catalog' | t }}</a>
@@ -221,5 +221,17 @@
         }
       }
     });
+
+    // Mobile Menu Toggle logic
+    function toggleMobileMenu(btn) {
+      btn.classList.toggle('menu-open');
+      const menu = document.getElementById('mobile-menu');
+      if (menu.style.maxHeight && menu.style.maxHeight !== '0px') {
+        menu.style.maxHeight = '0px';
+      } else {
+        menu.style.maxHeight = menu.scrollHeight + "px";
+      }
+    }
+    window.toggleMobileMenu = toggleMobileMenu;
   })();
 </script>
