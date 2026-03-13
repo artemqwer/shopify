@@ -9,14 +9,24 @@
   <div class="w-full max-w-[1920px] mx-auto px-4 md:px-[160px]">
     <div class="flex justify-between items-center h-[60px] md:h-[102px]">
 
-      <!-- Mobile Header Left: Hamburger Menu -->
-      <div class="md:hidden flex-1 flex items-center">
-        <button type="button" class="text-gray-900" aria-label="Menu" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
-           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16" />
-           </svg>
+      <div class="md:hidden flex-1 flex items-center" style="z-index: 60;">
+        <button type="button" class="mobile-menu-toggle relative w-6 h-6 text-gray-900 focus:outline-none" aria-label="Menu" onclick="document.getElementById('mobile-menu').classList.toggle('hidden'); this.classList.toggle('menu-open')">
+          <span class="absolute block h-[1.5px] w-6 bg-current transform transition duration-300 ease-in-out top-1/2 -translate-y-2"></span>
+          <span class="absolute block h-[1.5px] w-6 bg-current transform transition duration-300 ease-in-out top-1/2"></span>
+          <span class="absolute block h-[1.5px] w-6 bg-current transform transition duration-300 ease-in-out top-1/2 translate-y-2"></span>
         </button>
       </div>
+      <style>
+        .mobile-menu-toggle.menu-open span:nth-child(1) {
+          transform: translateY(0) rotate(45deg);
+        }
+        .mobile-menu-toggle.menu-open span:nth-child(2) {
+          opacity: 0;
+        }
+        .mobile-menu-toggle.menu-open span:nth-child(3) {
+          transform: translateY(0) rotate(-45deg);
+        }
+      </style>
 
       <!-- Desktop Left Navigation -->
       <nav class="hidden md:flex items-center flex-1 space-x-12 rtl:space-x-reverse">
