@@ -112,52 +112,66 @@
     <div class="flex flex-col gap-6 w-full">
 
       <!-- NAVIGATION Accordion -->
-      <details class="w-full group pb-6 border-b border-[#F5F5F5]">
-        <summary class="cursor-pointer list-none flex justify-between items-center text-left text-black uppercase mb-0 marker:hidden">
+      <div class="w-full border-b border-[#F5F5F5] pb-4">
+        <button type="button" class="mobile-accordion-btn w-full flex justify-between items-center text-left text-black uppercase pb-2" onclick="toggleFooterAccordion(this)">
           <span style="font-family: var(--font-montserrat), Montserrat, sans-serif;" class="font-medium tracking-widest text-[11px] text-gray-400">{{ 'footer.navigation' | t }}</span>
-          <svg class="w-4 h-4 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="m6 9 6 6 6-6"/></svg>
-        </summary>
-        <div class="pt-6">
-          <ul class="space-y-[20px]">
+          <svg class="accordion-icon w-4 h-4 text-gray-400 transition-transform duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div class="accordion-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+          <ul class="space-y-[20px] pt-4 pb-2">
             <li><a href="{{ routes.root_url }}" class="text-[13px] font-normal text-black">{{ 'footer.home' | t }}</a></li>
             <li><a href="{{ routes.all_products_collection_url }}" class="text-[13px] font-normal text-black">{{ 'footer.catalog' | t }}</a></li>
             <li><a href="{{ routes.search_url }}?view=popular" class="text-[13px] font-normal text-black">{{ 'footer.popular' | t }}</a></li>
             <li><a href="{{ routes.root_url }}about" class="text-[13px] font-normal text-black">{{ 'footer.about' | t }}</a></li>
           </ul>
         </div>
-      </details>
+      </div>
 
       <!-- CONTACTS Accordion -->
-      <details class="w-full group pb-6 border-b border-[#F5F5F5]">
-        <summary class="cursor-pointer list-none flex justify-between items-center text-left text-black uppercase mb-0 marker:hidden">
+      <div class="w-full border-b border-[#F5F5F5] pb-4">
+        <button type="button" class="mobile-accordion-btn w-full flex justify-between items-center text-left text-black uppercase pb-2" onclick="toggleFooterAccordion(this)">
           <span style="font-family: var(--font-montserrat), Montserrat, sans-serif;" class="font-medium tracking-widest text-[11px] text-gray-400">{{ 'footer.contacts' | t }}</span>
-          <svg class="w-4 h-4 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="m6 9 6 6 6-6"/></svg>
-        </summary>
-        <div class="pt-6">
-          <ul class="space-y-[20px]">
+          <svg class="accordion-icon w-4 h-4 text-gray-400 transition-transform duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div class="accordion-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+          <ul class="space-y-[20px] pt-4 pb-2">
             <li><a href="tel:+383457895" class="text-[13px] font-normal text-black">{{ 'footer.phone' | t }}</a></li>
             <li><a href="mailto:info@hoops.com.ua" class="text-[13px] font-normal text-black underline underline-offset-4 decoration-black/20">{{ 'footer.email' | t }}</a></li>
             <li><a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="text-[13px] font-normal text-black">{{ 'footer.instagram' | t }}</a></li>
           </ul>
         </div>
-      </details>
+      </div>
 
       <!-- LEGAL Accordion -->
-      <details class="w-full group">
-        <summary class="cursor-pointer list-none flex justify-between items-center text-left text-black uppercase mb-0 marker:hidden">
+      <div class="w-full">
+        <button type="button" class="mobile-accordion-btn w-full flex justify-between items-center text-left text-black uppercase pb-2" onclick="toggleFooterAccordion(this)">
           <span style="font-family: var(--font-montserrat), Montserrat, sans-serif;" class="font-medium tracking-widest text-[11px] text-gray-400">{{ 'footer.legal' | t }}</span>
-          <svg class="w-4 h-4 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="m6 9 6 6 6-6"/></svg>
-        </summary>
-        <div class="pt-6">
-          <ul class="space-y-[20px]">
+          <svg class="accordion-icon w-4 h-4 text-gray-400 transition-transform duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div class="accordion-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+          <ul class="space-y-[20px] pt-4 pb-2">
             <li><a href="{{ routes.root_url }}public-offer" class="text-[13px] font-normal text-black">{{ 'footer.public_offer' | t }}</a></li>
             <li><a href="{{ routes.root_url }}privacy" class="text-[13px] font-normal text-black">{{ 'footer.privacy' | t }}</a></li>
             <li><a href="{{ routes.root_url }}shipping" class="text-[13px] font-normal text-black">{{ 'footer.shipping' | t }}</a></li>
           </ul>
         </div>
-      </details>
+      </div>
 
     </div>
+    <script>
+      function toggleFooterAccordion(btn) {
+        const content = btn.nextElementSibling;
+        const icon = btn.querySelector('.accordion-icon');
+        
+        if (content.style.maxHeight) {
+          content.style.maxHeight = null;
+          if (icon) icon.style.transform = 'rotate(0deg)';
+        } else {
+          content.style.maxHeight = content.scrollHeight + "px";
+          if (icon) icon.style.transform = 'rotate(-180deg)';
+        }
+      }
+    </script>
 
     <!-- Payment Methods Mobile -->
     <div class="mt-[48px] mb-[64px] flex flex-wrap justify-center items-center w-full gap-4 md:gap-[34px]">
