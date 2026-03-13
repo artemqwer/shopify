@@ -129,15 +129,40 @@
       <li><a href="{{ routes.root_url }}shipping" class="text-[15px] font-normal text-black" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">Shipping & Payment</a></li>
     </ul>
 
-    <!-- Language Selector Vertical -->
-    <div class="flex flex-col gap-[18px] mb-[40px]">
-      {% form 'localization', class: 'flex flex-col items-center gap-[18px]' %}
-        <button type="submit" name="locale_code" value="en" class="flex items-center gap-1 text-[15px] uppercase font-medium {% if request.locale.iso_code == 'en' %}text-black{% else %}text-gray-400{% endif %}" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">
-          ENG <svg class="w-2.5 h-2.5" fill="none" viewBox="0 0 10 6"><path d="M1 5L5 1L9 5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
-        <button type="submit" name="locale_code" value="uk" class="text-[15px] uppercase font-medium {% if request.locale.iso_code == 'uk' %}text-[#e61a7a]{% else %}text-gray-400{% endif %}" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">UA</button>
-        <button type="submit" name="locale_code" value="fr" class="text-[15px] uppercase font-medium {% if request.locale.iso_code == 'fr' %}text-gray-400{% endif %}" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">FR</button>
-        <button type="submit" name="locale_code" value="he" class="text-[17px] font-medium {% if request.locale.iso_code == 'he' %}text-gray-400{% endif %}">עב</button>
+    <!-- Language Selector Accordion -->
+    <div class="mb-[40px] w-full">
+      {% form 'localization', class: 'flex flex-col items-center' %}
+        <div class="relative inline-block">
+          <button type="button" 
+                  onclick="document.getElementById('footer-lang-list').classList.toggle('hidden'); this.querySelector('svg').classList.toggle('rotate-180')"
+                  class="flex items-center justify-center gap-1.5 text-[15px] uppercase font-medium text-black focus:outline-none" 
+                  style="font-family: var(--font-montserrat), Montserrat, sans-serif;">
+            {% case request.locale.iso_code %}
+              {% when 'en' %}ENG
+              {% when 'uk' %}UA
+              {% when 'fr' %}FR
+              {% when 'he' %}עב
+            {% endcase %}
+            <svg class="w-3 h-3 transition-transform duration-300" fill="none" viewBox="0 0 10 6">
+              <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          
+          <div id="footer-lang-list" class="hidden flex flex-col items-center gap-[18px] mt-[18px]">
+            {% if request.locale.iso_code != 'en' %}
+              <button type="submit" name="locale_code" value="en" class="text-[15px] uppercase font-medium text-gray-400 hover:text-black transition-colors" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">ENG</button>
+            {% endif %}
+            {% if request.locale.iso_code != 'uk' %}
+              <button type="submit" name="locale_code" value="uk" class="text-[15px] uppercase font-medium text-gray-400 hover:text-black transition-colors" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">UA</button>
+            {% endif %}
+            {% if request.locale.iso_code != 'fr' %}
+              <button type="submit" name="locale_code" value="fr" class="text-[15px] uppercase font-medium text-gray-400 hover:text-black transition-colors" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">FR</button>
+            {% endif %}
+            {% if request.locale.iso_code != 'he' %}
+              <button type="submit" name="locale_code" value="he" class="text-[17px] font-medium text-gray-400 hover:text-black transition-colors">עב</button>
+            {% endif %}
+          </div>
+        </div>
       {% endform %}
     </div>
 
