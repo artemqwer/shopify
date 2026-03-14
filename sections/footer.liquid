@@ -148,7 +148,7 @@
             </svg>
           </button>
           
-          <div id="footer-lang-list" class="flex flex-col items-start gap-[24px] mt-[24px]">
+          <div id="footer-lang-list" class="flex flex-col items-start gap-[24px] mt-[24px] hidden">
             {% if request.locale.iso_code != 'uk' %}
               <button type="submit" name="locale_code" value="uk" class="text-[15px] uppercase font-medium text-[#e61a7a] hover:opacity-80 transition-opacity" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">UA</button>
             {% endif %}
