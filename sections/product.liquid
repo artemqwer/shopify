@@ -399,28 +399,26 @@
         {{ ui_desc }}
       </p>
 
-      <!-- Color swatches -->
-      <div class="flex items-center gap-3 mb-6">
-        <button class="color-swatch active" style="background:#1b2536;" aria-label="Dark Blue"></button>
-        <button class="color-swatch" style="background:#63141f;" aria-label="Bordeaux"></button>
-        <button class="color-swatch" style="background:#3d2b2b;" aria-label="Dark brown"></button>
+      <!-- Color swatches + size guide link -->
+      <div class="flex items-center justify-between mb-4">
+        <div class="flex items-center gap-3">
+          <button class="color-swatch active" style="background:#1b2536;" aria-label="Dark Blue"></button>
+          <button class="color-swatch" style="background:#63141f;" aria-label="Bordeaux"></button>
+          <button class="color-swatch" style="background:#3d2b2b;" aria-label="Dark brown"></button>
+        </div>
+        <button type="button" onclick="openSizeGuide()" class="text-[12px] text-[#888] underline hover:text-[#333] transition-colors bg-transparent border-none cursor-pointer p-0"
+           style="font-family: var(--font-montserrat), Montserrat, sans-serif;">
+          {{ txt_size_guide }}
+        </button>
       </div>
 
       <!-- Size selector -->
-      <div class="mb-2">
+      <div class="mb-7">
         <div class="flex items-center gap-3">
           <button class="size-btn" onclick="selectSize(this)">S</button>
           <button class="size-btn active" onclick="selectSize(this)">M</button>
           <button class="size-btn" onclick="selectSize(this)">L</button>
         </div>
-      </div>
-
-      <!-- Size guide link -->
-      <div class="mb-7 text-right" {% if request.locale.iso_code == 'he' %}style="text-align:left"{% endif %}>
-        <button type="button" onclick="openSizeGuide()" class="text-[12px] text-[#888] underline hover:text-[#333] transition-colors bg-transparent border-none cursor-pointer p-0"
-           style="font-family: var(--font-montserrat), Montserrat, sans-serif;">
-          {{ txt_size_guide }}
-        </button>
       </div>
 
       <!-- Add to cart -->
