@@ -335,7 +335,8 @@
       <span class="text-[13px] font-medium tracking-[0.12em] text-[#222] whitespace-nowrap">{{ txt_express }}</span>
     </div>
     <button type="button" class="btn-applepay" onclick="confirmOrder('applepay')">
-      <img src="{{ 'apple-pay.svg' | asset_url }}" height="20" style="filter:invert(1);" alt="Apple Pay">
+      <span>Pay with</span>
+      <img src="{{ 'apple-pay.svg' | asset_url }}" height="22" style="filter:invert(1); margin-top:1px;" alt="Apple Pay">
     </button>
   </div>
 
@@ -487,7 +488,8 @@
         <!-- Dynamic confirm button -->
         <div id="chk-confirm-wrapper">
           <button type="button" class="btn-applepay" id="btn-applepay-confirm" onclick="confirmOrder('applepay')">
-            <img src="{{ 'apple-pay.svg' | asset_url }}" height="20" style="filter:invert(1);" alt="Apple Pay">
+            <span>Pay with</span>
+            <img src="{{ 'apple-pay.svg' | asset_url }}" height="22" style="filter:invert(1); margin-top:1px;" alt="Apple Pay">
           </button>
           <button type="button" class="btn-confirm" id="btn-regular-confirm" style="display:none;" onclick="confirmOrder('regular')">
             {{ txt_confirm }}
