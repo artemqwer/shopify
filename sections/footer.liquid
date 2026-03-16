@@ -112,19 +112,19 @@
 
     <!-- Contacts -->
     <div class="flex flex-col gap-[24px] mb-[40px]">
-      <a href="tel:+383457895" class="text-[15px] font-normal text-black" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">+38 (345) 78 95</a>
-      <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="text-[15px] font-normal text-black" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">Instagram</a>
-      <a href="mailto:ESTERWUGMAN@gmail.com" class="text-[15px] font-normal text-black" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">ESTERWUGMAN@gmail.com</a>
+      <a href="tel:+383457895" class="text-[15px] font-normal text-black" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">{{ 'footer.phone' | t }}</a>
+      <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="text-[15px] font-normal text-black" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">{{ 'footer.instagram' | t }}</a>
+      <a href="mailto:ESTERWUGMAN@gmail.com" class="text-[15px] font-normal text-black" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">{{ 'footer.email' | t }}</a>
     </div>
 
     <!-- Navigation Links -->
     <ul class="flex flex-col gap-[24px] mb-[40px]">
-      <li><a href="{{ routes.root_url }}" class="text-[15px] font-normal text-black" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">Home</a></li>
-      <li><a href="{{ routes.all_products_collection_url }}" class="text-[15px] font-normal text-black" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">Catalog</a></li>
-      <li><a href="{{ routes.root_url }}about" class="text-[15px] font-normal text-black" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">About us</a></li>
-      <li><a href="{{ routes.root_url }}public-offer" class="text-[15px] font-normal text-black" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">Public Offer</a></li>
-      <li><a href="{{ routes.root_url }}privacy" class="text-[15px] font-normal text-black" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">Privacy Policy</a></li>
-      <li><a href="{{ routes.root_url }}shipping" class="text-[15px] font-normal text-black" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">Shipping & Payment</a></li>
+      <li><a href="{{ routes.root_url }}" class="text-[15px] font-normal text-black" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">{{ 'footer.home' | t }}</a></li>
+      <li><a href="{{ routes.all_products_collection_url }}" class="text-[15px] font-normal text-black" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">{{ 'footer.catalog' | t }}</a></li>
+      <li><a href="{{ routes.root_url }}about" class="text-[15px] font-normal text-black" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">{{ 'footer.about' | t }}</a></li>
+      <li><a href="{{ routes.root_url }}public-offer" class="text-[15px] font-normal text-black" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">{{ 'footer.public_offer' | t }}</a></li>
+      <li><a href="{{ routes.root_url }}privacy" class="text-[15px] font-normal text-black" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">{{ 'footer.privacy' | t }}</a></li>
+      <li><a href="{{ routes.root_url }}shipping" class="text-[15px] font-normal text-black" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">{{ 'footer.shipping' | t }}</a></li>
     </ul>
 
     <!-- Language Selector Accordion -->
@@ -167,7 +167,7 @@
     <!-- Copyright and Payments -->
     <div class="flex flex-col items-center gap-[12px] pt-8 w-full border-t border-[#F5F5F5]">
       <p class="text-[10px] font-light tracking-[0.05em] text-[#999] uppercase" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">
-        © 2026 ESTER WUGMAN
+        {{ 'footer.copyright' | t }}
       </p>
       <div class="flex items-center justify-center gap-5 scale-90">
         <img src="{{ 'apple-pay.svg' | asset_url }}" alt="Apple Pay" width="34" height="14" class="h-[14px] w-auto object-contain" />
