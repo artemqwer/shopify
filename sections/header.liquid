@@ -49,6 +49,9 @@
         #site-header.header-transparent .header-mobile-icon {
           color: white;
         }
+        .mobile-menu-toggle.menu-open span {
+          background-color: #111827;
+        }
       </style>
 
       <!-- Desktop Left Navigation -->
@@ -198,13 +201,9 @@
 
   <!-- Mobile Menu (full screen overlay) -->
   <div id="mobile-menu" class="md:hidden fixed inset-0 bg-white z-[55]">
-    <!-- Menu top bar: close button + logo -->
-    <div class="relative flex items-center justify-between h-[60px] px-4">
-      <button type="button" onclick="closeMobileMenu()" class="relative w-6 h-6 focus:outline-none flex-shrink-0" aria-label="Close menu">
-        <span class="absolute block h-[1.5px] w-6 bg-gray-900 transform rotate-45 top-1/2 left-0"></span>
-        <span class="absolute block h-[1.5px] w-6 bg-gray-900 transform -rotate-45 top-1/2 left-0"></span>
-      </button>
-      <a href="{{ routes.root_url }}" class="absolute left-1/2 -translate-x-1/2">
+    <!-- Menu top bar: logo only (burger stays in header, lifted above via JS) -->
+    <div class="flex items-center justify-center h-[60px]">
+      <a href="{{ routes.root_url }}">
         <img
           src="{{ 'logo-image.svg' | asset_url }}"
           alt="Ester Wugman Logo"
@@ -296,13 +295,24 @@
         menu.classList.add('is-open');
         backdrop.classList.add('is-open');
         document.body.style.overflow = 'hidden';
+        // Lift burger above the full-screen menu (z-55)
+        btn.style.position = 'fixed';
+        btn.style.zIndex = '60';
+        btn.style.top = '18px';
+        btn.style.left = '16px';
       }
     }
     function closeMobileMenu() {
       const menu = document.getElementById('mobile-menu');
       const backdrop = document.getElementById('mobile-menu-backdrop');
       const btn = document.querySelector('.mobile-menu-toggle');
-      if (btn) btn.classList.remove('menu-open');
+      if (btn) {
+        btn.classList.remove('menu-open');
+        btn.style.position = '';
+        btn.style.zIndex = '';
+        btn.style.top = '';
+        btn.style.left = '';
+      }
       menu.classList.remove('is-open');
       backdrop.classList.remove('is-open');
       document.body.style.overflow = '';
