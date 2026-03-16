@@ -59,6 +59,12 @@
     "product_4": "Foulard Vintage"
   },
   "catalog": {
-    "filter": "Filtrer"
+    "filter": "Filtrer",
+    "price_from": "De",
+    "price_to": "À",
+    "apply": "Appliquer",
+    "no_filters": "Les filtres apparaîtront une fois les produits ajoutés.",
+    "clear_filters": "Effacer",
+    "apply_filters": "Appliquer"
   }
 }

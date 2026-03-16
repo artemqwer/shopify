@@ -59,7 +59,13 @@
     "product_4": "מטפחת וינטג'"
   },
   "catalog": {
-    "filter": "סינון"
+    "filter": "סינון",
+    "price_from": "מ-",
+    "price_to": "עד",
+    "apply": "החל",
+    "no_filters": "הפילטרים יופיעו לאחר הוספת מוצרים.",
+    "clear_filters": "נקה",
+    "apply_filters": "החל"
   },
   "shopify": {
     "checkout": {

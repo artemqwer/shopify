@@ -59,6 +59,12 @@
     "product_4": "Vintage Scarf"
   },
   "catalog": {
-    "filter": "Filter"
+    "filter": "Filter",
+    "price_from": "From",
+    "price_to": "To",
+    "apply": "Apply",
+    "no_filters": "Filters will appear once products are added.",
+    "clear_filters": "Clear",
+    "apply_filters": "Apply"
   }
 }
