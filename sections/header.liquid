@@ -26,6 +26,15 @@
         .mobile-menu-toggle.menu-open span:nth-child(3) {
           transform: translateY(0) rotate(-45deg);
         }
+        #mobile-menu {
+          opacity: 0;
+          pointer-events: none;
+          transition: opacity 0.25s ease;
+        }
+        #mobile-menu.is-open {
+          opacity: 1;
+          pointer-events: auto;
+        }
       </style>
 
       <!-- Desktop Left Navigation -->
@@ -135,9 +144,16 @@
           </div>
         </div>
 
-        <!-- Search button -->
+        <!-- Search button (desktop text) -->
         <button type="button" class="text-[14px] font-medium tracking-widest text-gray-900 uppercase hover:text-[#d62873] transition-colors hidden md:block" onclick="window.location='{{ routes.root_url }}search'">
           {{ 'header.search' | t }}
+        </button>
+
+        <!-- Search icon (mobile only) -->
+        <button type="button" class="md:hidden text-gray-900 hover:text-[#d62873] transition-colors" onclick="window.location='{{ routes.root_url }}search'">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+          </svg>
         </button>
 
         <!-- Cart trigger -->
@@ -148,48 +164,53 @@
           <svg class="md:hidden w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
           </svg>
-          <span class="text-[#d62873] ml-1 font-bold">(<span data-cart-count>{{ cart.item_count | default: 0 }}</span>)</span>
+          <span class="text-[#d62873] ml-1 font-bold hidden md:inline">(<span data-cart-count>{{ cart.item_count | default: 0 }}</span>)</span>
         </button>
       </div>
 
     </div>
   </div>
 
-  <!-- Mobile Menu -->
-  <div id="mobile-menu" class="md:hidden absolute top-full left-0 w-full bg-white shadow-lg z-40 max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
-    <nav class="flex flex-col px-8 py-4 border-t border-[#F5F5F5]">
-      <a href="{{ routes.root_url }}" class="py-4 text-[14px] font-medium tracking-widest text-gray-900 uppercase border-b border-[#F5F5F5] hover:text-[#d62873] transition-colors">{{ 'header.home' | t }}</a>
-      <a href="{{ routes.all_products_collection_url }}" class="py-4 text-[14px] font-medium tracking-widest text-gray-900 uppercase border-b border-[#F5F5F5] hover:text-[#d62873] transition-colors">{{ 'header.catalog' | t }}</a>
-      <a href="{{ routes.search_url }}?view=popular" 
-         class="py-4 text-[14px] font-medium tracking-widest uppercase border-b border-[#F5F5F5] transition-colors 
-                {% if template.suffix == 'popular' or request.query_string contains 'view=popular' %}text-[#e61a7a]{% else %}text-gray-900 hover:text-[#e61a7a]{% endif %}">
-        {{ 'header.popular' | t }}
-      </a>
+  <!-- Mobile Menu (full-screen overlay) -->
+  <div id="mobile-menu" class="md:hidden fixed top-[60px] left-0 right-0 bottom-0 bg-white z-40 overflow-y-auto">
+    <nav class="flex flex-col px-10 pt-8 pb-12" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">
+      <a href="{{ routes.all_products_collection_url }}" class="text-[24px] font-light text-gray-900 py-3 hover:text-[#d62873] transition-colors">{{ 'header.catalog' | t }}</a>
+      <a href="{{ routes.root_url }}" class="text-[24px] font-light text-gray-900 py-3 hover:text-[#d62873] transition-colors">{{ 'header.home' | t }}</a>
+      <a href="{{ routes.root_url }}about" class="text-[24px] font-light text-gray-900 py-3 hover:text-[#d62873] transition-colors">{{ 'footer.about' | t }}</a>
+      <a href="{{ routes.root_url }}public-offer" class="text-[24px] font-light text-gray-900 py-3 hover:text-[#d62873] transition-colors">{{ 'footer.public_offer' | t }}</a>
+      <a href="{{ routes.root_url }}privacy" class="text-[24px] font-light text-gray-900 py-3 hover:text-[#d62873] transition-colors">{{ 'footer.privacy' | t }}</a>
+      <a href="{{ routes.root_url }}shipping" class="text-[24px] font-light text-gray-900 py-3 hover:text-[#d62873] transition-colors">{{ 'footer.shipping' | t }}</a>
 
-      <!-- Mobile Language Switcher -->
-      <div class="py-4">
-        <p class="text-[11px] tracking-widest text-gray-400 uppercase mb-3">Language / Мова</p>
-        {% form 'localization', class: 'flex items-center gap-6' %}
-          <button type="submit" name="locale_code" value="en"
-                  class="text-[13px] tracking-widest uppercase font-medium leading-none
-                         {% if request.locale.iso_code == 'en' %}text-[#e61a7a]{% else %}text-gray-500 hover:text-[#e61a7a]{% endif %}">
-            ENG
+      <!-- Language Selector -->
+      <div class="mt-4">
+        {% form 'localization', class: 'flex flex-col items-start' %}
+          <button type="button"
+                  onclick="document.getElementById('mobile-menu-lang-list').classList.toggle('hidden')"
+                  class="flex items-center gap-2 text-[24px] font-light text-[#e61a7a] focus:outline-none py-3">
+            {% case request.locale.iso_code %}
+              {% when 'en' %}ENG
+              {% when 'uk' %}UA
+              {% when 'fr' %}FR
+              {% when 'he' %}עב
+            {% endcase %}
+            <svg class="w-3 h-3" fill="none" viewBox="0 0 10 6">
+              <path d="M1 5L5 1L9 5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
           </button>
-          <button type="submit" name="locale_code" value="uk"
-                  class="text-[13px] tracking-widest uppercase font-medium leading-none
-                         {% if request.locale.iso_code == 'uk' %}text-[#e61a7a]{% else %}text-gray-500 hover:text-[#e61a7a]{% endif %}">
-            UA
-          </button>
-          <button type="submit" name="locale_code" value="fr"
-                  class="text-[13px] tracking-widest uppercase font-medium leading-none
-                         {% if request.locale.iso_code == 'fr' %}text-[#e61a7a]{% else %}text-gray-500 hover:text-[#e61a7a]{% endif %}">
-            FR
-          </button>
-          <button type="submit" name="locale_code" value="he"
-                  class="text-[15px] font-medium leading-none
-                         {% if request.locale.iso_code == 'he' %}text-[#e61a7a]{% else %}text-gray-500 hover:text-[#e61a7a]{% endif %}">
-            עב
-          </button>
+          <div id="mobile-menu-lang-list" class="flex flex-col items-start hidden">
+            {% if request.locale.iso_code != 'uk' %}
+              <button type="submit" name="locale_code" value="uk" class="text-[24px] font-light text-gray-900 hover:text-[#e61a7a] transition-colors py-3">UA</button>
+            {% endif %}
+            {% if request.locale.iso_code != 'en' %}
+              <button type="submit" name="locale_code" value="en" class="text-[24px] font-light text-gray-900 hover:text-[#e61a7a] transition-colors py-3">ENG</button>
+            {% endif %}
+            {% if request.locale.iso_code != 'fr' %}
+              <button type="submit" name="locale_code" value="fr" class="text-[24px] font-light text-gray-900 hover:text-[#e61a7a] transition-colors py-3">FR</button>
+            {% endif %}
+            {% if request.locale.iso_code != 'he' %}
+              <button type="submit" name="locale_code" value="he" class="text-[24px] font-light text-gray-900 hover:text-[#e61a7a] transition-colors py-3">עב</button>
+            {% endif %}
+          </div>
         {% endform %}
       </div>
     </nav>
@@ -224,19 +245,11 @@
     });
 
     // Mobile Menu Toggle logic
-    function closeMobileMenu(menu, toggle) {
-      menu.style.maxHeight = '0px';
-      toggle.classList.remove('menu-open');
-    }
-
     function toggleMobileMenu(btn) {
       btn.classList.toggle('menu-open');
       const menu = document.getElementById('mobile-menu');
-      if (menu.style.maxHeight && menu.style.maxHeight !== '0px') {
-        menu.style.maxHeight = '0px';
-      } else {
-        menu.style.maxHeight = menu.scrollHeight + "px";
-      }
+      const isOpen = menu.classList.toggle('is-open');
+      document.body.style.overflow = isOpen ? 'hidden' : '';
     }
     window.toggleMobileMenu = toggleMobileMenu;
 
