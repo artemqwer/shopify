@@ -36,12 +36,14 @@
           pointer-events: auto;
         }
         #mobile-menu {
-          transform: translateX(-100%);
+          transform: translateY(-12px);
+          opacity: 0;
           pointer-events: none;
-          transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+          transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
         }
         #mobile-menu.is-open {
-          transform: translateX(0);
+          transform: translateY(0);
+          opacity: 1;
           pointer-events: auto;
         }
       </style>
@@ -183,22 +185,22 @@
   <!-- Mobile Menu Backdrop -->
   <div id="mobile-menu-backdrop" class="md:hidden fixed inset-0 bg-black/40 z-40" onclick="closeMobileMenu()"></div>
 
-  <!-- Mobile Menu (slide-in drawer) -->
-  <div id="mobile-menu" class="md:hidden fixed top-0 left-0 bottom-0 w-[300px] bg-white z-50 overflow-y-auto shadow-2xl">
-    <nav class="flex flex-col px-10 pt-[80px] pb-12" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">
-      <a href="{{ routes.all_products_collection_url }}" class="text-[24px] font-light text-gray-900 py-3 hover:text-[#d62873] transition-colors">{{ 'header.catalog' | t }}</a>
-      <a href="{{ routes.root_url }}" class="text-[24px] font-light text-gray-900 py-3 hover:text-[#d62873] transition-colors">{{ 'header.home' | t }}</a>
-      <a href="{{ routes.root_url }}about" class="text-[24px] font-light text-gray-900 py-3 hover:text-[#d62873] transition-colors">{{ 'footer.about' | t }}</a>
-      <a href="{{ routes.root_url }}public-offer" class="text-[24px] font-light text-gray-900 py-3 hover:text-[#d62873] transition-colors">{{ 'footer.public_offer' | t }}</a>
-      <a href="{{ routes.root_url }}privacy" class="text-[24px] font-light text-gray-900 py-3 hover:text-[#d62873] transition-colors">{{ 'footer.privacy' | t }}</a>
-      <a href="{{ routes.root_url }}shipping" class="text-[24px] font-light text-gray-900 py-3 hover:text-[#d62873] transition-colors">{{ 'footer.shipping' | t }}</a>
+  <!-- Mobile Menu (full-width dropdown from header) -->
+  <div id="mobile-menu" class="md:hidden fixed top-[60px] left-0 right-0 bg-white z-50 shadow-md">
+    <nav class="flex flex-col px-5 pt-5 pb-5 gap-3" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">
+      <a href="{{ routes.all_products_collection_url }}" class="text-[16px] font-light text-gray-900 leading-none hover:text-[#d62873] transition-colors">{{ 'header.catalog' | t }}</a>
+      <a href="{{ routes.root_url }}" class="text-[16px] font-light text-gray-900 leading-none hover:text-[#d62873] transition-colors">{{ 'header.home' | t }}</a>
+      <a href="{{ routes.root_url }}about" class="text-[16px] font-light text-gray-900 leading-none hover:text-[#d62873] transition-colors">{{ 'footer.about' | t }}</a>
+      <a href="{{ routes.root_url }}public-offer" class="text-[16px] font-light text-gray-900 leading-none hover:text-[#d62873] transition-colors">{{ 'footer.public_offer' | t }}</a>
+      <a href="{{ routes.root_url }}privacy" class="text-[16px] font-light text-gray-900 leading-none hover:text-[#d62873] transition-colors">{{ 'footer.privacy' | t }}</a>
+      <a href="{{ routes.root_url }}shipping" class="text-[16px] font-light text-gray-900 leading-none hover:text-[#d62873] transition-colors">{{ 'footer.shipping' | t }}</a>
 
       <!-- Language Selector -->
-      <div class="mt-4">
-        {% form 'localization', class: 'flex flex-col items-start' %}
+      <div class="mt-1">
+        {% form 'localization', class: 'flex flex-col items-start gap-3' %}
           <button type="button"
                   onclick="document.getElementById('mobile-menu-lang-list').classList.toggle('hidden')"
-                  class="flex items-center gap-2 text-[24px] font-light text-[#e61a7a] focus:outline-none py-3">
+                  class="flex items-center gap-2 text-[16px] font-light text-[#e61a7a] focus:outline-none leading-none">
             {% case request.locale.iso_code %}
               {% when 'en' %}ENG
               {% when 'uk' %}UA
@@ -209,18 +211,18 @@
               <path d="M1 5L5 1L9 5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </button>
-          <div id="mobile-menu-lang-list" class="flex flex-col items-start hidden">
+          <div id="mobile-menu-lang-list" class="flex flex-col items-start gap-3 hidden">
             {% if request.locale.iso_code != 'uk' %}
-              <button type="submit" name="locale_code" value="uk" class="text-[24px] font-light text-gray-900 hover:text-[#e61a7a] transition-colors py-3">UA</button>
+              <button type="submit" name="locale_code" value="uk" class="text-[16px] font-light text-gray-900 hover:text-[#e61a7a] transition-colors leading-none">UA</button>
             {% endif %}
             {% if request.locale.iso_code != 'en' %}
-              <button type="submit" name="locale_code" value="en" class="text-[24px] font-light text-gray-900 hover:text-[#e61a7a] transition-colors py-3">ENG</button>
+              <button type="submit" name="locale_code" value="en" class="text-[16px] font-light text-gray-900 hover:text-[#e61a7a] transition-colors leading-none">ENG</button>
             {% endif %}
             {% if request.locale.iso_code != 'fr' %}
-              <button type="submit" name="locale_code" value="fr" class="text-[24px] font-light text-gray-900 hover:text-[#e61a7a] transition-colors py-3">FR</button>
+              <button type="submit" name="locale_code" value="fr" class="text-[16px] font-light text-gray-900 hover:text-[#e61a7a] transition-colors leading-none">FR</button>
             {% endif %}
             {% if request.locale.iso_code != 'he' %}
-              <button type="submit" name="locale_code" value="he" class="text-[24px] font-light text-gray-900 hover:text-[#e61a7a] transition-colors py-3">עב</button>
+              <button type="submit" name="locale_code" value="he" class="text-[16px] font-light text-gray-900 hover:text-[#e61a7a] transition-colors leading-none">עב</button>
             {% endif %}
           </div>
         {% endform %}
