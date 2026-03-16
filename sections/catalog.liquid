@@ -37,7 +37,7 @@
 <div class="w-full max-w-[1920px] mx-auto px-4 md:px-[160px] pt-[12px] md:pt-[24px] pb-[40px] md:pb-[36px]" {% if request.locale.iso_code == 'he' %}dir="rtl"{% endif %}>
 
   <!-- Page Title -->
-  <h1 class="text-[28px] md:text-[36px] font-light text-gray-900 mb-[16px] md:mb-[24px]"
+  <h1 class="text-[28px] md:text-[36px] font-light text-gray-900 mb-[16px] md:mb-[24px] text-center"
       style="font-family: var(--font-montserrat), Montserrat, sans-serif;">
     {% if collection.handle == 'all' %}{{ 'header.catalog' | t }}{% else %}{{ collection.title }}{% endif %}
   </h1>
