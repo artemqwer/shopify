@@ -197,8 +197,23 @@
   <div id="mobile-menu-backdrop" class="md:hidden fixed inset-0 z-40" onclick="closeMobileMenu()"></div>
 
   <!-- Mobile Menu (full screen overlay) -->
-  <div id="mobile-menu" class="md:hidden fixed inset-0 bg-white z-40">
-    <nav class="flex flex-col px-5 pt-[80px] pb-10 gap-2" style="font-family: Montserrat, sans-serif;">
+  <div id="mobile-menu" class="md:hidden fixed inset-0 bg-white z-[55]">
+    <!-- Menu top bar: close button + logo -->
+    <div class="relative flex items-center justify-between h-[60px] px-4">
+      <button type="button" onclick="closeMobileMenu()" class="relative w-6 h-6 focus:outline-none flex-shrink-0" aria-label="Close menu">
+        <span class="absolute block h-[1.5px] w-6 bg-gray-900 transform rotate-45 top-1/2 left-0"></span>
+        <span class="absolute block h-[1.5px] w-6 bg-gray-900 transform -rotate-45 top-1/2 left-0"></span>
+      </button>
+      <a href="{{ routes.root_url }}" class="absolute left-1/2 -translate-x-1/2">
+        <img
+          src="{{ 'logo-image.svg' | asset_url }}"
+          alt="Ester Wugman Logo"
+          width="80"
+          class="w-[80px] h-auto object-contain"
+        />
+      </a>
+    </div>
+    <nav class="flex flex-col px-5 pt-6 pb-10 gap-2" style="font-family: Montserrat, sans-serif;">
       <a href="{{ routes.all_products_collection_url }}" class="text-[14px] font-light text-gray-900 leading-none tracking-[0.03em] hover:text-[#d62873] transition-colors">{{ 'header.catalog' | t }}</a>
       <a href="{{ routes.root_url }}" class="text-[14px] font-light text-gray-900 leading-none tracking-[0.03em] hover:text-[#d62873] transition-colors">{{ 'header.home' | t }}</a>
       <a href="{{ routes.root_url }}about" class="text-[14px] font-light text-gray-900 leading-none tracking-[0.03em] hover:text-[#d62873] transition-colors">{{ 'footer.about' | t }}</a>
