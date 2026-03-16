@@ -50,6 +50,7 @@
     "privacy": "מדיניות פרטיות",
     "shipping": "משלוחים ותשלומים",
     "returns": "החלפות והחזרות",
+    "contacts_page": "צור קשר",
     "copyright": "© 2026 ESTER WUGMAN"
   },
   "products": {
@@ -58,6 +59,15 @@
     "product_2": "מטפחת משי כחולה",
     "product_3": "מטפחת וורודה",
     "product_4": "מטפחת וינטג'"
+  },
+  "contacts": {
+    "title": "צור קשר",
+    "phone_title": "טלפון",
+    "email_title": "דואר אלקטרוני",
+    "address_title": "כתובת",
+    "address_value": "רחוב Sichovykh Striltsiv 3א, משרד 305, דניפרו",
+    "social_title": "רשתות חברתיות",
+    "map_title": "המיקום שלנו"
   },
   "returns": {
     "intro": "ניתן להחליף או להחזיר כיסויי ראש בתנאים הבאים:",

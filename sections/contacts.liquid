@@ -1,0 +1,65 @@
+{% schema %}
+{
+  "name": "Contacts",
+  "settings": []
+}
+{% endschema %}
+
+<div class="w-full bg-white">
+  <div class="px-5 md:px-[160px] pt-10 pb-16" style="font-family: Montserrat, sans-serif;">
+
+    <h1 class="text-[24px] font-light text-[#111] tracking-widest uppercase text-center mb-10">{{ 'contacts.title' | t }}</h1>
+
+    <!-- Телефон -->
+    <div class="mb-8">
+      <h2 class="text-[15px] font-bold text-[#111] mb-4">{{ 'contacts.phone_title' | t }}</h2>
+      <div class="flex flex-col gap-3">
+        <a href="tel:+380635737824" class="flex items-center gap-3 text-[15px] text-[#111] hover:text-gray-500 transition-colors">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.68A2 2 0 012 .92h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          +380 (63) 573-78-24
+        </a>
+        <a href="tel:+380635737824" class="flex items-center gap-3 text-[15px] text-[#111] hover:text-gray-500 transition-colors">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.68A2 2 0 012 .92h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          +380 (63) 573-78-24
+        </a>
+      </div>
+    </div>
+
+    <!-- Пошта -->
+    <div class="mb-8">
+      <h2 class="text-[15px] font-bold text-[#111] mb-4">{{ 'contacts.email_title' | t }}</h2>
+      <a href="mailto:ESTERWUGMAN@gmail.com" class="flex items-center gap-3 text-[15px] text-[#111] hover:text-gray-500 transition-colors">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg>
+        ESTERWUGMAN@gmail.com
+      </a>
+    </div>
+
+    <!-- Адреса -->
+    <div class="mb-8">
+      <h2 class="text-[15px] font-bold text-[#111] mb-4">{{ 'contacts.address_title' | t }}</h2>
+      <div class="flex items-start gap-3 text-[15px] text-[#111]">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0; margin-top:2px"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+        {{ 'contacts.address_value' | t }}
+      </div>
+    </div>
+
+    <!-- Соціальні мережі -->
+    <div class="mb-10">
+      <h2 class="text-[15px] font-bold text-[#111] mb-4">{{ 'contacts.social_title' | t }}</h2>
+      <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center w-10 h-10 border border-[#e5e5e5] hover:border-[#111] transition-colors">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>
+      </a>
+    </div>
+
+    <!-- Карта -->
+    <div class="w-full bg-[#f0f0f0] flex items-center justify-center" style="height: 340px;">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2604.5!2d35.049!3d48.464!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2z0JTQvdGW0L_RgNC-!5e0!3m2!1suk!2sua!4v1"
+        width="100%" height="340" style="border:0; display:block;" allowfullscreen="" loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="{{ 'contacts.map_title' | t }}">
+      </iframe>
+    </div>
+
+  </div>
+</div>

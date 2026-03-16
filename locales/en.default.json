@@ -50,6 +50,7 @@
     "privacy": "Privacy Policy",
     "shipping": "Shipping & Payment",
     "returns": "Returns & Exchange",
+    "contacts_page": "Contacts",
     "copyright": "© 2026 ESTER WUGMAN"
   },
   "products": {
@@ -93,6 +94,15 @@
     "p3": "This phrase became not just a slogan, but a brand philosophy. Today everyone around is saying: «Show yourself!» Psychologists, coaches, influencers, marketers...",
     "p4": "We don't just talk — we create. We create headwear that speaks for you. That doesn't hide, but highlights. That helps you be yourself — boldly, precisely, without excess.",
     "p5": "This phrase became not just a slogan, but a brand philosophy. Today everyone around is saying: «Show yourself!» Psychologists, coaches, influencers, marketers..."
+  },
+  "contacts": {
+    "title": "Contacts",
+    "phone_title": "Phone",
+    "email_title": "Email",
+    "address_title": "Address",
+    "address_value": "Sichovykh Striltsiv St., 3a, office 305, Dnipro",
+    "social_title": "Social media",
+    "map_title": "Our location"
   },
   "returns": {
     "intro": "Headwear is eligible for exchange or return under the following conditions:",
