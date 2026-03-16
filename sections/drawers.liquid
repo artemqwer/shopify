@@ -731,7 +731,7 @@
   };
 
   function updateCartBadge(count) {
-    document.querySelectorAll('[data-cart-count]').forEach(el => {
+    document.querySelectorAll('[data-cart-count], [data-cart-count-mobile]').forEach(el => {
       el.textContent = count;
       el.style.display = '';
     });
