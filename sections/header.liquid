@@ -187,20 +187,20 @@
 
   <!-- Mobile Menu (full-width dropdown from header) -->
   <div id="mobile-menu" class="md:hidden fixed top-[60px] left-0 right-0 bg-white z-50">
-    <nav class="flex flex-col px-5 pt-6 pb-10 gap-3" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">
-      <a href="{{ routes.all_products_collection_url }}" class="text-[16px] font-light text-gray-900 leading-none hover:text-[#d62873] transition-colors">{{ 'header.catalog' | t }}</a>
-      <a href="{{ routes.root_url }}" class="text-[16px] font-light text-gray-900 leading-none hover:text-[#d62873] transition-colors">{{ 'header.home' | t }}</a>
-      <a href="{{ routes.root_url }}about" class="text-[16px] font-light text-gray-900 leading-none hover:text-[#d62873] transition-colors">{{ 'footer.about' | t }}</a>
-      <a href="{{ routes.root_url }}public-offer" class="text-[16px] font-light text-gray-900 leading-none hover:text-[#d62873] transition-colors">{{ 'footer.public_offer' | t }}</a>
-      <a href="{{ routes.root_url }}privacy" class="text-[16px] font-light text-gray-900 leading-none hover:text-[#d62873] transition-colors">{{ 'footer.privacy' | t }}</a>
-      <a href="{{ routes.root_url }}shipping" class="text-[16px] font-light text-gray-900 leading-none hover:text-[#d62873] transition-colors">{{ 'footer.shipping' | t }}</a>
+    <nav class="flex flex-col px-5 pt-6 pb-10 gap-2" style="font-family: Montserrat, sans-serif;">
+      <a href="{{ routes.all_products_collection_url }}" class="text-[14px] font-light text-gray-900 leading-none tracking-[0.03em] hover:text-[#d62873] transition-colors">{{ 'header.catalog' | t }}</a>
+      <a href="{{ routes.root_url }}" class="text-[14px] font-light text-gray-900 leading-none tracking-[0.03em] hover:text-[#d62873] transition-colors">{{ 'header.home' | t }}</a>
+      <a href="{{ routes.root_url }}about" class="text-[14px] font-light text-gray-900 leading-none tracking-[0.03em] hover:text-[#d62873] transition-colors">{{ 'footer.about' | t }}</a>
+      <a href="{{ routes.root_url }}public-offer" class="text-[14px] font-light text-gray-900 leading-none tracking-[0.03em] hover:text-[#d62873] transition-colors">{{ 'footer.public_offer' | t }}</a>
+      <a href="{{ routes.root_url }}privacy" class="text-[14px] font-light text-gray-900 leading-none tracking-[0.03em] hover:text-[#d62873] transition-colors">{{ 'footer.privacy' | t }}</a>
+      <a href="{{ routes.root_url }}shipping" class="text-[14px] font-light text-gray-900 leading-none tracking-[0.03em] hover:text-[#d62873] transition-colors">{{ 'footer.shipping' | t }}</a>
 
       <!-- Language Selector -->
       <div class="mt-1">
-        {% form 'localization', class: 'flex flex-col items-start gap-3' %}
+        {% form 'localization', class: 'flex flex-col items-start gap-2' %}
           <button type="button"
                   onclick="document.getElementById('mobile-menu-lang-list').classList.toggle('hidden')"
-                  class="flex items-center gap-2 text-[16px] font-light text-[#e61a7a] focus:outline-none leading-none">
+                  class="flex items-center gap-2 text-[14px] font-light text-[#e61a7a] focus:outline-none leading-none tracking-[0.03em]">
             {% case request.locale.iso_code %}
               {% when 'en' %}ENG
               {% when 'uk' %}UA
@@ -211,18 +211,18 @@
               <path d="M1 5L5 1L9 5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </button>
-          <div id="mobile-menu-lang-list" class="flex flex-col items-start gap-3 hidden">
+          <div id="mobile-menu-lang-list" class="flex flex-col items-start gap-2 hidden">
             {% if request.locale.iso_code != 'uk' %}
-              <button type="submit" name="locale_code" value="uk" class="text-[16px] font-light text-gray-900 hover:text-[#e61a7a] transition-colors leading-none">UA</button>
+              <button type="submit" name="locale_code" value="uk" class="text-[14px] font-light text-gray-900 hover:text-[#e61a7a] transition-colors leading-none tracking-[0.03em]">UA</button>
             {% endif %}
             {% if request.locale.iso_code != 'en' %}
-              <button type="submit" name="locale_code" value="en" class="text-[16px] font-light text-gray-900 hover:text-[#e61a7a] transition-colors leading-none">ENG</button>
+              <button type="submit" name="locale_code" value="en" class="text-[14px] font-light text-gray-900 hover:text-[#e61a7a] transition-colors leading-none tracking-[0.03em]">ENG</button>
             {% endif %}
             {% if request.locale.iso_code != 'fr' %}
-              <button type="submit" name="locale_code" value="fr" class="text-[16px] font-light text-gray-900 hover:text-[#e61a7a] transition-colors leading-none">FR</button>
+              <button type="submit" name="locale_code" value="fr" class="text-[14px] font-light text-gray-900 hover:text-[#e61a7a] transition-colors leading-none tracking-[0.03em]">FR</button>
             {% endif %}
             {% if request.locale.iso_code != 'he' %}
-              <button type="submit" name="locale_code" value="he" class="text-[16px] font-light text-gray-900 hover:text-[#e61a7a] transition-colors leading-none">עב</button>
+              <button type="submit" name="locale_code" value="he" class="text-[14px] font-light text-gray-900 hover:text-[#e61a7a] transition-colors leading-none tracking-[0.03em]">עב</button>
             {% endif %}
           </div>
         {% endform %}
