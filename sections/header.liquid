@@ -7,7 +7,7 @@
 
 <header id="site-header" class="fixed top-0 w-full z-50 transition-all duration-300 {% if template.name == 'index' %}bg-transparent border-transparent{% else %}bg-white border-b-2 border-[#F5F5F5] md:shadow-sm{% endif %} text-gray-900">
   <div class="w-full max-w-[1920px] mx-auto px-4 md:px-[160px]">
-    <div class="flex justify-between items-center h-[60px] md:h-[102px]">
+    <div class="relative flex justify-between items-center h-[60px] md:h-[102px]">
 
       <div class="md:hidden flex-1 flex items-center" style="z-index: 60;">
         <button type="button" class="mobile-menu-toggle relative w-6 h-6 focus:outline-none" aria-label="Menu" onclick="toggleMobileMenu(this)">
@@ -94,7 +94,7 @@
       </nav>
 
       <!-- Logo Center -->
-      <div class="flex flex-[2] md:flex-1 justify-center relative">
+      <div class="absolute left-1/2 -translate-x-1/2 flex items-center justify-center">
         <a href="{{ routes.root_url }}" class="flex items-center justify-center">
             <img
               id="header-logo"
