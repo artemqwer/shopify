@@ -248,25 +248,22 @@
 <script>
 (function() {
   var STORAGE_KEY = 'cookie_consent_v1';
-  var banner = document.getElementById('cookie-consent-banner');
+  var LANG_KEY    = 'lang_selected_v1';
+  var banner      = document.getElementById('cookie-consent-banner');
 
   /* Already consented — do nothing */
-  try {
-    if (localStorage.getItem(STORAGE_KEY)) return;
-  } catch(e) {}
+  try { if (localStorage.getItem(STORAGE_KEY)) return; } catch(e) {}
 
-  /* Show banner after short delay */
-  setTimeout(function() {
-    banner && banner.classList.add('is-visible');
-  }, 800);
+  function showBanner() {
+    setTimeout(function() {
+      banner && banner.classList.add('is-visible');
+    }, 600);
+  }
 
   function saveConsent(prefs) {
     try { localStorage.setItem(STORAGE_KEY, JSON.stringify(prefs)); } catch(e) {}
     banner && banner.classList.remove('is-visible');
-    setTimeout(function() {
-      banner && (banner.style.display = 'none');
-    }, 500);
-    document.dispatchEvent(new CustomEvent('cookieConsentSaved'));
+    setTimeout(function() { banner && (banner.style.display = 'none'); }, 500);
   }
 
   var btnAccept = document.getElementById('cookie-accept-all');
@@ -305,6 +302,17 @@
         marketing: marketing ? marketing.checked : false
       });
     });
+  }
+
+  /* Show only after lang modal is done */
+  try {
+    if (localStorage.getItem(LANG_KEY)) {
+      showBanner();
+    } else {
+      document.addEventListener('langModalDone', showBanner);
+    }
+  } catch(e) {
+    showBanner();
   }
 })();
 </script>

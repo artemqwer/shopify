@@ -157,11 +157,10 @@
 
 <script>
 (function() {
-  var LANG_KEY    = 'lang_selected_v1';
-  var COOKIE_KEY  = 'cookie_consent_v1';
-  var overlay     = document.getElementById('lang-modal-overlay');
-  var modal       = document.getElementById('lang-modal');
-  var closeBtn    = document.getElementById('lang-modal-close-btn');
+  var LANG_KEY = 'lang_selected_v1';
+  var overlay  = document.getElementById('lang-modal-overlay');
+  var modal    = document.getElementById('lang-modal');
+  var closeBtn = document.getElementById('lang-modal-close-btn');
 
   function showLangModal() {
     if (!overlay || !modal) return;
@@ -176,44 +175,32 @@
     overlay.classList.remove('is-visible');
     document.body.style.overflow = '';
     try { localStorage.setItem(LANG_KEY, '1'); } catch(e) {}
+    document.dispatchEvent(new CustomEvent('langModalDone'));
   }
 
-  /* Already selected language — skip */
-  try { if (localStorage.getItem(LANG_KEY)) return; } catch(e) {}
-
-  /* If cookie consent already done — show immediately */
-  try {
-    if (localStorage.getItem(COOKIE_KEY)) {
-      setTimeout(showLangModal, 400);
-      return;
-    }
-  } catch(e) {}
-
-  /* Otherwise wait for cookie consent event */
-  document.addEventListener('cookieConsentSaved', function() {
-    setTimeout(showLangModal, 600);
-  });
-
-  /* Close on X button */
+  /* Always register handlers */
   if (closeBtn) {
     closeBtn.addEventListener('click', hideLangModal);
   }
-
-  /* Close on overlay click (mobile: outside modal) */
   if (overlay) {
     overlay.addEventListener('click', function(e) {
       if (e.target === overlay) hideLangModal();
     });
   }
-
-  /* On language select — mark as chosen and let form submit */
   if (modal) {
     modal.querySelectorAll('.lang-btn').forEach(function(btn) {
       btn.addEventListener('click', function() {
         try { localStorage.setItem(LANG_KEY, '1'); } catch(e) {}
+        /* form will navigate — no need to dispatch, cookie banner reads key on next load */
       });
     });
   }
+
+  /* Already selected — skip */
+  try { if (localStorage.getItem(LANG_KEY)) return; } catch(e) {}
+
+  /* First visit — show immediately */
+  setTimeout(showLangModal, 500);
 })();
 </script>
 
