@@ -26,13 +26,22 @@
         .mobile-menu-toggle.menu-open span:nth-child(3) {
           transform: translateY(0) rotate(-45deg);
         }
-        #mobile-menu {
+        #mobile-menu-backdrop {
           opacity: 0;
           pointer-events: none;
-          transition: opacity 0.25s ease;
+          transition: opacity 0.3s ease;
+        }
+        #mobile-menu-backdrop.is-open {
+          opacity: 1;
+          pointer-events: auto;
+        }
+        #mobile-menu {
+          transform: translateX(-100%);
+          pointer-events: none;
+          transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
         }
         #mobile-menu.is-open {
-          opacity: 1;
+          transform: translateX(0);
           pointer-events: auto;
         }
       </style>
@@ -171,9 +180,12 @@
     </div>
   </div>
 
-  <!-- Mobile Menu (full-screen overlay) -->
-  <div id="mobile-menu" class="md:hidden fixed top-[60px] left-0 right-0 bottom-0 bg-white z-40 overflow-y-auto">
-    <nav class="flex flex-col px-10 pt-8 pb-12" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">
+  <!-- Mobile Menu Backdrop -->
+  <div id="mobile-menu-backdrop" class="md:hidden fixed inset-0 bg-black/40 z-40" onclick="closeMobileMenu()"></div>
+
+  <!-- Mobile Menu (slide-in drawer) -->
+  <div id="mobile-menu" class="md:hidden fixed top-0 left-0 bottom-0 w-[300px] bg-white z-50 overflow-y-auto shadow-2xl">
+    <nav class="flex flex-col px-10 pt-[80px] pb-12" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">
       <a href="{{ routes.all_products_collection_url }}" class="text-[24px] font-light text-gray-900 py-3 hover:text-[#d62873] transition-colors">{{ 'header.catalog' | t }}</a>
       <a href="{{ routes.root_url }}" class="text-[24px] font-light text-gray-900 py-3 hover:text-[#d62873] transition-colors">{{ 'header.home' | t }}</a>
       <a href="{{ routes.root_url }}about" class="text-[24px] font-light text-gray-900 py-3 hover:text-[#d62873] transition-colors">{{ 'footer.about' | t }}</a>
@@ -246,12 +258,29 @@
 
     // Mobile Menu Toggle logic
     function toggleMobileMenu(btn) {
-      btn.classList.toggle('menu-open');
       const menu = document.getElementById('mobile-menu');
-      const isOpen = menu.classList.toggle('is-open');
-      document.body.style.overflow = isOpen ? 'hidden' : '';
+      const backdrop = document.getElementById('mobile-menu-backdrop');
+      const isOpen = menu.classList.contains('is-open');
+      if (isOpen) {
+        closeMobileMenu();
+      } else {
+        btn.classList.add('menu-open');
+        menu.classList.add('is-open');
+        backdrop.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+    function closeMobileMenu() {
+      const menu = document.getElementById('mobile-menu');
+      const backdrop = document.getElementById('mobile-menu-backdrop');
+      const btn = document.querySelector('.mobile-menu-toggle');
+      if (btn) btn.classList.remove('menu-open');
+      menu.classList.remove('is-open');
+      backdrop.classList.remove('is-open');
+      document.body.style.overflow = '';
     }
     window.toggleMobileMenu = toggleMobileMenu;
+    window.closeMobileMenu = closeMobileMenu;
 
     {% if template.name == 'index' %}
       const header = document.getElementById('site-header');
