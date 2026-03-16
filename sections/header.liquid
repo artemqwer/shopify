@@ -5,7 +5,7 @@
 }
 {% endschema %}
 
-<header id="site-header" class="fixed top-0 w-full z-50 transition-all duration-300 {% if template.name == 'index' %}bg-transparent border-transparent{% else %}bg-white border-b-2 border-[#F5F5F5] md:shadow-sm{% endif %} text-gray-900">
+<header id="site-header" class="fixed top-0 w-full z-50 transition-all duration-300 {% if template.name == 'index' %}bg-transparent border-transparent{% else %}bg-white border-b-2 border-[#F5F5F5]{% endif %} text-gray-900">
   <div class="w-full max-w-[1920px] mx-auto px-4 md:px-[160px]">
     <div class="relative flex justify-between items-center h-[60px] md:h-[102px]">
 
@@ -61,7 +61,7 @@
           </a>
           <!-- Mega Menu Dropdown -->
           <div class="absolute top-[80%] left-0 rtl:right-0 pt-8 hidden group-hover:block z-50">
-            <div class="bg-white border border-gray-100 w-[600px] shadow-lg p-8 grid grid-cols-4 gap-6 text-left rtl:text-right">
+            <div class="bg-white border border-gray-100 w-[600px] p-8 grid grid-cols-4 gap-6 text-left rtl:text-right">
               <div class="flex flex-col space-y-3">
                 <a href="{{ routes.all_products_collection_url }}" class="text-sm text-gray-800 hover:text-[#d62873]">{{ 'header.menu.all' | t }}</a>
                 <a href="{{ routes.root_url }}collections/bestsellers" class="text-sm text-gray-800 hover:text-[#d62873]">{{ 'header.menu.bestsellers' | t }}</a>
@@ -129,7 +129,7 @@
 
           <!-- Dropdown: vertical list exactly like reference -->
           <div id="lang-menu-desktop"
-               class="hidden absolute top-full right-0 bg-white border border-gray-100 shadow-[0_8px_32px_rgba(0,0,0,0.10)] z-50 py-5 px-7 min-w-[88px]">
+               class="hidden absolute top-full right-0 bg-white border border-gray-100 z-50 py-5 px-7 min-w-[88px]">
             {% form 'localization', class: 'flex flex-col gap-[14px]' %}
               <button type="submit" name="locale_code" value="en"
                       class="text-left text-[13px] tracking-widest uppercase font-medium leading-none transition-colors

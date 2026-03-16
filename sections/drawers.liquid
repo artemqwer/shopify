@@ -29,11 +29,9 @@
     {% if request.locale.iso_code == 'he' %}
       left: 0;
       transform: translateX(-100%);
-      box-shadow: 10px 0 30px rgba(0,0,0,0.1);
     {% else %}
       right: 0;
       transform: translateX(100%);
-      box-shadow: -10px 0 30px rgba(0,0,0,0.1);
     {% endif %}
     height: 100%;
     background: #ffffff;
@@ -48,7 +46,6 @@
     height: auto !important;
     max-height: 100vh;
     border-bottom: 1px solid #f0f0f0;
-    box-shadow: -5px 15px 30px rgba(0,0,0,0.08);
   }
 
   @media (min-width: 640px) {
@@ -68,7 +65,7 @@
 <!-- ==========================================
      SHOPPING CART DRAWER
 =========================================== -->
-<div id="cart-drawer" class="side-drawer flex flex-col h-full bg-white shadow-xl" role="dialog" aria-modal="true" aria-label="Cart" {% if request.locale.iso_code == 'he' %}dir="rtl"{% else %}dir="ltr"{% endif %}>
+<div id="cart-drawer" class="side-drawer flex flex-col h-full bg-white" role="dialog" aria-modal="true" aria-label="Cart" {% if request.locale.iso_code == 'he' %}dir="rtl"{% else %}dir="ltr"{% endif %}>
 
   <!-- ── Header ─────────────────────────── -->
   <div class="relative px-8 pt-8 pb-5 bg-white flex-shrink-0 border-b border-[#f0f0f0]">
@@ -147,7 +144,7 @@
 <!-- ==========================================
      FILTER DRAWER — Dynamic Shopify Filters
 =========================================== -->
-<div id="filter-drawer" class="side-drawer flex flex-col bg-white shadow-xl" role="dialog" aria-modal="true" aria-label="Filters" {% if request.locale.iso_code == 'he' %}dir="rtl"{% else %}dir="ltr"{% endif %}>
+<div id="filter-drawer" class="side-drawer flex flex-col bg-white" role="dialog" aria-modal="true" aria-label="Filters" {% if request.locale.iso_code == 'he' %}dir="rtl"{% else %}dir="ltr"{% endif %}>
 
   <!-- Header -->
   <div class="relative w-full pt-8 pb-4 bg-white flex {% if request.locale.iso_code == 'he' %}justify-start{% else %}justify-end{% endif %} px-10 flex-shrink-0">
