@@ -5,12 +5,12 @@
 }
 {% endschema %}
 
-<header id="site-header" class="fixed top-0 w-full z-50 transition-all duration-300 {% if template.name == 'index' %}bg-transparent border-transparent{% else %}bg-white border-b-2 border-[#F5F5F5]{% endif %} text-gray-900">
+<header id="site-header" class="fixed top-0 w-full z-50 transition-all duration-300 {% if template.name == 'index' %}bg-transparent border-transparent header-transparent{% else %}bg-white border-b-2 border-[#F5F5F5]{% endif %} text-gray-900">
   <div class="w-full max-w-[1920px] mx-auto px-4 md:px-[160px]">
     <div class="relative flex justify-between items-center h-[60px] md:h-[102px]">
 
       <div class="md:hidden flex-1 flex items-center" style="z-index: 60;">
-        <button type="button" class="mobile-menu-toggle relative w-6 h-6 focus:outline-none" aria-label="Menu" onclick="toggleMobileMenu(this)">
+        <button type="button" class="mobile-menu-toggle header-mobile-icon relative w-6 h-6 focus:outline-none" aria-label="Menu" onclick="toggleMobileMenu(this)">
           <span class="absolute block h-[1.5px] w-6 bg-current transform transition duration-300 ease-in-out top-1/2 -translate-y-2"></span>
           <span class="absolute block h-[1.5px] w-6 bg-current transform transition duration-300 ease-in-out top-1/2"></span>
           <span class="absolute block h-[1.5px] w-6 bg-current transform transition duration-300 ease-in-out top-1/2 translate-y-2"></span>
@@ -45,6 +45,9 @@
           transform: translateY(0);
           opacity: 1;
           pointer-events: auto;
+        }
+        #site-header.header-transparent .header-mobile-icon {
+          color: white;
         }
       </style>
 
@@ -161,7 +164,7 @@
         </button>
 
         <!-- Search icon (mobile only) -->
-        <button type="button" class="md:hidden text-gray-900 hover:text-[#d62873] transition-colors" onclick="window.location='{{ routes.root_url }}search'">
+        <button type="button" class="md:hidden header-mobile-icon text-gray-900 hover:text-[#d62873] transition-colors" onclick="window.location='{{ routes.root_url }}search'">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
           </svg>
@@ -169,7 +172,7 @@
 
         <!-- Cart trigger -->
         <button type="button"
-                class="text-[14px] font-medium tracking-widest text-gray-900 uppercase hover:text-[#d62873] transition-colors flex items-center relative"
+                class="header-mobile-icon text-[14px] font-medium tracking-widest text-gray-900 uppercase hover:text-[#d62873] transition-colors flex items-center relative"
                 data-drawer-trigger="cart-drawer">
           <span class="hidden md:inline">{{ 'header.cart' | t }}</span>
           <span class="text-[#d62873] ml-1 font-bold hidden md:inline">(<span data-cart-count>{{ cart.item_count | default: 0 }}</span>)</span>
@@ -297,10 +300,10 @@
       window.addEventListener('scroll', function() {
         if (window.innerWidth >= 768) return; // desktop is always solid
         if (window.scrollY > 50) {
-          header.classList.remove('bg-transparent', 'border-transparent');
+          header.classList.remove('bg-transparent', 'border-transparent', 'header-transparent');
           header.classList.add('bg-white', 'border-b-2', 'border-[#F5F5F5]');
         } else {
-          header.classList.add('bg-transparent', 'border-transparent');
+          header.classList.add('bg-transparent', 'border-transparent', 'header-transparent');
           header.classList.remove('bg-white', 'border-b-2', 'border-[#F5F5F5]');
         }
       });
