@@ -36,6 +36,12 @@
 
 <div class="w-full max-w-[1920px] mx-auto px-4 md:px-[160px] pt-[12px] md:pt-[24px] pb-[40px] md:pb-[36px]" {% if request.locale.iso_code == 'he' %}dir="rtl"{% endif %}>
 
+  <!-- Page Title -->
+  <h1 class="text-[28px] md:text-[36px] font-light text-gray-900 mb-[16px] md:mb-[24px]"
+      style="font-family: var(--font-montserrat), Montserrat, sans-serif;">
+    {% if collection.handle == 'all' %}{{ 'header.catalog' | t }}{% else %}{{ collection.title }}{% endif %}
+  </h1>
+
   <!-- Breadcrumb + Filter Row -->
   <div class="flex items-center justify-between mb-[48px]">
     <nav class="flex items-center gap-2" aria-label="Breadcrumb" {% if request.locale.iso_code == 'he' %}style="direction: rtl;"{% endif %}>
