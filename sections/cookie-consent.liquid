@@ -1,0 +1,327 @@
+<!-- ==========================================
+     COOKIE CONSENT BANNER
+=========================================== -->
+{% schema %}
+{
+  "name": "Cookie Consent",
+  "settings": [
+    {
+      "type": "url",
+      "id": "policy_url",
+      "label": "Cookie Policy URL",
+      "default": "/policies/privacy-policy"
+    }
+  ]
+}
+{% endschema %}
+
+<style>
+  #cookie-consent-banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 99999;
+    background: #ffffff;
+    padding: 24px 20px 32px;
+    transform: translateY(100%);
+    transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.08);
+  }
+
+  #cookie-consent-banner.is-visible {
+    transform: translateY(0);
+  }
+
+  #cookie-consent-banner .cookie-text {
+    font-family: var(--font-montserrat), Montserrat, sans-serif;
+    font-size: 13px;
+    line-height: 1.65;
+    color: #333;
+    margin-bottom: 20px;
+  }
+
+  #cookie-consent-banner .cookie-text a {
+    color: #222;
+    font-weight: 600;
+    text-decoration: underline;
+  }
+
+  #cookie-consent-banner .cookie-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  #cookie-consent-banner .cookie-btn {
+    font-family: var(--font-montserrat), Montserrat, sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    padding: 14px 16px;
+    text-align: center;
+    cursor: pointer;
+    border: 1px solid #222;
+    transition: background 0.2s ease, color 0.2s ease;
+    width: 100%;
+    background: none;
+    -webkit-appearance: none;
+  }
+
+  #cookie-consent-banner .cookie-btn-accept {
+    background: #222;
+    color: #fff;
+  }
+
+  #cookie-consent-banner .cookie-btn-accept:hover {
+    background: #000;
+  }
+
+  #cookie-consent-banner .cookie-btn-reject {
+    background: #444;
+    color: #fff;
+    border-color: #444;
+  }
+
+  #cookie-consent-banner .cookie-btn-reject:hover {
+    background: #222;
+    border-color: #222;
+  }
+
+  #cookie-consent-banner .cookie-btn-settings {
+    background: #fff;
+    color: #222;
+  }
+
+  #cookie-consent-banner .cookie-btn-settings:hover {
+    background: #f5f5f5;
+  }
+
+  /* Settings panel */
+  #cookie-settings-panel {
+    display: none;
+    margin-top: 20px;
+    border-top: 1px solid #f0f0f0;
+    padding-top: 20px;
+  }
+
+  #cookie-settings-panel.is-open {
+    display: block;
+  }
+
+  .cookie-toggle-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+  }
+
+  .cookie-toggle-label {
+    font-family: var(--font-montserrat), Montserrat, sans-serif;
+    font-size: 12px;
+    color: #222;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  .cookie-toggle-label span {
+    display: block;
+    font-weight: 300;
+    font-size: 11px;
+    text-transform: none;
+    letter-spacing: 0;
+    color: #aaa;
+    margin-top: 2px;
+  }
+
+  /* Toggle switch */
+  .cookie-toggle {
+    position: relative;
+    width: 38px;
+    height: 22px;
+    flex-shrink: 0;
+  }
+
+  .cookie-toggle input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+    position: absolute;
+  }
+
+  .cookie-toggle-slider {
+    position: absolute;
+    inset: 0;
+    background: #d1d1d1;
+    border-radius: 22px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+
+  .cookie-toggle-slider:before {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    left: 3px;
+    top: 3px;
+    background: #fff;
+    border-radius: 50%;
+    transition: transform 0.2s ease;
+  }
+
+  .cookie-toggle input:checked + .cookie-toggle-slider {
+    background: #222;
+  }
+
+  .cookie-toggle input:checked + .cookie-toggle-slider:before {
+    transform: translateX(16px);
+  }
+
+  .cookie-toggle input:disabled + .cookie-toggle-slider {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
+  #cookie-settings-panel .cookie-btn {
+    margin-top: 10px;
+  }
+
+  @media (min-width: 640px) {
+    #cookie-consent-banner {
+      max-width: 420px;
+      left: 20px;
+      right: auto;
+      bottom: 20px;
+      border: 1px solid #f0f0f0;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+    }
+  }
+</style>
+
+<div id="cookie-consent-banner" role="dialog" aria-modal="true" aria-label="Cookie consent">
+
+  <p class="cookie-text">
+    Ми використовуємо наші та сторонні файли cookie, щоб розуміти характер використання нашого онлайн-магазину та мати можливість покращувати його, адаптувати вміст до ваших уподобань і персоналізувати нашу рекламу, маркетингові матеріали та публікації в соціальних мережах. Ви можете прийняти їх усі, відхилити їх або вибрати власні налаштування, натиснувши відповідні кнопки. Майте на увазі, що відмова від використання файлів cookie може вплинути на процес здійснення покупок. Додаткову інформацію можна переглянути в нашій <a href="{{ section.settings.policy_url | default: '/policies/privacy-policy' }}"><strong>Політика використання файлів cookie</strong></a>
+  </p>
+
+  <div class="cookie-buttons">
+    <button type="button" class="cookie-btn cookie-btn-accept" id="cookie-accept-all">
+      Дозволити всі файли Cookie
+    </button>
+    <button type="button" class="cookie-btn cookie-btn-reject" id="cookie-reject-optional">
+      Відхилити необов'язкові файли Cookie
+    </button>
+    <button type="button" class="cookie-btn cookie-btn-settings" id="cookie-open-settings">
+      Налаштування Cookie
+    </button>
+  </div>
+
+  <!-- Settings panel (hidden by default) -->
+  <div id="cookie-settings-panel">
+    <div class="cookie-toggle-row">
+      <div class="cookie-toggle-label">
+        Необхідні
+        <span>Завжди активні — потрібні для роботи сайту</span>
+      </div>
+      <label class="cookie-toggle">
+        <input type="checkbox" checked disabled>
+        <span class="cookie-toggle-slider"></span>
+      </label>
+    </div>
+
+    <div class="cookie-toggle-row">
+      <div class="cookie-toggle-label">
+        Аналітика
+        <span>Допомагають покращити роботу сайту</span>
+      </div>
+      <label class="cookie-toggle">
+        <input type="checkbox" id="cookie-analytics" checked>
+        <span class="cookie-toggle-slider"></span>
+      </label>
+    </div>
+
+    <div class="cookie-toggle-row">
+      <div class="cookie-toggle-label">
+        Маркетинг
+        <span>Персоналізована реклама та соцмережі</span>
+      </div>
+      <label class="cookie-toggle">
+        <input type="checkbox" id="cookie-marketing" checked>
+        <span class="cookie-toggle-slider"></span>
+      </label>
+    </div>
+
+    <button type="button" class="cookie-btn cookie-btn-accept" id="cookie-save-settings">
+      Зберегти налаштування
+    </button>
+  </div>
+
+</div>
+
+<script>
+(function() {
+  const STORAGE_KEY = 'cookie_consent_v1';
+  const banner = document.getElementById('cookie-consent-banner');
+
+  /* Already consented — do nothing */
+  try {
+    if (localStorage.getItem(STORAGE_KEY)) return;
+  } catch(e) {}
+
+  /* Show banner after short delay */
+  setTimeout(function() {
+    banner && banner.classList.add('is-visible');
+  }, 800);
+
+  function saveConsent(prefs) {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(prefs)); } catch(e) {}
+    banner && banner.classList.remove('is-visible');
+    setTimeout(function() {
+      banner && (banner.style.display = 'none');
+    }, 500);
+  }
+
+  /* Accept all */
+  var btnAccept = document.getElementById('cookie-accept-all');
+  if (btnAccept) {
+    btnAccept.addEventListener('click', function() {
+      saveConsent({ necessary: true, analytics: true, marketing: true });
+    });
+  }
+
+  /* Reject optional */
+  var btnReject = document.getElementById('cookie-reject-optional');
+  if (btnReject) {
+    btnReject.addEventListener('click', function() {
+      saveConsent({ necessary: true, analytics: false, marketing: false });
+    });
+  }
+
+  /* Open settings */
+  var btnSettings = document.getElementById('cookie-open-settings');
+  var settingsPanel = document.getElementById('cookie-settings-panel');
+  if (btnSettings && settingsPanel) {
+    btnSettings.addEventListener('click', function() {
+      settingsPanel.classList.toggle('is-open');
+      btnSettings.textContent = settingsPanel.classList.contains('is-open')
+        ? 'Сховати налаштування'
+        : 'Налаштування Cookie';
+    });
+  }
+
+  /* Save custom settings */
+  var btnSave = document.getElementById('cookie-save-settings');
+  if (btnSave) {
+    btnSave.addEventListener('click', function() {
+      var analytics  = document.getElementById('cookie-analytics');
+      var marketing  = document.getElementById('cookie-marketing');
+      saveConsent({
+        necessary: true,
+        analytics:  analytics  ? analytics.checked  : false,
+        marketing:  marketing  ? marketing.checked  : false
+      });
+    });
+  }
+})();
+</script>
