@@ -196,9 +196,9 @@
   <!-- Mobile Menu Backdrop -->
   <div id="mobile-menu-backdrop" class="md:hidden fixed inset-0 z-40" onclick="closeMobileMenu()"></div>
 
-  <!-- Mobile Menu (full-width dropdown from header) -->
-  <div id="mobile-menu" class="md:hidden fixed top-[60px] left-0 right-0 bg-white z-50">
-    <nav class="flex flex-col px-5 pt-6 pb-10 gap-2" style="font-family: Montserrat, sans-serif;">
+  <!-- Mobile Menu (full screen overlay) -->
+  <div id="mobile-menu" class="md:hidden fixed inset-0 bg-white z-40">
+    <nav class="flex flex-col px-5 pt-[80px] pb-10 gap-2" style="font-family: Montserrat, sans-serif;">
       <a href="{{ routes.all_products_collection_url }}" class="text-[14px] font-light text-gray-900 leading-none tracking-[0.03em] hover:text-[#d62873] transition-colors">{{ 'header.catalog' | t }}</a>
       <a href="{{ routes.root_url }}" class="text-[14px] font-light text-gray-900 leading-none tracking-[0.03em] hover:text-[#d62873] transition-colors">{{ 'header.home' | t }}</a>
       <a href="{{ routes.root_url }}about" class="text-[14px] font-light text-gray-900 leading-none tracking-[0.03em] hover:text-[#d62873] transition-colors">{{ 'footer.about' | t }}</a>
