@@ -255,9 +255,9 @@
   try { if (localStorage.getItem(STORAGE_KEY)) return; } catch(e) {}
 
   function showBanner() {
-    setTimeout(function() {
-      banner && banner.classList.add('is-visible');
-    }, 600);
+    if (!banner) return;
+    banner.style.display = '';
+    setTimeout(function() { banner.classList.add('is-visible'); }, 50);
   }
 
   function saveConsent(prefs) {
@@ -309,6 +309,8 @@
     if (localStorage.getItem(LANG_KEY)) {
       showBanner();
     } else {
+      /* wait for lang modal close */
+      window._cookieBannerShow = showBanner;
       document.addEventListener('langModalDone', showBanner);
     }
   } catch(e) {

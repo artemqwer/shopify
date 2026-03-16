@@ -126,7 +126,7 @@
 <div id="lang-modal" role="dialog" aria-modal="true" aria-labelledby="lang-modal-title">
 
   <div class="lang-modal-header">
-    <h2 class="lang-modal-title" id="lang-modal-title">Оберіть мову</h2>
+    <h2 class="lang-modal-title" id="lang-modal-title">Choose your language</h2>
     <button type="button" class="lang-modal-close" id="lang-modal-close-btn" aria-label="Close">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
         <path d="M18 6L6 18M6 6l12 12"/>
@@ -176,6 +176,10 @@
     document.body.style.overflow = '';
     try { localStorage.setItem(LANG_KEY, '1'); } catch(e) {}
     document.dispatchEvent(new CustomEvent('langModalDone'));
+    if (typeof window._cookieBannerShow === 'function') {
+      setTimeout(window._cookieBannerShow, 400);
+      window._cookieBannerShow = null;
+    }
   }
 
   /* Always register handlers */
