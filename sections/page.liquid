@@ -153,7 +153,70 @@
 
 {% assign h = page.handle %}
 
-{% if h == 'about-us' %}
+{% if h == 'shipping' %}
+<div class="w-full bg-white">
+  <div class="px-5 md:px-[160px] pt-10 pb-16" style="font-family: Montserrat, sans-serif;">
+
+    <p class="text-[15px] text-[#111] leading-[1.65] mb-8">{{ 'shipping.intro' | t }}</p>
+
+    <!-- Оплата -->
+    <h2 class="text-[20px] font-bold text-[#111] mb-4">{{ 'shipping.payment_title' | t }}</h2>
+    <ol class="flex flex-col gap-5 mb-8 list-none">
+      <li>
+        <p class="text-[15px] font-semibold text-[#111] mb-1">1. {{ 'shipping.bank_transfer_title' | t }}</p>
+        <p class="text-[15px] text-[#111] leading-[1.65]">{{ 'shipping.bank_transfer_desc' | t }}</p>
+      </li>
+      <li>
+        <p class="text-[15px] font-semibold text-[#111] mb-1">2. {{ 'shipping.cod_title' | t }}</p>
+        <p class="text-[15px] text-[#111] leading-[1.65]">{{ 'shipping.cod_desc' | t }}</p>
+      </li>
+      <li>
+        <p class="text-[15px] font-semibold text-[#111] mb-1">3. {{ 'shipping.payment_note_title' | t }}</p>
+        <p class="text-[15px] text-[#111] leading-[1.65]">{{ 'shipping.payment_note_desc' | t }}</p>
+      </li>
+    </ol>
+
+    <!-- Самовивіз -->
+    <h2 class="text-[20px] font-bold text-[#111] mb-4">{{ 'shipping.pickup_title' | t }}</h2>
+    <div class="flex flex-col gap-3 mb-8">
+      <p class="text-[15px] text-[#111] leading-[1.65]">{{ 'shipping.pickup_address' | t }}</p>
+      <p class="text-[15px] text-[#111]">{{ 'shipping.pickup_can' | t }}</p>
+      <ul class="flex flex-col gap-1 pl-4 list-disc">
+        <li class="text-[15px] text-[#111] leading-[1.65]">{{ 'shipping.pickup_item1' | t }}</li>
+        <li class="text-[15px] text-[#111] leading-[1.65]">{{ 'shipping.pickup_item2' | t }}</li>
+        <li class="text-[15px] text-[#111] leading-[1.65]">{{ 'shipping.pickup_item3' | t }}</li>
+      </ul>
+    </div>
+
+    <!-- Доставка -->
+    <h2 class="text-[20px] font-bold text-[#111] mb-4">{{ 'shipping.delivery_title' | t }}</h2>
+    <p class="text-[15px] text-[#111] leading-[1.65] mb-5">{{ 'shipping.delivery_intro' | t }}</p>
+    <ol class="flex flex-col gap-5 list-none">
+      <li>
+        <p class="text-[15px] font-semibold text-[#111] mb-1">1. {{ 'shipping.zone_title' | t }}</p>
+        <ul class="pl-4 list-disc"><li class="text-[15px] text-[#111] leading-[1.65]">{{ 'shipping.zone_desc' | t }}</li></ul>
+      </li>
+      <li>
+        <p class="text-[15px] font-semibold text-[#111] mb-1">2. {{ 'shipping.carriers_title' | t }}</p>
+        <ul class="pl-4 list-disc"><li class="text-[15px] text-[#111] leading-[1.65]">{{ 'shipping.carriers_desc' | t }}</li></ul>
+      </li>
+      <li>
+        <p class="text-[15px] font-semibold text-[#111] mb-1">3. {{ 'shipping.cost_title' | t }}</p>
+        <ul class="pl-4 list-disc"><li class="text-[15px] text-[#111] leading-[1.65]">{{ 'shipping.cost_desc' | t }}</li></ul>
+      </li>
+      <li>
+        <p class="text-[15px] font-semibold text-[#111] mb-1">4. {{ 'shipping.important_title' | t }}</p>
+        <ul class="flex flex-col gap-1 pl-4 list-disc">
+          <li class="text-[15px] text-[#111] leading-[1.65]">{{ 'shipping.important_item1' | t }}</li>
+          <li class="text-[15px] text-[#111] leading-[1.65]">{{ 'shipping.important_item2' | t }}</li>
+        </ul>
+      </li>
+    </ol>
+
+  </div>
+</div>
+
+{% elsif h == 'about-us' %}
 <div class="w-full bg-white">
 
   <div class="px-5 md:px-[160px] pt-10 pb-8">
