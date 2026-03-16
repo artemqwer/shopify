@@ -58,6 +58,14 @@
     "product_3": "Pink Scarf",
     "product_4": "Vintage Scarf"
   },
+  "about": {
+    "title": "Who are we?",
+    "p1": "In 2019 we created HOOPS HEADWEAR to give women more than just an accessory — an opportunity to express themselves.",
+    "p2": "Back then we wrote on postcards: \"SHOW YOUR PERSONALITY\".",
+    "p3": "This phrase became not just a slogan, but a brand philosophy. Today everyone around is saying: «Show yourself!» Psychologists, coaches, influencers, marketers...",
+    "p4": "We don't just talk — we create. We create headwear that speaks for you. That doesn't hide, but highlights. That helps you be yourself — boldly, precisely, without excess.",
+    "p5": "This phrase became not just a slogan, but a brand philosophy. Today everyone around is saying: «Show yourself!» Psychologists, coaches, influencers, marketers..."
+  },
   "catalog": {
     "filter": "Filter",
     "price_from": "From",
