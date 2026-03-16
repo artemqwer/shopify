@@ -36,14 +36,8 @@
 
 <div class="w-full max-w-[1920px] mx-auto px-4 md:px-[160px] pt-[12px] md:pt-[24px] pb-[40px] md:pb-[36px]" {% if request.locale.iso_code == 'he' %}dir="rtl"{% endif %}>
 
-  <!-- Page Title -->
-  <h1 class="text-[28px] md:text-[36px] font-light text-gray-900 mb-[16px] md:mb-[24px] text-center"
-      style="font-family: var(--font-montserrat), Montserrat, sans-serif;">
-    {% if collection.handle == 'all' %}{{ 'header.catalog' | t }}{% else %}{{ collection.title }}{% endif %}
-  </h1>
-
   <!-- Breadcrumb + Filter Row -->
-  <div class="flex items-center justify-between mb-[48px]">
+  <div class="flex items-center justify-between mb-[24px]">
     <nav class="flex items-center gap-2" aria-label="Breadcrumb" {% if request.locale.iso_code == 'he' %}style="direction: rtl;"{% endif %}>
       {% if request.locale.iso_code == 'he' %}
         {% unless collection.handle == 'all' %}
@@ -104,6 +98,12 @@
       {% endif %}
     </button>
   </div>
+
+  <!-- Page Title -->
+  <h1 class="text-[28px] md:text-[36px] font-light text-gray-900 mb-[16px] md:mb-[24px] text-center"
+      style="font-family: var(--font-montserrat), Montserrat, sans-serif;">
+    {% if collection.handle == 'all' %}{{ 'header.catalog' | t }}{% else %}{{ collection.title }}{% endif %}
+  </h1>
 
   <!-- ============================================================
        REAL SHOPIFY PRODUCTS (shown when products exist in collection)
@@ -207,7 +207,7 @@
             </h3>
             <p class="text-[12px] font-medium md:text-[13px] md:font-light text-gray-800 md:text-gray-500"
                style="font-family: var(--font-montserrat), Montserrat, sans-serif;">
-              $ 80
+              $80
             </p>
           </div>
         </a>
@@ -215,13 +215,21 @@
     </div>
 
     <!-- Static pagination for placeholder layout -->
-    <div class="flex items-center justify-center gap-1 mt-[64px] md:mt-[80px]">
-      <a href="{{ routes.all_products_collection_url }}?page=1" class="pagination-link current">1</a>
-      <a href="{{ routes.all_products_collection_url }}?page=2" class="pagination-link">2</a>
-      <a href="{{ routes.all_products_collection_url }}?page=3" class="pagination-link">3</a>
-      <span class="pagination-dots">&hellip;</span>
-      <a href="{{ routes.all_products_collection_url }}?page=12" class="pagination-link">12</a>
-      <a href="{{ routes.all_products_collection_url }}?page=2" class="pagination-link ml-1" aria-label="Next">&rsaquo;</a>
+    <div class="flex flex-col items-center mt-[64px] md:mt-[80px] w-full max-w-[300px] mx-auto">
+      <div class="text-[10px] md:text-[12px] text-gray-500 mb-2 font-medium tracking-wide">
+        12 of 48 items shown
+      </div>
+      <div class="w-full h-[6px] bg-[#EFEFEF] rounded-full mb-6 overflow-hidden">
+        <div class="h-full bg-[#e61a7a] rounded-full" style="width: 25%;"></div>
+      </div>
+      <a href="{{ routes.all_products_collection_url }}?page=2"
+         class="w-full bg-[#e61a7a] hover:bg-[#c9156a] transition-colors text-white py-[16px] text-center text-[12px] font-semibold tracking-wider uppercase mb-4"
+         style="font-family: var(--font-montserrat), Montserrat, sans-serif;">
+        {% if request.locale.iso_code == 'he' %}עוד{% else %}More{% endif %}
+      </a>
+      <div class="text-[10px] text-gray-400 font-medium">
+        End of page or <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="underline hover:text-gray-700 transition-colors">Back to top</button>
+      </div>
     </div>
 
   {% endif %}
