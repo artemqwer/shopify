@@ -14,12 +14,7 @@
 <section class="w-full mt-4 mb-[32px] md:mb-24 block md:hidden">
   <div class="relative w-full aspect-[390/500] overflow-hidden bg-black/5">
     {% if section.settings.banner_video != blank %}
-      <video autoplay loop muted playsinline webkit-playsinline preload="auto"
-             class="absolute inset-0 w-full h-full object-cover">
-        {% for source in section.settings.banner_video.sources %}
-          <source src="{{ source.url }}" type="{{ source.mime_type }}">
-        {% endfor %}
-      </video>
+      {{ section.settings.banner_video | video_tag: autoplay: true, loop: true, muted: true, controls: false, image_size: 'master', class: 'absolute inset-0 w-full h-full object-cover', id: 'video-banner-el' }}
     {% else %}
       <div class="absolute inset-0 w-full h-full flex flex-col items-center justify-center bg-gray-100 text-gray-500 p-4 text-center">
         <svg fill="currentColor" class="w-8 h-8 mb-2" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>

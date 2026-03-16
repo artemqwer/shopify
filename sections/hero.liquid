@@ -15,12 +15,7 @@
 <section class="w-full relative h-[100dvh] block md:hidden">
   <div class="absolute inset-0 w-full h-full overflow-hidden bg-black/10">
     {% if section.settings.mobile_video != blank %}
-      <video autoplay loop muted playsinline webkit-playsinline preload="auto"
-             class="w-full h-full object-cover">
-        {% for source in section.settings.mobile_video.sources %}
-          <source src="{{ source.url }}" type="{{ source.mime_type }}">
-        {% endfor %}
-      </video>
+      {{ section.settings.mobile_video | video_tag: autoplay: true, loop: true, muted: true, controls: false, image_size: 'master', class: 'w-full h-full object-cover', id: 'hero-video-el' }}
     {% else %}
       <div class="w-full h-full flex items-center justify-center bg-gray-200">
         <p class="text-gray-500 font-medium">Please upload a video in Theme Settings</p>

@@ -59,5 +59,15 @@
 
   {% render 'integration-scripts' %}
 
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('video').forEach(function(v) {
+        v.setAttribute('playsinline', '');
+        v.setAttribute('webkit-playsinline', '');
+        if (v.paused) { v.play().catch(function(){}); }
+      });
+    });
+  </script>
+
 </body>
 </html>
