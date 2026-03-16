@@ -11,7 +11,9 @@
   "sections": {
     "hero": {
       "type": "hero",
-      "settings": {}
+      "settings": {
+        "mobile_video": "shopify://files/videos/IMG_5141.MP4"
+      }
     },
     "recommended": {
       "type": "recommended-products",
