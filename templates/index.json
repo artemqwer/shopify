@@ -21,7 +21,9 @@
     },
     "video-banner": {
       "type": "video-banner",
-      "settings": {}
+      "settings": {
+        "banner_video": "shopify://files/videos/IMG_4334.mp4"
+      }
     },
     "recommended-2": {
       "type": "recommended-products",
