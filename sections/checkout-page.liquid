@@ -184,7 +184,6 @@
   {% assign txt_checkout    = 'לתשלום' %}
   {% assign txt_express     = 'תשלום מהיר' %}
   {% assign txt_or_fill     = 'או מלאו את הפרטים למטה:' %}
-  {% assign txt_applepay_btn = 'שלם עם Apple Pay' %}
   {% assign txt_details     = 'פרטי לקוח' %}
   {% assign txt_last        = 'שם משפחה*' %}
   {% assign txt_first       = 'שם פרטי*' %}
@@ -202,7 +201,6 @@
   {% assign txt_your_order  = 'ההזמנה שלך' %}
   {% assign txt_subtotal    = 'סכום ביניים' %}
   {% assign txt_payment     = 'תשלום' %}
-  {% assign txt_applepay_opt = 'Apple Pay' %}
   {% assign txt_card_gpay   = 'כרטיס אשראי, Google Pay' %}
   {% assign txt_cod         = 'תשלום במזומן במועד האספקה' %}
   {% assign txt_shipping    = 'משלוח' %}
@@ -218,7 +216,6 @@
   {% assign txt_checkout    = 'Оформлення' %}
   {% assign txt_express     = 'Express Checkout' %}
   {% assign txt_or_fill     = 'Або заповніть ваші дані нижче:' %}
-  {% assign txt_applepay_btn = 'Pay with Apple Pay' %}
   {% assign txt_details     = 'Контактні дані' %}
   {% assign txt_last        = 'Прізвище*' %}
   {% assign txt_first       = 'Ім&#x27;я*' %}
@@ -236,7 +233,6 @@
   {% assign txt_your_order  = 'Ваше замовлення' %}
   {% assign txt_subtotal    = 'Проміжний підсумок' %}
   {% assign txt_payment     = 'Спосіб оплати' %}
-  {% assign txt_applepay_opt = 'Apple Pay' %}
   {% assign txt_card_gpay   = 'Оплата карткою, Google Pay' %}
   {% assign txt_cod         = 'Оплата при отриманні' %}
   {% assign txt_shipping    = 'Доставка' %}
@@ -252,7 +248,6 @@
   {% assign txt_checkout    = 'Commande' %}
   {% assign txt_express     = 'Paiement express' %}
   {% assign txt_or_fill     = 'Ou remplissez vos coordonnées ci-dessous:' %}
-  {% assign txt_applepay_btn = 'Payer avec Apple Pay' %}
   {% assign txt_details     = 'Coordonnées' %}
   {% assign txt_last        = 'Nom*' %}
   {% assign txt_first       = 'Prénom*' %}
@@ -270,7 +265,6 @@
   {% assign txt_your_order  = 'Votre commande' %}
   {% assign txt_subtotal    = 'Sous-total' %}
   {% assign txt_payment     = 'Méthode de paiement' %}
-  {% assign txt_applepay_opt = 'Apple Pay' %}
   {% assign txt_card_gpay   = 'Carte, Google Pay' %}
   {% assign txt_cod         = 'Paiement à la livraison' %}
   {% assign txt_shipping    = 'Livraison' %}
@@ -286,7 +280,6 @@
   {% assign txt_checkout    = 'CHECKOUT' %}
   {% assign txt_express     = 'Express Checkout' %}
   {% assign txt_or_fill     = 'Or fill in your details below:' %}
-  {% assign txt_applepay_btn = 'Pay with Apple Pay' %}
   {% assign txt_details     = 'Customer Details' %}
   {% assign txt_last        = 'Last Name*' %}
   {% assign txt_first       = 'First Name*' %}
@@ -304,7 +297,6 @@
   {% assign txt_your_order  = 'Your Order' %}
   {% assign txt_subtotal    = 'Subtotal' %}
   {% assign txt_payment     = 'Payment Method' %}
-  {% assign txt_applepay_opt = 'Apple Pay' %}
   {% assign txt_card_gpay   = 'Card payment, Google Pay' %}
   {% assign txt_cod         = 'Cash on delivery' %}
   {% assign txt_shipping    = 'Shipping' %}
@@ -332,11 +324,11 @@
   <!-- Express Checkout -->
   <div class="max-w-[600px] mx-auto mb-2">
     <div class="express-checkout-title">
-      <span class="text-[13px] font-medium tracking-[0.12em] text-[#222] whitespace-nowrap">{{ txt_express }}</span>
+      <span style="font-family:Montserrat,sans-serif; font-weight:400; font-size:20px; line-height:1; letter-spacing:0.05em; color:#222;">{{ txt_express }}</span>
     </div>
     <button type="button" class="btn-applepay" onclick="confirmOrder('applepay')">
       <span>Pay with</span>
-      <img src="{{ 'apple-pay.svg' | asset_url }}" height="22" style="filter:invert(1); margin-top:1px;" alt="Apple Pay">
+      <img src="{{ 'apple-pay.svg' | asset_url }}" width="44" height="22" style="filter:invert(1); margin-top:1px;" alt="Apple Pay">
     </button>
   </div>
 
@@ -451,7 +443,7 @@
         <div class="space-y-3 mb-6">
           <label class="flex items-center gap-3 cursor-pointer">
             <input type="radio" name="payment_method" value="applepay" class="chk-radio-box" checked>
-            <img src="{{ 'apple-pay.svg' | asset_url }}" height="14" alt="Apple Pay">
+            <img src="{{ 'apple-pay.svg' | asset_url }}" width="28" height="14" alt="Apple Pay">
           </label>
           <label class="flex items-center gap-3 cursor-pointer">
             <input type="radio" name="payment_method" value="card" class="chk-radio-box">
@@ -489,7 +481,7 @@
         <div id="chk-confirm-wrapper">
           <button type="button" class="btn-applepay" id="btn-applepay-confirm" onclick="confirmOrder('applepay')">
             <span>Pay with</span>
-            <img src="{{ 'apple-pay.svg' | asset_url }}" height="22" style="filter:invert(1); margin-top:1px;" alt="Apple Pay">
+            <img src="{{ 'apple-pay.svg' | asset_url }}" width="44" height="22" style="filter:invert(1); margin-top:1px;" alt="Apple Pay">
           </button>
           <button type="button" class="btn-confirm" id="btn-regular-confirm" style="display:none;" onclick="confirmOrder('regular')">
             {{ txt_confirm }}
