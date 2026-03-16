@@ -1,20 +1,6 @@
 <!-- ==========================================
      COOKIE CONSENT BANNER
 =========================================== -->
-{% schema %}
-{
-  "name": "Cookie Consent",
-  "settings": [
-    {
-      "type": "url",
-      "id": "policy_url",
-      "label": "Cookie Policy URL",
-      "default": "/policies/privacy-policy"
-    }
-  ]
-}
-{% endschema %}
-
 <style>
   #cookie-consent-banner {
     position: fixed;
@@ -261,8 +247,8 @@
 
 <script>
 (function() {
-  const STORAGE_KEY = 'cookie_consent_v1';
-  const banner = document.getElementById('cookie-consent-banner');
+  var STORAGE_KEY = 'cookie_consent_v1';
+  var banner = document.getElementById('cookie-consent-banner');
 
   /* Already consented — do nothing */
   try {
@@ -282,7 +268,6 @@
     }, 500);
   }
 
-  /* Accept all */
   var btnAccept = document.getElementById('cookie-accept-all');
   if (btnAccept) {
     btnAccept.addEventListener('click', function() {
@@ -290,7 +275,6 @@
     });
   }
 
-  /* Reject optional */
   var btnReject = document.getElementById('cookie-reject-optional');
   if (btnReject) {
     btnReject.addEventListener('click', function() {
@@ -298,7 +282,6 @@
     });
   }
 
-  /* Open settings */
   var btnSettings = document.getElementById('cookie-open-settings');
   var settingsPanel = document.getElementById('cookie-settings-panel');
   if (btnSettings && settingsPanel) {
@@ -310,18 +293,30 @@
     });
   }
 
-  /* Save custom settings */
   var btnSave = document.getElementById('cookie-save-settings');
   if (btnSave) {
     btnSave.addEventListener('click', function() {
-      var analytics  = document.getElementById('cookie-analytics');
-      var marketing  = document.getElementById('cookie-marketing');
+      var analytics = document.getElementById('cookie-analytics');
+      var marketing = document.getElementById('cookie-marketing');
       saveConsent({
         necessary: true,
-        analytics:  analytics  ? analytics.checked  : false,
-        marketing:  marketing  ? marketing.checked  : false
+        analytics: analytics ? analytics.checked : false,
+        marketing: marketing ? marketing.checked : false
       });
     });
   }
 })();
 </script>
+
+{% schema %}
+{
+  "name": "Cookie Consent",
+  "settings": [
+    {
+      "type": "url",
+      "id": "policy_url",
+      "label": "Cookie Policy URL"
+    }
+  ]
+}
+{% endschema %}
