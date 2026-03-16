@@ -266,6 +266,7 @@
     setTimeout(function() {
       banner && (banner.style.display = 'none');
     }, 500);
+    document.dispatchEvent(new CustomEvent('cookieConsentSaved'));
   }
 
   var btnAccept = document.getElementById('cookie-accept-all');
