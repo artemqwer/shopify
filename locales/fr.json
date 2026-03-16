@@ -60,6 +60,10 @@
     "product_3": "Foulard rose",
     "product_4": "Foulard Vintage"
   },
+  "hero": {
+    "for_sea": "Pour la mer",
+    "classic": "Classique"
+  },
   "contacts": {
     "title": "Contacts",
     "phone_title": "Téléphone",
