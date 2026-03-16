@@ -49,6 +49,7 @@
     "public_offer": "Public Offer",
     "privacy": "Privacy Policy",
     "shipping": "Shipping & Payment",
+    "returns": "Returns & Exchange",
     "copyright": "© 2026 ESTER WUGMAN"
   },
   "products": {
@@ -92,6 +93,26 @@
     "p3": "This phrase became not just a slogan, but a brand philosophy. Today everyone around is saying: «Show yourself!» Psychologists, coaches, influencers, marketers...",
     "p4": "We don't just talk — we create. We create headwear that speaks for you. That doesn't hide, but highlights. That helps you be yourself — boldly, precisely, without excess.",
     "p5": "This phrase became not just a slogan, but a brand philosophy. Today everyone around is saying: «Show yourself!» Psychologists, coaches, influencers, marketers..."
+  },
+  "returns": {
+    "intro": "Headwear is eligible for exchange or return under the following conditions:",
+    "condition_title": "Product condition",
+    "condition_item1": "The item has not been used.",
+    "condition_item2": "Original seals, brand tags, and packaging are intact.",
+    "condition_item3": "Proof of purchase (receipt) must be provided.",
+    "deadline_title": "Return period",
+    "deadline_item1": "You have the right to request a return within 14 calendar days from the date of purchase (not counting the day of purchase).",
+    "deadline_item2": "If the order was received by delivery, the period starts from the date of actual receipt.",
+    "defect_title": "Defect or manufacturing fault",
+    "defect_item1": "If a defect or manufacturing fault is discovered after purchase, the item is eligible for exchange or return regardless of the time of use.",
+    "defect_item2": "In such cases, the store covers the shipping costs.",
+    "process_title": "Exchange & return process",
+    "process_item1": "To initiate the process, contact us via messenger or by email listed on the website.",
+    "process_item2": "After your request is confirmed, send the item back via postal service.",
+    "process_item3": "Refunds are processed within 5 business days of receiving and inspecting the item.",
+    "important_title": "Important",
+    "important_item1": "Exchange or return is not possible if the item shows signs of use, damage caused by the buyer, or if the original packaging or documents are missing. The store reserves the right to refuse a return or exchange if the conditions are not met.",
+    "outro": "Inspect your order immediately upon receipt — this will help resolve any issues faster and protect your rights."
   },
   "catalog": {
     "filter": "Filter",

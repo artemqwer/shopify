@@ -49,6 +49,7 @@
     "public_offer": "Offre publique",
     "privacy": "Politique de confidentialité",
     "shipping": "Livraison et paiement",
+    "returns": "Échanges et retours",
     "copyright": "© 2026 ESTER WUGMAN"
   },
   "products": {
@@ -57,6 +58,26 @@
     "product_2": "Foulard en soie bleue",
     "product_3": "Foulard rose",
     "product_4": "Foulard Vintage"
+  },
+  "returns": {
+    "intro": "Les coiffures sont éligibles à l'échange ou au retour dans les conditions suivantes :",
+    "condition_title": "État du produit",
+    "condition_item1": "L'article n'a pas été utilisé.",
+    "condition_item2": "Les étiquettes, plombs d'origine et l'emballage sont intacts.",
+    "condition_item3": "La preuve d'achat (reçu) doit être fournie.",
+    "deadline_title": "Délai de retour",
+    "deadline_item1": "Vous avez le droit de demander un retour dans les 14 jours calendaires suivant la date d'achat (sans compter le jour d'achat).",
+    "deadline_item2": "Si la commande a été reçue par livraison, le délai commence à partir de la date de réception effective.",
+    "defect_title": "Défaut ou vice de fabrication",
+    "defect_item1": "Si un défaut ou un vice de fabrication est découvert après l'achat, l'article est éligible à l'échange ou au retour quelle que soit la durée d'utilisation.",
+    "defect_item2": "Dans ce cas, le magasin prend en charge les frais d'expédition.",
+    "process_title": "Procédure d'échange et de retour",
+    "process_item1": "Pour initier la procédure, contactez-nous via messagerie ou par e-mail indiqué sur le site.",
+    "process_item2": "Après confirmation de votre demande, renvoyez l'article par service postal.",
+    "process_item3": "Les remboursements sont traités dans les 5 jours ouvrables suivant la réception et l'inspection de l'article.",
+    "important_title": "Important",
+    "important_item1": "L'échange ou le retour est impossible si l'article présente des traces d'utilisation, des dommages causés par l'acheteur, ou si l'emballage ou les documents originaux sont manquants. Le magasin se réserve le droit de refuser un retour ou un échange si les conditions ne sont pas respectées.",
+    "outro": "Inspectez votre commande immédiatement à la réception — cela vous aidera à résoudre les problèmes plus rapidement et à protéger vos droits."
   },
   "catalog": {
     "filter": "Filtrer",
