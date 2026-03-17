@@ -31,13 +31,24 @@
   }
 
   [dir="rtl"] #footer-mobile .flex-col,
-  [dir="rtl"] #footer-mobile ul,
-  [dir="rtl"] #footer-mobile form {
+  [dir="rtl"] #footer-mobile > .flex-col:not(.footer-bottom),
+  [dir="rtl"] #footer-mobile > ul,
+  [dir="rtl"] #footer-mobile > .footer-lang-wrap > form {
     align-items: flex-start !important;
     text-align: right !important;
   }
 
-  /* Prevent numbers and emails from flipping their order (+38 stayed +38) */
+  /* Bottom part (Copyright & Logos) - ALWAYS CENTERED */
+  .footer-bottom {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    width: 100% !important;
+  }
+
+  /* Prevent numbers and emails from flipping their order */
   [dir="rtl"] .ltr-fix {
     direction: ltr !important;
     unicode-bidi: isolate;
@@ -46,9 +57,6 @@
 
   [dir="rtl"] .footer-bottom {
     direction: ltr !important;
-    text-align: center !important;
-    align-items: center !important;
-    width: 100% !important;
   }
 </style>
 
@@ -132,8 +140,7 @@
     <!-- Copyright Desktop -->
     <div class="text-center md:absolute w-full left-0 md:top-[204px] pt-[19px] pb-[19px] mt-auto md:p-0 border-t border-[#F5F5F5] md:border-t-0 pointer-events-none">
       <p
-        class="text-[11px] font-light tracking-widest text-black uppercase leading-none"
-        class="footer-copyright"
+        class="footer-copyright text-[11px] font-light tracking-widest text-black uppercase leading-none"
         style="font-family: var(--font-montserrat), Montserrat, sans-serif; direction: ltr; text-align: center;"
       >
         {{ 'footer.copyright' | t }}
