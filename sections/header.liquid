@@ -5,7 +5,7 @@
 }
 {% endschema %}
 
-<header id="site-header" class="fixed top-0 w-full z-50 transition-all duration-300 {% if template.name == 'index' %}bg-transparent border-transparent header-transparent{% else %}bg-white border-b border-[#F5F5F5]{% endif %} text-gray-900">
+<header id="site-header" class="fixed top-0 w-full z-50 transition-all duration-300 {% if template.name == 'index' %}bg-transparent header-transparent{% else %}bg-white{% endif %} text-gray-900" style="box-shadow: none !important; border: none !important;">
   <div class="w-full max-w-[1920px] mx-auto px-[20px] md:px-[160px]">
     <div class="relative flex justify-between items-center h-[57px] md:h-[102px]">
 
@@ -58,6 +58,10 @@
         }
         .mobile-menu-toggle.menu-open span {
           background-color: #111827;
+        }
+        #site-header {
+          box-shadow: none !important;
+          border: none !important;
         }
       </style>
 
@@ -336,11 +340,11 @@
       window.addEventListener('scroll', function() {
         if (window.innerWidth >= 768) return; // desktop is always solid
         if (window.scrollY > 50) {
-          header.classList.remove('bg-transparent', 'border-transparent', 'header-transparent');
-          header.classList.add('bg-white', 'border-b-2', 'border-[#F5F5F5]');
+          header.classList.remove('bg-transparent', 'header-transparent');
+          header.classList.add('bg-white', 'border-none');
         } else {
-          header.classList.add('bg-transparent', 'border-transparent', 'header-transparent');
-          header.classList.remove('bg-white', 'border-b-2', 'border-[#F5F5F5]');
+          header.classList.add('bg-transparent', 'header-transparent');
+          header.classList.remove('bg-white', 'border-none');
         }
       });
     {% endif %}
