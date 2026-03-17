@@ -20,16 +20,35 @@
     display: none;
   }
 
-  /* RTL (Hebrew) – entire footer flips */
+  /* RTL (Hebrew) – Footer alignment */
   [dir="rtl"] footer {
-    direction: rtl;
-    text-align: right;
+    /* Keep physical alignment to the left as requested by user ("вирівнювання як зараз") */
+    text-align: left;
   }
+  
+  /* Ensure Hebrew text itself is RTL */
+  [dir="rtl"] footer .rtl-text {
+    direction: rtl;
+    display: inline-block;
+  }
+
+  /* Fix phone, email and social links in RTL to stay LTR */
+  [dir="rtl"] footer a[href^="tel"],
+  [dir="rtl"] footer a[href^="mailto"],
+  [dir="rtl"] footer a[href*="instagram"],
+  [dir="rtl"] footer .ltr-fix {
+    direction: ltr !important;
+    display: inline-block;
+    unicode-bidi: isolate;
+  }
+
   [dir="rtl"] footer .footer-bottom {
     text-align: center;
   }
+
   [dir="rtl"] footer .footer-copyright {
     direction: ltr;
+    display: block;
   }
 </style>
 
@@ -123,24 +142,24 @@
   </div>
 
   <!-- MOBILE FOOTER -->
-  <div id="footer-mobile" class="flex flex-col md:hidden w-full px-5 pb-10 pt-10 items-start text-left">
+  <div id="footer-mobile" class="flex flex-col md:hidden w-full px-5 pb-10 pt-10 items-start text-left" style="direction: ltr !important;">
 
     <!-- Contacts -->
-    <div class="flex flex-col gap-[24px] mb-[40px]">
-      <a href="tel:+383457895" class="text-[15px] font-normal text-black" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">{{ 'footer.phone' | t }}</a>
-      <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="text-[15px] font-normal text-black" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">{{ 'footer.instagram' | t }}</a>
-      <a href="mailto:ESTERWUGMAN@gmail.com" class="text-[15px] font-normal text-black" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">{{ 'footer.email' | t }}</a>
+    <div class="flex flex-col gap-[24px] mb-[40px] items-start">
+      <a href="tel:+383457895" class="text-[15px] font-normal text-black ltr-fix" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">{{ 'footer.phone' | t }}</a>
+      <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="text-[15px] font-normal text-black ltr-fix" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">{{ 'footer.instagram' | t }}</a>
+      <a href="mailto:ESTERWUGMAN@gmail.com" class="text-[15px] font-normal text-black ltr-fix" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">{{ 'footer.email' | t }}</a>
     </div>
 
     <!-- Navigation Links -->
-    <ul class="flex flex-col gap-[24px] mb-[40px]">
-      <li><a href="{{ routes.root_url }}" class="text-[15px] font-normal text-black" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">{{ 'footer.home' | t }}</a></li>
-      <li><a href="{{ routes.all_products_collection_url }}" class="text-[15px] font-normal text-black" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">{{ 'footer.catalog' | t }}</a></li>
-      <li><a href="{{ routes.search_url }}?view=popular" class="text-[15px] font-normal text-black" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">{{ 'footer.popular' | t }}</a></li>
-      <li><a href="{{ routes.root_url }}pages/about-us" class="text-[15px] font-normal text-black" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">{{ 'footer.about' | t }}</a></li>
-      <li><a href="{{ routes.root_url }}pages/public-offer" class="text-[15px] font-normal text-black" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">{{ 'footer.public_offer' | t }}</a></li>
-      <li><a href="{{ routes.root_url }}pages/privacy" class="text-[15px] font-normal text-black" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">{{ 'footer.privacy' | t }}</a></li>
-      <li><a href="{{ routes.root_url }}pages/shipping-payment" class="text-[15px] font-normal text-black" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">{{ 'footer.shipping' | t }}</a></li>
+    <ul class="flex flex-col gap-[24px] mb-[40px] items-start">
+      <li><a href="{{ routes.root_url }}" class="text-[15px] font-normal text-black {% if request.locale.iso_code == 'he' %}rtl-text{% endif %}" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">{{ 'footer.home' | t }}</a></li>
+      <li><a href="{{ routes.all_products_collection_url }}" class="text-[15px] font-normal text-black {% if request.locale.iso_code == 'he' %}rtl-text{% endif %}" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">{{ 'footer.catalog' | t }}</a></li>
+      <li><a href="{{ routes.search_url }}?view=popular" class="text-[15px] font-normal text-black {% if request.locale.iso_code == 'he' %}rtl-text{% endif %}" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">{{ 'footer.popular' | t }}</a></li>
+      <li><a href="{{ routes.root_url }}pages/about-us" class="text-[15px] font-normal text-black {% if request.locale.iso_code == 'he' %}rtl-text{% endif %}" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">{{ 'footer.about' | t }}</a></li>
+      <li><a href="{{ routes.root_url }}pages/public-offer" class="text-[15px] font-normal text-black {% if request.locale.iso_code == 'he' %}rtl-text{% endif %}" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">{{ 'footer.public_offer' | t }}</a></li>
+      <li><a href="{{ routes.root_url }}pages/privacy" class="text-[15px] font-normal text-black {% if request.locale.iso_code == 'he' %}rtl-text{% endif %}" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">{{ 'footer.privacy' | t }}</a></li>
+      <li><a href="{{ routes.root_url }}pages/shipping-payment" class="text-[15px] font-normal text-black {% if request.locale.iso_code == 'he' %}rtl-text{% endif %}" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">{{ 'footer.shipping' | t }}</a></li>
     </ul>
 
     <!-- Language Selector Accordion -->
