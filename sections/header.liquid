@@ -145,17 +145,17 @@
                class="hidden absolute top-full right-0 bg-white border border-gray-100 z-50 py-5 px-7 min-w-[88px]">
             {% form 'localization', class: 'flex flex-col gap-[14px]' %}
               <button type="submit" name="locale_code" value="en"
-                      class="text-left text-[13px] tracking-widest uppercase font-medium leading-none transition-colors
+                      class="text-left rtl:text-right text-[13px] tracking-widest uppercase font-medium leading-none transition-colors
                              {% if request.locale.iso_code == 'en' %}text-[#e61a7a]{% else %}text-gray-800 hover:text-[#e61a7a]{% endif %}">
                 ENG
               </button>
               <button type="submit" name="locale_code" value="uk"
-                      class="text-left text-[13px] tracking-widest uppercase font-medium leading-none transition-colors
+                      class="text-left rtl:text-right text-[13px] tracking-widest uppercase font-medium leading-none transition-colors
                              {% if request.locale.iso_code == 'uk' %}text-[#e61a7a]{% else %}text-gray-800 hover:text-[#e61a7a]{% endif %}">
                 UA
               </button>
               <button type="submit" name="locale_code" value="fr"
-                      class="text-left text-[13px] tracking-widest uppercase font-medium leading-none transition-colors
+                      class="text-left rtl:text-right text-[13px] tracking-widest uppercase font-medium leading-none transition-colors
                              {% if request.locale.iso_code == 'fr' %}text-[#e61a7a]{% else %}text-gray-800 hover:text-[#e61a7a]{% endif %}">
                 FR
               </button>
@@ -215,7 +215,7 @@
         />
       </a>
     </div>
-    <nav class="flex flex-col px-5 pt-6 pb-10 gap-2" style="font-family: Montserrat, sans-serif;">
+    <nav class="flex flex-col px-5 pt-6 pb-10 gap-2 items-start rtl:items-end" style="font-family: Montserrat, sans-serif;">
       <a href="{{ routes.all_products_collection_url }}" class="text-[14px] font-light text-gray-900 leading-none tracking-[0.03em] hover:text-[#d62873] transition-colors">{{ 'header.catalog' | t }}</a>
       <a href="{{ routes.root_url }}" class="text-[14px] font-light text-gray-900 leading-none tracking-[0.03em] hover:text-[#d62873] transition-colors">{{ 'header.home' | t }}</a>
       <a href="{{ routes.root_url }}pages/about-us" class="text-[14px] font-light text-gray-900 leading-none tracking-[0.03em] hover:text-[#d62873] transition-colors">{{ 'footer.about' | t }}</a>
@@ -225,7 +225,7 @@
 
       <!-- Language Selector -->
       <div class="mt-1">
-        {% form 'localization', class: 'flex flex-col items-start gap-2' %}
+        {% form 'localization', class: 'flex flex-col items-start rtl:items-end gap-2' %}
           <button type="button"
                   onclick="(function(){var list=document.getElementById('mobile-menu-lang-list');var caret=document.getElementById('mobile-lang-caret');var isOpen=!list.classList.contains('hidden');list.classList.toggle('hidden',isOpen);caret.style.transform=isOpen?'':'rotate(180deg)';})()"
                   class="flex items-center gap-2 text-[14px] font-light text-[#e61a7a] focus:outline-none leading-none tracking-[0.03em]">
@@ -239,7 +239,7 @@
               <path d="M1 5L5 1L9 5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </button>
-          <div id="mobile-menu-lang-list" class="flex flex-col items-start gap-2 hidden">
+          <div id="mobile-menu-lang-list" class="flex flex-col items-start rtl:items-end gap-2 hidden">
             {% if request.locale.iso_code != 'uk' %}
               <button type="submit" name="locale_code" value="uk" class="text-[14px] font-light text-gray-900 hover:text-[#e61a7a] transition-colors leading-none tracking-[0.03em]">UA</button>
             {% endif %}
@@ -302,7 +302,14 @@
         btn.style.position = 'fixed';
         btn.style.zIndex = '60';
         btn.style.top = '18px';
-        btn.style.left = '16px';
+        var isRtl = document.documentElement.dir === 'rtl';
+        if (isRtl) {
+          btn.style.right = '16px';
+          btn.style.left = '';
+        } else {
+          btn.style.left = '16px';
+          btn.style.right = '';
+        }
       }
     }
     function closeMobileMenu() {
@@ -315,6 +322,7 @@
         btn.style.zIndex = '';
         btn.style.top = '';
         btn.style.left = '';
+        btn.style.right = '';
       }
       menu.classList.remove('is-open');
       backdrop.classList.remove('is-open');
