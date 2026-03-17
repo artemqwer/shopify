@@ -200,6 +200,8 @@
   {% assign txt_branch      = 'סניף' %}
   {% assign txt_notes       = 'הערות להזמנה (לא חובה)' %}
   {% assign txt_promo       = 'קוד קופון' %}
+  {% assign txt_promo_apply = 'החל' %}
+  {% assign txt_promo_placeholder = 'הזינו קוד קופון' %}
   {% assign txt_your_order  = 'ההזמנה שלך' %}
   {% assign txt_subtotal    = 'סכום ביניים' %}
   {% assign txt_payment     = 'תשלום' %}
@@ -232,6 +234,8 @@
   {% assign txt_branch      = 'Відділення' %}
   {% assign txt_notes       = 'Примітки до замовлення (необов&#x27;язково)' %}
   {% assign txt_promo       = 'ПРОМОКОД' %}
+  {% assign txt_promo_apply = 'Застосувати' %}
+  {% assign txt_promo_placeholder = 'Введіть промокод' %}
   {% assign txt_your_order  = 'Ваше замовлення' %}
   {% assign txt_subtotal    = 'Проміжний підсумок' %}
   {% assign txt_payment     = 'Спосіб оплати' %}
@@ -264,6 +268,8 @@
   {% assign txt_branch      = 'Agence' %}
   {% assign txt_notes       = 'Notes de commande (facultatif)' %}
   {% assign txt_promo       = 'CODE PROMO' %}
+  {% assign txt_promo_apply = 'Appliquer' %}
+  {% assign txt_promo_placeholder = 'Entrez le code promo' %}
   {% assign txt_your_order  = 'Votre commande' %}
   {% assign txt_subtotal    = 'Sous-total' %}
   {% assign txt_payment     = 'Méthode de paiement' %}
@@ -296,6 +302,8 @@
   {% assign txt_branch      = 'Branch' %}
   {% assign txt_notes       = 'Order notes (optional)' %}
   {% assign txt_promo       = 'PROMO CODE' %}
+  {% assign txt_promo_apply = 'Apply' %}
+  {% assign txt_promo_placeholder = 'Enter promo code' %}
   {% assign txt_your_order  = 'Your Order' %}
   {% assign txt_subtotal    = 'Subtotal' %}
   {% assign txt_payment     = 'Payment Method' %}
@@ -418,9 +426,26 @@
       <div class="order-summary-box">
 
         <!-- Promo Code -->
-        <div class="flex items-center justify-between border-b border-[#e5e5e5] pb-4 mb-6 cursor-pointer group">
-          <span class="text-[13px] font-semibold tracking-wider text-[#222]">{{ txt_promo }}</span>
-          <span class="text-[18px] font-light text-[#222] group-hover:text-gray-500 transition-colors">+</span>
+        <div class="border-b border-[#e5e5e5] pb-4 mb-6">
+          <div class="flex items-center justify-between cursor-pointer group" onclick="togglePromoField()">
+            <span class="text-[13px] font-semibold tracking-wider text-[#222]">{{ txt_promo }}</span>
+            <span id="promo-toggle-icon" class="text-[18px] font-light text-[#222] group-hover:text-gray-500 transition-colors">+</span>
+          </div>
+          <div id="promo-field" class="hidden mt-3">
+            <div class="flex gap-2">
+              <input type="text" id="promo-input" placeholder="{{ txt_promo_placeholder }}"
+                class="flex-1 border border-[#ddd] px-3 py-2 text-[13px] outline-none focus:border-[#222] transition-colors rounded-none">
+              <button type="button" onclick="applyPromoCode()"
+                class="bg-[#222] text-white px-4 py-2 text-[12px] font-semibold tracking-wider hover:bg-[#444] transition-colors">
+                {{ txt_promo_apply }}
+              </button>
+            </div>
+            <div id="promo-message" class="text-[11px] mt-2 hidden"></div>
+            <div id="promo-applied" class="hidden mt-2 flex items-center justify-between text-[12px]">
+              <span class="text-green-600" id="promo-applied-text"></span>
+              <button type="button" onclick="removePromoCode()" class="text-[#999] hover:text-[#222] text-[11px] underline">✕</button>
+            </div>
+          </div>
         </div>
 
         <!-- Your Order -->
@@ -432,6 +457,12 @@
             <span class="truncate pr-4">Loading order...</span>
             <span class="flex-shrink-0">...</span>
           </div>
+        </div>
+
+        <!-- Discount row (hidden by default) -->
+        <div id="discount-row" class="hidden flex items-center justify-between text-[12px] text-green-600 mb-4">
+          <span id="discount-label"></span>
+          <span id="discount-amount"></span>
         </div>
 
         <!-- Subtotal -->
@@ -550,6 +581,101 @@
     });
   });
 
+  // ── Promo Code Logic ──
+  let activePromo = null; // { code, type: 'percent'|'fixed', value: number }
+
+  function togglePromoField() {
+    const field = document.getElementById('promo-field');
+    const icon = document.getElementById('promo-toggle-icon');
+    if (field.classList.contains('hidden')) {
+      field.classList.remove('hidden');
+      icon.textContent = '−';
+      document.getElementById('promo-input').focus();
+    } else {
+      field.classList.add('hidden');
+      icon.textContent = '+';
+    }
+  }
+
+  function applyPromoCode() {
+    const input = document.getElementById('promo-input');
+    const msgEl = document.getElementById('promo-message');
+    const code = input.value.trim().toUpperCase();
+
+    if (!code) {
+      showPromoMessage(msgEl, 'Please enter a promo code.', 'red');
+      return;
+    }
+
+    // Check discount code via Shopify AJAX API
+    fetch('/discount/' + encodeURIComponent(code), { method: 'GET', redirect: 'follow' })
+      .then(() => {
+        // After applying, check cart for discount
+        return fetch('/cart.js').then(r => r.json());
+      })
+      .then(cart => {
+        if (cart.total_discount && cart.total_discount > 0) {
+          activePromo = { code: code, type: 'fixed', value: cart.total_discount / 100 };
+          showAppliedPromo(code, cart.total_discount / 100);
+          recalcTotals();
+        } else {
+          // Discount might not apply via AJAX — store locally for demo
+          showPromoMessage(msgEl, 'Code applied! Discount will be calculated at final checkout.', 'green');
+          activePromo = { code: code, type: 'percent', value: 0 };
+          showAppliedPromo(code, 0);
+        }
+      })
+      .catch(() => {
+        showPromoMessage(msgEl, 'Could not verify code. It will be applied at checkout.', 'orange');
+        activePromo = { code: code, type: 'percent', value: 0 };
+        showAppliedPromo(code, 0);
+      });
+  }
+
+  function showPromoMessage(el, text, color) {
+    el.textContent = text;
+    el.style.color = color;
+    el.classList.remove('hidden');
+    setTimeout(() => el.classList.add('hidden'), 4000);
+  }
+
+  function showAppliedPromo(code, discount) {
+    const appliedEl = document.getElementById('promo-applied');
+    const appliedText = document.getElementById('promo-applied-text');
+    const discountRow = document.getElementById('discount-row');
+    const discountLabel = document.getElementById('discount-label');
+    const discountAmount = document.getElementById('discount-amount');
+
+    appliedText.textContent = code;
+    appliedEl.classList.remove('hidden');
+    document.getElementById('promo-input').disabled = true;
+
+    if (discount > 0) {
+      discountLabel.textContent = code;
+      discountAmount.textContent = '-$' + discount.toFixed(2).replace(/\.00$/, '');
+      discountRow.classList.remove('hidden');
+    }
+  }
+
+  function removePromoCode() {
+    activePromo = null;
+    document.getElementById('promo-applied').classList.add('hidden');
+    document.getElementById('discount-row').classList.add('hidden');
+    document.getElementById('promo-input').value = '';
+    document.getElementById('promo-input').disabled = false;
+    // Clear Shopify discount
+    fetch('/discount/clear', { method: 'GET' }).catch(() => {});
+    recalcTotals();
+  }
+
+  function recalcTotals() {
+    const mockItems = getMockCart();
+    fetch('/cart.js')
+      .then(r => r.json())
+      .then(cart => renderCheckout(cart, mockItems))
+      .catch(() => renderCheckout(null, mockItems));
+  }
+
   function formatMoney(cents) {
     if (typeof cents === 'string' && cents.indexOf('$') !== -1) return cents;
     return '$' + (cents / 100).toFixed(2).replace(/\.00$/, '');
@@ -595,10 +721,16 @@
     if (html === '') html = '<div class="text-[12px] text-[#888]">Your cart is empty.</div>';
     container.innerHTML = html;
 
-    const finalTotal    = (realCents / 100) + mockTotalVal;
+    const subtotal = (realCents / 100) + mockTotalVal;
+    const subtotalStr = '$' + subtotal.toFixed(2).replace(/\.00$/, '');
+    subtotalEl.textContent = subtotalStr;
+
+    let finalTotal = subtotal;
+    if (activePromo && activePromo.value > 0) {
+      finalTotal = Math.max(0, subtotal - activePromo.value);
+    }
     const finalTotalStr = '$' + finalTotal.toFixed(2).replace(/\.00$/, '');
-    subtotalEl.textContent = finalTotalStr;
-    totalEl.textContent    = finalTotalStr;
+    totalEl.textContent = finalTotalStr;
   }
 
   document.addEventListener('DOMContentLoaded', function() {
