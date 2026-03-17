@@ -135,9 +135,9 @@
     <div class="mb-[40px] w-full">
       {% form 'localization', class: 'flex flex-col items-start' %}
         <div class="relative inline-block w-full">
-          <button type="button" 
-                  onclick="document.getElementById('footer-lang-list').classList.toggle('hidden')"
-                  class="flex items-center gap-2 text-[15px] uppercase font-medium text-black focus:outline-none" 
+          <button type="button"
+                  onclick="(function(){var list=document.getElementById('footer-lang-list');var caret=document.getElementById('footer-lang-caret');var isOpen=!list.classList.contains('hidden');list.classList.toggle('hidden',isOpen);caret.style.transform=isOpen?'':'rotate(180deg)';})()"
+                  class="flex items-center gap-2 text-[15px] uppercase font-medium text-black focus:outline-none"
                   style="font-family: var(--font-montserrat), Montserrat, sans-serif;">
             {% case request.locale.iso_code %}
               {% when 'en' %}ENG
@@ -145,7 +145,7 @@
               {% when 'fr' %}FR
               {% when 'he' %}עב
             {% endcase %}
-            <svg class="w-3 h-3" fill="none" viewBox="0 0 10 6">
+            <svg id="footer-lang-caret" class="w-3 h-3 transition-transform duration-200" fill="none" viewBox="0 0 10 6">
               <path d="M1 5L5 1L9 5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </button>
