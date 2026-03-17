@@ -6,8 +6,8 @@
 {% endschema %}
 
 <header id="site-header" class="fixed top-0 w-full z-50 transition-all duration-300 {% if template.name == 'index' %}bg-transparent border-transparent header-transparent{% else %}bg-white border-b-2 border-[#F5F5F5]{% endif %} text-gray-900">
-  <div class="w-full max-w-[1920px] mx-auto pl-4 pr-[50px] md:px-[160px]">
-    <div class="relative flex justify-between items-center h-[57px] md:h-[102px]">
+  <div class="w-full max-w-[1920px] mx-auto px-4 md:px-[160px]">
+    <div class="relative flex justify-between items-center h-[60px] md:h-[102px]">
 
       <div class="md:hidden flex-1 flex items-center" style="z-index: 60;">
         <button type="button" class="mobile-menu-toggle header-mobile-icon relative w-6 h-6 focus:outline-none" aria-label="Menu" onclick="toggleMobileMenu(this)">
@@ -121,7 +121,7 @@
       </div>
 
       <!-- Header Right: Language, Search, Cart -->
-      <div class="flex items-center flex-1 justify-end space-x-[12px] md:space-x-10 rtl:space-x-reverse">
+      <div class="flex items-center flex-1 justify-end space-x-[13px] md:space-x-10 rtl:space-x-reverse">
 
         <!-- Language Selector (Desktop) -->
         <div class="hidden md:block relative" id="lang-switcher-desktop">
@@ -174,8 +174,10 @@
         </button>
 
         <!-- Search icon (mobile only) -->
-        <button type="button" class="md:hidden header-mobile-icon" onclick="window.location='{{ routes.root_url }}search'">
-          <img src="{{ 'Search.svg' | asset_url }}" width="24" height="24" alt="search" class="cart-icon-img">
+        <button type="button" class="md:hidden header-mobile-icon text-gray-900 hover:text-[#d62873] transition-colors" onclick="window.location='{{ routes.root_url }}search'">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+          </svg>
         </button>
 
         <!-- Cart trigger -->
@@ -210,7 +212,6 @@
           src="{{ 'logo-image.svg' | asset_url }}"
           alt="Ester Wugman Logo"
           width="80"
-          height="39"
           class="w-[80px] h-auto object-contain"
         />
       </a>
