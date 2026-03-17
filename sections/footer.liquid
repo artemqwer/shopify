@@ -21,11 +21,19 @@
   }
 
   /* RTL / Hebrew fixes for mobile footer */
+  [dir="rtl"] #footer-mobile {
+    align-items: flex-end;
+    text-align: right;
+  }
   [dir="rtl"] #footer-mobile .footer-lang-wrap form {
-    align-items: center;
+    align-items: flex-end;
   }
   [dir="rtl"] #footer-lang-list {
+    align-items: flex-end;
+  }
+  [dir="rtl"] #footer-mobile .footer-bottom {
     align-items: center;
+    text-align: center;
   }
 </style>
 
@@ -118,17 +126,17 @@
   </div>
 
   <!-- MOBILE FOOTER -->
-  <div id="footer-mobile" class="flex flex-col md:hidden w-full px-5 pb-10 pt-10 items-center text-center">
+  <div id="footer-mobile" class="flex flex-col md:hidden w-full px-5 pb-10 pt-10 items-start text-left">
 
     <!-- Contacts -->
-    <div class="flex flex-col items-center gap-[24px] mb-[40px]">
+    <div class="flex flex-col gap-[24px] mb-[40px]">
       <a href="tel:+383457895" class="text-[15px] font-normal text-black" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">{{ 'footer.phone' | t }}</a>
       <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="text-[15px] font-normal text-black" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">{{ 'footer.instagram' | t }}</a>
       <a href="mailto:ESTERWUGMAN@gmail.com" class="text-[15px] font-normal text-black" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">{{ 'footer.email' | t }}</a>
     </div>
 
     <!-- Navigation Links -->
-    <ul class="flex flex-col items-center gap-[24px] mb-[40px]">
+    <ul class="flex flex-col gap-[24px] mb-[40px]">
       <li><a href="{{ routes.root_url }}" class="text-[15px] font-normal text-black" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">{{ 'footer.home' | t }}</a></li>
       <li><a href="{{ routes.all_products_collection_url }}" class="text-[15px] font-normal text-black" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">{{ 'footer.catalog' | t }}</a></li>
       <li><a href="{{ routes.search_url }}?view=popular" class="text-[15px] font-normal text-black" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">{{ 'footer.popular' | t }}</a></li>
@@ -140,8 +148,8 @@
 
     <!-- Language Selector Accordion -->
     <div class="footer-lang-wrap mb-[40px] w-full">
-      {% form 'localization', class: 'flex flex-col items-center' %}
-        <div class="relative flex flex-col items-center w-full">
+      {% form 'localization', class: 'flex flex-col items-start' %}
+        <div class="relative inline-block w-full">
           <button type="button"
                   onclick="(function(){var list=document.getElementById('footer-lang-list');var caret=document.getElementById('footer-lang-caret');var isOpen=!list.classList.contains('hidden');list.classList.toggle('hidden',isOpen);caret.style.transform=isOpen?'':'rotate(180deg)';})()"
                   class="flex items-center gap-2 text-[15px] uppercase font-medium text-[#e61a7a] focus:outline-none"
@@ -157,7 +165,7 @@
             </svg>
           </button>
           
-          <div id="footer-lang-list" class="flex flex-col items-center gap-[24px] mt-[24px] hidden">
+          <div id="footer-lang-list" class="flex flex-col items-start gap-[24px] mt-[24px] hidden">
             {% if request.locale.iso_code != 'uk' %}
               <button type="submit" name="locale_code" value="uk" class="text-[15px] uppercase font-medium text-black/40 hover:text-black transition-colors" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">UA</button>
             {% endif %}
@@ -176,7 +184,7 @@
     </div>
 
     <!-- Copyright and Payments -->
-    <div class="flex flex-col items-center gap-[12px] pt-8 w-full border-t border-[#F5F5F5]">
+    <div class="footer-bottom flex flex-col items-center gap-[12px] pt-8 w-full border-t border-[#F5F5F5]">
       <p class="text-[10px] font-light tracking-[0.05em] text-[#999] uppercase" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">
         {{ 'footer.copyright' | t }}
       </p>
