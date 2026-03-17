@@ -202,7 +202,7 @@
   <div id="mobile-menu-backdrop" class="md:hidden fixed inset-0 z-40" onclick="closeMobileMenu()"></div>
 
   <!-- Mobile Menu (full screen overlay) -->
-  <div id="mobile-menu" class="md:hidden fixed inset-0 bg-white z-[55]">
+  <div id="mobile-menu" class="md:hidden fixed inset-0 bg-white z-[55]" {% if request.locale.iso_code == 'he' %}dir="rtl"{% endif %}>
     <!-- Menu top bar: logo only (burger stays in header, lifted above via JS) -->
     <div class="flex items-center justify-center h-[60px]">
       <a href="{{ routes.root_url }}">
@@ -215,7 +215,7 @@
         />
       </a>
     </div>
-    <nav class="flex flex-col px-5 pt-6 pb-10 gap-2 items-start rtl:items-end" style="font-family: Montserrat, sans-serif;">
+    <nav class="flex flex-col px-5 pt-6 pb-10 gap-2 {% if request.locale.iso_code == 'he' %}items-start text-right{% else %}items-start text-left{% endif %}" style="font-family: Montserrat, sans-serif;">
       <a href="{{ routes.all_products_collection_url }}" class="text-[14px] font-light text-gray-900 leading-none tracking-[0.03em] hover:text-[#d62873] transition-colors">{{ 'header.catalog' | t }}</a>
       <a href="{{ routes.root_url }}" class="text-[14px] font-light text-gray-900 leading-none tracking-[0.03em] hover:text-[#d62873] transition-colors">{{ 'header.home' | t }}</a>
       <a href="{{ routes.root_url }}pages/about-us" class="text-[14px] font-light text-gray-900 leading-none tracking-[0.03em] hover:text-[#d62873] transition-colors">{{ 'footer.about' | t }}</a>
@@ -225,7 +225,7 @@
 
       <!-- Language Selector -->
       <div class="mt-1">
-        {% form 'localization', class: 'flex flex-col items-start rtl:items-end gap-2' %}
+        {% form 'localization', class: 'flex flex-col items-start gap-2' %}
           <button type="button"
                   onclick="(function(){var list=document.getElementById('mobile-menu-lang-list');var caret=document.getElementById('mobile-lang-caret');var isOpen=!list.classList.contains('hidden');list.classList.toggle('hidden',isOpen);caret.style.transform=isOpen?'':'rotate(180deg)';})()"
                   class="flex items-center gap-2 text-[14px] font-light text-[#e61a7a] focus:outline-none leading-none tracking-[0.03em]">
@@ -239,7 +239,7 @@
               <path d="M1 5L5 1L9 5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </button>
-          <div id="mobile-menu-lang-list" class="flex flex-col items-start rtl:items-end gap-2 hidden">
+          <div id="mobile-menu-lang-list" class="flex flex-col items-start gap-2 hidden">
             {% if request.locale.iso_code != 'uk' %}
               <button type="submit" name="locale_code" value="uk" class="text-[14px] font-light text-gray-900 hover:text-[#e61a7a] transition-colors leading-none tracking-[0.03em]">UA</button>
             {% endif %}
