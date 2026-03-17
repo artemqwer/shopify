@@ -81,23 +81,23 @@
             <div class="bg-white border border-gray-100 w-[600px] p-8 grid grid-cols-4 gap-6 text-left rtl:text-right">
               <div class="flex flex-col space-y-3">
                 <a href="{{ routes.all_products_collection_url }}" class="text-sm text-gray-800 hover:text-[#d62873]">{{ 'header.menu.all' | t }}</a>
-                <a href="{{ routes.root_url }}collections/bestsellers" class="text-sm text-gray-800 hover:text-[#d62873]">{{ 'header.menu.bestsellers' | t }}</a>
-                <a href="{{ routes.root_url }}collections/kepi" class="text-sm text-gray-800 hover:text-[#d62873]">{{ 'header.menu.kepi' | t }}</a>
+                <a href="{{ routes.root_url | append: '/collections/bestsellers' | replace: '//', '/' }}" class="text-sm text-gray-800 hover:text-[#d62873]">{{ 'header.menu.bestsellers' | t }}</a>
+                <a href="{{ routes.root_url | append: '/collections/kepi' | replace: '//', '/' }}" class="text-sm text-gray-800 hover:text-[#d62873]">{{ 'header.menu.kepi' | t }}</a>
               </div>
               <div class="flex flex-col space-y-3">
-                <a href="{{ routes.root_url }}collections/hats" class="text-sm text-gray-800 hover:text-[#d62873]">{{ 'header.menu.hats' | t }}</a>
-                <a href="{{ routes.root_url }}collections/beretes" class="text-sm text-gray-800 hover:text-[#d62873]">{{ 'header.menu.beretes' | t }}</a>
-                <a href="{{ routes.root_url }}collections/beanies" class="text-sm text-gray-800 hover:text-[#d62873]">{{ 'header.menu.beanies' | t }}</a>
+                <a href="{{ routes.root_url | append: '/collections/hats' | replace: '//', '/' }}" class="text-sm text-gray-800 hover:text-[#d62873]">{{ 'header.menu.hats' | t }}</a>
+                <a href="{{ routes.root_url | append: '/collections/beretes' | replace: '//', '/' }}" class="text-sm text-gray-800 hover:text-[#d62873]">{{ 'header.menu.beretes' | t }}</a>
+                <a href="{{ routes.root_url | append: '/collections/beanies' | replace: '//', '/' }}" class="text-sm text-gray-800 hover:text-[#d62873]">{{ 'header.menu.beanies' | t }}</a>
               </div>
               <div class="flex flex-col space-y-3">
-                <a href="{{ routes.root_url }}collections/caps" class="text-sm text-gray-800 hover:text-[#d62873]">{{ 'header.menu.caps' | t }}</a>
-                <a href="{{ routes.root_url }}collections/panamas" class="text-sm text-gray-800 hover:text-[#d62873]">{{ 'header.menu.panamas' | t }}</a>
-                <a href="{{ routes.root_url }}collections/scarves" class="text-sm text-gray-800 hover:text-[#d62873]">{{ 'header.menu.scarves' | t }}</a>
+                <a href="{{ routes.root_url | append: '/collections/caps' | replace: '//', '/' }}" class="text-sm text-gray-800 hover:text-[#d62873]">{{ 'header.menu.caps' | t }}</a>
+                <a href="{{ routes.root_url | append: '/collections/panamas' | replace: '//', '/' }}" class="text-sm text-gray-800 hover:text-[#d62873]">{{ 'header.menu.panamas' | t }}</a>
+                <a href="{{ routes.root_url | append: '/collections/scarves' | replace: '//', '/' }}" class="text-sm text-gray-800 hover:text-[#d62873]">{{ 'header.menu.scarves' | t }}</a>
               </div>
               <div class="flex flex-col space-y-3">
-                <a href="{{ routes.root_url }}collections/scarfs" class="text-sm text-gray-800 hover:text-[#d62873]">{{ 'header.menu.scarfs' | t }}</a>
-                <a href="{{ routes.root_url }}collections/headbands" class="text-sm text-gray-800 hover:text-[#d62873]">{{ 'header.menu.headbands' | t }}</a>
-                <a href="{{ routes.root_url }}collections/sets" class="text-sm text-gray-800 hover:text-[#d62873]">{{ 'header.menu.sets' | t }}</a>
+                <a href="{{ routes.root_url | append: '/collections/scarfs' | replace: '//', '/' }}" class="text-sm text-gray-800 hover:text-[#d62873]">{{ 'header.menu.scarfs' | t }}</a>
+                <a href="{{ routes.root_url | append: '/collections/headbands' | replace: '//', '/' }}" class="text-sm text-gray-800 hover:text-[#d62873]">{{ 'header.menu.headbands' | t }}</a>
+                <a href="{{ routes.root_url | append: '/collections/sets' | replace: '//', '/' }}" class="text-sm text-gray-800 hover:text-[#d62873]">{{ 'header.menu.sets' | t }}</a>
               </div>
             </div>
           </div>
@@ -173,12 +173,12 @@
         </div>
 
         <!-- Search button (desktop text) -->
-        <button type="button" class="text-[14px] font-medium tracking-widest text-gray-900 uppercase hover:text-[#d62873] transition-colors hidden md:block" onclick="window.location='{{ routes.root_url }}search'">
+        <button type="button" class="text-[14px] font-medium tracking-widest text-gray-900 uppercase hover:text-[#d62873] transition-colors hidden md:block" onclick="window.location='{{ routes.root_url | append: '/search' | replace: '//', '/' }}'">
           {{ 'header.search' | t }}
         </button>
 
         <!-- Search icon (mobile only) -->
-        <button type="button" class="md:hidden header-mobile-icon" onclick="window.location='{{ routes.root_url }}search'">
+        <button type="button" class="md:hidden header-mobile-icon" onclick="window.location='{{ routes.root_url | append: '/search' | replace: '//', '/' }}'">
           <img src="{{ 'Search.svg' | asset_url }}" width="24" height="24" alt="search" class="cart-icon-img">
         </button>
 
@@ -222,10 +222,10 @@
     <nav class="flex flex-col px-5 pt-6 pb-10 gap-2 {% if request.locale.iso_code == 'he' %}items-start text-right{% else %}items-start text-left{% endif %}" style="font-family: Montserrat, sans-serif;">
       <a href="{{ routes.all_products_collection_url }}" class="text-[14px] font-light text-gray-900 leading-none tracking-[0.03em] hover:text-[#d62873] transition-colors">{{ 'header.catalog' | t }}</a>
       <a href="{{ routes.root_url }}" class="text-[14px] font-light text-gray-900 leading-none tracking-[0.03em] hover:text-[#d62873] transition-colors">{{ 'header.home' | t }}</a>
-      <a href="{{ routes.root_url }}pages/about-us" class="text-[14px] font-light text-gray-900 leading-none tracking-[0.03em] hover:text-[#d62873] transition-colors">{{ 'footer.about' | t }}</a>
-      <a href="{{ routes.root_url }}pages/returns" class="text-[14px] font-light text-gray-900 leading-none tracking-[0.03em] hover:text-[#d62873] transition-colors">{{ 'footer.public_offer' | t }}</a>
-      <a href="{{ routes.root_url }}pages/contacts" class="text-[14px] font-light text-gray-900 leading-none tracking-[0.03em] hover:text-[#d62873] transition-colors">{{ 'footer.privacy' | t }}</a>
-      <a href="{{ routes.root_url }}pages/shipping" class="text-[14px] font-light text-gray-900 leading-none tracking-[0.03em] hover:text-[#d62873] transition-colors">{{ 'footer.shipping' | t }}</a>
+      <a href="{{ routes.root_url | append: '/pages/about-us' | replace: '//', '/' }}" class="text-[14px] font-light text-gray-900 leading-none tracking-[0.03em] hover:text-[#d62873] transition-colors">{{ 'footer.about' | t }}</a>
+      <a href="{{ routes.root_url | append: '/pages/returns' | replace: '//', '/' }}" class="text-[14px] font-light text-gray-900 leading-none tracking-[0.03em] hover:text-[#d62873] transition-colors">{{ 'footer.public_offer' | t }}</a>
+      <a href="{{ routes.root_url | append: '/pages/contacts' | replace: '//', '/' }}" class="text-[14px] font-light text-gray-900 leading-none tracking-[0.03em] hover:text-[#d62873] transition-colors">{{ 'footer.privacy' | t }}</a>
+      <a href="{{ routes.root_url | append: '/pages/shipping' | replace: '//', '/' }}" class="text-[14px] font-light text-gray-900 leading-none tracking-[0.03em] hover:text-[#d62873] transition-colors">{{ 'footer.shipping' | t }}</a>
 
       <!-- Language Selector -->
       <div class="mt-1">
