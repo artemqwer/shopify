@@ -137,7 +137,7 @@
         <div class="relative inline-block w-full">
           <button type="button"
                   onclick="(function(){var list=document.getElementById('footer-lang-list');var caret=document.getElementById('footer-lang-caret');var isOpen=!list.classList.contains('hidden');list.classList.toggle('hidden',isOpen);caret.style.transform=isOpen?'':'rotate(180deg)';})()"
-                  class="flex items-center gap-2 text-[15px] uppercase font-medium text-black focus:outline-none"
+                  class="flex items-center gap-2 text-[15px] uppercase font-medium text-[#e61a7a] focus:outline-none"
                   style="font-family: var(--font-montserrat), Montserrat, sans-serif;">
             {% case request.locale.iso_code %}
               {% when 'en' %}ENG
@@ -152,7 +152,7 @@
           
           <div id="footer-lang-list" class="flex flex-col items-start gap-[24px] mt-[24px] hidden">
             {% if request.locale.iso_code != 'uk' %}
-              <button type="submit" name="locale_code" value="uk" class="text-[15px] uppercase font-medium text-[#e61a7a] hover:opacity-80 transition-opacity" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">UA</button>
+              <button type="submit" name="locale_code" value="uk" class="text-[15px] uppercase font-medium text-black/40 hover:text-black transition-colors" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">UA</button>
             {% endif %}
             {% if request.locale.iso_code != 'en' %}
               <button type="submit" name="locale_code" value="en" class="text-[15px] uppercase font-medium text-black/40 hover:text-black transition-colors" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">ENG</button>
