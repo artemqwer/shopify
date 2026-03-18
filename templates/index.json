@@ -15,8 +15,8 @@
         "mobile_video": "shopify://files/videos/IMG_5141.MP4"
       }
     },
-    "recommended": {
-      "type": "recommended-products",
+    "popular": {
+      "type": "popular-products",
       "settings": {}
     },
     "video-banner": {
@@ -25,15 +25,15 @@
         "banner_video": "shopify://files/videos/IMG_4334.mp4"
       }
     },
-    "recommended-2": {
+    "recommended": {
       "type": "recommended-products",
       "settings": {}
     }
   },
   "order": [
     "hero",
-    "recommended",
+    "popular",
     "video-banner",
-    "recommended-2"
+    "recommended"
   ]
 }
