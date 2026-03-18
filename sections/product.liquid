@@ -165,7 +165,7 @@
     .product-info-col p.price-line { font-size: 15px !important; }
   }
 
-  /* Gallery dots (mobile only) */
+  /* Gallery dots */
   .gallery-dots {
     display: none;
     justify-content: center;
@@ -196,7 +196,7 @@
       margin-right: -1rem;
       width: calc(100% + 2rem) !important;
     }
-    .gallery-dots { display: flex; }
+    .gallery-dots { display: flex !important; }
   }
 </style>
 
@@ -348,17 +348,7 @@
       </div>
 
       <!-- Gallery dots (mobile) -->
-      <div class="gallery-dots" id="gallery-dots">
-        {% if use_shopify_imgs %}
-          {% for image in product.images %}
-            <button class="gallery-dot{% if forloop.first %} active{% endif %}" data-index="{{ forloop.index0 }}" aria-label="Image {{ forloop.index }}"></button>
-          {% endfor %}
-        {% else %}
-          {% for img_name in gallery_imgs %}
-            <button class="gallery-dot{% if forloop.first %} active{% endif %}" data-index="{{ forloop.index0 }}" aria-label="Image {{ forloop.index }}"></button>
-          {% endfor %}
-        {% endif %}
-      </div>
+      <div class="gallery-dots" id="gallery-dots"></div>
 
       <!-- Thumbnails row (2 side by side below) -->
       {% if use_shopify_imgs %}
@@ -543,12 +533,29 @@
   // Mobile gallery swipe + dots
   (function() {
     const mainImg = document.getElementById('gallery-main-img');
-    if (!mainImg) return;
+    const dotsContainer = document.getElementById('gallery-dots');
+    if (!mainImg || !dotsContainer) return;
+
+    // Build image list from main + thumbnails
     const images = [mainImg.src];
-    document.querySelectorAll('.product-thumbs-row img').forEach(img => images.push(img.src));
+    document.querySelectorAll('.product-thumbs-row img').forEach(img => {
+      const src = img.src.replace(/width=400/, 'width=1000');
+      images.push(src);
+    });
     if (images.length <= 1) return;
+
+    // Generate dots via JS
+    images.forEach((_, i) => {
+      const dot = document.createElement('button');
+      dot.className = 'gallery-dot' + (i === 0 ? ' active' : '');
+      dot.dataset.index = i;
+      dot.setAttribute('aria-label', 'Image ' + (i + 1));
+      dot.addEventListener('click', () => goTo(i));
+      dotsContainer.appendChild(dot);
+    });
+
     let current = 0;
-    const dots = document.querySelectorAll('#gallery-dots .gallery-dot');
+    const dots = dotsContainer.querySelectorAll('.gallery-dot');
 
     function updateDots(idx) {
       dots.forEach(d => d.classList.remove('active'));
@@ -561,14 +568,6 @@
       updateDots(idx);
       setTimeout(() => { mainImg.src = images[idx]; mainImg.style.opacity = '1'; }, 180);
     }
-
-    // Dot click
-    dots.forEach(dot => {
-      dot.addEventListener('click', () => {
-        const idx = parseInt(dot.dataset.index, 10);
-        if (idx >= 0 && idx < images.length) goTo(idx);
-      });
-    });
 
     let startX = 0;
     mainImg.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
