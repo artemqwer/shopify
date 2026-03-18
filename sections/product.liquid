@@ -374,7 +374,21 @@
       {% endif %}
 
       <!-- Mobile dot indicators -->
-      <div class="gallery-dots" id="gallery-dots-mob"></div>
+      <div class="gallery-dots" id="gallery-dots-mob">
+        {% if use_shopify_imgs %}
+          {% if product.images.size > 1 %}
+            {% for image in product.images %}
+              <button class="gallery-dot{% if forloop.first %} active{% endif %}" data-index="{{ forloop.index0 }}" aria-label="Image {{ forloop.index }}"></button>
+            {% endfor %}
+          {% endif %}
+        {% else %}
+          {% if gallery_imgs.size > 1 %}
+            {% for img in gallery_imgs %}
+              <button class="gallery-dot{% if forloop.first %} active{% endif %}" data-index="{{ forloop.index0 }}" aria-label="Image {{ forloop.index }}"></button>
+            {% endfor %}
+          {% endif %}
+        {% endif %}
+      </div>
 
     </div><!-- /gallery -->
 
@@ -525,18 +539,15 @@
     document.querySelectorAll('.product-thumbs-row img').forEach(img => images.push(img.src));
     if (images.length <= 1) return;
     let current = 0;
+    const dots = dotsEl.querySelectorAll('.gallery-dot');
     function goTo(idx) {
       current = idx;
       mainImg.style.opacity = '0';
       setTimeout(() => { mainImg.src = images[idx]; mainImg.style.opacity = '1'; }, 180);
-      dotsEl.querySelectorAll('.gallery-dot').forEach((d, i) => d.classList.toggle('active', i === idx));
+      dots.forEach((d, i) => d.classList.toggle('active', i === idx));
     }
-    images.forEach((_, i) => {
-      const d = document.createElement('button');
-      d.className = 'gallery-dot' + (i === 0 ? ' active' : '');
-      d.setAttribute('aria-label', 'Image ' + (i+1));
+    dots.forEach((d, i) => {
       d.addEventListener('click', () => goTo(i));
-      dotsEl.appendChild(d);
     });
     let startX = 0;
     mainImg.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
