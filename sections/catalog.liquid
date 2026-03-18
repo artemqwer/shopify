@@ -148,7 +148,7 @@
 
     <!-- Pagination -->
     {% if paginate.pages > 1 %}
-      <nav class="flex items-center justify-center gap-1.5 mt-[48px] md:mt-[64px]" aria-label="Pagination">
+      <nav class="flex items-center justify-center gap-0.5 mt-[48px] md:mt-[64px]" aria-label="Pagination">
         {% if paginate.previous %}
           <a href="{{ paginate.previous.url }}" class="pagination-link" aria-label="Previous">&lsaquo;</a>
         {% endif %}
@@ -203,7 +203,7 @@
     </div>
 
     <!-- Static pagination for placeholder -->
-    <nav class="flex items-center justify-center gap-1.5 mt-[48px] md:mt-[64px]" aria-label="Pagination">
+    <nav class="flex items-center justify-center gap-0.5 mt-[48px] md:mt-[64px]" aria-label="Pagination">
       <span class="pagination-link current">1</span>
       <a href="{{ routes.all_products_collection_url }}?page=2" class="pagination-link">2</a>
       <a href="{{ routes.all_products_collection_url }}?page=3" class="pagination-link">3</a>
