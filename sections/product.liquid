@@ -165,26 +165,32 @@
     .product-info-col p.price-line { font-size: 15px !important; }
   }
 
-  /* Gallery dots */
+  /* Gallery dots — overlaid on image bottom */
   .gallery-dots {
     display: none;
+    position: absolute;
+    bottom: 16px;
+    left: 0;
+    right: 0;
     justify-content: center;
     align-items: center;
     gap: 8px;
-    padding: 14px 0 6px;
+    z-index: 5;
+    pointer-events: none;
   }
   .gallery-dot {
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background: #d1d1d1;
+    background: rgba(255,255,255,0.5);
     border: none;
     padding: 0;
     cursor: pointer;
     transition: background 0.25s;
+    pointer-events: auto;
   }
   .gallery-dot.active {
-    background: #222;
+    background: #DE2077;
   }
 
   @media (max-width: 768px) {
@@ -330,7 +336,9 @@
     <div class="product-gallery-col w-full md:w-[55%] flex-shrink-0">
 
       <!-- Main big image -->
-      <div class="product-gallery-main relative w-full overflow-hidden mb-3" style="aspect-ratio: 3/4;">
+      <div class="product-gallery-main relative w-full overflow-hidden mb-3" style="aspect-ratio: 3/4;"
+           id="gallery-container"
+           data-images='{% if use_shopify_imgs %}[{% for image in product.images %}"{{ image | image_url: width: 1000 }}"{% unless forloop.last %},{% endunless %}{% endfor %}]{% else %}[{% for img_name in gallery_imgs %}"{{ img_name | asset_url }}"{% unless forloop.last %},{% endunless %}{% endfor %}]{% endif %}'>
         {% if use_shopify_imgs %}
           <img id="gallery-main-img"
                src="{{ product.images[0] | image_url: width: 1000 }}"
@@ -345,10 +353,9 @@
                loading="eager" />
         {% endif %}
 
+        <!-- Gallery dots (mobile) — inside image container -->
+        <div class="gallery-dots" id="gallery-dots"></div>
       </div>
-
-      <!-- Gallery dots (mobile) -->
-      <div class="gallery-dots" id="gallery-dots"></div>
 
       <!-- Thumbnails row (2 side by side below) -->
       {% if use_shopify_imgs %}
@@ -532,33 +539,31 @@
 
   // Mobile gallery swipe + dots
   (function() {
+    const container = document.getElementById('gallery-container');
     const mainImg = document.getElementById('gallery-main-img');
     const dotsContainer = document.getElementById('gallery-dots');
-    if (!mainImg || !dotsContainer) return;
+    if (!container || !mainImg || !dotsContainer) return;
 
-    // Build image list from main + thumbnails
-    const images = [mainImg.src];
-    document.querySelectorAll('.product-thumbs-row img').forEach(img => {
-      const src = img.src.replace(/width=400/, 'width=1000');
-      images.push(src);
-    });
+    // Get all image URLs from data attribute
+    var images = [];
+    try { images = JSON.parse(container.dataset.images); } catch(e) {}
     if (images.length <= 1) return;
 
-    // Generate dots via JS
-    images.forEach((_, i) => {
-      const dot = document.createElement('button');
+    // Generate dots
+    images.forEach(function(_, i) {
+      var dot = document.createElement('button');
       dot.className = 'gallery-dot' + (i === 0 ? ' active' : '');
       dot.dataset.index = i;
       dot.setAttribute('aria-label', 'Image ' + (i + 1));
-      dot.addEventListener('click', () => goTo(i));
+      dot.addEventListener('click', function() { goTo(i); });
       dotsContainer.appendChild(dot);
     });
 
-    let current = 0;
-    const dots = dotsContainer.querySelectorAll('.gallery-dot');
+    var current = 0;
+    var dots = dotsContainer.querySelectorAll('.gallery-dot');
 
     function updateDots(idx) {
-      dots.forEach(d => d.classList.remove('active'));
+      for (var d = 0; d < dots.length; d++) dots[d].classList.remove('active');
       if (dots[idx]) dots[idx].classList.add('active');
     }
 
@@ -566,13 +571,13 @@
       current = idx;
       mainImg.style.opacity = '0';
       updateDots(idx);
-      setTimeout(() => { mainImg.src = images[idx]; mainImg.style.opacity = '1'; }, 180);
+      setTimeout(function() { mainImg.src = images[idx]; mainImg.style.opacity = '1'; }, 180);
     }
 
-    let startX = 0;
-    mainImg.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
-    mainImg.addEventListener('touchend', e => {
-      const dx = e.changedTouches[0].clientX - startX;
+    var startX = 0;
+    container.addEventListener('touchstart', function(e) { startX = e.touches[0].clientX; }, { passive: true });
+    container.addEventListener('touchend', function(e) {
+      var dx = e.changedTouches[0].clientX - startX;
       if (Math.abs(dx) < 40) return;
       if (dx < 0 && current < images.length - 1) goTo(current + 1);
       else if (dx > 0 && current > 0) goTo(current - 1);
