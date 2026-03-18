@@ -12,6 +12,15 @@
   .catalog-card:hover .catalog-card-img {
     transform: scale(1.05);
   }
+  .catalog-slide {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+  .catalog-slide.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
   .pagination-link {
     display: inline-flex;
     align-items: center;
@@ -112,27 +121,39 @@
 
     <div class="grid grid-cols-2 lg:grid-cols-4 gap-x-[12px] gap-y-[32px] md:gap-x-6 md:gap-y-[64px]">
       {% for product in collection.products %}
-        <a href="{{ product.url }}" class="catalog-card cursor-pointer flex flex-col group no-underline">
-          <div class="relative aspect-[3/4] mb-3 md:mb-4 overflow-hidden w-full bg-gray-100">
-            {% if product.featured_image %}
-              <img
-                src="{{ product.featured_image | image_url: width: 600 }}"
-                alt="{{ product.featured_image.alt | default: product.title }}"
-                class="catalog-card-img absolute inset-0 w-full h-full object-cover"
-                loading="lazy"
-              />
+        <div class="catalog-card flex flex-col group">
+          <div class="relative aspect-[3/4] mb-3 md:mb-4 overflow-hidden w-full bg-gray-100 catalog-slider" data-product-url="{{ product.url }}">
+            {% if product.images.size > 0 %}
+              {% for image in product.images %}
+                <a href="{{ product.url }}" class="catalog-slide absolute inset-0 w-full h-full no-underline {% if forloop.first %}active{% endif %}" data-index="{{ forloop.index0 }}">
+                  <img
+                    src="{{ image | image_url: width: 600 }}"
+                    alt="{{ image.alt | default: product.title }}"
+                    class="catalog-card-img w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                </a>
+              {% endfor %}
+              {% if product.images.size > 1 %}
+                <div class="absolute bottom-2 left-0 right-0 flex justify-center gap-1 z-10 pointer-events-none">
+                  {% for image in product.images %}
+                    <span class="catalog-dot w-[6px] h-[6px] rounded-full transition-colors" style="background:{% if forloop.first %}#DE2077{% else %}#d1d5db{% endif %}" data-index="{{ forloop.index0 }}"></span>
+                  {% endfor %}
+                </div>
+              {% endif %}
             {% else %}
-              <!-- Fallback placeholder when product has no image yet -->
               {% assign fallback_index = forloop.index0 | modulo: 4 | plus: 1 %}
-              <img
-                src="{{ 'product-image-' | append: fallback_index | append: '.png' | asset_url }}"
-                alt="{{ product.title }}"
-                class="catalog-card-img absolute inset-0 w-full h-full object-cover"
-                loading="lazy"
-              />
+              <a href="{{ product.url }}" class="absolute inset-0 w-full h-full no-underline">
+                <img
+                  src="{{ 'product-image-' | append: fallback_index | append: '.png' | asset_url }}"
+                  alt="{{ product.title }}"
+                  class="catalog-card-img w-full h-full object-cover"
+                  loading="lazy"
+                />
+              </a>
             {% endif %}
           </div>
-          <div class="flex flex-col space-y-1 md:space-y-1.5 px-0.5 md:px-1" {% if request.locale.iso_code == 'he' %}style="text-align: right; direction: rtl;"{% endif %}>
+          <a href="{{ product.url }}" class="flex flex-col space-y-1 md:space-y-1.5 px-0.5 md:px-1 no-underline" {% if request.locale.iso_code == 'he' %}style="text-align: right; direction: rtl;"{% endif %}>
             <h3 class="text-[11px] md:text-[13px] font-semibold text-gray-900 tracking-wide group-hover:text-gray-500 transition-colors"
                 style="font-family: var(--font-montserrat), Montserrat, sans-serif;">
               {{ product.title }}
@@ -141,8 +162,8 @@
                style="font-family: var(--font-montserrat), Montserrat, sans-serif;">
               {{ product.price | money }}
             </p>
-          </div>
-        </a>
+          </a>
+        </div>
       {% endfor %}
     </div>
 
@@ -216,3 +237,42 @@
 </div>
 
 {% endpaginate %}
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.catalog-slider').forEach(function(slider) {
+    var slides = slider.querySelectorAll('.catalog-slide');
+    var dots = slider.querySelectorAll('.catalog-dot');
+    if (slides.length < 2) return;
+
+    var current = 0;
+    var startX = 0;
+    var diff = 0;
+
+    function goTo(idx) {
+      if (idx < 0 || idx >= slides.length) return;
+      slides[current].classList.remove('active');
+      dots[current].style.background = '#d1d5db';
+      current = idx;
+      slides[current].classList.add('active');
+      dots[current].style.background = '#DE2077';
+    }
+
+    slider.addEventListener('touchstart', function(e) {
+      startX = e.touches[0].clientX;
+      diff = 0;
+    }, {passive: true});
+
+    slider.addEventListener('touchmove', function(e) {
+      diff = e.touches[0].clientX - startX;
+    }, {passive: true});
+
+    slider.addEventListener('touchend', function() {
+      if (Math.abs(diff) > 30) {
+        if (diff < 0 && current < slides.length - 1) goTo(current + 1);
+        else if (diff > 0 && current > 0) goTo(current - 1);
+      }
+    });
+  });
+});
+</script>

@@ -49,6 +49,7 @@
     </div>
   </main>
   
+  {% unless template.name == 'collection' or template.name == 'list-collections' %}
   <!-- Catalog link -->
   <div class="flex justify-center pt-[4px] pb-[4px] md:pt-[8px] md:pb-[8px]">
     <a href="{{ routes.all_products_collection_url }}"
@@ -57,6 +58,7 @@
       {{ 'header.catalog' | t }}
     </a>
   </div>
+  {% endunless %}
 
   <div class="w-full mt-auto">
     {% section 'footer' %}
