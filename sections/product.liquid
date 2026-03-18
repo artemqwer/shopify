@@ -165,29 +165,24 @@
     .product-info-col p.price-line { font-size: 15px !important; }
   }
 
-  /* Gallery dots — overlaid on image bottom */
+  /* Gallery dots — below image on mobile */
   .gallery-dots {
     display: none;
-    position: absolute;
-    bottom: 16px;
-    left: 0;
-    right: 0;
     justify-content: center;
     align-items: center;
     gap: 8px;
+    padding: 14px 0 6px;
     z-index: 5;
-    pointer-events: none;
   }
   .gallery-dot {
-    width: 8px;
-    height: 8px;
+    width: 7px;
+    height: 7px;
     border-radius: 50%;
-    background: rgba(255,255,255,0.5);
+    background: #d1d1d1;
     border: none;
     padding: 0;
     cursor: pointer;
     transition: background 0.25s;
-    pointer-events: auto;
   }
   .gallery-dot.active {
     background: #DE2077;
@@ -353,11 +348,21 @@
 
       </div>
 
-      <!-- DEBUG: Gallery dots test -->
-      <div style="display:flex !important;justify-content:center;align-items:center;gap:12px;padding:20px 0;background:yellow;">
-        <span style="display:inline-block;width:20px;height:20px;border-radius:50%;background:red;"></span>
-        <span style="display:inline-block;width:20px;height:20px;border-radius:50%;background:blue;"></span>
-        <span style="display:inline-block;width:20px;height:20px;border-radius:50%;background:green;"></span>
+      <!-- Gallery Pagination Dots (mobile only) -->
+      <div class="gallery-dots" id="gallery-dots">
+        {% if use_shopify_imgs %}
+          {% for image in product.images %}
+            <button class="gallery-dot{% if forloop.first %} active{% endif %}"
+                    data-src="{{ image | image_url: width: 1000 }}"
+                    aria-label="Image {{ forloop.index }}"></button>
+          {% endfor %}
+        {% else %}
+          {% for img_name in gallery_imgs %}
+            <button class="gallery-dot{% if forloop.first %} active{% endif %}"
+                    data-src="{{ img_name | asset_url }}"
+                    aria-label="Image {{ forloop.index }}"></button>
+          {% endfor %}
+        {% endif %}
       </div>
 
       <!-- Thumbnails row (2 side by side below) -->
@@ -558,7 +563,7 @@
     function updateDots(idx) {
       for (var d = 0; d < dots.length; d++) {
         dots[d].classList.remove('active');
-        dots[d].style.background = 'rgba(255,255,255,0.5)';
+        dots[d].style.background = '#d1d1d1';
       }
       dots[idx].classList.add('active');
       dots[idx].style.background = '#DE2077';
