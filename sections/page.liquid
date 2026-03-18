@@ -118,24 +118,7 @@
     .product-info-col h1 { font-size: 22px !important; }
   }
 
-  /* ── Mobile gallery dots ── */
-  .gallery-dots {
-    display: none;
-    position: absolute;
-    bottom: 16px;
-    left: 16px;
-    z-index: 10;
-    justify-content: flex-start;
-    gap: 6px;
-  }
-  .gallery-dot {
-    width: 6px; height: 6px; border-radius: 50%;
-    background: rgba(255, 255, 255, 0.7); border: none; padding: 0;
-    cursor: pointer; transition: background 0.2s; flex-shrink: 0;
-  }
-  .gallery-dot.active { background: #e61a7a; }
   @media (max-width: 768px) {
-    .gallery-dots { display: flex; }
     .product-thumbs-row { display: none !important; }
     .product-gallery-main {
       margin-left: -1rem;
@@ -367,7 +350,6 @@
       </div>
 
       <!-- Mobile dot indicators -->
-      <div class="gallery-dots" id="page-gallery-dots"></div>
 
       <!-- Thumbnails (if any) — hidden on mobile -->
       {% if img_thumbs != '' %}
