@@ -202,7 +202,7 @@
       margin-right: -1rem;
       width: calc(100% + 2rem) !important;
     }
-    .gallery-dots { display: flex !important; }
+    #gallery-dots { display: flex !important; }
   }
 </style>
 
@@ -336,7 +336,7 @@
     <div class="product-gallery-col w-full md:w-[55%] flex-shrink-0">
 
       <!-- Main big image -->
-      <div class="product-gallery-main relative w-full overflow-hidden mb-3" style="aspect-ratio: 3/4;" id="gallery-container">
+      <div class="product-gallery-main relative w-full overflow-hidden mb-0" style="aspect-ratio: 3/4;" id="gallery-container">
         {% if use_shopify_imgs %}
           <img id="gallery-main-img"
                src="{{ product.images[0] | image_url: width: 1000 }}"
@@ -350,23 +350,25 @@
                class="absolute inset-0 w-full h-full object-cover"
                loading="eager" />
         {% endif %}
+      </div>
 
-        <!-- Gallery Pagination Dots (mobile only) -->
-        <div class="gallery-dots" id="gallery-dots">
-          {% if use_shopify_imgs %}
-            {% for image in product.images %}
-              <button class="gallery-dot{% if forloop.first %} active{% endif %}"
-                      data-src="{{ image | image_url: width: 1000 }}"
-                      aria-label="Image {{ forloop.index }}"></button>
-            {% endfor %}
-          {% else %}
-            {% for img_name in gallery_imgs %}
-              <button class="gallery-dot{% if forloop.first %} active{% endif %}"
-                      data-src="{{ img_name | asset_url }}"
-                      aria-label="Image {{ forloop.index }}"></button>
-            {% endfor %}
-          {% endif %}
-        </div>
+      <!-- Gallery Pagination Dots (mobile only) -->
+      <div id="gallery-dots" style="display:none; justify-content:flex-start; align-items:center; gap:8px; margin-top:-32px; padding:0 0 16px 20px; position:relative; z-index:10;">
+        {% if use_shopify_imgs %}
+          {% for image in product.images %}
+            <button class="gallery-dot{% if forloop.first %} active{% endif %}"
+                    data-src="{{ image | image_url: width: 1000 }}"
+                    aria-label="Image {{ forloop.index }}"
+                    style="width:9px; height:9px; border-radius:50%; border:none; padding:0; cursor:pointer; transition:background 0.25s; {% if forloop.first %}background:#DE2077;{% else %}background:rgba(222,32,119,0.35);{% endif %}"></button>
+          {% endfor %}
+        {% else %}
+          {% for img_name in gallery_imgs %}
+            <button class="gallery-dot{% if forloop.first %} active{% endif %}"
+                    data-src="{{ img_name | asset_url }}"
+                    aria-label="Image {{ forloop.index }}"
+                    style="width:9px; height:9px; border-radius:50%; border:none; padding:0; cursor:pointer; transition:background 0.25s; {% if forloop.first %}background:#DE2077;{% else %}background:rgba(222,32,119,0.35);{% endif %}"></button>
+          {% endfor %}
+        {% endif %}
       </div>
 
       <!-- Thumbnails row (2 side by side below) -->
