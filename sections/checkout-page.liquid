@@ -577,6 +577,11 @@
       } else {
         appleBtn.style.display   = 'none';
         regularBtn.style.display = '';
+        if (this.value === 'card') {
+          regularBtn.style.background = '#DE2077';
+        } else {
+          regularBtn.style.background = '#000';
+        }
       }
     });
   });
