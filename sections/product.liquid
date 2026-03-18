@@ -165,6 +165,28 @@
     .product-info-col p.price-line { font-size: 15px !important; }
   }
 
+  /* Gallery dots (mobile only) */
+  .gallery-dots {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 0 6px;
+  }
+  .gallery-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #d1d1d1;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: background 0.25s;
+  }
+  .gallery-dot.active {
+    background: #222;
+  }
+
   @media (max-width: 768px) {
     /* Thumbnails hidden on mobile — replaced by full slider + dots */
     .product-thumbs-row { display: none !important; }
@@ -174,6 +196,7 @@
       margin-right: -1rem;
       width: calc(100% + 2rem) !important;
     }
+    .gallery-dots { display: flex; }
   }
 </style>
 
@@ -322,6 +345,19 @@
                loading="eager" />
         {% endif %}
 
+      </div>
+
+      <!-- Gallery dots (mobile) -->
+      <div class="gallery-dots" id="gallery-dots">
+        {% if use_shopify_imgs %}
+          {% for image in product.images %}
+            <button class="gallery-dot{% if forloop.first %} active{% endif %}" data-index="{{ forloop.index0 }}" aria-label="Image {{ forloop.index }}"></button>
+          {% endfor %}
+        {% else %}
+          {% for img_name in gallery_imgs %}
+            <button class="gallery-dot{% if forloop.first %} active{% endif %}" data-index="{{ forloop.index0 }}" aria-label="Image {{ forloop.index }}"></button>
+          {% endfor %}
+        {% endif %}
       </div>
 
       <!-- Thumbnails row (2 side by side below) -->
@@ -492,11 +528,19 @@
   function setMainImg(src, thumbEl) {
     const main = document.getElementById('gallery-main-img');
     if (main) { main.style.opacity = '0'; setTimeout(() => { main.src = src; main.style.opacity = '1'; }, 180); }
-    document.querySelectorAll('.product-thumb').forEach(t => t.classList.remove('active'));
-    if (thumbEl) thumbEl.classList.add('active');
+    const thumbs = document.querySelectorAll('.product-thumb');
+    thumbs.forEach(t => t.classList.remove('active'));
+    if (thumbEl) {
+      thumbEl.classList.add('active');
+      // Sync dots: thumb index + 1 because first image has no thumb
+      const idx = Array.from(thumbs).indexOf(thumbEl) + 1;
+      const dots = document.querySelectorAll('#gallery-dots .gallery-dot');
+      dots.forEach(d => d.classList.remove('active'));
+      if (dots[idx]) dots[idx].classList.add('active');
+    }
   }
 
-  // Mobile gallery swipe
+  // Mobile gallery swipe + dots
   (function() {
     const mainImg = document.getElementById('gallery-main-img');
     if (!mainImg) return;
@@ -504,11 +548,28 @@
     document.querySelectorAll('.product-thumbs-row img').forEach(img => images.push(img.src));
     if (images.length <= 1) return;
     let current = 0;
+    const dots = document.querySelectorAll('#gallery-dots .gallery-dot');
+
+    function updateDots(idx) {
+      dots.forEach(d => d.classList.remove('active'));
+      if (dots[idx]) dots[idx].classList.add('active');
+    }
+
     function goTo(idx) {
       current = idx;
       mainImg.style.opacity = '0';
+      updateDots(idx);
       setTimeout(() => { mainImg.src = images[idx]; mainImg.style.opacity = '1'; }, 180);
     }
+
+    // Dot click
+    dots.forEach(dot => {
+      dot.addEventListener('click', () => {
+        const idx = parseInt(dot.dataset.index, 10);
+        if (idx >= 0 && idx < images.length) goTo(idx);
+      });
+    });
+
     let startX = 0;
     mainImg.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
     mainImg.addEventListener('touchend', e => {
