@@ -297,6 +297,7 @@
   {% assign ui_desc       = desc_he %}
   {% assign txt_home      = 'דף הבית' %}
   {% assign txt_catalog   = 'קטלוג' %}
+  {% assign txt_scarf     = 'מטפחת' %}
   {% assign txt_add_cart  = 'הוסף לסל' %}
   {% assign txt_buy_now   = 'רכישה עכשיו' %}
   {% assign txt_size_guide= 'מדריך מידות' %}
@@ -309,6 +310,7 @@
   {% assign ui_desc       = desc_en %}
   {% assign txt_home      = 'Home' %}
   {% assign txt_catalog   = 'Catalog' %}
+  {% assign txt_scarf     = 'Scarf' %}
   {% assign txt_add_cart  = 'Add to cart' %}
   {% assign txt_buy_now   = 'Buy Now' %}
   {% assign txt_size_guide= 'Size Guide' %}
@@ -329,6 +331,8 @@
     {% if request.locale.iso_code == 'he' %}
       <span class="text-[10px] tracking-[0.12em] uppercase text-gray-800">{{ ui_title | upcase }}</span>
       <span class="text-gray-300 text-[10px]">‹</span>
+      <span class="text-[10px] tracking-[0.12em] uppercase text-gray-400">{{ txt_scarf }}</span>
+      <span class="text-gray-300 text-[10px]">‹</span>
       <a href="{{ routes.all_products_collection_url }}"
          class="text-[10px] tracking-[0.12em] uppercase text-gray-400 hover:text-gray-700 transition-colors">{{ txt_catalog }}</a>
       <span class="text-gray-300 text-[10px]">‹</span>
@@ -341,7 +345,7 @@
       <a href="{{ routes.all_products_collection_url }}"
          class="text-[10px] tracking-[0.12em] uppercase text-gray-400 hover:text-gray-700 transition-colors">{{ txt_catalog }}</a>
       <span class="text-gray-300 text-[10px]">›</span>
-      <span class="text-gray-400 text-[10px] tracking-[0.12em] uppercase">{{ txt_catalog }}</span>
+      <span class="text-gray-400 text-[10px] tracking-[0.12em] uppercase">{{ txt_scarf }}</span>
       <span class="text-gray-300 text-[10px]">›</span>
       <span class="text-gray-800 text-[10px] tracking-[0.12em] uppercase">{{ ui_title | upcase }}</span>
     {% endif %}
@@ -357,7 +361,7 @@
       <div class="product-gallery-main relative w-full overflow-hidden mb-3" style="aspect-ratio: 920/974;">
         <img id="page-main-img"
              src="{{ img_main | asset_url }}"
-             alt="{{ ui_title }}"
+             alt="{{ ui_title | escape }}"
              class="absolute inset-0 w-full h-full object-cover"
              loading="eager" />
       </div>
@@ -373,7 +377,7 @@
                  style="aspect-ratio: 1/1;"
                  onclick="pageSetImg('{{ thumb | asset_url }}', this)">
               <img src="{{ thumb | asset_url }}"
-                   alt="{{ ui_title }}"
+                   alt="{{ ui_title | escape }}"
                    class="absolute inset-0 w-full h-full object-cover" />
             </div>
           {% endfor %}
@@ -455,7 +459,7 @@
                 onclick="pageToggle('acc-care')">
           <span class="text-[13px] font-medium text-[#222] tracking-wider"
                 style="font-family: var(--font-montserrat), Montserrat, sans-serif;">{{ txt_care }}</span>
-          <span id="acc-care-icon" class="accordion-icon text-[20px] font-light text-[#e61a7a] leading-none select-none">✕</span>
+          <span id="acc-care-icon" class="accordion-icon text-[20px] font-light text-[#e61a7a] leading-none select-none">–</span>
         </button>
         <div id="acc-care" class="accordion-content open">
           <div class="text-[13px] text-[#555] leading-[1.9] pb-4"
@@ -537,9 +541,8 @@
     var isOpen = content.classList.contains('open');
     content.classList.toggle('open', !isOpen);
     if (icon) {
-      if (id === 'acc-mat') {
-        icon.textContent = isOpen ? '+' : '–';
-      } else {
+      icon.textContent = isOpen ? '+' : '–';
+      if (id === 'acc-care') {
         icon.style.color = isOpen ? '#222' : '#e61a7a';
       }
     }

@@ -101,16 +101,19 @@
             const container = document.getElementById('rec-products-container');
             if (!container) return;
             const isHe = locale === 'he';
+            function esc(s) { var d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
             container.innerHTML = data.products.map(p => {
               const img = p.featured_image ? p.featured_image.url.replace('http:', 'https:') : '';
               const price = p.price ? ('$' + (p.price / 100).toFixed(2).replace(/\.00$/, '')) : '';
-              return `<a href="${p.url}" class="product-card cursor-pointer flex flex-col group no-underline">
+              const safeTitle = esc(p.title || '');
+              const safeUrl = esc(p.url || '');
+              return `<a href="${safeUrl}" class="product-card cursor-pointer flex flex-col group no-underline">
                 <div class="relative aspect-[3/4] mb-4 overflow-hidden w-full bg-gray-100">
-                  ${img ? `<img src="${img}&width=600" alt="${p.title}" class="product-card-img absolute inset-0 w-full h-full object-cover" loading="lazy"/>` : ''}
+                  ${img ? `<img src="${esc(img)}&width=600" alt="${safeTitle}" class="product-card-img absolute inset-0 w-full h-full object-cover" loading="lazy"/>` : ''}
                 </div>
                 <div class="flex flex-col space-y-1.5 px-1" ${isHe ? 'dir="rtl" style="text-align:right;"' : ''}>
                   <h3 class="text-[13px] font-semibold text-gray-900 tracking-wide group-hover:text-gray-500 transition-colors whitespace-nowrap overflow-hidden text-ellipsis"
-                      style="font-family: var(--font-montserrat), Montserrat, sans-serif;">${p.title}</h3>
+                      style="font-family: var(--font-montserrat), Montserrat, sans-serif;">${safeTitle}</h3>
                   <p class="text-[13px] text-gray-500 font-light" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">${price}</p>
                 </div>
               </a>`;

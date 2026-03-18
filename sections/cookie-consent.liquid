@@ -302,8 +302,8 @@
       var marketing = document.getElementById('cookie-marketing');
       saveConsent({
         necessary: true,
-        analytics: analytics ? analytics.checked : false,
-        marketing: marketing ? marketing.checked : false
+        analytics: analytics ? analytics.checked : true,
+        marketing: marketing ? marketing.checked : true
       });
     });
   }

@@ -203,7 +203,7 @@
 {% endcomment %}
 
 {% comment %} Detect real product vs demo placeholder {% endcomment %}
-{% if product.id != blank and product.id != 0 %}
+{% if product.id != blank %}
   {% assign use_real_product = true %}
 {% else %}
   {% assign use_real_product = false %}
@@ -336,7 +336,7 @@
         {% else %}
           <img id="gallery-main-img"
                src="{{ gallery_imgs[0] | asset_url }}"
-               alt="{{ ui_title }}"
+               alt="{{ ui_title | escape }}"
                class="absolute inset-0 w-full h-full object-cover"
                loading="eager" />
         {% endif %}
@@ -345,7 +345,7 @@
       <!-- Thumbnails row (2 side by side below) -->
       {% if use_shopify_imgs %}
         {% if product.images.size > 1 %}
-          <div class="product-thumbs-row grid gap-3" style="grid-template-columns: repeat({{ product.images.size | minus: 1 }}, 1fr);">
+          <div class="product-thumbs-row grid gap-3" style="grid-template-columns: repeat({{ product.images.size | minus: 1 | at_least: 1 }}, 1fr);">
             {% for image in product.images offset: 1 %}
               <div class="product-thumb relative overflow-hidden"
                    style="aspect-ratio: 1/1;"
@@ -359,13 +359,13 @@
         {% endif %}
       {% else %}
         {% if gallery_imgs.size > 1 %}
-          <div class="product-thumbs-row grid gap-3" style="grid-template-columns: repeat({{ gallery_imgs.size | minus: 1 }}, 1fr);">
+          <div class="product-thumbs-row grid gap-3" style="grid-template-columns: repeat({{ gallery_imgs.size | minus: 1 | at_least: 1 }}, 1fr);">
             {% for img_name in gallery_imgs offset: 1 %}
               <div class="product-thumb relative overflow-hidden"
                    style="aspect-ratio: 1/1;"
                    onclick="setMainImg('{{ img_name | asset_url }}', this)">
                 <img src="{{ img_name | asset_url }}"
-                     alt="{{ ui_title }}"
+                     alt="{{ ui_title | escape }}"
                      class="absolute inset-0 w-full h-full object-cover" />
               </div>
             {% endfor %}
@@ -454,7 +454,7 @@
         <button class="w-full flex items-center justify-between py-4 text-left" onclick="toggleAccordion('acc-care')">
           <span class="text-[13px] font-medium text-[#222] tracking-wider"
                 style="font-family: var(--font-montserrat), Montserrat, sans-serif;">{{ txt_care }}</span>
-          <span id="acc-care-icon" class="accordion-icon text-[20px] font-light text-[#e61a7a] leading-none">✕</span>
+          <span id="acc-care-icon" class="accordion-icon text-[20px] font-light text-[#e61a7a] leading-none">–</span>
         </button>
         <div id="acc-care" class="accordion-content open">
           <div class="text-[13px] text-[#555] leading-[1.9] pb-4"
@@ -571,10 +571,8 @@
     content.classList.toggle('open', !isOpen);
     if (icon) {
       icon.classList.toggle('open', !isOpen);
-      if (id === 'acc-material') {
-        icon.textContent = isOpen ? '+' : '–';
-      } else {
-        icon.textContent = isOpen ? '✕' : '✕';
+      icon.textContent = isOpen ? '+' : '–';
+      if (id === 'acc-care') {
         icon.style.color = isOpen ? '#222' : '#e61a7a';
       }
     }

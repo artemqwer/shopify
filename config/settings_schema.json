@@ -1,1 +1,66 @@
-[]
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Ester Wugman",
+    "theme_version": "1.0.0",
+    "theme_author": "Antigraviti"
+  },
+  {
+    "name": "Allpay Integration",
+    "settings": [
+      {
+        "type": "text",
+        "id": "allpay_terminal_number",
+        "label": "Allpay Terminal Number",
+        "info": "Your Allpay terminal number for payment processing."
+      },
+      {
+        "type": "text",
+        "id": "allpay_public_key",
+        "label": "Allpay Public Key",
+        "info": "Public key provided by Allpay."
+      },
+      {
+        "type": "checkbox",
+        "id": "allpay_sandbox_mode",
+        "label": "Sandbox Mode",
+        "default": true,
+        "info": "Enable sandbox mode for testing."
+      }
+    ]
+  },
+  {
+    "name": "Morning Integration",
+    "settings": [
+      {
+        "type": "text",
+        "id": "morning_api_id",
+        "label": "Morning API ID",
+        "info": "API ID for Morning receipt service."
+      },
+      {
+        "type": "text",
+        "id": "morning_api_secret",
+        "label": "Morning API Secret",
+        "info": "API secret for Morning receipt service."
+      }
+    ]
+  },
+  {
+    "name": "PUDO / Shipping",
+    "settings": [
+      {
+        "type": "text",
+        "id": "hfd_api_key",
+        "label": "HFD API Key",
+        "info": "API key for HFD shipping integration."
+      },
+      {
+        "type": "text",
+        "id": "chita_api_key",
+        "label": "Chita API Key",
+        "info": "API key for Chita shipping integration."
+      }
+    ]
+  }
+]

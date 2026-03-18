@@ -576,8 +576,8 @@
   const elSubtotal = document.getElementById('cart-subtotal');
   const elCount    = document.getElementById('cart-count-label');
 
-  function moneyFromCents(cents) { return '$' + (cents / 100).toFixed(2).replace(/\.00$/, ''); }
-  function moneyFromFloat(f)     { return '$' + f.toFixed(2).replace(/\.00$/, ''); }
+  function moneyFromCents(cents) { var n = parseInt(cents) || 0; return '$' + (n / 100).toFixed(2).replace(/\.00$/, ''); }
+  function moneyFromFloat(f)     { var n = parseFloat(f) || 0; return '$' + n.toFixed(2).replace(/\.00$/, ''); }
 
   function showLoading() {
     elLoading && (elLoading.style.display = 'flex');
@@ -609,16 +609,18 @@
     if (!elList) return;
     elList.innerHTML = items.map(item => {
       const priceStr = item.isMock ? item.price : moneyFromCents(item.price);
+      const safeTitle = (item.product_title || '').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');
+      const safeImg  = (item.image || '').replace(/"/g,'&quot;');
       const imgHtml  = item.image
-        ? `<img src="${item.image}" alt="${item.product_title}" class="w-full h-full object-cover">`
+        ? `<img src="${safeImg}" alt="${safeTitle}" class="w-full h-full object-cover">`
         : '<div class="w-full h-full bg-[#eee]"></div>';
       return `
       <div class="flex py-5 border-b border-[#f0f0f0]" data-key="${item.key}" data-mock="${item.isMock ? '1' : ''}" style="direction:inherit">
         <div class="w-[90px] h-[90px] flex-shrink-0 bg-[#f8f8f8] overflow-hidden" style="margin-inline-end:16px">${imgHtml}</div>
         <div class="flex-1 flex flex-col justify-between min-w-0">
           <div>
-            <p class="text-[14px] font-medium text-[#222] truncate" style="font-family:var(--font-montserrat)">${item.product_title}</p>
-            ${item.variant_title ? `<p class="text-[12px] text-[#aaa] mt-0.5" style="font-family:var(--font-montserrat)">${item.variant_title}</p>` : ''}
+            <p class="text-[14px] font-medium text-[#222] truncate" style="font-family:var(--font-montserrat)">${safeTitle}</p>
+            ${item.variant_title ? `<p class="text-[12px] text-[#aaa] mt-0.5" style="font-family:var(--font-montserrat)">${(item.variant_title || '').replace(/&/g,'&amp;').replace(/</g,'&lt;')}</p>` : ''}
             <p class="text-[13px] text-[#888] mt-1" style="font-family:var(--font-montserrat)">${priceStr}</p>
           </div>
           <div class="flex items-center mt-2" style="direction:ltr">
@@ -671,7 +673,7 @@
       .then(r => r.json())
       .then(realCart => {
         const mockItems  = mockGet();
-        const allItems   = [...realCart.items, ...mockItems];
+        const allItems   = [...(realCart.items || []), ...mockItems];
         const mockSub    = mockTotal(mockItems);
         const realSub    = realCart.total_price / 100;
         const totalSub   = moneyFromFloat(realSub + mockSub);
@@ -734,9 +736,10 @@
     });
   }
 
+  /* Initial badge count (single fetch on page load) */
   fetch('/cart.js')
     .then(r => r.json())
-    .then(c => { updateCartBadge(c.item_count + mockCount(mockGet())); })
+    .then(c => { updateCartBadge((c.item_count || 0) + mockCount(mockGet())); })
     .catch(() => updateCartBadge(mockCount(mockGet())));
 
   window.ShopifyDrawer = { open: openDrawer, close: closeAll };

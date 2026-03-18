@@ -46,6 +46,12 @@ window.AllpayIntegration = (function() {
         return;
       }
 
+      if (!txnId) {
+        console.error('[Allpay] handleReturnUrl: missing transaction ID.');
+        this._showPaymentError(status || '999');
+        return;
+      }
+
       if (status === '000' || status === '0') {
         // Payment approved — update cart note and redirect to thank-you
         this._updateCartAndRedirect(orderId, txnId);

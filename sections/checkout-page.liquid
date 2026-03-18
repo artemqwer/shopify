@@ -357,19 +357,23 @@
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6 mb-6">
         <div>
-          <input type="text" class="chk-input" placeholder="{{ txt_last }}" required autocomplete="family-name">
+          <label for="chk-last-name" class="sr-only">{{ txt_last }}</label>
+          <input type="text" id="chk-last-name" class="chk-input" placeholder="{{ txt_last }}" required autocomplete="family-name">
         </div>
         <div>
-          <input type="text" class="chk-input" placeholder="{{ txt_first }}" required autocomplete="given-name">
+          <label for="chk-first-name" class="sr-only">{{ txt_first }}</label>
+          <input type="text" id="chk-first-name" class="chk-input" placeholder="{{ txt_first }}" required autocomplete="given-name">
         </div>
         <div>
+          <label for="chk-phone" class="sr-only">{{ txt_phone }}</label>
           <input type="tel" id="chk-phone" class="chk-input" placeholder="{{ txt_phone }}"
                  inputmode="tel" autocomplete="tel"
-                 pattern="[\+\d][\d\s\-\(\)]{6,18}"
+                 pattern="^[\+]?[\d\s\-\(\)]{7,20}$"
                  maxlength="20" required>
         </div>
         <div>
-          <input type="email" class="chk-input" placeholder="{{ txt_email }}" required autocomplete="email">
+          <label for="chk-email" class="sr-only">{{ txt_email }}</label>
+          <input type="email" id="chk-email" class="chk-input" placeholder="{{ txt_email }}" required autocomplete="email">
         </div>
       </div>
 
@@ -395,7 +399,8 @@
 
       <div class="space-y-6 mb-12">
         <div class="chk-select-wrapper">
-          <select class="chk-select" required>
+          <label for="chk-city" class="sr-only">{{ txt_city }}</label>
+          <select id="chk-city" class="chk-select" required>
             <option value="" disabled selected hidden>{{ txt_city }}</option>
             <option value="Kyiv">Kyiv</option>
             <option value="Lviv">Lviv</option>
@@ -406,7 +411,8 @@
         </div>
 
         <div class="chk-select-wrapper">
-          <select class="chk-select" required>
+          <label for="chk-branch" class="sr-only">{{ txt_branch }}</label>
+          <select id="chk-branch" class="chk-select" required>
             <option value="" disabled selected hidden>{{ txt_branch }}</option>
             <option value="1">1</option>
             <option value="2">2</option>
@@ -415,7 +421,8 @@
         </div>
 
         <div>
-          <textarea class="chk-input" placeholder="{{ txt_notes }}" rows="3" style="resize:none; padding-top:12px;"></textarea>
+          <label for="chk-notes" class="sr-only">{{ txt_notes }}</label>
+          <textarea id="chk-notes" class="chk-input" placeholder="{{ txt_notes }}" rows="3" style="resize:none; padding-top:12px;"></textarea>
         </div>
       </div>
 
@@ -614,7 +621,8 @@
 
     // Check discount code via Shopify AJAX API
     fetch('/discount/' + encodeURIComponent(code), { method: 'GET', redirect: 'follow' })
-      .then(() => {
+      .then(r => {
+        if (!r.ok) return Promise.reject('Invalid discount code');
         // After applying, check cart for discount
         return fetch('/cart.js').then(r => r.json());
       })
@@ -690,6 +698,8 @@
     try { return JSON.parse(localStorage.getItem('ester_mock_cart')) || []; } catch(e) { return []; }
   }
 
+  function escHtml(s) { var d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+
   function renderCheckout(cart, mockItems) {
     const container  = document.getElementById('checkout-items-container');
     const subtotalEl = document.getElementById('checkout-subtotal');
@@ -700,7 +710,7 @@
 
     if (cart && cart.items && cart.items.length > 0) {
       cart.items.forEach(item => {
-        const title = item.product_title + (item.variant_title ? ' - ' + item.variant_title : '');
+        const title = escHtml(item.product_title + (item.variant_title ? ' - ' + item.variant_title : ''));
         html += `<div class="flex justify-between items-center text-[12px] text-[#555] mb-2">
           <div class="truncate pr-4">${title}${item.quantity > 1 ? ` <span class="text-gray-400">x${item.quantity}</span>` : ''}</div>
           <div class="flex-shrink-0">${formatMoney(item.original_line_price)}</div>
@@ -715,7 +725,7 @@
         const unitVal = parseFloat(valStr) || 0;
         const lineVal = unitVal * item.quantity;
         mockTotalVal += lineVal;
-        const title = item.product_title + (item.variant_title ? ' - ' + item.variant_title : '');
+        const title = escHtml(item.product_title + (item.variant_title ? ' - ' + item.variant_title : ''));
         html += `<div class="flex justify-between items-center text-[12px] text-[#555] mb-2">
           <div class="truncate pr-4">${title}${item.quantity > 1 ? ` <span class="text-gray-400">x${item.quantity}</span>` : ''}</div>
           <div class="flex-shrink-0">$${lineVal}</div>
