@@ -336,9 +336,7 @@
     <div class="product-gallery-col w-full md:w-[55%] flex-shrink-0">
 
       <!-- Main big image -->
-      <div class="product-gallery-main relative w-full overflow-hidden mb-3" style="aspect-ratio: 3/4;"
-           id="gallery-container"
-           data-images='{% if use_shopify_imgs %}[{% for image in product.images %}"{{ image | image_url: width: 1000 }}"{% unless forloop.last %},{% endunless %}{% endfor %}]{% else %}[{% for img_name in gallery_imgs %}"{{ img_name | asset_url }}"{% unless forloop.last %},{% endunless %}{% endfor %}]{% endif %}'>
+      <div class="product-gallery-main relative w-full overflow-hidden mb-3" style="aspect-ratio: 3/4;" id="gallery-container">
         {% if use_shopify_imgs %}
           <img id="gallery-main-img"
                src="{{ product.images[0] | image_url: width: 1000 }}"
@@ -353,8 +351,20 @@
                loading="eager" />
         {% endif %}
 
-        <!-- Gallery dots (mobile) — inside image container -->
-        <div class="gallery-dots" id="gallery-dots"></div>
+        <!-- Gallery dots (mobile) -->
+        {% if use_shopify_imgs and product.images.size > 1 %}
+          <div class="gallery-dots" id="gallery-dots" style="display:flex !important;position:absolute;bottom:16px;left:0;right:0;justify-content:center;align-items:center;gap:8px;z-index:5;">
+            {% for image in product.images %}
+              <button class="gallery-dot{% if forloop.first %} active{% endif %}" data-index="{{ forloop.index0 }}" data-src="{{ image | image_url: width: 1000 }}" style="width:8px;height:8px;border-radius:50%;border:none;padding:0;cursor:pointer;{% if forloop.first %}background:#DE2077;{% else %}background:rgba(255,255,255,0.5);{% endif %}"></button>
+            {% endfor %}
+          </div>
+        {% elsif use_shopify_imgs == false and gallery_imgs.size > 1 %}
+          <div class="gallery-dots" id="gallery-dots" style="display:flex !important;position:absolute;bottom:16px;left:0;right:0;justify-content:center;align-items:center;gap:8px;z-index:5;">
+            {% for img_name in gallery_imgs %}
+              <button class="gallery-dot{% if forloop.first %} active{% endif %}" data-index="{{ forloop.index0 }}" data-src="{{ img_name | asset_url }}" style="width:8px;height:8px;border-radius:50%;border:none;padding:0;cursor:pointer;{% if forloop.first %}background:#DE2077;{% else %}background:rgba(255,255,255,0.5);{% endif %}"></button>
+            {% endfor %}
+          </div>
+        {% endif %}
       </div>
 
       <!-- Thumbnails row (2 side by side below) -->
@@ -539,32 +549,26 @@
 
   // Mobile gallery swipe + dots
   (function() {
-    const container = document.getElementById('gallery-container');
-    const mainImg = document.getElementById('gallery-main-img');
-    const dotsContainer = document.getElementById('gallery-dots');
-    if (!container || !mainImg || !dotsContainer) return;
+    var container = document.getElementById('gallery-container');
+    var mainImg = document.getElementById('gallery-main-img');
+    var dots = document.querySelectorAll('#gallery-dots .gallery-dot');
+    if (!container || !mainImg || dots.length < 2) return;
 
-    // Get all image URLs from data attribute
+    // Build image array from dot data-src attributes
     var images = [];
-    try { images = JSON.parse(container.dataset.images); } catch(e) {}
-    if (images.length <= 1) return;
-
-    // Generate dots
-    images.forEach(function(_, i) {
-      var dot = document.createElement('button');
-      dot.className = 'gallery-dot' + (i === 0 ? ' active' : '');
-      dot.dataset.index = i;
-      dot.setAttribute('aria-label', 'Image ' + (i + 1));
-      dot.addEventListener('click', function() { goTo(i); });
-      dotsContainer.appendChild(dot);
-    });
+    for (var i = 0; i < dots.length; i++) {
+      images.push(dots[i].getAttribute('data-src'));
+    }
 
     var current = 0;
-    var dots = dotsContainer.querySelectorAll('.gallery-dot');
 
     function updateDots(idx) {
-      for (var d = 0; d < dots.length; d++) dots[d].classList.remove('active');
-      if (dots[idx]) dots[idx].classList.add('active');
+      for (var d = 0; d < dots.length; d++) {
+        dots[d].classList.remove('active');
+        dots[d].style.background = 'rgba(255,255,255,0.5)';
+      }
+      dots[idx].classList.add('active');
+      dots[idx].style.background = '#DE2077';
     }
 
     function goTo(idx) {
@@ -574,6 +578,14 @@
       setTimeout(function() { mainImg.src = images[idx]; mainImg.style.opacity = '1'; }, 180);
     }
 
+    // Dot click handlers
+    for (var j = 0; j < dots.length; j++) {
+      (function(idx) {
+        dots[idx].addEventListener('click', function() { goTo(idx); });
+      })(j);
+    }
+
+    // Touch swipe
     var startX = 0;
     container.addEventListener('touchstart', function(e) { startX = e.touches[0].clientX; }, { passive: true });
     container.addEventListener('touchend', function(e) {
