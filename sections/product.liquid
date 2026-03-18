@@ -6,7 +6,7 @@
 {% endschema %}
 
 <style>
-  .product-gallery-main img { transition: opacity 0.35s ease; }
+  .product-gallery-main img { transition: opacity 0.35s ease; position: relative; z-index: 1; }
   .product-thumb { cursor: pointer; border: 2px solid transparent; transition: border-color 0.2s; }
   .product-thumb.active { border-color: #222; }
   .product-thumb:hover { border-color: #aaa; }
@@ -352,10 +352,10 @@
         {% endif %}
 
         <!-- Gallery dots -->
-        <div id="gallery-dots" style="display:flex !important;position:absolute;bottom:16px;left:0;right:0;justify-content:center;align-items:center;gap:8px;z-index:5;pointer-events:none;">
-          <button class="gallery-dot active" data-index="0" data-src="{{ gallery_imgs[0] | default: 'product-image-4.png' | asset_url }}" style="width:8px;height:8px;border-radius:50%;border:none;padding:0;cursor:pointer;pointer-events:auto;background:#DE2077;"></button>
-          <button class="gallery-dot" data-index="1" data-src="{{ gallery_imgs[1] | default: 'product-image-5.png' | asset_url }}" style="width:8px;height:8px;border-radius:50%;border:none;padding:0;cursor:pointer;pointer-events:auto;background:rgba(255,255,255,0.5);"></button>
-          <button class="gallery-dot" data-index="2" data-src="{{ gallery_imgs[2] | default: 'product-image-6.png' | asset_url }}" style="width:8px;height:8px;border-radius:50%;border:none;padding:0;cursor:pointer;pointer-events:auto;background:rgba(255,255,255,0.5);"></button>
+        <div id="gallery-dots" style="display:flex !important;position:absolute;bottom:16px;left:0;right:0;justify-content:center;align-items:center;gap:8px;z-index:50;pointer-events:none;">
+          <button class="gallery-dot active" data-index="0" data-src="{{ gallery_imgs[0] | default: 'product-image-4.png' | asset_url }}" style="width:8px;height:8px;border-radius:50%;border:none;padding:0;cursor:pointer;pointer-events:auto;background:#DE2077;position:relative;z-index:51;"></button>
+          <button class="gallery-dot" data-index="1" data-src="{{ gallery_imgs[1] | default: 'product-image-5.png' | asset_url }}" style="width:8px;height:8px;border-radius:50%;border:none;padding:0;cursor:pointer;pointer-events:auto;background:rgba(255,255,255,0.5);position:relative;z-index:51;"></button>
+          <button class="gallery-dot" data-index="2" data-src="{{ gallery_imgs[2] | default: 'product-image-6.png' | asset_url }}" style="width:8px;height:8px;border-radius:50%;border:none;padding:0;cursor:pointer;pointer-events:auto;background:rgba(255,255,255,0.5);position:relative;z-index:51;"></button>
         </div>
       </div>
 
