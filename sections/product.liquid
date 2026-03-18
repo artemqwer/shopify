@@ -351,17 +351,11 @@
                loading="eager" />
         {% endif %}
 
-        <!-- Gallery dots (mobile) -->
-        {% if use_shopify_imgs and product.images.size > 1 %}
-          <div class="gallery-dots" id="gallery-dots" style="display:flex !important;position:absolute;bottom:16px;left:0;right:0;justify-content:center;align-items:center;gap:8px;z-index:5;">
-            {% for image in product.images %}
-              <button class="gallery-dot{% if forloop.first %} active{% endif %}" data-index="{{ forloop.index0 }}" data-src="{{ image | image_url: width: 1000 }}" style="width:8px;height:8px;border-radius:50%;border:none;padding:0;cursor:pointer;{% if forloop.first %}background:#DE2077;{% else %}background:rgba(255,255,255,0.5);{% endif %}"></button>
-            {% endfor %}
-          </div>
-        {% elsif use_shopify_imgs == false and gallery_imgs.size > 1 %}
-          <div class="gallery-dots" id="gallery-dots" style="display:flex !important;position:absolute;bottom:16px;left:0;right:0;justify-content:center;align-items:center;gap:8px;z-index:5;">
+        <!-- Gallery dots -->
+        {% if gallery_imgs.size > 1 %}
+          <div class="gallery-dots" id="gallery-dots" style="display:flex !important;position:absolute;bottom:16px;left:0;right:0;justify-content:center;align-items:center;gap:8px;z-index:5;pointer-events:none;">
             {% for img_name in gallery_imgs %}
-              <button class="gallery-dot{% if forloop.first %} active{% endif %}" data-index="{{ forloop.index0 }}" data-src="{{ img_name | asset_url }}" style="width:8px;height:8px;border-radius:50%;border:none;padding:0;cursor:pointer;{% if forloop.first %}background:#DE2077;{% else %}background:rgba(255,255,255,0.5);{% endif %}"></button>
+              <button class="gallery-dot{% if forloop.first %} active{% endif %}" data-index="{{ forloop.index0 }}" data-src="{{ img_name | asset_url }}" style="width:8px;height:8px;border-radius:50%;border:none;padding:0;cursor:pointer;pointer-events:auto;{% if forloop.first %}background:#DE2077;{% else %}background:rgba(255,255,255,0.5);{% endif %}"></button>
             {% endfor %}
           </div>
         {% endif %}
