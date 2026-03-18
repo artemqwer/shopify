@@ -146,37 +146,25 @@
       {% endfor %}
     </div>
 
-    <!-- Shopify Pagination Layout -->
+    <!-- Pagination -->
     {% if paginate.pages > 1 %}
-      <div class="flex flex-col items-center mt-[64px] md:mt-[80px] w-full max-w-[300px] mx-auto">
-        
-        <!-- Progress Text -->
-        <div class="text-[10px] md:text-[12px] text-gray-500 mb-2 font-medium tracking-wide">
-          {% assign current_shown = paginate.current_offset | plus: collection.products.size %}
-          {{ current_shown }} of {{ paginate.items }} items shown
-        </div>
-
-        <!-- Progress Bar -->
-        {% assign progress_width = current_shown | times: 100.0 | divided_by: paginate.items %}
-        <div class="w-full h-[14px] bg-[#EFEFEF] rounded-full mb-6 overflow-hidden">
-          <div class="h-full bg-[#e61a7a] rounded-full transition-all duration-500" style="width: {{ progress_width }}%;"></div>
-        </div>
-
-        {% if paginate.next %}
-          <!-- LOAD MORE BUTTON -->
-          <a href="{{ paginate.next.url }}" 
-             class="w-full bg-[#e61a7a] hover:bg-[#c9156a] transition-colors text-white py-[16px] text-center text-[12px] font-semibold tracking-wider uppercase mb-4"
-             style="font-family: var(--font-montserrat), Montserrat, sans-serif;">
-            {% if request.locale.iso_code == 'he' %}עוד{% else %}More{% endif %}
-          </a>
+      <nav class="flex items-center justify-center gap-3 mt-[48px] md:mt-[64px]" aria-label="Pagination">
+        {% if paginate.previous %}
+          <a href="{{ paginate.previous.url }}" class="pagination-link" aria-label="Previous">&lsaquo;</a>
         {% endif %}
-
-        <!-- BACK TO TOP -->
-        <div class="text-[10px] text-gray-400 font-medium">
-          End of page or <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="underline hover:text-gray-700 transition-colors">Back to top</button>
-        </div>
-
-      </div>
+        {% for part in paginate.parts %}
+          {% if part.is_link %}
+            <a href="{{ part.url }}" class="pagination-link">{{ part.title }}</a>
+          {% elsif part.title == paginate.current_page %}
+            <span class="pagination-link current">{{ part.title }}</span>
+          {% else %}
+            <span class="pagination-dots">…</span>
+          {% endif %}
+        {% endfor %}
+        {% if paginate.next %}
+          <a href="{{ paginate.next.url }}" class="pagination-link" aria-label="Next">&rsaquo;</a>
+        {% endif %}
+      </nav>
     {% endif %}
 
   {% else %}
@@ -214,23 +202,14 @@
       {% endfor %}
     </div>
 
-    <!-- Static pagination for placeholder layout -->
-    <div class="flex flex-col items-center mt-[64px] md:mt-[80px] w-full max-w-[300px] mx-auto">
-      <div class="text-[10px] md:text-[12px] text-gray-500 mb-2 font-medium tracking-wide">
-        12 of 48 items shown
-      </div>
-      <div class="w-full h-[14px] bg-[#EFEFEF] rounded-full mb-6 overflow-hidden">
-        <div class="h-full bg-[#e61a7a] rounded-full" style="width: 25%;"></div>
-      </div>
-      <a href="{{ routes.all_products_collection_url }}?page=2"
-         class="w-full bg-[#e61a7a] hover:bg-[#c9156a] transition-colors text-white py-[16px] text-center text-[12px] font-semibold tracking-wider uppercase mb-4"
-         style="font-family: var(--font-montserrat), Montserrat, sans-serif;">
-        {% if request.locale.iso_code == 'he' %}עוד{% else %}More{% endif %}
-      </a>
-      <div class="text-[10px] text-gray-400 font-medium">
-        End of page or <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="underline hover:text-gray-700 transition-colors">Back to top</button>
-      </div>
-    </div>
+    <!-- Static pagination for placeholder -->
+    <nav class="flex items-center justify-center gap-3 mt-[48px] md:mt-[64px]" aria-label="Pagination">
+      <span class="pagination-link current">1</span>
+      <a href="{{ routes.all_products_collection_url }}?page=2" class="pagination-link">2</a>
+      <a href="{{ routes.all_products_collection_url }}?page=3" class="pagination-link">3</a>
+      <a href="{{ routes.all_products_collection_url }}?page=4" class="pagination-link">4</a>
+      <a href="{{ routes.all_products_collection_url }}?page=2" class="pagination-link" aria-label="Next">&rsaquo;</a>
+    </nav>
 
   {% endif %}
 
