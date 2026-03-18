@@ -219,9 +219,9 @@
   {% assign use_real_product = false %}
 {% endif %}
 
-{% assign p1_imgs = "product-image-1.png" | split: "," %}
-{% assign p2_imgs = "product-image-2.png" | split: "," %}
-{% assign p3_imgs = "product-image-3.png" | split: "," %}
+{% assign p1_imgs = "product-image-1.png,product-image-2.png,product-image-3.png" | split: "," %}
+{% assign p2_imgs = "product-image-2.png,product-image-1.png,product-image-3.png" | split: "," %}
+{% assign p3_imgs = "product-image-3.png,product-image-1.png,product-image-2.png" | split: "," %}
 {% assign p4_imgs = "product-image-4.png,product-image-5.png,product-image-6.png" | split: "," %}
 
 {% comment %} Choose demo gallery based on handle {% endcomment %}
