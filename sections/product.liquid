@@ -351,12 +351,13 @@
                loading="eager" />
         {% endif %}
 
-        <!-- Gallery dots -->
-        <div id="gallery-dots" style="display:flex !important;position:absolute;bottom:16px;left:0;right:0;justify-content:center;align-items:center;gap:8px;z-index:50;pointer-events:none;">
-          <button class="gallery-dot active" data-index="0" data-src="{{ gallery_imgs[0] | default: 'product-image-4.png' | asset_url }}" style="width:8px;height:8px;border-radius:50%;border:none;padding:0;cursor:pointer;pointer-events:auto;background:#DE2077;position:relative;z-index:51;"></button>
-          <button class="gallery-dot" data-index="1" data-src="{{ gallery_imgs[1] | default: 'product-image-5.png' | asset_url }}" style="width:8px;height:8px;border-radius:50%;border:none;padding:0;cursor:pointer;pointer-events:auto;background:rgba(255,255,255,0.5);position:relative;z-index:51;"></button>
-          <button class="gallery-dot" data-index="2" data-src="{{ gallery_imgs[2] | default: 'product-image-6.png' | asset_url }}" style="width:8px;height:8px;border-radius:50%;border:none;padding:0;cursor:pointer;pointer-events:auto;background:rgba(255,255,255,0.5);position:relative;z-index:51;"></button>
-        </div>
+      </div>
+
+      <!-- Gallery dots — OUTSIDE overflow:hidden container -->
+      <div id="gallery-dots" style="display:flex !important;justify-content:center;align-items:center;gap:8px;margin-top:-32px;margin-bottom:16px;position:relative;z-index:50;">
+        <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#DE2077;" data-index="0" data-src="{{ gallery_imgs[0] | default: 'product-image-4.png' | asset_url }}" class="gallery-dot active"></span>
+        <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.5);" data-index="1" data-src="{{ gallery_imgs[1] | default: 'product-image-5.png' | asset_url }}" class="gallery-dot"></span>
+        <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.5);" data-index="2" data-src="{{ gallery_imgs[2] | default: 'product-image-6.png' | asset_url }}" class="gallery-dot"></span>
       </div>
 
       <!-- Thumbnails row (2 side by side below) -->
