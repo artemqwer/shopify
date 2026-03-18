@@ -165,32 +165,7 @@
     .product-info-col p.price-line { font-size: 15px !important; }
   }
 
-  /* ── Mobile gallery dots ── */
-  .gallery-dots {
-    display: none;
-    justify-content: center;
-    gap: 6px;
-    position: absolute;
-    bottom: 12px;
-    left: 0;
-    right: 0;
-    z-index: 10;
-    pointer-events: none;
-  }
-  .gallery-dot {
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: #ccc;
-    border: none;
-    padding: 0;
-    cursor: pointer;
-    transition: background 0.2s;
-    flex-shrink: 0;
-    pointer-events: auto;
-  }
-  .gallery-dot.active { background: #DE2077; }
   @media (max-width: 768px) {
-    .gallery-dots { display: flex; }
     /* Thumbnails hidden on mobile — replaced by full slider + dots */
     .product-thumbs-row { display: none !important; }
     /* Full bleed image on mobile */
@@ -347,22 +322,6 @@
                loading="eager" />
         {% endif %}
 
-        <!-- Mobile dot indicators (overlaid on image) -->
-        <div class="gallery-dots" id="gallery-dots-mob">
-          {% if use_shopify_imgs %}
-            {% if product.images.size > 1 %}
-              {% for image in product.images %}
-                <button class="gallery-dot{% if forloop.first %} active{% endif %}" data-index="{{ forloop.index0 }}" aria-label="Image {{ forloop.index }}"></button>
-              {% endfor %}
-            {% endif %}
-          {% else %}
-            {% if gallery_imgs.size > 1 %}
-              {% for img in gallery_imgs %}
-                <button class="gallery-dot{% if forloop.first %} active{% endif %}" data-index="{{ forloop.index0 }}" aria-label="Image {{ forloop.index }}"></button>
-              {% endfor %}
-            {% endif %}
-          {% endif %}
-        </div>
       </div>
 
       <!-- Thumbnails row (2 side by side below) -->
@@ -537,25 +496,19 @@
     if (thumbEl) thumbEl.classList.add('active');
   }
 
-  // Mobile gallery dots + swipe
+  // Mobile gallery swipe
   (function() {
     const mainImg = document.getElementById('gallery-main-img');
-    const dotsEl  = document.getElementById('gallery-dots-mob');
-    if (!mainImg || !dotsEl) return;
+    if (!mainImg) return;
     const images = [mainImg.src];
     document.querySelectorAll('.product-thumbs-row img').forEach(img => images.push(img.src));
     if (images.length <= 1) return;
     let current = 0;
-    const dots = dotsEl.querySelectorAll('.gallery-dot');
     function goTo(idx) {
       current = idx;
       mainImg.style.opacity = '0';
       setTimeout(() => { mainImg.src = images[idx]; mainImg.style.opacity = '1'; }, 180);
-      dots.forEach((d, i) => d.classList.toggle('active', i === idx));
     }
-    dots.forEach((d, i) => {
-      d.addEventListener('click', () => goTo(i));
-    });
     let startX = 0;
     mainImg.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
     mainImg.addEventListener('touchend', e => {

@@ -134,13 +134,6 @@
                   />
                 </a>
               {% endfor %}
-              {% if product.images.size > 1 %}
-                <div class="absolute bottom-2 left-0 right-0 flex justify-center gap-1 z-10 pointer-events-none">
-                  {% for image in product.images %}
-                    <span class="catalog-dot w-[6px] h-[6px] rounded-full transition-colors" style="background:{% if forloop.first %}#DE2077{% else %}#d1d5db{% endif %}" data-index="{{ forloop.index0 }}"></span>
-                  {% endfor %}
-                </div>
-              {% endif %}
             {% else %}
               {% assign fallback_index = forloop.index0 | modulo: 4 | plus: 1 %}
               <a href="{{ product.url }}" class="absolute inset-0 w-full h-full no-underline">
@@ -242,7 +235,6 @@
 document.addEventListener('DOMContentLoaded', function() {
   document.querySelectorAll('.catalog-slider').forEach(function(slider) {
     var slides = slider.querySelectorAll('.catalog-slide');
-    var dots = slider.querySelectorAll('.catalog-dot');
     if (slides.length < 2) return;
 
     var current = 0;
@@ -252,10 +244,8 @@ document.addEventListener('DOMContentLoaded', function() {
     function goTo(idx) {
       if (idx < 0 || idx >= slides.length) return;
       slides[current].classList.remove('active');
-      dots[current].style.background = '#d1d5db';
       current = idx;
       slides[current].classList.add('active');
-      dots[current].style.background = '#DE2077';
     }
 
     slider.addEventListener('touchstart', function(e) {
