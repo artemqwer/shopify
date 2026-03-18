@@ -132,10 +132,10 @@
     pointer-events: none;
   }
   .gallery-dot {
-    width: 9px;
-    height: 9px;
+    width: 11px;
+    height: 11px;
     border-radius: 50%;
-    background: rgba(222, 32, 119, 0.35);
+    background: #EDEDED;
     border: none;
     padding: 0;
     cursor: pointer;
@@ -514,14 +514,14 @@
       setTimeout(function() { mainImg.src = images[idx]; mainImg.style.opacity = '1'; }, 180);
       dotsEl.querySelectorAll('.gallery-dot').forEach(function(d, i) {
         d.classList.toggle('active', i === idx);
-        d.style.background = (i === idx) ? '#DE2077' : 'rgba(222, 32, 119, 0.35)';
+        d.style.background = (i === idx) ? '#DE2077' : '#EDEDED';
       });
     }
 
     images.forEach(function(_, i) {
       var d = document.createElement('button');
       d.className = 'gallery-dot' + (i === 0 ? ' active' : '');
-      d.style.background = (i === 0) ? '#DE2077' : 'rgba(222, 32, 119, 0.35)';
+      d.style.background = (i === 0) ? '#DE2077' : '#EDEDED';
       d.setAttribute('aria-label', 'Image ' + (i + 1));
       d.addEventListener('click', function() { goTo(i); });
       dotsEl.appendChild(d);
