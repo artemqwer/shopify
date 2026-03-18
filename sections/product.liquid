@@ -170,7 +170,12 @@
     display: none;
     justify-content: center;
     gap: 6px;
-    margin-top: 10px;
+    position: absolute;
+    bottom: 12px;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    pointer-events: none;
   }
   .gallery-dot {
     width: 6px; height: 6px;
@@ -181,6 +186,7 @@
     cursor: pointer;
     transition: background 0.2s;
     flex-shrink: 0;
+    pointer-events: auto;
   }
   .gallery-dot.active { background: #DE2077; }
   @media (max-width: 768px) {
@@ -340,6 +346,23 @@
                class="absolute inset-0 w-full h-full object-cover"
                loading="eager" />
         {% endif %}
+
+        <!-- Mobile dot indicators (overlaid on image) -->
+        <div class="gallery-dots" id="gallery-dots-mob">
+          {% if use_shopify_imgs %}
+            {% if product.images.size > 1 %}
+              {% for image in product.images %}
+                <button class="gallery-dot{% if forloop.first %} active{% endif %}" data-index="{{ forloop.index0 }}" aria-label="Image {{ forloop.index }}"></button>
+              {% endfor %}
+            {% endif %}
+          {% else %}
+            {% if gallery_imgs.size > 1 %}
+              {% for img in gallery_imgs %}
+                <button class="gallery-dot{% if forloop.first %} active{% endif %}" data-index="{{ forloop.index0 }}" aria-label="Image {{ forloop.index }}"></button>
+              {% endfor %}
+            {% endif %}
+          {% endif %}
+        </div>
       </div>
 
       <!-- Thumbnails row (2 side by side below) -->
@@ -373,22 +396,6 @@
         {% endif %}
       {% endif %}
 
-      <!-- Mobile dot indicators -->
-      <div class="gallery-dots" id="gallery-dots-mob">
-        {% if use_shopify_imgs %}
-          {% if product.images.size > 1 %}
-            {% for image in product.images %}
-              <button class="gallery-dot{% if forloop.first %} active{% endif %}" data-index="{{ forloop.index0 }}" aria-label="Image {{ forloop.index }}"></button>
-            {% endfor %}
-          {% endif %}
-        {% else %}
-          {% if gallery_imgs.size > 1 %}
-            {% for img in gallery_imgs %}
-              <button class="gallery-dot{% if forloop.first %} active{% endif %}" data-index="{{ forloop.index0 }}" aria-label="Image {{ forloop.index }}"></button>
-            {% endfor %}
-          {% endif %}
-        {% endif %}
-      </div>
 
     </div><!-- /gallery -->
 
