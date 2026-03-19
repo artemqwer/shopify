@@ -12,24 +12,18 @@
 >
   <div class="w-full max-w-[1920px] mx-auto px-[20px] md:px-[160px]">
     <div class="relative flex justify-between items-center h-[57px] md:h-[102px]">
-      <div id="burger-desktop-remover" class="md:hidden hide-on-desktop flex-1 md:flex-none md:w-0 md:h-0 md:overflow-hidden md:opacity-0 md:pointer-events-none flex items-center" style="z-index: 60;">
-        <button
-          type="button"
-          class="mobile-menu-toggle header-mobile-icon md:hidden md:pointer-events-none md:w-0 md:h-0 relative w-6 h-6 focus:outline-none"
-          aria-label="Menu"
-          onclick="toggleMobileMenu(this)"
-        >
-          <span
-            class="absolute block h-[1px] w-6 bg-current transform transition duration-300 ease-in-out top-1/2 -translate-y-2"
-          ></span>
-          <span
-            class="absolute block h-[1px] w-6 bg-current transform transition duration-300 ease-in-out top-1/2"
-          ></span>
-          <span
-            class="absolute block h-[1px] w-6 bg-current transform transition duration-300 ease-in-out top-1/2 translate-y-2"
-          ></span>
-        </button>
-      </div>
+      <!-- Mobile Burger Button (Absolutely positioned to avoid ANY flex-1 stretching issues) -->
+      <button
+        id="burger-desktop-remover"
+        type="button"
+        class="absolute left-0 rtl:right-0 rtl:left-auto md:hidden hide-on-desktop mobile-menu-toggle header-mobile-icon w-6 h-6 focus:outline-none z-[60] mt-[-12px] top-1/2"
+        aria-label="Menu"
+        onclick="toggleMobileMenu(this)"
+      >
+        <span class="absolute block h-[1px] w-6 bg-current transform transition duration-300 ease-in-out top-[0] md:w-0"></span>
+        <span class="absolute block h-[1px] w-6 bg-current transform transition duration-300 ease-in-out top-[12px] md:w-0"></span>
+        <span class="absolute block h-[1px] w-6 bg-current transform transition duration-300 ease-in-out top-[24px] md:w-0"></span>
+      </button>
       <style>
         .mobile-menu-toggle.menu-open span:nth-child(1) {
           transform: translateY(0) rotate(45deg);
