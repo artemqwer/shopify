@@ -12,7 +12,7 @@
 >
   <div class="w-full max-w-[1920px] mx-auto px-[20px] md:px-[160px]">
     <div class="relative flex justify-between items-center h-[57px] md:h-[102px]">
-      <div class="md:hidden flex-1 flex items-center" style="z-index: 60;">
+      <div class="md:hidden hide-on-desktop flex-1 flex items-center" style="z-index: 60;">
         <button
           type="button"
           class="mobile-menu-toggle header-mobile-icon relative w-6 h-6 focus:outline-none"
@@ -81,8 +81,15 @@
         }
         /* Force-hide ALL mobile-only elements on desktop — Tailwind CDN may not apply md:hidden */
         @media (min-width: 768px) {
-          .md\:hidden {
+          .md\:hidden,
+          .hide-on-desktop {
             display: none !important;
+            pointer-events: none !important;
+            visibility: hidden !important;
+            width: 0 !important;
+            height: 0 !important;
+            overflow: hidden !important;
+            opacity: 0 !important;
           }
         }
       </style>
@@ -360,12 +367,12 @@
   </div>
 
   <!-- Mobile Menu Backdrop -->
-  <div id="mobile-menu-backdrop" class="md:hidden fixed inset-0 z-40" onclick="closeMobileMenu()"></div>
+  <div id="mobile-menu-backdrop" class="md:hidden hide-on-desktop fixed inset-0 z-40" onclick="closeMobileMenu()"></div>
 
   <!-- Mobile Menu (full screen overlay) -->
   <div
     id="mobile-menu"
-    class="md:hidden fixed inset-0 bg-white z-[55]"
+    class="md:hidden hide-on-desktop fixed inset-0 bg-white z-[55]"
     {% if request.locale.iso_code == 'he' %}
       dir="rtl"
     {% endif %}
