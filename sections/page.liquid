@@ -427,14 +427,14 @@
       </div>
 
       <!-- Size selector -->
-      <div class="flex items-center gap-3 mb-2">
+      <div class="hidden md:flex items-center gap-3 mb-2">
         <button class="size-btn" onclick="sizeClick(this)">S</button>
         <button class="size-btn active" onclick="sizeClick(this)">M</button>
         <button class="size-btn" onclick="sizeClick(this)">L</button>
       </div>
 
       <!-- Size guide -->
-      <div class="mb-7 text-right" {% if request.locale.iso_code == 'he' %}style="text-align:left"{% endif %}>
+      <div class="hidden md:block mb-7 text-right" {% if request.locale.iso_code == 'he' %}style="text-align:left"{% endif %}>
         <button type="button" onclick="openSizeGuide()" class="text-[12px] text-[#888] underline hover:text-[#333] transition-colors bg-transparent border-none cursor-pointer p-0"
            style="font-family: var(--font-montserrat), Montserrat, sans-serif;">
           {{ txt_size_guide }}

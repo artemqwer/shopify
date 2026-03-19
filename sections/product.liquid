@@ -433,14 +433,14 @@
           <button class="color-swatch" style="background:#63141f;" aria-label="Bordeaux"></button>
           <button class="color-swatch" style="background:#3d2b2b;" aria-label="Dark brown"></button>
         </div>
-        <button type="button" onclick="openSizeGuide()" class="text-[12px] text-[#888] underline hover:text-[#333] transition-colors bg-transparent border-none cursor-pointer p-0"
+        <button type="button" onclick="openSizeGuide()" class="hidden md:block text-[12px] text-[#888] underline hover:text-[#333] transition-colors bg-transparent border-none cursor-pointer p-0"
            style="font-family: var(--font-montserrat), Montserrat, sans-serif;">
           {{ txt_size_guide }}
         </button>
       </div>
 
       <!-- Size selector -->
-      <div class="mb-7">
+      <div class="hidden md:block mb-7">
         <div class="flex items-center gap-3">
           <button class="size-btn" onclick="selectSize(this)">S</button>
           <button class="size-btn active" onclick="selectSize(this)">M</button>
