@@ -85,7 +85,8 @@
       <nav class="hidden md:flex items-center flex-1 space-x-12 rtl:space-x-reverse">
         <a
           href="{{ routes.root_url }}"
-          class="text-[14px] font-medium tracking-widest text-gray-900 uppercase hover:text-[#d62873] transition-colors"
+          onclick="window.location.href=this.href;return false;"
+          class="text-[14px] font-medium tracking-widest text-gray-900 uppercase hover:text-[#d62873] transition-colors cursor-pointer"
         >
           {{ 'header.home' | t }}
         </a>
@@ -93,7 +94,8 @@
         <div class="relative group" id="catalog-nav-group">
           <a
             href="{{ routes.all_products_collection_url }}"
-            class="flex items-center text-[14px] font-medium tracking-widest text-gray-900 uppercase hover:text-[#d62873] transition-colors py-8"
+            onclick="window.location.href=this.href;return false;"
+            class="flex items-center text-[14px] font-medium tracking-widest text-gray-900 uppercase hover:text-[#d62873] transition-colors py-8 cursor-pointer"
           >
             {{ 'header.catalog' | t }}
             <svg
@@ -197,8 +199,9 @@
 
         <a
           href="{{ routes.search_url }}?view=popular"
+          onclick="window.location.href=this.href;return false;"
           class="
-            text-[14px] font-medium tracking-widest uppercase transition-colors
+            text-[14px] font-medium tracking-widest uppercase transition-colors cursor-pointer
             {% if template.suffix == 'popular' or request.query_string contains 'view=popular' %}text-[#e61a7a]{% else %}text-gray-900 hover:text-[#e61a7a]{% endif %}
           "
         >
@@ -506,7 +509,15 @@
     }
     window.toggleLangMenu = toggleLangMenu;
 
-
+    // Force all header nav links to navigate via JS (workaround for blocked <a> clicks)
+    document.querySelectorAll('#site-header nav a, #catalog-mega-menu a').forEach(function(link) {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        var href = this.getAttribute('href');
+        if (href) window.location.href = href;
+      }, true);
+    });
 
     // Close on outside click for language switcher
     document.addEventListener('click', function(e) {
