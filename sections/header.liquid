@@ -79,24 +79,29 @@
           box-shadow: none !important;
           border: none !important;
         }
+        /* Force-hide mobile-only overlays on desktop — Tailwind CDN may not apply md:hidden */
+        @media (min-width: 768px) {
+          #mobile-menu,
+          #mobile-menu-backdrop {
+            display: none !important;
+            pointer-events: none !important;
+          }
+        }
       </style>
 
       <!-- Desktop Left Navigation -->
-      <nav class="hidden md:flex items-center flex-1 space-x-12 rtl:space-x-reverse" style="position: relative; z-index: 999999; pointer-events: auto;">
-        <button
-          type="button"
-          onclick="window.location.href='{{ routes.root_url }}';"
-          class="text-[14px] font-medium tracking-widest text-gray-900 uppercase hover:text-[#d62873] transition-colors cursor-pointer bg-transparent border-none p-0"
+      <nav class="hidden md:flex items-center flex-1 space-x-12 rtl:space-x-reverse">
+        <a
+          href="{{ routes.root_url }}"
+          class="text-[14px] font-medium tracking-widest text-gray-900 uppercase hover:text-[#d62873] transition-colors"
         >
           {{ 'header.home' | t }}
-        </button>
+        </a>
 
         <div class="relative group" id="catalog-nav-group">
-          <button
-            type="button"
-            onclick="window.location.href='{{ routes.all_products_collection_url }}';"
-            class="flex items-center text-[14px] font-medium tracking-widest text-gray-900 uppercase hover:text-[#d62873] transition-colors py-8 cursor-pointer bg-transparent border-none p-0"
-            style="padding-top: 2rem; padding-bottom: 2rem;"
+          <a
+            href="{{ routes.all_products_collection_url }}"
+            class="flex items-center text-[14px] font-medium tracking-widest text-gray-900 uppercase hover:text-[#d62873] transition-colors py-8"
           >
             {{ 'header.catalog' | t }}
             <svg
@@ -111,7 +116,7 @@
             >
               <path d="m6 9 6 6 6-6"/>
             </svg>
-          </button>
+          </a>
           <!-- Mega Menu Dropdown -->
           <div class="absolute top-full left-0 rtl:right-0 pt-0 hidden group-hover:block z-50" id="catalog-mega-menu">
             <div class="pt-4">
@@ -198,16 +203,15 @@
           </div>
         </div>
 
-        <button
-          type="button"
-          onclick="window.location.href='{{ routes.search_url }}?view=popular';"
+        <a
+          href="{{ routes.search_url }}?view=popular"
           class="
-            text-[14px] font-medium tracking-widest uppercase transition-colors cursor-pointer bg-transparent border-none p-0
+            text-[14px] font-medium tracking-widest uppercase transition-colors
             {% if template.suffix == 'popular' or request.query_string contains 'view=popular' %}text-[#e61a7a]{% else %}text-gray-900 hover:text-[#e61a7a]{% endif %}
           "
         >
           {{ 'header.popular' | t }}
-        </button>
+        </a>
       </nav>
 
       <!-- Logo Center -->
@@ -509,16 +513,6 @@
       if (btn)   btn.setAttribute('aria-expanded', String(!isOpen));
     }
     window.toggleLangMenu = toggleLangMenu;
-
-    // Force all header nav links to navigate via JS (workaround for blocked <a> clicks)
-    document.querySelectorAll('#site-header nav a, #catalog-mega-menu a').forEach(function(link) {
-      link.addEventListener('click', function(e) {
-        e.preventDefault();
-        e.stopImmediatePropagation();
-        var href = this.getAttribute('href');
-        if (href) window.location.href = href;
-      }, true);
-    });
 
     // Close on outside click for language switcher
     document.addEventListener('click', function(e) {
