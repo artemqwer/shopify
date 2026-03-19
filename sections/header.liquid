@@ -90,7 +90,7 @@
           {{ 'header.home' | t }}
         </a>
 
-        <div class="relative" id="catalog-nav-group">
+        <div class="relative group" id="catalog-nav-group">
           <a
             href="{{ routes.all_products_collection_url }}"
             class="flex items-center text-[14px] font-medium tracking-widest text-gray-900 uppercase hover:text-[#d62873] transition-colors py-8"
@@ -110,8 +110,9 @@
             </svg>
           </a>
           <!-- Mega Menu Dropdown -->
-          <div class="absolute top-full left-0 rtl:right-0 pt-2 hidden z-50" id="catalog-mega-menu">
-            <div class="bg-white border border-gray-100 w-[600px] p-8 grid grid-cols-4 gap-6 text-left rtl:text-right">
+          <div class="absolute top-full left-0 rtl:right-0 pt-0 hidden group-hover:block z-50" id="catalog-mega-menu">
+            <div class="pt-4">
+              <div class="bg-white border border-gray-100 w-[600px] p-8 grid grid-cols-4 gap-6 text-left rtl:text-right shadow-xl">
               <div class="flex flex-col space-y-3">
                 <a href="{{ routes.all_products_collection_url }}" class="text-sm text-gray-800 hover:text-[#d62873]">
                   {{- 'header.menu.all' | t -}}
@@ -188,6 +189,7 @@
                 >
                   {{- 'header.menu.sets' | t -}}
                 </a>
+              </div>
               </div>
             </div>
           </div>
@@ -504,21 +506,7 @@
     }
     window.toggleLangMenu = toggleLangMenu;
 
-    // Catalog mega menu — JS hover (CSS group-hover removed to prevent click interception)
-    var catalogGroup = document.getElementById('catalog-nav-group');
-    var catalogMenu  = document.getElementById('catalog-mega-menu');
-    var catalogTimer;
-    if (catalogGroup && catalogMenu) {
-      catalogGroup.addEventListener('mouseenter', function() {
-        clearTimeout(catalogTimer);
-        catalogMenu.classList.remove('hidden');
-      });
-      catalogGroup.addEventListener('mouseleave', function() {
-        catalogTimer = setTimeout(function() {
-          catalogMenu.classList.add('hidden');
-        }, 100);
-      });
-    }
+
 
     // Close on outside click for language switcher
     document.addEventListener('click', function(e) {
