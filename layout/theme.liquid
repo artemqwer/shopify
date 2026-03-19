@@ -63,7 +63,7 @@
   
   {% unless template.name == 'collection' or template.name == 'list-collections' %}
   <!-- Catalog link -->
-  <div class="flex justify-center pt-[4px] pb-[4px] md:pt-[8px] md:pb-[8px]">
+  <div class="flex md:hidden justify-center pt-[4px] pb-[4px]">
     <a href="{{ routes.all_products_collection_url }}"
        class="text-[13px] md:text-[15px] font-medium text-gray-900 underline underline-offset-4 hover:text-gray-500 transition-colors tracking-wide"
        style="font-family: var(--font-montserrat), Montserrat, sans-serif;">
