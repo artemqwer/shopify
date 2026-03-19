@@ -506,17 +506,7 @@
     }
     window.toggleLangMenu = toggleLangMenu;
 
-    // Force catalog link navigation on desktop (bypass any interfering handlers)
-    var catalogLink = document.querySelector('#catalog-nav-group > a');
-    if (catalogLink) {
-      catalogLink.addEventListener('click', function(e) {
-        var href = this.getAttribute('href');
-        if (href && href !== '#' && href !== '') {
-          e.stopImmediatePropagation();
-          window.location.href = href;
-        }
-      }, true);
-    }
+
 
     // Close on outside click for language switcher
     document.addEventListener('click', function(e) {
