@@ -14,9 +14,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
 
   {{ content_for_header }}
-
-  {{ 'theme.css' | asset_url | stylesheet_tag }}
-
+  
   <style>
     :root {
       --font-montserrat: 'Montserrat', sans-serif;
@@ -42,18 +40,6 @@
       .md\:hidden { display: none !important; }
       .hidden.md\:flex { display: flex !important; }
       .hidden.md\:block { display: block !important; }
-      .hidden.md\:inline { display: inline !important; }
-      /* Kill mobile menu on desktop completely */
-      #mobile-menu,
-      #mobile-menu-backdrop {
-        display: none !important;
-        visibility: hidden !important;
-        pointer-events: none !important;
-        position: static !important;
-        width: 0 !important;
-        height: 0 !important;
-        overflow: hidden !important;
-      }
     }
 
     /* Prevent fixed-content sections after footer from taking layout space on desktop */
