@@ -79,8 +79,12 @@
           box-shadow: none !important;
           border: none !important;
         }
-        /* Force-hide ALL mobile-only elements on desktop — Tailwind CDN may not apply md:hidden */
+        /* Force-hide ALL mobile-only elements on desktop */
         @media (min-width: 768px) {
+          #burger-desktop-remover,
+          .mobile-menu-toggle,
+          #mobile-menu,
+          #mobile-menu-backdrop,
           .hide-on-desktop {
             display: none !important;
             pointer-events: none !important;
@@ -89,7 +93,7 @@
             height: 0 !important;
             overflow: hidden !important;
             opacity: 0 !important;
-            z-index: -1 !important;
+            z-index: -9999 !important;
           }
         }
       </style>
