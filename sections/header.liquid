@@ -600,12 +600,22 @@
         if (burgerBtn) { burgerBtn.style.cssText = 'display: none !important; pointer-events: none !important;'; }
         if (backdrop) { backdrop.style.cssText = 'display: none !important; pointer-events: none !important;'; }
         if (menu) { menu.style.cssText = 'display: none !important; pointer-events: none !important;'; }
+        
+        // Nuke ANY md:hidden element lying around on desktop to mathematically guarantee no phantom click areas
+        document.querySelectorAll('.md\\:hidden, .header-mobile-icon').forEach(function(el) {
+          if (el && el.style) { el.style.setProperty('display', 'none', 'important'); el.style.setProperty('pointer-events', 'none', 'important'); }
+        });
+
         closeMobileMenu();
       } else {
         if (burgerWrap) { burgerWrap.style.cssText = 'z-index: 60;'; }
         if (burgerBtn) { burgerBtn.style.cssText = ''; }
         if (backdrop) { backdrop.style.cssText = ''; }
         if (menu) { menu.style.cssText = ''; }
+        
+        document.querySelectorAll('.md\\:hidden, .header-mobile-icon').forEach(function(el) {
+          if (el && el.style) { el.style.removeProperty('display'); el.style.removeProperty('pointer-events'); }
+        });
       }
     }
     
