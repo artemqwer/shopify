@@ -64,10 +64,10 @@
     <div class="flex flex-col md:flex-row justify-between items-start">
 
       <!-- Columns Container -->
-      <div class="flex flex-col md:flex-row gap-8 md:gap-[120px] w-full md:flex-1">
+      <div class="flex flex-col md:flex-row gap-8 md:gap-[120px] w-full md:w-auto">
 
         <!-- Contacts Column -->
-        <div class="w-full md:flex-1">
+        <div class="w-full md:w-auto">
           <ul class="space-y-[24px]">
             <li><a href="tel:+383457895" class="text-[13px] font-normal text-black hover:text-gray-500 transition-colors">{{ 'footer.phone' | t }}</a></li>
             <li><a href="mailto:ESTERWUGMAN@gmail.com" class="text-[13px] font-normal text-black hover:text-gray-500 transition-colors">{{ 'footer.email' | t }}</a></li>
@@ -76,7 +76,7 @@
         </div>
 
         <!-- Navigation Column -->
-        <div class="w-full md:flex-1">
+        <div class="w-full md:w-auto">
           <ul class="space-y-[24px]">
             <li><a href="{{ routes.root_url }}" class="text-[13px] font-normal text-black hover:text-gray-500 transition-colors">{{ 'footer.home' | t }}</a></li>
             <li><a href="{{ routes.all_products_collection_url }}" class="text-[13px] font-normal text-black hover:text-gray-500 transition-colors">{{ 'footer.catalog' | t }}</a></li>
@@ -85,7 +85,7 @@
         </div>
 
         <!-- Legal Column -->
-        <div class="w-full md:flex-1">
+        <div class="w-full md:w-auto">
           <ul class="space-y-[24px]">
             <li><a href="{{ routes.root_url }}pages/public-offer" class="text-[13px] font-normal text-black hover:text-gray-500 transition-colors">{{ 'footer.public_offer' | t }}</a></li>
             <li><a href="{{ routes.root_url }}pages/privacy" class="text-[13px] font-normal text-black hover:text-gray-500 transition-colors">{{ 'footer.privacy' | t }}</a></li>
