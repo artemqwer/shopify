@@ -34,6 +34,18 @@
     }
     /* Reset for shopify top bar */
     #shopify-section-header { z-index: 50; position: sticky; top: 0; }
+
+    /* Prevent fixed-content sections after footer from taking layout space on desktop */
+    @media (min-width: 768px) {
+      #shopify-section-drawers,
+      #shopify-section-cookie-consent,
+      #shopify-section-lang-modal {
+        position: absolute;
+        width: 0;
+        height: 0;
+        overflow: visible;
+      }
+    }
   </style>
 
   <!-- Google Fonts -->
