@@ -1,3 +1,13 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@source "./layout/**/*.liquid";
+@source "./sections/**/*.liquid";
+@source "./snippets/**/*.liquid";
+@source "./templates/**/*.liquid";
+
+@layer base {
+  * { box-sizing: border-box; }
+  body { color: #1a1a1a; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; background-color: #fff; }
+  a { transition: color 0.2s, background-color 0.2s; }
+  img { object-fit: cover; }
+}
