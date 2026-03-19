@@ -79,12 +79,10 @@
           box-shadow: none !important;
           border: none !important;
         }
-        /* Force-hide mobile-only overlays on desktop — Tailwind CDN may not apply md:hidden */
+        /* Force-hide ALL mobile-only elements on desktop — Tailwind CDN may not apply md:hidden */
         @media (min-width: 768px) {
-          #mobile-menu,
-          #mobile-menu-backdrop {
+          .md\:hidden {
             display: none !important;
-            pointer-events: none !important;
           }
         }
       </style>
