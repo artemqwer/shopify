@@ -67,6 +67,13 @@
           #site-header.header-transparent .cart-icon-img {
             filter: brightness(0) invert(1);
           }
+          /* When menu is open, force icons to be dark */
+          #mobile-menu.is-open ~ #mobile-menu-backdrop {
+            pointer-events: auto;
+          }
+          body:has(#mobile-menu.is-open) #site-header .cart-icon-img {
+            filter: brightness(0) !important;
+          }
         }
         .cart-icon-img {
           filter: brightness(0);
@@ -610,6 +617,7 @@
     function toggleMobileMenu(btn) {
       const menu = document.getElementById('mobile-menu');
       const backdrop = document.getElementById('mobile-menu-backdrop');
+      const header = document.getElementById('site-header');
       const isOpen = menu.classList.contains('is-open');
       if (isOpen) {
         closeMobileMenu();
@@ -617,6 +625,9 @@
         btn.classList.add('menu-open');
         menu.classList.add('is-open');
         backdrop.classList.add('is-open');
+        header.classList.add('menu-is-open');
+        header.classList.remove('header-transparent');
+        header.classList.add('bg-white');
         document.body.style.overflow = 'hidden';
         // Lift burger above the full-screen menu (z-55)
         btn.style.position = 'fixed';
@@ -635,6 +646,7 @@
     function closeMobileMenu() {
       const menu = document.getElementById('mobile-menu');
       const backdrop = document.getElementById('mobile-menu-backdrop');
+      const header = document.getElementById('site-header');
       const btn = document.querySelector('.mobile-menu-toggle');
       if (btn) {
         btn.classList.remove('menu-open');
@@ -646,7 +658,15 @@
       }
       menu.classList.remove('is-open');
       backdrop.classList.remove('is-open');
+      header.classList.remove('menu-is-open');
       document.body.style.overflow = '';
+      // Restore transparent header on index if scrolled to top
+      {% if template.name == 'index' %}
+      if (window.scrollY <= 50 && window.innerWidth < 768) {
+        header.classList.add('header-transparent');
+        header.classList.remove('bg-white');
+      }
+      {% endif %}
     }
     window.toggleMobileMenu = toggleMobileMenu;
     window.closeMobileMenu = closeMobileMenu;
