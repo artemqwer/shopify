@@ -380,13 +380,25 @@
   <!-- Mobile Menu (full screen overlay) -->
   <div
     id="mobile-menu"
-    class="md:hidden hide-on-desktop fixed inset-0 bg-white z-[55]"
+    class="md:hidden hide-on-desktop fixed inset-0 bg-white z-[55] overflow-y-auto"
     {% if request.locale.iso_code == 'he' %}
       dir="rtl"
     {% endif %}
   >
-    <!-- Menu top bar: logo only (burger stays in header, lifted above via JS) -->
-    <div class="flex items-center justify-center h-[60px]">
+    <!-- Close button -->
+    <button
+      type="button"
+      onclick="closeMobileMenu()"
+      class="absolute top-[20px] {% if request.locale.iso_code == 'he' %}right-[20px]{% else %}left-[20px]{% endif %} z-10 p-2"
+    >
+      <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M18 6L6 18M6 6l12 12"/>
+      </svg>
+    </button>
+
+    <!-- Menu top bar: logo and search/cart icons -->
+    <div class="flex items-center justify-between h-[60px] px-[20px]">
+      <div class="w-[24px]"></div>
       <a href="{{ routes.root_url }}">
         <img
           src="{{ 'logo-image.svg' | asset_url }}"
@@ -396,55 +408,123 @@
           class="w-[80px] h-auto object-contain"
         >
       </a>
+      <div class="flex items-center gap-3">
+        <button type="button" onclick="window.location='{{ routes.root_url | append: '/search' | replace: '//', '/' }}'">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="11" cy="11" r="8"/>
+            <path d="M21 21l-4.35-4.35"/>
+          </svg>
+        </button>
+        <button type="button" data-drawer-trigger="cart-drawer">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M9 2L7 6M17 2l2 4M3 6h18M5 6l2 14h10l2-14"/>
+          </svg>
+        </button>
+      </div>
     </div>
+
+    <!-- Recommended products -->
+    <div class="px-[20px] mb-6">
+      <button
+        type="button"
+        class="flex items-center justify-between w-full text-left mb-3"
+        onclick="toggleMobileSection('recommended')"
+      >
+        <span class="text-[16px] font-normal" style="font-family: Montserrat, sans-serif;">Recommended products</span>
+        <svg id="recommended-caret" class="w-4 h-4 transition-transform" fill="none" viewBox="0 0 10 6">
+          <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <div id="recommended-section" class="grid grid-cols-3 gap-2">
+        <a href="{{ routes.search_url }}?view=demo&product=leopard-print-scarf" class="block">
+          <img src="{{ 'product-image-1.png' | asset_url }}" alt="Product" class="w-full aspect-[3/4] object-cover"/>
+          <p class="text-[11px] mt-1" style="font-family: Montserrat, sans-serif;">{{ 'products.product_1' | t }}</p>
+        </a>
+        <a href="{{ routes.search_url }}?view=demo&product=vintage-scarf" class="block">
+          <img src="{{ 'product-image-4.png' | asset_url }}" alt="Product" class="w-full aspect-[3/4] object-cover"/>
+          <p class="text-[11px] mt-1" style="font-family: Montserrat, sans-serif;">{{ 'products.product_4' | t }}</p>
+        </a>
+        <a href="{{ routes.search_url }}?view=demo&product=pink-scarf" class="block">
+          <img src="{{ 'product-image-3.png' | asset_url }}" alt="Product" class="w-full aspect-[3/4] object-cover"/>
+          <p class="text-[11px] mt-1" style="font-family: Montserrat, sans-serif;">{{ 'products.product_3' | t }}</p>
+        </a>
+      </div>
+    </div>
+
+    <!-- Unpacking section -->
+    <div class="px-[20px] mb-6">
+      <button
+        type="button"
+        class="flex items-center justify-between w-full text-left mb-3"
+        onclick="toggleMobileSection('unpacking')"
+      >
+        <span class="text-[16px] font-normal" style="font-family: Montserrat, sans-serif;">Unpacking</span>
+        <svg id="unpacking-caret" class="w-4 h-4 transition-transform" fill="none" viewBox="0 0 10 6">
+          <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <div id="unpacking-section" class="grid grid-cols-3 gap-2">
+        <div class="block">
+          <img src="{{ 'product-image-3.png' | asset_url }}" alt="Unpacking" class="w-full aspect-[3/4] object-cover"/>
+        </div>
+        <div class="block">
+          <img src="{{ 'product-image-5.png' | asset_url }}" alt="Unpacking" class="w-full aspect-[3/4] object-cover"/>
+        </div>
+        <div class="block">
+          <img src="{{ 'product-image-6.png' | asset_url }}" alt="Unpacking" class="w-full aspect-[3/4] object-cover"/>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation menu -->
     <nav
-      class="flex flex-col px-5 pt-6 pb-10 gap-2 {% if request.locale.iso_code == 'he' %}items-start text-right{% else %}items-start text-left{% endif %}"
+      class="flex flex-col px-[20px] pt-0 pb-6 gap-3 {% if request.locale.iso_code == 'he' %}items-start text-right{% else %}items-start text-left{% endif %}"
       style="font-family: Montserrat, sans-serif;"
     >
       <a
         href="{{ routes.all_products_collection_url }}"
-        class="text-[14px] font-light text-gray-900 leading-none tracking-[0.03em] hover:text-[#d62873] transition-colors"
+        class="text-[16px] font-normal text-gray-900 leading-none hover:text-[#d62873] transition-colors"
       >
-        {{- 'header.catalog' | t -}}
+        Catalog
       </a>
       <a
         href="{{ routes.root_url }}"
-        class="text-[14px] font-light text-gray-900 leading-none tracking-[0.03em] hover:text-[#d62873] transition-colors"
+        class="text-[16px] font-normal text-gray-900 leading-none hover:text-[#d62873] transition-colors"
       >
-        {{- 'header.home' | t -}}
+        Home
       </a>
       <a
         href="{{ routes.root_url | append: '/pages/about-us' | replace: '//', '/' }}"
-        class="text-[14px] font-light text-gray-900 leading-none tracking-[0.03em] hover:text-[#d62873] transition-colors"
+        class="text-[16px] font-normal text-gray-900 leading-none hover:text-[#d62873] transition-colors"
       >
-        {{- 'footer.about' | t -}}
+        About us
       </a>
       <a
-        href="{{ routes.root_url | append: '/pages/returns' | replace: '//', '/' }}"
-        class="text-[14px] font-light text-gray-900 leading-none tracking-[0.03em] hover:text-[#d62873] transition-colors"
+        href="{{ routes.root_url | append: '/pages/public-offer' | replace: '//', '/' }}"
+        class="text-[16px] font-normal text-gray-900 leading-none hover:text-[#d62873] transition-colors"
       >
-        {{- 'footer.public_offer' | t -}}
+        Public Offer
       </a>
       <a
-        href="{{ routes.root_url | append: '/pages/contacts' | replace: '//', '/' }}"
-        class="text-[14px] font-light text-gray-900 leading-none tracking-[0.03em] hover:text-[#d62873] transition-colors"
+        href="{{ routes.root_url | append: '/pages/privacy' | replace: '//', '/' }}"
+        class="text-[16px] font-normal text-gray-900 leading-none hover:text-[#d62873] transition-colors"
       >
-        {{- 'footer.privacy' | t -}}
+        Privacy Policy
       </a>
       <a
-        href="{{ routes.root_url | append: '/pages/shipping' | replace: '//', '/' }}"
-        class="text-[14px] font-light text-gray-900 leading-none tracking-[0.03em] hover:text-[#d62873] transition-colors"
+        href="{{ routes.root_url | append: '/pages/shipping-payment' | replace: '//', '/' }}"
+        class="text-[16px] font-normal text-gray-900 leading-none hover:text-[#d62873] transition-colors"
       >
-        {{- 'footer.shipping' | t -}}
+        Shipping & Payment
       </a>
 
       <!-- Language Selector -->
-      <div class="mt-1">
+      <div class="mt-4">
         {% form 'localization', class: 'flex flex-col items-start gap-2' %}
           <button
             type="button"
             onclick="(function(){var list=document.getElementById('mobile-menu-lang-list');var caret=document.getElementById('mobile-lang-caret');var isOpen=!list.classList.contains('hidden');list.classList.toggle('hidden',isOpen);caret.style.transform=isOpen?'':'rotate(180deg)';})()"
-            class="flex items-center gap-2 text-[14px] font-light text-[#e61a7a] focus:outline-none leading-none tracking-[0.03em]"
+            class="flex items-center gap-2 text-[16px] font-normal uppercase text-[#e61a7a] focus:outline-none leading-none"
           >
             {% case request.locale.iso_code %}
               {% when 'en' -%}
@@ -465,13 +545,13 @@
               <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </button>
-          <div id="mobile-menu-lang-list" class="flex flex-col items-start gap-2 hidden">
+          <div id="mobile-menu-lang-list" class="flex items-center gap-3 hidden">
             {% if request.locale.iso_code != 'uk' %}
               <button
                 type="submit"
                 name="locale_code"
                 value="uk"
-                class="text-[14px] font-light text-gray-900 hover:text-[#e61a7a] transition-colors leading-none tracking-[0.03em]"
+                class="text-[16px] font-normal uppercase text-gray-400 hover:text-gray-900 transition-colors leading-none"
               >
                 UA
               </button>
@@ -481,7 +561,7 @@
                 type="submit"
                 name="locale_code"
                 value="en"
-                class="text-[14px] font-light text-gray-900 hover:text-[#e61a7a] transition-colors leading-none tracking-[0.03em]"
+                class="text-[16px] font-normal uppercase text-gray-400 hover:text-gray-900 transition-colors leading-none"
               >
                 ENG
               </button>
@@ -491,7 +571,7 @@
                 type="submit"
                 name="locale_code"
                 value="fr"
-                class="text-[14px] font-light text-gray-900 hover:text-[#e61a7a] transition-colors leading-none tracking-[0.03em]"
+                class="text-[16px] font-normal uppercase text-gray-400 hover:text-gray-900 transition-colors leading-none"
               >
                 FR
               </button>
@@ -501,7 +581,7 @@
                 type="submit"
                 name="locale_code"
                 value="he"
-                class="text-[14px] font-light text-gray-900 hover:text-[#e61a7a] transition-colors leading-none tracking-[0.03em]"
+                class="text-[17px] font-normal text-gray-400 hover:text-gray-900 transition-colors leading-none"
               >
                 עב
               </button>
@@ -540,6 +620,17 @@
       }
     });
 
+    // Mobile section toggles
+    function toggleMobileSection(sectionName) {
+      const section = document.getElementById(sectionName + '-section');
+      const caret = document.getElementById(sectionName + '-caret');
+      if (!section || !caret) return;
+      const isOpen = !section.classList.contains('hidden');
+      section.classList.toggle('hidden', isOpen);
+      caret.style.transform = isOpen ? '' : 'rotate(180deg)';
+    }
+    window.toggleMobileSection = toggleMobileSection;
+
     // Mobile Menu Toggle logic
     function toggleMobileMenu(btn) {
       const menu = document.getElementById('mobile-menu');
@@ -552,18 +643,6 @@
         menu.classList.add('is-open');
         backdrop.classList.add('is-open');
         document.body.style.overflow = 'hidden';
-        // Lift burger above the full-screen menu (z-55)
-        btn.style.position = 'fixed';
-        btn.style.zIndex = '60';
-        btn.style.top = '18px';
-        var isRtl = document.documentElement.dir === 'rtl';
-        if (isRtl) {
-          btn.style.right = '16px';
-          btn.style.left = '';
-        } else {
-          btn.style.left = '16px';
-          btn.style.right = '';
-        }
       }
     }
     function closeMobileMenu() {
@@ -572,11 +651,6 @@
       const btn = document.querySelector('.mobile-menu-toggle');
       if (btn) {
         btn.classList.remove('menu-open');
-        btn.style.position = '';
-        btn.style.zIndex = '';
-        btn.style.top = '';
-        btn.style.left = '';
-        btn.style.right = '';
       }
       menu.classList.remove('is-open');
       backdrop.classList.remove('is-open');
