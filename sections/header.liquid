@@ -74,6 +74,9 @@
           body:has(#mobile-menu.is-open) #site-header .cart-icon-img {
             filter: brightness(0) !important;
           }
+          #site-header.menu-is-open .header-logo-container {
+            display: none !important;
+          }
         }
         .cart-icon-img {
           filter: brightness(0);
@@ -232,7 +235,7 @@
       </nav>
 
       <!-- Logo Center -->
-      <div class="absolute left-1/2 -translate-x-1/2 flex items-center justify-center z-[70]">
+      <div class="header-logo-container absolute left-1/2 -translate-x-1/2 flex items-center justify-center z-[70]">
         <a href="{{ routes.root_url }}" class="flex items-center justify-center">
           <img
             id="header-logo"
