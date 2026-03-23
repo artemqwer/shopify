@@ -59,11 +59,11 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 
-<body class="antialiased bg-white text-neutral-900 min-h-screen flex flex-col relative max-w-[1920px] mx-auto">
+<body class="antialiased bg-white text-neutral-900 min-h-screen flex flex-col relative">
   {% section 'header' %}
-  
+
   <main class="flex-1 w-full relative" id="MainContent" role="main">
-    <div class="{% unless template.name == 'index' %}pt-[60px] md:pt-[102px] pb-[36px] md:pb-[120px]{% endunless %} max-w-[1920px] mx-auto w-full">
+    <div class="{% unless template.name == 'index' %}pt-[60px] md:pt-[102px] pb-[36px] md:pb-[120px]{% endunless %} w-full">
       {{ content_for_layout }}
     </div>
   </main>

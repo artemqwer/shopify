@@ -167,7 +167,7 @@
 
 {% if h == 'shipping-payment' %}
 <div class="w-full bg-white">
-  <div class="px-5 md:px-[160px] pt-10 pb-16" style="font-family: Montserrat, sans-serif;">
+  <div class="max-w-[1280px] mx-auto px-5 md:px-[20px] pt-10 pb-16" style="font-family: Montserrat, sans-serif;">
 
     <p class="text-[15px] text-[#111] leading-[1.65] mb-8">{{ 'shipping.intro' | t }}</p>
 
@@ -231,7 +231,7 @@
 {% elsif h == 'about-us' %}
 <div class="w-full bg-white">
 
-  <div class="px-5 md:px-[160px] pt-10 pb-8">
+  <div class="max-w-[1280px] mx-auto px-5 md:px-[20px] pt-10 pb-8">
     <h1 class="text-[26px] font-bold text-[#111] mb-7 leading-tight" style="font-family: Montserrat, sans-serif;">
       {{ 'about.title' | t }}
     </h1>
@@ -246,7 +246,7 @@
     <img src="{{ 'product-image-1.png' | asset_url }}" alt="{{ 'about.title' | t }}" width="800" height="600" class="w-full object-cover" loading="lazy" />
   </div>
 
-  <div class="px-5 md:px-[160px] pb-8">
+  <div class="max-w-[1280px] mx-auto px-5 md:px-[20px] pb-8">
     <div class="flex flex-col gap-5">
       <p class="text-[15px] font-normal text-[#111] leading-[1.65]" style="font-family: Montserrat, sans-serif;">{{ 'about.p4' | t }}</p>
       <p class="text-[15px] font-normal text-[#111] leading-[1.65]" style="font-family: Montserrat, sans-serif;">{{ 'about.p5' | t }}</p>
@@ -334,7 +334,7 @@
 
 {% assign thumbs_arr = img_thumbs | split: ',' %}
 
-<div class="w-full max-w-[1920px] mx-auto px-4 md:px-[160px] pt-[12px] pb-[64px]"
+<div class="w-full max-w-[1280px] mx-auto px-4 md:px-[20px] pt-[12px] pb-[64px]"
      {% if request.locale.iso_code == 'he' %}dir="rtl"{% endif %}>
 
   <!-- Breadcrumbs -->
