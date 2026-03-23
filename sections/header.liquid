@@ -104,6 +104,13 @@
             visibility: hidden !important;
           }
         }
+        .scrollbar-hide::-webkit-scrollbar {
+          display: none;
+        }
+        .scrollbar-hide {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
       </style>
 
       <!-- Desktop Left Navigation -->
@@ -420,17 +427,17 @@
           <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1" stroke-linecap="round"/>
         </svg>
       </button>
-      <div id="recommended-section" class="grid grid-cols-3 gap-2">
-        <a href="{{ routes.search_url }}?view=demo&product=leopard-print-scarf" class="block">
-          <img src="{{ 'product-image-1.png' | asset_url }}" alt="Product" class="w-full aspect-[3/4] object-cover"/>
+      <div id="recommended-section" class="flex space-x-3 overflow-x-auto scrollbar-hide -mx-[20px] px-[20px]">
+        <a href="{{ routes.search_url }}?view=demo&product=leopard-print-scarf" class="flex-shrink-0 w-[148px] block">
+          <img src="{{ 'product-image-1.png' | asset_url }}" alt="Product" class="w-[148px] h-[203px] object-cover"/>
           <p class="text-[11px] mt-1" style="font-family: Montserrat, sans-serif;">{{ 'products.product_1' | t }}</p>
         </a>
-        <a href="{{ routes.search_url }}?view=demo&product=vintage-scarf" class="block">
-          <img src="{{ 'product-image-4.png' | asset_url }}" alt="Product" class="w-full aspect-[3/4] object-cover"/>
+        <a href="{{ routes.search_url }}?view=demo&product=vintage-scarf" class="flex-shrink-0 w-[148px] block">
+          <img src="{{ 'product-image-4.png' | asset_url }}" alt="Product" class="w-[148px] h-[203px] object-cover"/>
           <p class="text-[11px] mt-1" style="font-family: Montserrat, sans-serif;">{{ 'products.product_4' | t }}</p>
         </a>
-        <a href="{{ routes.search_url }}?view=demo&product=pink-scarf" class="block">
-          <img src="{{ 'product-image-3.png' | asset_url }}" alt="Product" class="w-full aspect-[3/4] object-cover"/>
+        <a href="{{ routes.search_url }}?view=demo&product=pink-scarf" class="flex-shrink-0 w-[148px] block">
+          <img src="{{ 'product-image-3.png' | asset_url }}" alt="Product" class="w-[148px] h-[203px] object-cover"/>
           <p class="text-[11px] mt-1" style="font-family: Montserrat, sans-serif;">{{ 'products.product_3' | t }}</p>
         </a>
       </div>
@@ -448,15 +455,15 @@
           <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1" stroke-linecap="round"/>
         </svg>
       </button>
-      <div id="unpacking-section" class="grid grid-cols-3 gap-2">
-        <div class="block">
-          <img src="{{ 'product-image-3.png' | asset_url }}" alt="Unpacking" class="w-full aspect-[3/4] object-cover"/>
+      <div id="unpacking-section" class="flex space-x-3 overflow-x-auto scrollbar-hide -mx-[20px] px-[20px]">
+        <div class="flex-shrink-0 w-[148px] block">
+          <img src="{{ 'product-image-3.png' | asset_url }}" alt="Unpacking" class="w-[148px] h-[203px] object-cover"/>
         </div>
-        <div class="block">
-          <img src="{{ 'product-image-5.png' | asset_url }}" alt="Unpacking" class="w-full aspect-[3/4] object-cover"/>
+        <div class="flex-shrink-0 w-[148px] block">
+          <img src="{{ 'product-image-5.png' | asset_url }}" alt="Unpacking" class="w-[148px] h-[203px] object-cover"/>
         </div>
-        <div class="block">
-          <img src="{{ 'product-image-6.png' | asset_url }}" alt="Unpacking" class="w-full aspect-[3/4] object-cover"/>
+        <div class="flex-shrink-0 w-[148px] block">
+          <img src="{{ 'product-image-6.png' | asset_url }}" alt="Unpacking" class="w-[148px] h-[203px] object-cover"/>
         </div>
       </div>
     </div>
