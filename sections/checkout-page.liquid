@@ -206,7 +206,7 @@
   {% assign txt_subtotal    = 'סכום ביניים' %}
   {% assign txt_payment     = 'תשלום' %}
   {% assign txt_card_gpay   = 'כרטיס אשראי, Google Pay' %}
-  {% assign txt_cod         = 'תשלום במזומן במועד האספקה' %}
+
   {% assign txt_shipping    = 'משלוח' %}
   {% assign txt_nova        = 'נובה פושטה' %}
   {% assign txt_total       = 'סך הכל לתשלום' %}
@@ -240,7 +240,7 @@
   {% assign txt_subtotal    = 'Проміжний підсумок' %}
   {% assign txt_payment     = 'Спосіб оплати' %}
   {% assign txt_card_gpay   = 'Оплата карткою, Google Pay' %}
-  {% assign txt_cod         = 'Оплата при отриманні' %}
+
   {% assign txt_shipping    = 'Доставка' %}
   {% assign txt_nova        = 'Нова пошта' %}
   {% assign txt_total       = 'До сплати' %}
@@ -274,7 +274,7 @@
   {% assign txt_subtotal    = 'Sous-total' %}
   {% assign txt_payment     = 'Méthode de paiement' %}
   {% assign txt_card_gpay   = 'Carte, Google Pay' %}
-  {% assign txt_cod         = 'Paiement à la livraison' %}
+
   {% assign txt_shipping    = 'Livraison' %}
   {% assign txt_nova        = 'Nova Poshta' %}
   {% assign txt_total       = 'Total à payer' %}
@@ -308,7 +308,7 @@
   {% assign txt_subtotal    = 'Subtotal' %}
   {% assign txt_payment     = 'Payment Method' %}
   {% assign txt_card_gpay   = 'Card payment, Google Pay' %}
-  {% assign txt_cod         = 'Cash on delivery' %}
+
   {% assign txt_shipping    = 'Shipping' %}
   {% assign txt_nova        = 'Nova Poshta' %}
   {% assign txt_total       = 'Total to pay' %}
@@ -485,13 +485,9 @@
             <input type="radio" name="payment_method" value="applepay" class="chk-radio-box" checked>
             <img src="{{ 'apple-pay.svg' | asset_url }}" width="28" height="14" alt="Apple Pay">
           </label>
-          <label class="flex items-center gap-3 cursor-pointer">
+          <label class="flex items-center gap-3 cursor-pointer border-b border-[#e5e5e5] pb-5">
             <input type="radio" name="payment_method" value="card" class="chk-radio-box">
             <span class="text-[12px] text-[#555]">{{ txt_card_gpay }}</span>
-          </label>
-          <label class="flex items-center gap-3 cursor-pointer border-b border-[#e5e5e5] pb-5">
-            <input type="radio" name="payment_method" value="cod" class="chk-radio-box">
-            <span class="text-[12px] text-[#555]">{{ txt_cod }}</span>
           </label>
         </div>
 
