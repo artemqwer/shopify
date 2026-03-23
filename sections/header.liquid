@@ -512,12 +512,12 @@
       </a>
 
       <!-- Language Selector -->
-      <div class="mt-1">
-        {% form 'localization', class: 'flex flex-col items-start gap-2' %}
+      <div class="mt-0">
+        {% form 'localization', class: 'flex flex-col items-start gap-[20px]' %}
           <button
             type="button"
             onclick="(function(){var list=document.getElementById('mobile-menu-lang-list');var caret=document.getElementById('mobile-lang-caret');var isOpen=!list.classList.contains('hidden');list.classList.toggle('hidden',isOpen);caret.style.transform=isOpen?'':'rotate(180deg)';})()"
-            class="flex items-center gap-2 text-[14px] font-light text-[#e61a7a] focus:outline-none leading-none tracking-[0.03em]"
+            class="flex items-center justify-between w-[68px] h-[24px] text-[20px] font-light text-[#e61a7a] focus:outline-none leading-none tracking-[0.05em]"
           >
             {% case request.locale.iso_code %}
               {% when 'en' -%}
