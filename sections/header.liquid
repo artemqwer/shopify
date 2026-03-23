@@ -74,9 +74,6 @@
           body:has(#mobile-menu.is-open) #site-header .cart-icon-img {
             filter: brightness(0) !important;
           }
-          #site-header.menu-is-open .header-logo-container {
-            display: none !important;
-          }
         }
         .cart-icon-img {
           filter: brightness(0);
@@ -402,18 +399,8 @@
       dir="rtl"
     {% endif %}
   >
-    <!-- Menu top bar: logo only (burger stays in header, lifted above via JS) -->
-    <div class="flex items-center justify-center h-[60px]">
-      <a href="{{ routes.root_url }}">
-        <img
-          src="{{ 'logo-image.svg' | asset_url }}"
-          alt="Ester Wugman Logo"
-          width="80"
-          height="39"
-          class="w-[80px] h-auto object-contain"
-        >
-      </a>
-    </div>
+    <!-- Spacing for fixed header -->
+    <div class="h-[60px]"></div>
 
     <!-- Recommended products -->
     <div class="pl-[32px] pr-[20px] mb-6">
