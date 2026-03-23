@@ -100,7 +100,8 @@
       <nav class="hidden md:flex items-center flex-1 space-x-12 rtl:space-x-reverse">
         <a
           href="{{ routes.root_url }}"
-          class="text-[14px] font-medium tracking-widest text-gray-900 uppercase hover:text-[#d62873] transition-colors"
+          class="text-[14px] font-normal tracking-widest text-gray-900 uppercase hover:text-[#d62873] transition-colors"
+          style="font-family: Montserrat, sans-serif;"
         >
           {{ 'header.home' | t }}
         </a>
@@ -108,7 +109,8 @@
         <div class="relative group" id="catalog-nav-group">
           <a
             href="{{ routes.all_products_collection_url }}"
-            class="flex items-center text-[14px] font-medium tracking-widest text-gray-900 uppercase hover:text-[#d62873] transition-colors py-8"
+            class="flex items-center text-[14px] font-normal tracking-widest text-gray-900 uppercase hover:text-[#d62873] transition-colors py-8"
+            style="font-family: Montserrat, sans-serif;"
           >
             {{ 'header.catalog' | t }}
             <svg
@@ -213,9 +215,10 @@
         <a
           href="{{ routes.search_url }}?view=popular"
           class="
-            text-[14px] font-medium tracking-widest uppercase transition-colors
+            text-[14px] font-normal tracking-widest uppercase transition-colors
             {% if template.suffix == 'popular' or request.query_string contains 'view=popular' %}text-[#e61a7a]{% else %}text-gray-900 hover:text-[#e61a7a]{% endif %}
           "
+          style="font-family: Montserrat, sans-serif;"
         >
           {{ 'header.popular' | t }}
         </a>
@@ -245,7 +248,8 @@
             id="lang-btn-desktop"
             onclick="toggleLangMenu()"
             aria-expanded="false"
-            class="flex items-center gap-[5px] text-[13px] font-medium tracking-widest text-gray-900 uppercase hover:text-[#e61a7a] transition-colors py-8 select-none"
+            class="flex items-center gap-[5px] text-[13px] font-normal tracking-widest text-gray-900 uppercase hover:text-[#e61a7a] transition-colors py-8 select-none"
+            style="font-family: Montserrat, sans-serif;"
           >
             {% if request.locale.iso_code == 'he' -%}
               עב
@@ -282,7 +286,7 @@
                 name="locale_code"
                 value="en"
                 class="
-                  text-left rtl:text-right text-[13px] tracking-widest uppercase font-medium leading-none transition-colors
+                  text-left rtl:text-right text-[13px] tracking-widest uppercase font-normal leading-none transition-colors
                   {% if request.locale.iso_code == 'en' %}text-[#e61a7a]{% else %}text-gray-800 hover:text-[#e61a7a]{% endif %}
                 "
               >
@@ -293,7 +297,7 @@
                 name="locale_code"
                 value="uk"
                 class="
-                  text-left rtl:text-right text-[13px] tracking-widest uppercase font-medium leading-none transition-colors
+                  text-left rtl:text-right text-[13px] tracking-widest uppercase font-normal leading-none transition-colors
                   {% if request.locale.iso_code == 'uk' %}text-[#e61a7a]{% else %}text-gray-800 hover:text-[#e61a7a]{% endif %}
                 "
               >
@@ -304,7 +308,7 @@
                 name="locale_code"
                 value="fr"
                 class="
-                  text-left rtl:text-right text-[13px] tracking-widest uppercase font-medium leading-none transition-colors
+                  text-left rtl:text-right text-[13px] tracking-widest uppercase font-normal leading-none transition-colors
                   {% if request.locale.iso_code == 'fr' %}text-[#e61a7a]{% else %}text-gray-800 hover:text-[#e61a7a]{% endif %}
                 "
               >
@@ -315,7 +319,7 @@
                 name="locale_code"
                 value="he"
                 class="
-                  text-left text-[15px] font-medium leading-none transition-colors
+                  text-left text-[15px] font-normal leading-none transition-colors
                   {% if request.locale.iso_code == 'he' %}text-[#e61a7a]{% else %}text-gray-800 hover:text-[#e61a7a]{% endif %}
                 "
               >
@@ -328,7 +332,8 @@
         <!-- Search button (desktop text) -->
         <button
           type="button"
-          class="text-[14px] font-medium tracking-widest text-gray-900 uppercase hover:text-[#d62873] transition-colors hidden md:block"
+          class="text-[14px] font-normal tracking-widest text-gray-900 uppercase hover:text-[#d62873] transition-colors hidden md:block"
+          style="font-family: Montserrat, sans-serif;"
           onclick="window.location='{{ routes.root_url | append: '/search' | replace: '//', '/' }}'"
         >
           {{ 'header.search' | t }}
@@ -346,7 +351,8 @@
         <!-- Cart trigger -->
         <button
           type="button"
-          class="header-mobile-icon text-[14px] font-medium tracking-widest text-gray-900 uppercase hover:text-[#d62873] transition-colors flex items-center relative"
+          class="header-mobile-icon text-[14px] font-normal tracking-widest text-gray-900 uppercase hover:text-[#d62873] transition-colors flex items-center relative"
+          style="font-family: Montserrat, sans-serif;"
           data-drawer-trigger="cart-drawer"
         >
           <span class="hidden md:inline">{{ 'header.cart' | t }}</span>
