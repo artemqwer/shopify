@@ -7,7 +7,7 @@
 
 <header
   id="site-header"
-  class="fixed top-0 w-full z-[60] transition-all duration-300 {% if template.name == 'index' %}bg-transparent header-transparent md:bg-white{% else %}bg-white{% endif %} text-gray-900"
+  class="fixed top-0 w-full z-50 transition-all duration-300 {% if template.name == 'index' %}bg-transparent header-transparent md:bg-white{% else %}bg-white{% endif %} text-gray-900"
   style="box-shadow: none !important; border: none !important;"
 >
   <div class="w-full max-w-[1280px] mx-auto px-[20px] header-desktop-padding">
@@ -66,16 +66,6 @@
           }
           #site-header.header-transparent .cart-icon-img {
             filter: brightness(0) invert(1);
-          }
-          /* Force white background when menu is open */
-          #site-header.menu-open-bg {
-            background-color: #ffffff !important;
-          }
-          #site-header.menu-open-bg .header-mobile-icon {
-            color: #111827 !important;
-          }
-          #site-header.menu-open-bg .cart-icon-img {
-            filter: brightness(0) !important;
           }
         }
         .cart-icon-img {
@@ -390,11 +380,23 @@
   <!-- Mobile Menu (full screen overlay) -->
   <div
     id="mobile-menu"
-    class="md:hidden hide-on-desktop fixed inset-0 bg-white z-[55] overflow-y-auto pt-[57px]"
+    class="md:hidden hide-on-desktop fixed inset-0 bg-white z-[55]"
     {% if request.locale.iso_code == 'he' %}
       dir="rtl"
     {% endif %}
   >
+    <!-- Menu top bar: logo only (burger stays in header, lifted above via JS) -->
+    <div class="flex items-center justify-center h-[60px]">
+      <a href="{{ routes.root_url }}">
+        <img
+          src="{{ 'logo-image.svg' | asset_url }}"
+          alt="Ester Wugman Logo"
+          width="80"
+          height="39"
+          class="w-[80px] h-auto object-contain"
+        >
+      </a>
+    </div>
 
     <!-- Recommended products -->
     <div class="px-[20px] mb-6">
@@ -451,53 +453,53 @@
 
     <!-- Navigation menu -->
     <nav
-      class="flex flex-col px-[20px] pt-0 pb-6 gap-3 {% if request.locale.iso_code == 'he' %}items-start text-right{% else %}items-start text-left{% endif %}"
+      class="flex flex-col px-5 pt-6 pb-10 gap-2 {% if request.locale.iso_code == 'he' %}items-start text-right{% else %}items-start text-left{% endif %}"
       style="font-family: Montserrat, sans-serif;"
     >
       <a
         href="{{ routes.all_products_collection_url }}"
-        class="text-[16px] font-normal text-gray-900 leading-none hover:text-[#d62873] transition-colors"
+        class="text-[14px] font-light text-gray-900 leading-none tracking-[0.03em] hover:text-[#d62873] transition-colors"
       >
-        Catalog
+        {{- 'header.catalog' | t -}}
       </a>
       <a
         href="{{ routes.root_url }}"
-        class="text-[16px] font-normal text-gray-900 leading-none hover:text-[#d62873] transition-colors"
+        class="text-[14px] font-light text-gray-900 leading-none tracking-[0.03em] hover:text-[#d62873] transition-colors"
       >
-        Home
+        {{- 'header.home' | t -}}
       </a>
       <a
         href="{{ routes.root_url | append: '/pages/about-us' | replace: '//', '/' }}"
-        class="text-[16px] font-normal text-gray-900 leading-none hover:text-[#d62873] transition-colors"
+        class="text-[14px] font-light text-gray-900 leading-none tracking-[0.03em] hover:text-[#d62873] transition-colors"
       >
-        About us
+        {{- 'footer.about' | t -}}
       </a>
       <a
-        href="{{ routes.root_url | append: '/pages/public-offer' | replace: '//', '/' }}"
-        class="text-[16px] font-normal text-gray-900 leading-none hover:text-[#d62873] transition-colors"
+        href="{{ routes.root_url | append: '/pages/returns' | replace: '//', '/' }}"
+        class="text-[14px] font-light text-gray-900 leading-none tracking-[0.03em] hover:text-[#d62873] transition-colors"
       >
-        Public Offer
+        {{- 'footer.public_offer' | t -}}
       </a>
       <a
-        href="{{ routes.root_url | append: '/pages/privacy' | replace: '//', '/' }}"
-        class="text-[16px] font-normal text-gray-900 leading-none hover:text-[#d62873] transition-colors"
+        href="{{ routes.root_url | append: '/pages/contacts' | replace: '//', '/' }}"
+        class="text-[14px] font-light text-gray-900 leading-none tracking-[0.03em] hover:text-[#d62873] transition-colors"
       >
-        Privacy Policy
+        {{- 'footer.privacy' | t -}}
       </a>
       <a
-        href="{{ routes.root_url | append: '/pages/shipping-payment' | replace: '//', '/' }}"
-        class="text-[16px] font-normal text-gray-900 leading-none hover:text-[#d62873] transition-colors"
+        href="{{ routes.root_url | append: '/pages/shipping' | replace: '//', '/' }}"
+        class="text-[14px] font-light text-gray-900 leading-none tracking-[0.03em] hover:text-[#d62873] transition-colors"
       >
-        Shipping & Payment
+        {{- 'footer.shipping' | t -}}
       </a>
 
       <!-- Language Selector -->
-      <div class="mt-4">
+      <div class="mt-1">
         {% form 'localization', class: 'flex flex-col items-start gap-2' %}
           <button
             type="button"
             onclick="(function(){var list=document.getElementById('mobile-menu-lang-list');var caret=document.getElementById('mobile-lang-caret');var isOpen=!list.classList.contains('hidden');list.classList.toggle('hidden',isOpen);caret.style.transform=isOpen?'':'rotate(180deg)';})()"
-            class="flex items-center gap-2 text-[16px] font-normal uppercase text-[#e61a7a] focus:outline-none leading-none"
+            class="flex items-center gap-2 text-[14px] font-light text-[#e61a7a] focus:outline-none leading-none tracking-[0.03em]"
           >
             {% case request.locale.iso_code %}
               {% when 'en' -%}
@@ -518,13 +520,13 @@
               <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </button>
-          <div id="mobile-menu-lang-list" class="flex items-center gap-3 hidden">
+          <div id="mobile-menu-lang-list" class="flex flex-col items-start gap-2 hidden">
             {% if request.locale.iso_code != 'uk' %}
               <button
                 type="submit"
                 name="locale_code"
                 value="uk"
-                class="text-[16px] font-normal uppercase text-gray-400 hover:text-gray-900 transition-colors leading-none"
+                class="text-[14px] font-light text-gray-900 hover:text-[#e61a7a] transition-colors leading-none tracking-[0.03em]"
               >
                 UA
               </button>
@@ -534,7 +536,7 @@
                 type="submit"
                 name="locale_code"
                 value="en"
-                class="text-[16px] font-normal uppercase text-gray-400 hover:text-gray-900 transition-colors leading-none"
+                class="text-[14px] font-light text-gray-900 hover:text-[#e61a7a] transition-colors leading-none tracking-[0.03em]"
               >
                 ENG
               </button>
@@ -544,7 +546,7 @@
                 type="submit"
                 name="locale_code"
                 value="fr"
-                class="text-[16px] font-normal uppercase text-gray-400 hover:text-gray-900 transition-colors leading-none"
+                class="text-[14px] font-light text-gray-900 hover:text-[#e61a7a] transition-colors leading-none tracking-[0.03em]"
               >
                 FR
               </button>
@@ -554,7 +556,7 @@
                 type="submit"
                 name="locale_code"
                 value="he"
-                class="text-[17px] font-normal text-gray-400 hover:text-gray-900 transition-colors leading-none"
+                class="text-[14px] font-light text-gray-900 hover:text-[#e61a7a] transition-colors leading-none tracking-[0.03em]"
               >
                 עב
               </button>
@@ -608,7 +610,6 @@
     function toggleMobileMenu(btn) {
       const menu = document.getElementById('mobile-menu');
       const backdrop = document.getElementById('mobile-menu-backdrop');
-      const header = document.getElementById('site-header');
       const isOpen = menu.classList.contains('is-open');
       if (isOpen) {
         closeMobileMenu();
@@ -616,21 +617,35 @@
         btn.classList.add('menu-open');
         menu.classList.add('is-open');
         backdrop.classList.add('is-open');
-        header.classList.add('menu-open-bg');
         document.body.style.overflow = 'hidden';
+        // Lift burger above the full-screen menu (z-55)
+        btn.style.position = 'fixed';
+        btn.style.zIndex = '60';
+        btn.style.top = '18px';
+        var isRtl = document.documentElement.dir === 'rtl';
+        if (isRtl) {
+          btn.style.right = '16px';
+          btn.style.left = '';
+        } else {
+          btn.style.left = '16px';
+          btn.style.right = '';
+        }
       }
     }
     function closeMobileMenu() {
       const menu = document.getElementById('mobile-menu');
       const backdrop = document.getElementById('mobile-menu-backdrop');
-      const header = document.getElementById('site-header');
       const btn = document.querySelector('.mobile-menu-toggle');
       if (btn) {
         btn.classList.remove('menu-open');
+        btn.style.position = '';
+        btn.style.zIndex = '';
+        btn.style.top = '';
+        btn.style.left = '';
+        btn.style.right = '';
       }
       menu.classList.remove('is-open');
       backdrop.classList.remove('is-open');
-      header.classList.remove('menu-open-bg');
       document.body.style.overflow = '';
     }
     window.toggleMobileMenu = toggleMobileMenu;
