@@ -67,6 +67,16 @@
           #site-header.header-transparent .cart-icon-img {
             filter: brightness(0) invert(1);
           }
+          /* Force white background when menu is open */
+          #site-header.menu-open-bg {
+            background-color: #ffffff !important;
+          }
+          #site-header.menu-open-bg .header-mobile-icon {
+            color: #111827 !important;
+          }
+          #site-header.menu-open-bg .cart-icon-img {
+            filter: brightness(0) !important;
+          }
         }
         .cart-icon-img {
           filter: brightness(0);
@@ -380,48 +390,11 @@
   <!-- Mobile Menu (full screen overlay) -->
   <div
     id="mobile-menu"
-    class="md:hidden hide-on-desktop fixed inset-0 bg-white z-[55] overflow-y-auto"
+    class="md:hidden hide-on-desktop fixed inset-0 bg-white z-[55] overflow-y-auto pt-[57px]"
     {% if request.locale.iso_code == 'he' %}
       dir="rtl"
     {% endif %}
   >
-    <!-- Close button -->
-    <button
-      type="button"
-      onclick="closeMobileMenu()"
-      class="absolute top-[20px] {% if request.locale.iso_code == 'he' %}right-[20px]{% else %}left-[20px]{% endif %} z-10 p-2"
-    >
-      <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-        <path d="M18 6L6 18M6 6l12 12"/>
-      </svg>
-    </button>
-
-    <!-- Menu top bar: logo and search/cart icons -->
-    <div class="flex items-center justify-between h-[60px] px-[20px]">
-      <div class="w-[24px]"></div>
-      <a href="{{ routes.root_url }}">
-        <img
-          src="{{ 'logo-image.svg' | asset_url }}"
-          alt="Ester Wugman Logo"
-          width="80"
-          height="39"
-          class="w-[80px] h-auto object-contain"
-        >
-      </a>
-      <div class="flex items-center gap-3">
-        <button type="button" onclick="window.location='{{ routes.root_url | append: '/search' | replace: '//', '/' }}'">
-          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-            <circle cx="11" cy="11" r="8"/>
-            <path d="M21 21l-4.35-4.35"/>
-          </svg>
-        </button>
-        <button type="button" data-drawer-trigger="cart-drawer">
-          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-            <path d="M9 2L7 6M17 2l2 4M3 6h18M5 6l2 14h10l2-14"/>
-          </svg>
-        </button>
-      </div>
-    </div>
 
     <!-- Recommended products -->
     <div class="px-[20px] mb-6">
@@ -635,6 +608,7 @@
     function toggleMobileMenu(btn) {
       const menu = document.getElementById('mobile-menu');
       const backdrop = document.getElementById('mobile-menu-backdrop');
+      const header = document.getElementById('site-header');
       const isOpen = menu.classList.contains('is-open');
       if (isOpen) {
         closeMobileMenu();
@@ -642,18 +616,21 @@
         btn.classList.add('menu-open');
         menu.classList.add('is-open');
         backdrop.classList.add('is-open');
+        header.classList.add('menu-open-bg');
         document.body.style.overflow = 'hidden';
       }
     }
     function closeMobileMenu() {
       const menu = document.getElementById('mobile-menu');
       const backdrop = document.getElementById('mobile-menu-backdrop');
+      const header = document.getElementById('site-header');
       const btn = document.querySelector('.mobile-menu-toggle');
       if (btn) {
         btn.classList.remove('menu-open');
       }
       menu.classList.remove('is-open');
       backdrop.classList.remove('is-open');
+      header.classList.remove('menu-open-bg');
       document.body.style.overflow = '';
     }
     window.toggleMobileMenu = toggleMobileMenu;
