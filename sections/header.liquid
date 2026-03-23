@@ -1,7 +1,27 @@
 {% schema %}
 {
   "name": "Header",
-  "settings": []
+  "settings": [
+    {
+      "type": "collection",
+      "id": "recommended_collection",
+      "label": "Recommended Products Collection",
+      "info": "Used in the mobile menu"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "unpacking_image",
+      "name": "Unpacking Media",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        }
+      ]
+    }
+  ]
 }
 {% endschema %}
 
@@ -415,18 +435,27 @@
         </svg>
       </button>
       <div id="recommended-section" class="flex space-x-3 overflow-x-auto scrollbar-hide -mr-[20px] pl-[32px] pr-0 snap-x snap-mandatory w-full">
-        <a href="{{ routes.search_url }}?view=demo&product=leopard-print-scarf" class="flex-shrink-0 w-[calc(50vw-22px)] block snap-start">
-          <img src="{{ 'product-image-1.png' | asset_url }}" alt="Product" class="w-full h-[203px] object-cover"/>
-          <p class="text-[11px] mt-1" style="font-family: Montserrat, sans-serif;">{{ 'products.product_1' | t }}</p>
-        </a>
-        <a href="{{ routes.search_url }}?view=demo&product=vintage-scarf" class="flex-shrink-0 w-[calc(50vw-22px)] block snap-start">
-          <img src="{{ 'product-image-4.png' | asset_url }}" alt="Product" class="w-full h-[203px] object-cover"/>
-          <p class="text-[11px] mt-1" style="font-family: Montserrat, sans-serif;">{{ 'products.product_4' | t }}</p>
-        </a>
-        <a href="{{ routes.search_url }}?view=demo&product=pink-scarf" class="flex-shrink-0 w-[calc(50vw-22px)] block snap-start">
-          <img src="{{ 'product-image-3.png' | asset_url }}" alt="Product" class="w-full h-[203px] object-cover"/>
-          <p class="text-[11px] mt-1" style="font-family: Montserrat, sans-serif;">{{ 'products.product_3' | t }}</p>
-        </a>
+        {% if section.settings.recommended_collection != blank %}
+          {% for product in section.settings.recommended_collection.products limit: 3 %}
+            <a href="{{ product.url }}" class="flex-shrink-0 w-[calc(50vw-22px)] block snap-start">
+              <img src="{{ product.featured_image | image_url: width: 600 }}" alt="{{ product.title | escape }}" class="w-full h-[203px] object-cover"/>
+              <p class="text-[11px] mt-1" style="font-family: Montserrat, sans-serif;">{{ product.title }}</p>
+            </a>
+          {% endfor %}
+        {% else %}
+          <a href="{{ routes.search_url }}?view=demo&product=leopard-print-scarf" class="flex-shrink-0 w-[calc(50vw-22px)] block snap-start">
+            <img src="{{ 'product-image-1.png' | asset_url }}" alt="Product" class="w-full h-[203px] object-cover"/>
+            <p class="text-[11px] mt-1" style="font-family: Montserrat, sans-serif;">{{ 'products.product_1' | t }}</p>
+          </a>
+          <a href="{{ routes.search_url }}?view=demo&product=vintage-scarf" class="flex-shrink-0 w-[calc(50vw-22px)] block snap-start">
+            <img src="{{ 'product-image-4.png' | asset_url }}" alt="Product" class="w-full h-[203px] object-cover"/>
+            <p class="text-[11px] mt-1" style="font-family: Montserrat, sans-serif;">{{ 'products.product_4' | t }}</p>
+          </a>
+          <a href="{{ routes.search_url }}?view=demo&product=pink-scarf" class="flex-shrink-0 w-[calc(50vw-22px)] block snap-start">
+            <img src="{{ 'product-image-3.png' | asset_url }}" alt="Product" class="w-full h-[203px] object-cover"/>
+            <p class="text-[11px] mt-1" style="font-family: Montserrat, sans-serif;">{{ 'products.product_3' | t }}</p>
+          </a>
+        {% endif %}
         <div class="flex-shrink-0 w-[32px]"></div>
       </div>
     </div>
@@ -444,15 +473,26 @@
         </svg>
       </button>
       <div id="unpacking-section" class="flex space-x-3 overflow-x-auto scrollbar-hide -mr-[20px] pl-[32px] pr-0 snap-x snap-mandatory w-full">
-        <div class="flex-shrink-0 w-[calc(50vw-22px)] block snap-start">
-          <img src="{{ 'IMG_9734 1(2).png' | asset_url }}" alt="Unpacking" class="w-full h-[203px] object-cover"/>
-        </div>
-        <div class="flex-shrink-0 w-[calc(50vw-22px)] block snap-start">
-          <img src="{{ 'IMG_9734 1.svg' | asset_url }}" alt="Unpacking" class="w-full h-[203px] object-cover"/>
-        </div>
-        <div class="flex-shrink-0 w-[calc(50vw-22px)] block snap-start">
-          <img src="{{ 'IMG_9734 1(1).svg' | asset_url }}" alt="Unpacking" class="w-full h-[203px] object-cover"/>
-        </div>
+        {% assign unpacking_blocks = section.blocks | where: 'type', 'unpacking_image' %}
+        {% if unpacking_blocks.size > 0 %}
+          {% for block in unpacking_blocks %}
+            <div class="flex-shrink-0 w-[calc(50vw-22px)] block snap-start" {{ block.shopify_attributes }}>
+              {% if block.settings.image != blank %}
+                <img src="{{ block.settings.image | image_url: width: 600 }}" alt="Unpacking" class="w-full h-[203px] object-cover"/>
+              {% endif %}
+            </div>
+          {% endfor %}
+        {% else %}
+          <div class="flex-shrink-0 w-[calc(50vw-22px)] block snap-start">
+            <img src="{{ 'IMG_9734 1(2).png' | asset_url }}" alt="Unpacking" class="w-full h-[203px] object-cover"/>
+          </div>
+          <div class="flex-shrink-0 w-[calc(50vw-22px)] block snap-start">
+            <img src="{{ 'IMG_9734 1.svg' | asset_url }}" alt="Unpacking" class="w-full h-[203px] object-cover"/>
+          </div>
+          <div class="flex-shrink-0 w-[calc(50vw-22px)] block snap-start">
+            <img src="{{ 'IMG_9734 1(1).svg' | asset_url }}" alt="Unpacking" class="w-full h-[203px] object-cover"/>
+          </div>
+        {% endif %}
         <div class="flex-shrink-0 w-[32px]"></div>
       </div>
     </div>

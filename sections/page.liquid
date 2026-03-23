@@ -1,7 +1,22 @@
 {% schema %}
 {
   "name": "Page",
-  "settings": []
+  "settings": [
+    {
+      "type": "header",
+      "content": "About Us Page"
+    },
+    {
+      "type": "image_picker",
+      "id": "about_image_1",
+      "label": "About Us Image 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "about_image_2",
+      "label": "About Us Image 2"
+    }
+  ]
 }
 {% endschema %}
 
@@ -243,7 +258,11 @@
   </div>
 
   <div class="w-full mb-8">
-    <img src="{{ 'product-image-1.png' | asset_url }}" alt="{{ 'about.title' | t }}" width="800" height="600" class="w-full object-cover" loading="lazy" />
+    {% if section.settings.about_image_1 != blank %}
+      <img src="{{ section.settings.about_image_1 | image_url: width: 1280 }}" alt="{{ section.settings.about_image_1.alt | escape | default: 'About Us' }}" width="800" height="600" class="w-full object-cover" loading="lazy" />
+    {% else %}
+      <img src="{{ 'product-image-1.png' | asset_url }}" alt="{{ 'about.title' | t }}" width="800" height="600" class="w-full object-cover" loading="lazy" />
+    {% endif %}
   </div>
 
   <div class="max-w-[1280px] mx-auto px-5 md:px-[20px] pb-8">
@@ -254,7 +273,11 @@
   </div>
 
   <div class="w-full pb-16">
-    <img src="{{ 'product-image-4.png' | asset_url }}" alt="{{ 'about.title' | t }}" width="800" height="600" class="w-full object-cover" loading="lazy" />
+    {% if section.settings.about_image_2 != blank %}
+      <img src="{{ section.settings.about_image_2 | image_url: width: 1280 }}" alt="{{ section.settings.about_image_2.alt | escape | default: 'About Us' }}" width="800" height="600" class="w-full object-cover" loading="lazy" />
+    {% else %}
+      <img src="{{ 'product-image-4.png' | asset_url }}" alt="{{ 'about.title' | t }}" width="800" height="600" class="w-full object-cover" loading="lazy" />
+    {% endif %}
   </div>
 
 </div>

@@ -6,6 +6,56 @@
       "type": "video",
       "id": "mobile_video",
       "label": "Mobile Hero Video (mp4 recommended)"
+    },
+    {
+      "type": "header",
+      "content": "Mobile Links"
+    },
+    {
+      "type": "text",
+      "id": "link_1_text",
+      "label": "Link 1 Text",
+      "default": "For sea/pool"
+    },
+    {
+      "type": "url",
+      "id": "link_1_url",
+      "label": "Link 1 URL"
+    },
+    {
+      "type": "text",
+      "id": "link_2_text",
+      "label": "Link 2 Text",
+      "default": "Classic"
+    },
+    {
+      "type": "url",
+      "id": "link_2_url",
+      "label": "Link 2 URL"
+    },
+    {
+      "type": "header",
+      "content": "Desktop Images"
+    },
+    {
+      "type": "image_picker",
+      "id": "desktop_image_1",
+      "label": "Desktop Image 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "desktop_image_2",
+      "label": "Desktop Image 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "desktop_image_3",
+      "label": "Desktop Image 3"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero Section"
     }
   ]
 }
@@ -24,11 +74,11 @@
   </div>
 
   <div class="absolute inset-x-0 bottom-[12px] flex justify-center items-center gap-12 z-20">
-    <a href="{{ routes.all_products_collection_url }}" class="text-white opacity-90 border-b border-white transition-all text-center" style="font-family: Montserrat, sans-serif; font-weight: 300; font-size: 12px; line-height: 1; letter-spacing: 0.03em; text-transform: none;">
-      {{ 'hero.for_sea' | t }}
+    <a href="{{ section.settings.link_1_url | default: routes.all_products_collection_url }}" class="text-white opacity-90 border-b border-white transition-all text-center" style="font-family: Montserrat, sans-serif; font-weight: 300; font-size: 12px; line-height: 1; letter-spacing: 0.03em; text-transform: none;">
+      {{ section.settings.link_1_text | default: 'For sea/pool' }}
     </a>
-    <a href="{{ routes.all_products_collection_url }}" class="text-white opacity-90 border-b border-white transition-all text-center" style="font-family: Montserrat, sans-serif; font-weight: 300; font-size: 12px; line-height: 1; letter-spacing: 0.03em; text-transform: none;">
-      {{ 'hero.classic' | t }}
+    <a href="{{ section.settings.link_2_url | default: routes.all_products_collection_url }}" class="text-white opacity-90 border-b border-white transition-all text-center" style="font-family: Montserrat, sans-serif; font-weight: 300; font-size: 12px; line-height: 1; letter-spacing: 0.03em; text-transform: none;">
+      {{ section.settings.link_2_text | default: 'Classic' }}
     </a>
   </div>
 </section>
@@ -37,32 +87,26 @@
 <section class="hidden md:block w-full mb-[32px] md:mb-0 md:mt-[102px]">
   <div class="w-full 2xl:max-w-[1920px] 2xl:mx-auto">
     <div class="grid grid-cols-1 md:grid-cols-3 md:gap-0 w-full aspect-[390/500] md:aspect-auto md:h-[500px] xl:h-[600px] 2xl:h-[700px] overflow-hidden">
-        <div class="relative w-full h-full md:translate-x-[3px]">
-          <img
-            src="{{ 'hero-image-1.png' | asset_url }}" 
-            alt="Hero Image 1" 
-            width="600"
-            height="800"
-            class="absolute inset-0 w-full h-full object-cover"
-          />
+        <div class="relative w-full h-full md:translate-x-[3px] bg-gray-100">
+          {% if section.settings.desktop_image_1 != blank %}
+            <img src="{{ section.settings.desktop_image_1 | image_url: width: 800 }}" alt="{{ section.settings.desktop_image_1.alt | escape }}" width="600" height="800" class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+          {% else %}
+            <img src="{{ 'hero-image-1.png' | asset_url }}" alt="Hero Image 1" width="600" height="800" class="absolute inset-0 w-full h-full object-cover" />
+          {% endif %}
         </div>
-        <div class="relative hidden md:block w-full h-full">
-          <img 
-            src="{{ 'hero-image-2.png' | asset_url }}" 
-            alt="Hero Image 2" 
-            width="600"
-            height="800"
-            class="absolute inset-0 w-full h-full object-cover"
-          />
+        <div class="relative hidden md:block w-full h-full bg-gray-100">
+          {% if section.settings.desktop_image_2 != blank %}
+            <img src="{{ section.settings.desktop_image_2 | image_url: width: 800 }}" alt="{{ section.settings.desktop_image_2.alt | escape }}" width="600" height="800" class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+          {% else %}
+            <img src="{{ 'hero-image-2.png' | asset_url }}" alt="Hero Image 2" width="600" height="800" class="absolute inset-0 w-full h-full object-cover" />
+          {% endif %}
         </div>
-        <div class="relative hidden md:block w-full h-full md:-translate-x-[3px]">
-          <img
-            src="{{ 'hero-image-3.png' | asset_url }}" 
-            alt="Hero Image 3" 
-            width="600"
-            height="800"
-            class="absolute inset-0 w-full h-full object-cover"
-          />
+        <div class="relative hidden md:block w-full h-full md:-translate-x-[3px] bg-gray-100">
+          {% if section.settings.desktop_image_3 != blank %}
+            <img src="{{ section.settings.desktop_image_3 | image_url: width: 800 }}" alt="{{ section.settings.desktop_image_3.alt | escape }}" width="600" height="800" class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+          {% else %}
+            <img src="{{ 'hero-image-3.png' | asset_url }}" alt="Hero Image 3" width="600" height="800" class="absolute inset-0 w-full h-full object-cover" />
+          {% endif %}
         </div>
     </div>
   </div>
