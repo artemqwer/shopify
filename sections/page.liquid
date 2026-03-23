@@ -31,79 +31,12 @@
     transition: border-color 0.2s; outline: none;
   }
   .color-swatch.active, .color-swatch:hover { border-color: #222; }
-  .size-btn {
-    min-width: 40px; height: 40px; padding: 0 10px;
-    border: 1.5px solid #d1d1d1; font-size: 13px; cursor: pointer;
-    transition: border-color 0.2s, background 0.2s; background: transparent;
-    display: flex; align-items: center; justify-content: center;
-    font-family: var(--font-montserrat), Montserrat, sans-serif;
-  }
-  .size-btn.active { border-color: #DE2077 !important; background: #DE2077 !important; color: #fff !important; }
-  .size-btn:hover:not(.active) { border-color: #888; }
+
   .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
   .accordion-content.open { max-height: 600px; }
   .accordion-icon { transition: transform 0.3s; font-style: normal; }
 
-  /* ── Size Guide Modal ── */
-  #size-guide-overlay {
-    position: fixed; inset: 0; background: rgba(0,0,0,0.55);
-    z-index: 99990; display: none;
-    align-items: center; justify-content: center;
-    padding: 16px; overflow-y: auto;
-  }
-  #size-guide-overlay.active { display: flex; }
-  #size-guide-modal {
-    background: #fff; width: 100%; max-width: 860px;
-    position: relative; overflow: hidden; margin: auto;
-  }
-  #size-guide-modal .sg-close {
-    position: absolute; top: 16px;
-    background: none; border: none; cursor: pointer;
-    padding: 8px; z-index: 10; display: flex; align-items: center; justify-content: center;
-  }
-  #size-guide-overlay[dir="ltr"] .sg-close { right: 16px; }
-  #size-guide-overlay[dir="rtl"] .sg-close { left: 16px; }
-  #size-guide-modal .sg-body { display: flex; min-height: 420px; position: relative; }
-  #size-guide-modal .sg-left {
-    flex: 1; padding: 60px 40px 60px 60px;
-    display: flex; flex-direction: column; justify-content: center;
-  }
-  #size-guide-overlay[dir="rtl"] .sg-left { padding: 60px 60px 60px 40px; }
-  #size-guide-modal .sg-right {
-    width: 320px; flex-shrink: 0;
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    padding: 60px 40px;
-  }
-  #size-guide-modal .sg-right img { width: 100%; height: auto; display: block; mix-blend-mode: multiply; }
-  #size-guide-modal .sg-right-label {
-    text-align: center; color: #555; font-size: 11px;
-    font-weight: 500; letter-spacing: 0.05em; margin-bottom: 12px;
-    text-transform: uppercase;
-    font-family: var(--font-montserrat), Montserrat, sans-serif;
-  }
-  #size-guide-modal h2.sg-title {
-    font-size: 22px; font-weight: 600; letter-spacing: 0.04em;
-    text-transform: uppercase; color: #111; margin: 0 0 28px;
-    line-height: 1.2; font-family: var(--font-montserrat), Montserrat, sans-serif;
-  }
-  #size-guide-modal .sg-row {
-    border: 1px solid #ccc; padding: 14px 20px;
-    font-size: 15px; font-weight: 400; color: #111;
-    text-align: center; margin-bottom: 10px;
-    font-family: var(--font-montserrat), Montserrat, sans-serif; letter-spacing: 0.03em;
-  }
-  @media (max-width: 640px) {
-    #size-guide-modal .sg-body { flex-direction: column; min-height: unset; }
-    #size-guide-modal .sg-left { padding: 52px 24px 24px; align-items: flex-start; order: 1; }
-    #size-guide-overlay[dir="rtl"] .sg-left { padding: 52px 24px 24px; }
-    #size-guide-modal h2.sg-title { font-size: 16px; margin-bottom: 20px; }
-    #size-guide-modal .sg-row { font-size: 13px; padding: 12px 16px; }
-    #size-guide-modal .sg-right { width: 100%; padding: 0 24px 32px; order: 2; }
-    #size-guide-modal .sg-right-label { font-size: 10px; }
-    #size-guide-modal .sg-close { top: 10px; }
-    #size-guide-overlay[dir="ltr"] .sg-close { right: 10px; }
-    #size-guide-overlay[dir="rtl"] .sg-close { left: 10px; }
-  }
+
 
   /* ── Action Buttons ── */
   .btn-cart {
@@ -449,20 +382,7 @@
         <button class="color-swatch" style="background:#3d2b2b;" aria-label="Dark brown" onclick="swatchClick(this)"></button>
       </div>
 
-      <!-- Size selector -->
-      <div class="hidden md:flex items-center gap-3 mb-2">
-        <button class="size-btn" onclick="sizeClick(this)">S</button>
-        <button class="size-btn active" onclick="sizeClick(this)">M</button>
-        <button class="size-btn" onclick="sizeClick(this)">L</button>
-      </div>
 
-      <!-- Size guide -->
-      <div class="hidden md:block mb-7 text-right" {% if request.locale.iso_code == 'he' %}style="text-align:left"{% endif %}>
-        <button type="button" onclick="openSizeGuide()" class="text-[12px] text-[#888] underline hover:text-[#333] transition-colors bg-transparent border-none cursor-pointer p-0"
-           style="font-family: var(--font-montserrat), Montserrat, sans-serif;">
-          {{ txt_size_guide }}
-        </button>
-      </div>
 
       <!-- Action buttons -->
       <div class="flex flex-col gap-3 mb-8">
@@ -561,10 +481,7 @@
     });
   })();
 
-  function sizeClick(btn) {
-    document.querySelectorAll('.size-btn').forEach(function(b){ b.classList.remove('active'); });
-    btn.classList.add('active');
-  }
+
 
   function swatchClick(sw) {
     document.querySelectorAll('.color-swatch').forEach(function(s){ s.classList.remove('active'); });

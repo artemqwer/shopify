@@ -45,80 +45,7 @@
   .accordion-icon { transition: transform 0.3s; }
   .accordion-icon.open { transform: rotate(45deg); }
 
-  /* Size Guide Modal */
-  #size-guide-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.55);
-    z-index: 99990;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    padding: 16px;
-    overflow-y: auto;
-  }
-  #size-guide-overlay.active { display: flex; }
-  #size-guide-modal {
-    background: #fff; width: 100%; max-width: 860px;
-    position: relative; overflow: hidden;
-    margin: auto;
-  }
-  #size-guide-modal .sg-close {
-    position: absolute; top: 16px;
-    background: none; border: none; cursor: pointer;
-    padding: 8px; z-index: 10; display: flex; align-items: center; justify-content: center;
-  }
-  #size-guide-overlay[dir="ltr"] .sg-close { right: 16px; }
-  #size-guide-overlay[dir="rtl"] .sg-close { left: 16px; }
 
-  #size-guide-modal .sg-body { display: flex; min-height: 420px; position: relative; }
-  #size-guide-modal .sg-left {
-    flex: 1; padding: 60px 40px 60px 60px;
-    display: flex; flex-direction: column; justify-content: center;
-  }
-  #size-guide-overlay[dir="rtl"] .sg-left { padding: 60px 60px 60px 40px; }
-  #size-guide-modal .sg-right {
-    width: 320px; flex-shrink: 0;
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    padding: 60px 40px;
-  }
-  #size-guide-modal .sg-right img {
-    width: 100%; height: auto; display: block;
-    mix-blend-mode: multiply;
-  }
-  #size-guide-modal .sg-right-label {
-    text-align: center; color: #555; font-size: 11px;
-    font-weight: 500; letter-spacing: 0.05em; margin-bottom: 12px;
-    text-transform: uppercase;
-    font-family: var(--font-montserrat), Montserrat, sans-serif;
-  }
-  #size-guide-modal h2.sg-title {
-    font-size: 22px; font-weight: 600; letter-spacing: 0.04em;
-    text-transform: uppercase; color: #111; margin: 0 0 28px;
-    line-height: 1.2; font-family: var(--font-montserrat), Montserrat, sans-serif;
-  }
-  #size-guide-modal .sg-row {
-    border: 1px solid #ccc; padding: 14px 20px;
-    font-size: 15px; font-weight: 400; color: #111;
-    text-align: center; margin-bottom: 10px;
-    font-family: var(--font-montserrat), Montserrat, sans-serif; letter-spacing: 0.03em;
-  }
-  @media (max-width: 640px) {
-    #size-guide-modal .sg-body { flex-direction: column; min-height: unset; }
-    #size-guide-modal .sg-left {
-      padding: 52px 24px 24px;
-      align-items: flex-start;
-      order: 1;
-    }
-    #size-guide-overlay[dir="rtl"] .sg-left { padding: 52px 24px 24px; }
-    #size-guide-modal h2.sg-title { font-size: 16px; margin-bottom: 20px; }
-    #size-guide-modal .sg-row { font-size: 13px; padding: 12px 16px; }
-    #size-guide-modal .sg-right { width: 100%; padding: 0 24px 32px; order: 2; }
-    #size-guide-modal .sg-right-label { font-size: 10px; }
-    #size-guide-modal .sg-close { top: 10px; }
-    #size-guide-overlay[dir="ltr"] .sg-close { right: 10px; }
-    #size-guide-overlay[dir="rtl"] .sg-close { left: 10px; }
-  }
 
   /* Buttons */
   .btn-cart {
@@ -426,27 +353,16 @@
         {{ ui_desc }}
       </p>
 
-      <!-- Color swatches + size guide link -->
-      <div class="flex items-center justify-between mb-4">
+      <!-- Color swatches -->
+      <div class="flex items-center justify-between mb-7">
         <div class="flex items-center gap-3">
           <button class="color-swatch active" style="background:#1b2536;" aria-label="Dark Blue"></button>
           <button class="color-swatch" style="background:#63141f;" aria-label="Bordeaux"></button>
           <button class="color-swatch" style="background:#3d2b2b;" aria-label="Dark brown"></button>
         </div>
-        <button type="button" onclick="openSizeGuide()" class="hidden md:block text-[12px] text-[#888] underline hover:text-[#333] transition-colors bg-transparent border-none cursor-pointer p-0"
-           style="font-family: var(--font-montserrat), Montserrat, sans-serif;">
-          {{ txt_size_guide }}
-        </button>
       </div>
 
-      <!-- Size selector -->
-      <div class="hidden md:block mb-7">
-        <div class="flex items-center gap-3">
-          <button class="size-btn" onclick="selectSize(this)">S</button>
-          <button class="size-btn active" onclick="selectSize(this)">M</button>
-          <button class="size-btn" onclick="selectSize(this)">L</button>
-        </div>
-      </div>
+
 
       <!-- Add to cart -->
       <div class="flex flex-col gap-3 mb-8">
@@ -494,47 +410,9 @@
   </div><!-- /flex layout -->
 </div>
 
-<!-- ═══ SIZE GUIDE MODAL ═══ -->
-<div id="size-guide-overlay" onclick="if(event.target===this)closeSizeGuide()" dir="{% if request.locale.iso_code == 'he' %}rtl{% else %}ltr{% endif %}">
-  <div id="size-guide-modal">
-    <button class="sg-close" onclick="closeSizeGuide()" aria-label="Close">
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
-    </button>
-    <div class="sg-body">
-      <div class="sg-left">
-        <h2 class="sg-title">
-          {% if request.locale.iso_code == 'he' %}מידה – היקף ראש{% else %}SIZE — HEAD CIRCUMFERENCE{% endif %}
-        </h2>
-        <div class="sg-row" dir="ltr">S - 56 {% if request.locale.iso_code == 'he' %}ס"מ{% else %}cm{% endif %}</div>
-        <div class="sg-row" dir="ltr">M - 57 {% if request.locale.iso_code == 'he' %}ס"מ{% else %}cm{% endif %}</div>
-        <div class="sg-row" dir="ltr">L - 58 {% if request.locale.iso_code == 'he' %}ס"מ{% else %}cm{% endif %}</div>
-      </div>
-      <div class="sg-right">
-        <div class="sg-right-label">
-          {% if request.locale.iso_code == 'he' %}מדוד לפי הקו הזה{% else %}MEASURE ALONG THIS LINE{% endif %}
-        </div>
-        <img src="{{ 'image2.svg' | asset_url }}" 
-             alt="{% if request.locale.iso_code == 'he' %}מדידת ראש{% else %}Measurement{% endif %}" 
-             loading="lazy">
-      </div>
-    </div>
-  </div>
-</div>
+
 
 <script>
-  // Size Guide modal
-  function openSizeGuide() {
-    const el = document.getElementById('size-guide-overlay');
-    if (el) { el.classList.add('active'); document.body.style.overflow = 'hidden'; }
-  }
-  function closeSizeGuide() {
-    const el = document.getElementById('size-guide-overlay');
-    if (el) { el.classList.remove('active'); document.body.style.overflow = ''; }
-  }
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') closeSizeGuide();
-  });
-
   // Gallery switcher
   function setMainImg(src, thumbEl) {
     const main = document.getElementById('gallery-main-img');
@@ -600,11 +478,7 @@
     });
   })();
 
-  // Size selector
-  function selectSize(btn) {
-    document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-  }
+
 
   // Color swatch
   document.querySelectorAll('.color-swatch').forEach(sw => {
