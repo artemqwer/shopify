@@ -416,7 +416,7 @@
     </div>
 
     <!-- Recommended products -->
-    <div class="px-[20px] mb-6">
+    <div class="pl-[32px] pr-[20px] mb-6">
       <button
         type="button"
         class="flex items-center justify-between w-full text-left mb-3"
@@ -427,24 +427,25 @@
           <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1" stroke-linecap="round"/>
         </svg>
       </button>
-      <div id="recommended-section" class="flex space-x-3 overflow-x-auto scrollbar-hide -mx-[20px] px-[20px] snap-x snap-mandatory w-full">
-        <a href="{{ routes.search_url }}?view=demo&product=leopard-print-scarf" class="flex-shrink-0 w-[calc(50vw-26px)] block snap-start">
+      <div id="recommended-section" class="flex space-x-3 overflow-x-auto scrollbar-hide -mr-[20px] pl-[32px] pr-0 snap-x snap-mandatory w-full">
+        <a href="{{ routes.search_url }}?view=demo&product=leopard-print-scarf" class="flex-shrink-0 w-[calc(50vw-22px)] block snap-start">
           <img src="{{ 'product-image-1.png' | asset_url }}" alt="Product" class="w-full h-[203px] object-cover"/>
           <p class="text-[11px] mt-1" style="font-family: Montserrat, sans-serif;">{{ 'products.product_1' | t }}</p>
         </a>
-        <a href="{{ routes.search_url }}?view=demo&product=vintage-scarf" class="flex-shrink-0 w-[calc(50vw-26px)] block snap-start">
+        <a href="{{ routes.search_url }}?view=demo&product=vintage-scarf" class="flex-shrink-0 w-[calc(50vw-22px)] block snap-start">
           <img src="{{ 'product-image-4.png' | asset_url }}" alt="Product" class="w-full h-[203px] object-cover"/>
           <p class="text-[11px] mt-1" style="font-family: Montserrat, sans-serif;">{{ 'products.product_4' | t }}</p>
         </a>
-        <a href="{{ routes.search_url }}?view=demo&product=pink-scarf" class="flex-shrink-0 w-[calc(50vw-26px)] block snap-start">
+        <a href="{{ routes.search_url }}?view=demo&product=pink-scarf" class="flex-shrink-0 w-[calc(50vw-22px)] block snap-start">
           <img src="{{ 'product-image-3.png' | asset_url }}" alt="Product" class="w-full h-[203px] object-cover"/>
           <p class="text-[11px] mt-1" style="font-family: Montserrat, sans-serif;">{{ 'products.product_3' | t }}</p>
         </a>
+        <div class="flex-shrink-0 w-[32px]"></div>
       </div>
     </div>
 
     <!-- Unpacking section -->
-    <div class="px-[20px] mb-6">
+    <div class="pl-[32px] pr-[20px] mb-6">
       <button
         type="button"
         class="flex items-center justify-between w-full text-left mb-3"
@@ -455,21 +456,22 @@
           <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1" stroke-linecap="round"/>
         </svg>
       </button>
-      <div id="unpacking-section" class="flex space-x-3 overflow-x-auto scrollbar-hide -mx-[20px] px-[20px] snap-x snap-mandatory w-full">
-        <div class="flex-shrink-0 w-[calc(50vw-26px)] block snap-start">
+      <div id="unpacking-section" class="flex space-x-3 overflow-x-auto scrollbar-hide -mr-[20px] pl-[32px] pr-0 snap-x snap-mandatory w-full">
+        <div class="flex-shrink-0 w-[calc(50vw-22px)] block snap-start">
           <img src="{{ 'IMG_9734 1(2).png' | asset_url }}" alt="Unpacking" class="w-full h-[203px] object-cover"/>
         </div>
-        <div class="flex-shrink-0 w-[calc(50vw-26px)] block snap-start">
+        <div class="flex-shrink-0 w-[calc(50vw-22px)] block snap-start">
           <img src="{{ 'IMG_9734 1.svg' | asset_url }}" alt="Unpacking" class="w-full h-[203px] object-cover"/>
         </div>
-        <div class="flex-shrink-0 w-[calc(50vw-26px)] block snap-start">
+        <div class="flex-shrink-0 w-[calc(50vw-22px)] block snap-start">
           <img src="{{ 'IMG_9734 1(1).svg' | asset_url }}" alt="Unpacking" class="w-full h-[203px] object-cover"/>
         </div>
+        <div class="flex-shrink-0 w-[32px]"></div>
       </div>
     </div>
 
     <nav
-      class="flex flex-col px-5 pt-6 pb-10 gap-[20px] {% if request.locale.iso_code == 'he' %}items-start text-right{% else %}items-start text-left{% endif %}"
+      class="flex flex-col pl-[32px] pr-5 pt-6 pb-10 gap-[20px] {% if request.locale.iso_code == 'he' %}items-start text-right{% else %}items-start text-left{% endif %}"
       style="font-family: Montserrat, sans-serif;"
     >
       <a
