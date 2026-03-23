@@ -397,7 +397,7 @@
   <!-- Mobile Menu (full screen overlay) -->
   <div
     id="mobile-menu"
-    class="md:hidden hide-on-desktop fixed inset-0 bg-white z-[55]"
+    class="md:hidden hide-on-desktop fixed inset-0 bg-white z-[55] overflow-y-auto"
     {% if request.locale.iso_code == 'he' %}
       dir="rtl"
     {% endif %}
@@ -427,16 +427,16 @@
           <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1" stroke-linecap="round"/>
         </svg>
       </button>
-      <div id="recommended-section" class="flex space-x-3 overflow-x-auto scrollbar-hide -mx-[20px] px-[20px]">
-        <a href="{{ routes.search_url }}?view=demo&product=leopard-print-scarf" class="flex-shrink-0 w-[calc(50vw-26px)] block">
+      <div id="recommended-section" class="flex space-x-3 overflow-x-auto scrollbar-hide -mx-[20px] px-[20px] snap-x snap-mandatory w-full">
+        <a href="{{ routes.search_url }}?view=demo&product=leopard-print-scarf" class="flex-shrink-0 w-[calc(50vw-26px)] block snap-start">
           <img src="{{ 'product-image-1.png' | asset_url }}" alt="Product" class="w-full h-[203px] object-cover"/>
           <p class="text-[11px] mt-1" style="font-family: Montserrat, sans-serif;">{{ 'products.product_1' | t }}</p>
         </a>
-        <a href="{{ routes.search_url }}?view=demo&product=vintage-scarf" class="flex-shrink-0 w-[calc(50vw-26px)] block">
+        <a href="{{ routes.search_url }}?view=demo&product=vintage-scarf" class="flex-shrink-0 w-[calc(50vw-26px)] block snap-start">
           <img src="{{ 'product-image-4.png' | asset_url }}" alt="Product" class="w-full h-[203px] object-cover"/>
           <p class="text-[11px] mt-1" style="font-family: Montserrat, sans-serif;">{{ 'products.product_4' | t }}</p>
         </a>
-        <a href="{{ routes.search_url }}?view=demo&product=pink-scarf" class="flex-shrink-0 w-[calc(50vw-26px)] block">
+        <a href="{{ routes.search_url }}?view=demo&product=pink-scarf" class="flex-shrink-0 w-[calc(50vw-26px)] block snap-start">
           <img src="{{ 'product-image-3.png' | asset_url }}" alt="Product" class="w-full h-[203px] object-cover"/>
           <p class="text-[11px] mt-1" style="font-family: Montserrat, sans-serif;">{{ 'products.product_3' | t }}</p>
         </a>
@@ -455,14 +455,14 @@
           <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1" stroke-linecap="round"/>
         </svg>
       </button>
-      <div id="unpacking-section" class="flex space-x-3 overflow-x-auto scrollbar-hide -mx-[20px] px-[20px]">
-        <div class="flex-shrink-0 w-[calc(50vw-26px)] block">
+      <div id="unpacking-section" class="flex space-x-3 overflow-x-auto scrollbar-hide -mx-[20px] px-[20px] snap-x snap-mandatory w-full">
+        <div class="flex-shrink-0 w-[calc(50vw-26px)] block snap-start">
           <img src="{{ 'IMG_9734 1(2).png' | asset_url }}" alt="Unpacking" class="w-full h-[203px] object-cover"/>
         </div>
-        <div class="flex-shrink-0 w-[calc(50vw-26px)] block">
+        <div class="flex-shrink-0 w-[calc(50vw-26px)] block snap-start">
           <img src="{{ 'IMG_9734 1.svg' | asset_url }}" alt="Unpacking" class="w-full h-[203px] object-cover"/>
         </div>
-        <div class="flex-shrink-0 w-[calc(50vw-26px)] block">
+        <div class="flex-shrink-0 w-[calc(50vw-26px)] block snap-start">
           <img src="{{ 'IMG_9734 1(1).svg' | asset_url }}" alt="Unpacking" class="w-full h-[203px] object-cover"/>
         </div>
       </div>
