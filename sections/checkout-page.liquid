@@ -331,24 +331,10 @@
     </span>
   </div>
 
-  <!-- Express Checkout -->
-  <div class="max-w-[600px] mx-auto mb-2">
-    <div class="express-checkout-title">
-      <span style="font-family:Montserrat,sans-serif; font-weight:300; font-size:28px; line-height:1; letter-spacing:0.03em; color:#222;">{{ txt_express }}</span>
-    </div>
-    <button type="button" class="btn-applepay" onclick="confirmOrder('applepay')">
-      <span>Pay with</span>
-      <img src="{{ 'apple-pay.svg' | asset_url }}" width="44" height="22" style="filter:invert(1); margin-top:1px;" alt="Apple Pay">
-    </button>
-  </div>
-
   <div class="checkout-cols flex flex-col lg:flex-row gap-[32px] lg:gap-[100px] mt-0">
 
     <!-- LEFT COLUMN: Forms -->
     <div class="checkout-form-col flex-1 max-w-full lg:max-w-[600px]">
-
-      <!-- "Or fill in your details below:" separator -->
-      <div class="chk-or-separator">{{ txt_or_fill }}</div>
 
       <!-- Customer Details -->
       <h2 class="text-[28px] md:text-[32px] font-light text-[#222] tracking-wide mb-6 md:mb-8">
