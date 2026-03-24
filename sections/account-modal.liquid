@@ -243,6 +243,13 @@
   {% assign txt_current_password = 'סיסמה נוכחית' %}
   {% assign txt_new_password = 'סיסמה חדשה' %}
   {% assign txt_confirm_password = 'אשר סיסמה' %}
+  {% assign txt_login = 'כניסה' %}
+  {% assign txt_register = 'הרשמה' %}
+  {% assign txt_password = 'סיסמה' %}
+  {% assign txt_forgot_password = 'שכחת סיסמה?' %}
+  {% assign txt_no_account = 'אין לך חשבון?' %}
+  {% assign txt_have_account = 'כבר יש לך חשבון?' %}
+  {% assign txt_create_account = 'צור חשבון' %}
 {% elsif request.locale.iso_code == 'uk' %}
   {% assign acc_dir = 'ltr' %}
   {% assign txt_account = 'Мій акаунт' %}
@@ -279,6 +286,13 @@
   {% assign txt_current_password = 'Поточний пароль' %}
   {% assign txt_new_password = 'Новий пароль' %}
   {% assign txt_confirm_password = 'Підтвердити пароль' %}
+  {% assign txt_login = 'Увійти' %}
+  {% assign txt_register = 'Реєстрація' %}
+  {% assign txt_password = 'Пароль' %}
+  {% assign txt_forgot_password = 'Забули пароль?' %}
+  {% assign txt_no_account = 'Немає акаунту?' %}
+  {% assign txt_have_account = 'Вже є акаунт?' %}
+  {% assign txt_create_account = 'Створити акаунт' %}
 {% elsif request.locale.iso_code == 'fr' %}
   {% assign acc_dir = 'ltr' %}
   {% assign txt_account = 'Mon compte' %}
@@ -315,6 +329,13 @@
   {% assign txt_current_password = 'Mot de passe actuel' %}
   {% assign txt_new_password = 'Nouveau mot de passe' %}
   {% assign txt_confirm_password = 'Confirmer le mot de passe' %}
+  {% assign txt_login = 'Connexion' %}
+  {% assign txt_register = "S'inscrire" %}
+  {% assign txt_password = 'Mot de passe' %}
+  {% assign txt_forgot_password = 'Mot de passe oublié?' %}
+  {% assign txt_no_account = 'Pas encore de compte?' %}
+  {% assign txt_have_account = 'Déjà un compte?' %}
+  {% assign txt_create_account = 'Créer un compte' %}
 {% else %}
   {% assign acc_dir = 'ltr' %}
   {% assign txt_account = 'My Account' %}
@@ -351,12 +372,20 @@
   {% assign txt_current_password = 'Current Password' %}
   {% assign txt_new_password = 'New Password' %}
   {% assign txt_confirm_password = 'Confirm Password' %}
+  {% assign txt_login = 'Login' %}
+  {% assign txt_register = 'Register' %}
+  {% assign txt_password = 'Password' %}
+  {% assign txt_forgot_password = 'Forgot password?' %}
+  {% assign txt_no_account = 'Don\'t have an account?' %}
+  {% assign txt_have_account = 'Already have an account?' %}
+  {% assign txt_create_account = 'Create Account' %}
 {% endif %}
 
-{% if customer %}
 <!-- Main Account Modal Wrapper (Hidden by default) -->
-<div id="main-account-modal" onclick="if(event.target === this) closeAccountModal()" class="fixed inset-0 z-[1000] flex items-center justify-center p-4 bg-black bg-opacity-60 transition-opacity" style="display:none;">
-  <!-- Modal Content Container -->
+<div id="main-account-modal" onclick="if(event.target === this) closeAccountModal()" class="fixed inset-0 z-[1000] flex items-center justify-center p-4 bg-black bg-opacity%60 transition-opacity" style="display:none;">
+
+{% if customer %}
+  <!-- Modal Content Container for Authenticated User -->
   <div class="account-container relative bg-white w-full max-w-[800px] h-full max-h-[90vh] overflow-y-auto px-4 md:px-8 py-8 md:py-10 shadow-2xl z-10" dir="{{ acc_dir }}">
     
     <!-- Close button for main modal -->
@@ -429,51 +458,44 @@
 
     <h2 class="text-[20px] font-medium text-[#222] mb-6">{{ txt_profile }}</h2>
 
-    <form id="profile-form" class="max-w-[600px] space-y-6">
+    {% form 'customer', id: 'profile-form', class: 'max-w-[600px] space-y-6' %}
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
           <label for="prof-first-name" class="block text-[11px] uppercase tracking-wider text-[#888] mb-1">{{ txt_first_name }}</label>
-          <input type="text" id="prof-first-name" class="acc-input" value="{{ customer.first_name | default: '' }}">
+          <input type="text" id="prof-first-name" name="customer[first_name]" class="acc-input" value="{{ customer.first_name | default: '' }}">
         </div>
         <div>
           <label for="prof-last-name" class="block text-[11px] uppercase tracking-wider text-[#888] mb-1">{{ txt_last_name }}</label>
-          <input type="text" id="prof-last-name" class="acc-input" value="{{ customer.last_name | default: '' }}">
+          <input type="text" id="prof-last-name" name="customer[last_name]" class="acc-input" value="{{ customer.last_name | default: '' }}">
         </div>
       </div>
       <div>
         <label for="prof-email" class="block text-[11px] uppercase tracking-wider text-[#888] mb-1">{{ txt_email }}</label>
-        <input type="email" id="prof-email" class="acc-input" value="{{ customer.email | default: 'user@example.com' }}">
+        <input type="email" id="prof-email" name="customer[email]" class="acc-input" value="{{ customer.email | default: 'user@example.com' }}">
       </div>
       <div>
         <label for="prof-phone" class="block text-[11px] uppercase tracking-wider text-[#888] mb-1">{{ txt_phone }}</label>
-        <input type="tel" id="prof-phone" class="acc-input" value="{{ customer.phone | default: '' }}">
+        <input type="tel" id="prof-phone" name="customer[phone]" class="acc-input" value="{{ customer.phone | default: '' }}">
       </div>
       <button type="submit" class="btn-primary">{{ txt_save_changes }}</button>
-    </form>
+    {% endform %}
 
     <hr class="my-10 border-[#e5e5e5]">
 
     <h3 class="text-[18px] font-medium text-[#222] mb-6">{{ txt_change_password }}</h3>
-    <form id="password-form" class="max-w-[600px] space-y-4">
+    {% form 'customer', id: 'password-form', class: 'max-w-[600px] space-y-4' %}
+      <input type="hidden" name="form_type" value="change_password">
+      <input type="hidden" name="_method" value="put">
       <div>
         <label for="current-password" class="block text-[11px] uppercase tracking-wider text-[#888] mb-1">{{ txt_current_password }}</label>
-        <input type="password" id="current-password" class="acc-input" required>
+        <input type="password" name="customer[current_password]" id="current-password" class="acc-input" required>
       </div>
       <div>
         <label for="new-password" class="block text-[11px] uppercase tracking-wider text-[#888] mb-1">{{ txt_new_password }}</label>
-        <input type="password" id="new-password" class="acc-input" minlength="6" required>
+        <input type="password" name="customer[password]" id="new-password" class="acc-input" minlength="5" required>
       </div>
       <div>
         <label for="confirm-password" class="block text-[11px] uppercase tracking-wider text-[#888] mb-1">{{ txt_confirm_password }}</label>
-        <input type="password" id="confirm-password" class="acc-input" minlength="6" required>
-      </div>
-      <button type="submit" class="btn-primary">{{ txt_save_changes }}</button>
-    </form>
-
-  </div>
-
-</div>
-<!-- End Main Account Modal Wrapper -->
 </div>
 
 <script>
