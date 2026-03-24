@@ -504,6 +504,9 @@
           <label for="chk-terms" class="text-[11px] text-[#888] cursor-pointer leading-tight">{{ txt_agree }}</label>
         </div>
 
+        <!-- Error message -->
+        <div id="chk-error-msg" style="display:none; background:#fff0f5; border-left:3px solid #e61a7a; padding:10px 14px; font-size:12px; color:#c0134e; margin-bottom:12px; font-family:inherit;"></div>
+
         <!-- Dynamic confirm button -->
         <div id="chk-confirm-wrapper">
           <button type="button" class="btn-applepay" id="btn-applepay-confirm" onclick="confirmOrder('applepay')">
@@ -740,66 +743,61 @@
   });
 
   function confirmOrder(method) {
-    const terms = document.getElementById('chk-terms');
-    const dir   = document.documentElement.getAttribute('dir') || document.body.dir || 'ltr';
+    var dir = document.documentElement.getAttribute('dir') || 'ltr';
 
-    // ── Validate required fields ──
-    const lastName  = document.getElementById('chk-last-name');
-    const firstName = document.getElementById('chk-first-name');
-    const phone     = document.getElementById('chk-phone');
-    const email     = document.getElementById('chk-email');
-    const city      = document.getElementById('chk-city');
-
-    const required = [lastName, firstName, phone, email, city];
-    for (const el of required) {
-      if (!el || !el.value.trim()) {
-        if (el) { el.focus(); el.style.borderColor = '#e61a7a'; setTimeout(() => { el.style.borderColor = ''; }, 2000); }
-        return;
-      }
+    // Show visible error
+    function showErr(msg) {
+      var el = document.getElementById('chk-error-msg');
+      if (el) { el.textContent = msg; el.style.display = 'block'; setTimeout(function(){ el.style.display = 'none'; }, 4000); }
+      else { alert(msg); }
     }
 
-    if (!terms.checked) {
-      alert(dir === 'rtl' ? 'אנא אשר את תנאי האתר' : 'Please agree to the terms and conditions before proceeding.');
+    // Validate
+    var lastName  = (document.getElementById('chk-last-name')  || {}).value || '';
+    var firstName = (document.getElementById('chk-first-name') || {}).value || '';
+    var phone     = (document.getElementById('chk-phone')      || {}).value || '';
+    var email     = (document.getElementById('chk-email')      || {}).value || '';
+
+    if (!lastName.trim() || !firstName.trim() || !phone.trim() || !email.trim()) {
+      showErr(dir === 'rtl' ? 'אנא מלא את כל השדות הנדרשים' : 'Please fill in all required fields.');
       return;
     }
 
-    // ── Show loading state ──
-    const activeBtn = method === 'applepay'
+    var terms = document.getElementById('chk-terms');
+    if (!terms || !terms.checked) {
+      showErr(dir === 'rtl' ? 'אנא אשר את תנאי האתר' : 'Please agree to the terms and conditions.');
+      return;
+    }
+
+    // Loading state
+    var activeBtn = method === 'applepay'
       ? document.getElementById('btn-applepay-confirm')
       : document.getElementById('btn-regular-confirm');
-    activeBtn.innerHTML = dir === 'rtl' ? 'מעבד...' : 'Processing...';
-    activeBtn.disabled = true;
+    if (activeBtn) { activeBtn.innerHTML = dir === 'rtl' ? 'מעבד...' : 'Processing...'; activeBtn.disabled = true; }
 
-    // ── Save delivery info as cart note & attributes ──
-    const notes  = document.getElementById('chk-notes');
-    const branch = document.getElementById('chk-branch');
-    const cityText = city.options[city.selectedIndex] ? city.options[city.selectedIndex].text : city.value;
+    // Save info to cart (best-effort, non-blocking)
+    var cityEl  = document.getElementById('chk-city');
+    var notes   = document.getElementById('chk-notes');
+    var branch  = document.getElementById('chk-branch');
+    var cityVal = cityEl ? (cityEl.options[cityEl.selectedIndex] ? cityEl.options[cityEl.selectedIndex].text : cityEl.value) : '';
 
-    const noteVal = [
-      lastName.value.trim() + ' ' + firstName.value.trim(),
-      phone.value.trim(),
-      email.value.trim(),
-      'City: ' + cityText,
-      branch && branch.value ? 'Branch: ' + branch.value : '',
-      notes && notes.value.trim() ? 'Notes: ' + notes.value.trim() : ''
-    ].filter(Boolean).join(' | ');
+    var noteText = [lastName.trim() + ' ' + firstName.trim(), phone.trim(), email.trim()];
+    if (cityVal) noteText.push('City: ' + cityVal);
+    if (branch && branch.value) noteText.push('Branch: ' + branch.value);
+    if (notes && notes.value.trim()) noteText.push('Notes: ' + notes.value.trim());
 
-    const formData = new FormData();
-    formData.append('note', noteVal);
-    formData.append('attributes[Customer Name]', lastName.value.trim() + ' ' + firstName.value.trim());
-    formData.append('attributes[Phone]', phone.value.trim());
-    formData.append('attributes[Email]', email.value.trim());
-    formData.append('attributes[City]', cityText);
-    formData.append('attributes[Payment Method]', method);
-    if (branch && branch.value) formData.append('attributes[Branch]', branch.value);
-    if (notes && notes.value.trim()) formData.append('attributes[Notes]', notes.value.trim());
+    var fd = new FormData();
+    fd.append('note', noteText.join(' | '));
+    fd.append('attributes[Customer Name]', lastName.trim() + ' ' + firstName.trim());
+    fd.append('attributes[Phone]', phone.trim());
+    fd.append('attributes[Email]', email.trim());
+    if (cityVal) fd.append('attributes[City]', cityVal);
+    fd.append('attributes[Payment Method]', method);
 
-    // Update cart then go to real Shopify checkout
-    fetch('/cart/update.js', { method: 'POST', body: formData })
+    localStorage.removeItem('ester_mock_cart');
+
+    fetch('/cart/update.js', { method: 'POST', body: fd })
       .catch(function() {})
-      .finally(function() {
-        localStorage.removeItem('ester_mock_cart');
-        window.location.href = '/checkout';
-      });
+      .finally(function() { window.location.href = '/checkout'; });
   }
 </script>
