@@ -1,0 +1,9 @@
+{
+  "sections": {
+    "main": {
+      "type": "public-offer",
+      "settings": {}
+    }
+  },
+  "order": ["main"]
+}
