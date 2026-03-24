@@ -496,7 +496,15 @@
       </div>
       <div>
         <label for="confirm-password" class="block text-[11px] uppercase tracking-wider text-[#888] mb-1">{{ txt_confirm_password }}</label>
-</div>
+        <input type="password" id="confirm-password" class="acc-input" minlength="5" required>
+      </div>
+      <button type="submit" class="btn-primary">{{ txt_change_password }}</button>
+    {% endform %}
+
+  </div>
+
+  </div>
+  <!-- End of account-container -->
 
 <script>
 (function() {
@@ -669,6 +677,10 @@
 })();
 </script>
 {% endif %}
+
+</div>
+<!-- End of #main-account-modal -->
+
 <!-- Global Modal Controls -->
 <script>
 window.openAccountModal = function() {
