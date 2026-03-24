@@ -382,7 +382,7 @@
 {% endif %}
 
 <!-- Main Account Modal Wrapper (Hidden by default) -->
-<div id="main-account-modal" onclick="if(event.target === this) closeAccountModal()" class="fixed inset-0 z-[1000] flex items-center justify-center p-4 bg-black bg-opacity%60 transition-opacity" style="display:none;">
+<div id="main-account-modal" onclick="if(event.target===this) closeAccountModal()" class="fixed inset-0 z-[1000] p-4 bg-black bg-opacity-60" style="display:none; align-items:center; justify-content:center;">
 
 {% if customer %}
   <!-- Modal Content Container for Authenticated User -->
@@ -672,15 +672,17 @@
 <!-- Global Modal Controls -->
 <script>
 window.openAccountModal = function() {
-  const modal = document.getElementById('main-account-modal');
+  var modal = document.getElementById('main-account-modal');
   if (modal) {
     modal.style.display = 'flex';
+    modal.style.alignItems = 'center';
+    modal.style.justifyContent = 'center';
     document.body.style.overflow = 'hidden';
   }
 };
 
 window.closeAccountModal = function() {
-  const modal = document.getElementById('main-account-modal');
+  var modal = document.getElementById('main-account-modal');
   if (modal) {
     modal.style.display = 'none';
     document.body.style.overflow = '';
