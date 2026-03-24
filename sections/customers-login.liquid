@@ -1,0 +1,190 @@
+{% schema %}
+{ "name": "Customer Login", "settings": [] }
+{% endschema %}
+
+{% assign dir = 'ltr' %}
+{% if request.locale.iso_code == 'he' %}{% assign dir = 'rtl' %}{% endif %}
+
+{% if request.locale.iso_code == 'he' %}
+  {% assign t_title    = 'כניסה לחשבון' %}
+  {% assign t_email    = 'אימייל' %}
+  {% assign t_password = 'סיסמה' %}
+  {% assign t_forgot   = 'שכחתי סיסמה' %}
+  {% assign t_login    = 'כניסה' %}
+  {% assign t_no_acc   = 'אין לך חשבון?' %}
+  {% assign t_register = 'הרשמה' %}
+{% elsif request.locale.iso_code == 'uk' %}
+  {% assign t_title    = 'Вхід до акаунту' %}
+  {% assign t_email    = 'Email' %}
+  {% assign t_password = 'Пароль' %}
+  {% assign t_forgot   = 'Забули пароль?' %}
+  {% assign t_login    = 'Увійти' %}
+  {% assign t_no_acc   = 'Немає акаунту?' %}
+  {% assign t_register = 'Зареєструватись' %}
+{% elsif request.locale.iso_code == 'fr' %}
+  {% assign t_title    = 'Connexion' %}
+  {% assign t_email    = 'Email' %}
+  {% assign t_password = 'Mot de passe' %}
+  {% assign t_forgot   = 'Mot de passe oublié?' %}
+  {% assign t_login    = 'Se connecter' %}
+  {% assign t_no_acc   = 'Pas de compte?' %}
+  {% assign t_register = "S'inscrire" %}
+{% else %}
+  {% assign t_title    = 'Sign In' %}
+  {% assign t_email    = 'Email' %}
+  {% assign t_password = 'Password' %}
+  {% assign t_forgot   = 'Forgot password?' %}
+  {% assign t_login    = 'Sign In' %}
+  {% assign t_no_acc   = 'No account yet?' %}
+  {% assign t_register = 'Create Account' %}
+{% endif %}
+
+<style>
+  .acc-page-wrap {
+    font-family: var(--font-montserrat), Montserrat, sans-serif;
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 16px;
+  }
+  .acc-card {
+    width: 100%;
+    max-width: 440px;
+    background: #fff;
+  }
+  .acc-card h1 {
+    font-size: 28px;
+    font-weight: 300;
+    letter-spacing: 0.05em;
+    color: #222;
+    margin-bottom: 32px;
+    text-align: center;
+  }
+  .acc-field { margin-bottom: 20px; }
+  .acc-label {
+    display: block;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #888;
+    margin-bottom: 6px;
+  }
+  .acc-input {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #d1d1d1;
+    padding: 10px 0;
+    font-size: 14px;
+    color: #222;
+    background: transparent;
+    outline: none;
+    transition: border-color 0.2s;
+    font-family: inherit;
+  }
+  .acc-input:focus { border-color: #e61a7a; }
+  .acc-btn-submit {
+    width: 100%;
+    background: #222;
+    color: #fff;
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: 600;
+    padding: 16px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-top: 8px;
+    font-family: inherit;
+  }
+  .acc-btn-submit:hover { background: #e61a7a; }
+  .acc-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    font-size: 12px;
+  }
+  .acc-links a {
+    color: #888;
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    transition: color 0.2s;
+  }
+  .acc-links a:hover { color: #e61a7a; }
+  .acc-divider {
+    text-align: center;
+    color: #ccc;
+    font-size: 11px;
+    margin: 24px 0;
+    position: relative;
+  }
+  .acc-divider::before, .acc-divider::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 42%;
+    height: 1px;
+    background: #e5e5e5;
+  }
+  .acc-divider::before { left: 0; }
+  .acc-divider::after { right: 0; }
+  .acc-btn-secondary {
+    width: 100%;
+    background: transparent;
+    color: #222;
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: 500;
+    padding: 14px;
+    border: 1px solid #d1d1d1;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: inherit;
+    text-align: center;
+    display: block;
+    text-decoration: none;
+  }
+  .acc-btn-secondary:hover { border-color: #222; }
+  .acc-error {
+    background: #fff0f5;
+    border-left: 3px solid #e61a7a;
+    padding: 12px 16px;
+    font-size: 13px;
+    color: #c0134e;
+    margin-bottom: 20px;
+  }
+</style>
+
+<div class="acc-page-wrap" dir="{{ dir }}">
+  <div class="acc-card">
+    <h1>{{ t_title }}</h1>
+
+    {% if form.errors %}
+      <div class="acc-error">
+        {{ form.errors | default_errors }}
+      </div>
+    {% endif %}
+
+    {% form 'customer_login' %}
+      <div class="acc-field">
+        <label class="acc-label" for="login-email">{{ t_email }}</label>
+        <input type="email" id="login-email" name="customer[email]" class="acc-input"
+               autocomplete="email" autofocus
+               value="{{ form.email }}" required>
+      </div>
+      <div class="acc-field">
+        <label class="acc-label" for="login-password">{{ t_password }}</label>
+        <input type="password" id="login-password" name="customer[password]" class="acc-input"
+               autocomplete="current-password" required>
+      </div>
+      <button type="submit" class="acc-btn-submit">{{ t_login }}</button>
+    {% endform %}
+
+    <div class="acc-links">
+      <a href="{{ routes.account_recover_url }}">{{ t_forgot }}</a>
+      <a href="{{ routes.account_register_url }}">{{ t_no_acc }} {{ t_register }}</a>
+    </div>
+  </div>
+</div>
