@@ -372,7 +372,7 @@
                 onclick="handleAddToCart(this)">
           {{ txt_add_cart }}
         </button>
-        <a href="{% if use_real_product and product.variants.first.id != blank %}{{ routes.search_url }}?view=order{% else %}{{ routes.search_url }}?view=order{% endif %}" class="btn-buy">{{ txt_buy_now }}</a>
+        <a href="/checkout" class="btn-buy">{{ txt_buy_now }}</a>
       </div>
 
       <!-- Accordion: Material -->
