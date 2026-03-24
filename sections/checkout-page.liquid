@@ -358,22 +358,26 @@
       <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6 mb-6">
         <div>
           <label for="chk-last-name" class="sr-only">{{ txt_last }}</label>
-          <input type="text" id="chk-last-name" class="chk-input" placeholder="{{ txt_last }}" required autocomplete="family-name">
+          <input type="text" id="chk-last-name" class="chk-input" placeholder="{{ txt_last }}" required autocomplete="family-name"
+            value="{% if customer %}{{ customer.last_name }}{% endif %}">
         </div>
         <div>
           <label for="chk-first-name" class="sr-only">{{ txt_first }}</label>
-          <input type="text" id="chk-first-name" class="chk-input" placeholder="{{ txt_first }}" required autocomplete="given-name">
+          <input type="text" id="chk-first-name" class="chk-input" placeholder="{{ txt_first }}" required autocomplete="given-name"
+            value="{% if customer %}{{ customer.first_name }}{% endif %}">
         </div>
         <div>
           <label for="chk-phone" class="sr-only">{{ txt_phone }}</label>
           <input type="tel" id="chk-phone" class="chk-input" placeholder="{{ txt_phone }}"
                  inputmode="tel" autocomplete="tel"
                  pattern="^[\+]?[\d\s\-\(\)]{7,20}$"
-                 maxlength="20" required>
+                 maxlength="20" required
+                 value="{% if customer %}{{ customer.phone | default: customer.default_address.phone }}{% endif %}">
         </div>
         <div>
           <label for="chk-email" class="sr-only">{{ txt_email }}</label>
-          <input type="email" id="chk-email" class="chk-input" placeholder="{{ txt_email }}" required autocomplete="email">
+          <input type="email" id="chk-email" class="chk-input" placeholder="{{ txt_email }}" required autocomplete="email"
+            value="{% if customer %}{{ customer.email }}{% endif %}">
         </div>
       </div>
 
@@ -400,13 +404,14 @@
       <div class="space-y-6 mb-12">
         <div class="chk-select-wrapper">
           <label for="chk-city" class="sr-only">{{ txt_city }}</label>
+          {% assign cust_city = customer.default_address.city | downcase %}
           <select id="chk-city" class="chk-select" required>
-            <option value="" disabled selected hidden>{{ txt_city }}</option>
-            <option value="Kyiv">Kyiv</option>
-            <option value="Lviv">Lviv</option>
-            <option value="Odesa">Odesa</option>
-            <option value="Dnipro">Dnipro</option>
-            <option value="Kharkiv">Kharkiv</option>
+            <option value="" disabled {% unless cust_city %}selected{% endunless %} hidden>{{ txt_city }}</option>
+            <option value="Kyiv" {% if cust_city == 'kyiv' or cust_city == 'київ' %}selected{% endif %}>Kyiv</option>
+            <option value="Lviv" {% if cust_city == 'lviv' or cust_city == 'львів' %}selected{% endif %}>Lviv</option>
+            <option value="Odesa" {% if cust_city == 'odesa' or cust_city == 'одеса' %}selected{% endif %}>Odesa</option>
+            <option value="Dnipro" {% if cust_city == 'dnipro' or cust_city == 'дніпро' %}selected{% endif %}>Dnipro</option>
+            <option value="Kharkiv" {% if cust_city == 'kharkiv' or cust_city == 'харків' %}selected{% endif %}>Kharkiv</option>
           </select>
         </div>
 
