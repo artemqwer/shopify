@@ -741,23 +741,65 @@
 
   function confirmOrder(method) {
     const terms = document.getElementById('chk-terms');
-    const dir = document.documentElement.getAttribute('dir') || document.body.dir || 'ltr';
+    const dir   = document.documentElement.getAttribute('dir') || document.body.dir || 'ltr';
+
+    // ── Validate required fields ──
+    const lastName  = document.getElementById('chk-last-name');
+    const firstName = document.getElementById('chk-first-name');
+    const phone     = document.getElementById('chk-phone');
+    const email     = document.getElementById('chk-email');
+    const city      = document.getElementById('chk-city');
+
+    const required = [lastName, firstName, phone, email, city];
+    for (const el of required) {
+      if (!el || !el.value.trim()) {
+        if (el) { el.focus(); el.style.borderColor = '#e61a7a'; setTimeout(() => { el.style.borderColor = ''; }, 2000); }
+        return;
+      }
+    }
+
     if (!terms.checked) {
       alert(dir === 'rtl' ? 'אנא אשר את תנאי האתר' : 'Please agree to the terms and conditions before proceeding.');
       return;
     }
+
+    // ── Show loading state ──
     const activeBtn = method === 'applepay'
       ? document.getElementById('btn-applepay-confirm')
       : document.getElementById('btn-regular-confirm');
-    const ogContent = activeBtn.innerHTML;
     activeBtn.innerHTML = dir === 'rtl' ? 'מעבד...' : 'Processing...';
     activeBtn.disabled = true;
-    setTimeout(() => {
-      alert(dir === 'rtl' ? 'תודה על ההזמנה! זו הדגמה.' : 'Thank you for your order! This is a demo checkout.');
-      localStorage.removeItem('ester_mock_cart');
-      fetch('{{ routes.cart_clear_url }}', { method: 'POST' }).finally(() => {
-        window.location.href = '{{ routes.root_url }}';
+
+    // ── Save delivery info as cart note & attributes ──
+    const notes  = document.getElementById('chk-notes');
+    const branch = document.getElementById('chk-branch');
+    const cityText = city.options[city.selectedIndex] ? city.options[city.selectedIndex].text : city.value;
+
+    const noteVal = [
+      lastName.value.trim() + ' ' + firstName.value.trim(),
+      phone.value.trim(),
+      email.value.trim(),
+      'City: ' + cityText,
+      branch && branch.value ? 'Branch: ' + branch.value : '',
+      notes && notes.value.trim() ? 'Notes: ' + notes.value.trim() : ''
+    ].filter(Boolean).join(' | ');
+
+    const formData = new FormData();
+    formData.append('note', noteVal);
+    formData.append('attributes[Customer Name]', lastName.value.trim() + ' ' + firstName.value.trim());
+    formData.append('attributes[Phone]', phone.value.trim());
+    formData.append('attributes[Email]', email.value.trim());
+    formData.append('attributes[City]', cityText);
+    formData.append('attributes[Payment Method]', method);
+    if (branch && branch.value) formData.append('attributes[Branch]', branch.value);
+    if (notes && notes.value.trim()) formData.append('attributes[Notes]', notes.value.trim());
+
+    // Update cart then go to real Shopify checkout
+    fetch('/cart/update.js', { method: 'POST', body: formData })
+      .catch(function() {})
+      .finally(function() {
+        localStorage.removeItem('ester_mock_cart');
+        window.location.href = '/checkout';
       });
-    }, 1500);
   }
 </script>
