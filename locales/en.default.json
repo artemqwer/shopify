@@ -66,8 +66,6 @@
     "payment_title": "Payment",
     "bank_transfer_title": "Bank Transfer",
     "bank_transfer_desc": "Payment is made to the account of FOP Kravets Nelli Viktorivna.",
-    "cod_title": "Cash on Delivery",
-    "cod_desc": "Available with a 300 UAH prepayment that reserves the item for you. The remaining amount is paid upon receipt.",
     "payment_note_title": "Important",
     "payment_note_desc": "Payment is considered confirmed only after funds are received in the account.",
     "pickup_title": "Pickup",
