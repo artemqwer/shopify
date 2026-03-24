@@ -98,9 +98,9 @@
         <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
           <path stroke-linecap="round" stroke-linejoin="round" d="M3 4.5h18M7 12h10M10.5 19.5h3"/>
         </svg>
-        (0) {{ 'catalog.filter' | t }}
+        (<span data-filter-count>0</span>) {{ 'catalog.filter' | t }}
       {% else %}
-        {{ 'catalog.filter' | t }} (0)
+        {{ 'catalog.filter' | t }} (<span data-filter-count>0</span>)
         <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
           <path stroke-linecap="round" stroke-linejoin="round" d="M3 4.5h18M7 12h10M10.5 19.5h3"/>
         </svg>

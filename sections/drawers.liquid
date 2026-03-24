@@ -525,9 +525,12 @@
   /* Expose filter count in the header button */
   (function updateFilterCount() {
     const url = new URL(window.location.href);
-    const count = [...url.searchParams.keys()].filter(k => k.startsWith('filter.')).length;
+    let count = 0;
+    url.searchParams.forEach((v, k) => {
+      if (k.startsWith('filter.')) count++;
+    });
     document.querySelectorAll('[data-filter-count]').forEach(el => {
-      el.textContent = '(' + count + ')';
+      el.textContent = count;
     });
   })();
 
