@@ -171,8 +171,8 @@
         <div class="filter-group mb-8" data-filter-name="{{ filter.label | upcase }}">
           
           {% comment %} Header {% endcomment %}
-          <div class="flex items-center justify-between mb-5 {% if filter.label != 'Size' and filter.label != 'Color' %}cursor-pointer filter-accordion-trigger{% endif %}">
-            <h3 class="text-[14px] font-bold text-[#222] uppercase tracking-widest" style="font-family: var(--font-montserrat);">
+          <div class="flex items-center justify-between mb-4 {% if filter.label != 'Size' and filter.label != 'Color' %}cursor-pointer filter-accordion-trigger{% endif %}">
+            <h3 class="text-[14px] font-bold text-[#222] uppercase tracking-[0.05em]" style="font-family: var(--font-montserrat);">
               {{ filter.label }}
             </h3>
             {% if filter.label != 'Size' and filter.label != 'Color' %}
@@ -205,9 +205,9 @@
               
               {% if lbl contains 'color' or lbl contains 'колір' or lbl contains 'צבע' %}
                 {% comment %} ── COLOR SWATCHES ── {% endcomment %}
-                <div class="flex flex-wrap gap-x-4 gap-y-5">
+                <div class="flex flex-wrap gap-x-4 gap-y-4">
                   {% for value in filter.values %}
-                    <button type="button" class="filter-swatch w-[28px] h-[28px] rounded-full ring-offset-2 transition-all border border-[#eee] {% if value.active %}ring-1 ring-[#e61a7a]{% endif %}"
+                    <button type="button" class="filter-swatch w-[28px] h-[28px] rounded-full ring-offset-2 transition-all border border-[#eee] {% if value.active %}ring-1 ring-[#222]{% endif %}"
                             data-param="{{ value.param_name }}" data-value="{{ value.value | url_encode }}" data-active="{{ value.active }}"
                             style="background-color: {{ value.value | downcase }};" title="{{ value.label }}"></button>
                   {% endfor %}
@@ -215,30 +215,33 @@
 
               {% elsif lbl contains 'size' or lbl contains 'розмір' or lbl contains 'גודל' %}
                 {% comment %} ── SIZE GRID ── {% endcomment %}
-                <div class="flex flex-wrap gap-3">
+                <div class="flex flex-wrap gap-2.5">
                   {% for value in filter.values %}
                     {% assign v_up = value.label | upcase %}
-                    <button type="button" class="filter-size h-[36px] border text-[13px] flex items-center justify-center transition-all bg-white
-                                   {% if v_up contains 'ONE SIZE' %}w-[102px] mt-1{% else %}w-[44px]{% endif %}
-                                   {% if value.active %}border-[#222] font-semibold{% else %}border-[#eee] text-[#222]{% endif %}"
+                    <button type="button" class="filter-size h-[32px] border text-[12px] flex items-center justify-center transition-all bg-white
+                                   {% if v_up contains 'ONE SIZE' %}w-[80px] mt-1.5{% else %}w-[36px]{% endif %}
+                                   {% if value.active %}border-[#222] font-semibold{% else %}border-[#d1d1d1] text-[#222]{% endif %}"
                             data-param="{{ value.param_name }}" data-value="{{ value.value | url_encode }}" data-active="{{ value.active }}">
                       {{ value.label | upcase }}
                     </button>
+                    {% if v_up contains 'ONE SIZE' %}
+                      <div class="w-full"></div>
+                    {% endif %}
                   {% endfor %}
                 </div>
 
               {% else %}
                 {% comment %} ── CHECKBOX LIST (Category, Material, Availability) ── {% endcomment %}
-                <div class="flex flex-col gap-3.5">
+                <div class="flex flex-col gap-3">
                   {% for value in filter.values %}
                     <div class="flex items-center cursor-pointer group filter-item" data-param="{{ value.param_name }}" data-value="{{ value.value | url_encode }}" data-active="{{ value.active }}">
-                      <div class="w-[15px] h-[15px] border border-[#222] rounded-[1px] transition-colors flex items-center justify-center mr-3
-                                  {% if value.active %}bg-[#e61a7a] border-[#e61a7a]{% else %}bg-transparent{% endif %}">
+                      <div class="w-[14px] h-[14px] border border-[#222] rounded-[1px] transition-colors flex items-center justify-center mr-3 flex-shrink-0
+                                  {% if value.active %}bg-[#de2077] border-[#de2077]{% else %}bg-transparent{% endif %}">
                         {% if value.active %}
-                          <svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="4"><path d="M5 13l4 4L19 7"/></svg>
+                          <svg class="w-2.5 h-2.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="5"><path d="M5 13l4 4L19 7"/></svg>
                         {% endif %}
                       </div>
-                      <span class="text-[14px] text-[#222] font-normal" style="font-family: var(--font-montserrat);">{{ value.label }}</span>
+                      <span class="text-[14px] text-[#222] font-light leading-none" style="font-family: var(--font-montserrat);">{{ value.label }}</span>
                     </div>
                   {% endfor %}
                 </div>
@@ -247,7 +250,7 @@
           </div>
           
           <!-- Divider Line -->
-          <div class="h-[1px] bg-[#d1d1d1] w-full mt-8"></div>
+          <hr class="border-t border-[#d1d1d1] w-full mt-7 mb-1">
         </div>
       {% endfor %}
     {% else %}
@@ -354,10 +357,10 @@
       const box = el.querySelector('div');
       if (box) {
         if (active) {
-          box.classList.add('bg-[#e61a7a]', 'border-[#e61a7a]');
-          box.innerHTML = '<svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="4"><path d="M5 13l4 4L19 7"/></svg>';
+          box.classList.add('bg-[#de2077]', 'border-[#de2077]');
+          box.innerHTML = '<svg class="w-2.5 h-2.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="5"><path d="M5 13l4 4L19 7"/></svg>';
         } else {
-          box.classList.remove('bg-[#e61a7a]', 'border-[#e61a7a]');
+          box.classList.remove('bg-[#de2077]', 'border-[#de2077]');
           box.innerHTML = '';
         }
       }
