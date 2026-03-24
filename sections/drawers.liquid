@@ -167,150 +167,89 @@
   <div class="flex-1 overflow-y-auto px-10 pb-10 bg-white" id="filter-body">
 
     {% if collection.filters.size > 0 %}
-      {% comment %} ── DYNAMIC FILTERS FROM SHOPIFY ── {% endcomment %}
       {% for filter in collection.filters %}
-
-        <div class="mb-5 filter-group" data-filter-type="{{ filter.type }}">
-
-          {% comment %} Section divider (not on first) {% endcomment %}
-          {% unless forloop.first %}
-            <div class="h-[1px] bg-[#222] w-full mb-5 opacity-60"></div>
-          {% endunless %}
-
-          {% comment %} Accordion header {% endcomment %}
-          <div class="flex items-center justify-between mb-4 cursor-pointer filter-accordion-trigger">
-            <h3 class="text-[13px] font-bold text-[#222222] uppercase tracking-widest"
-                style="font-family: var(--font-montserrat), Montserrat, sans-serif;">
+        <div class="filter-group mb-8" data-filter-name="{{ filter.label | upcase }}">
+          
+          {% comment %} Header {% endcomment %}
+          <div class="flex items-center justify-between mb-5 {% if filter.label != 'Size' and filter.label != 'Color' %}cursor-pointer filter-accordion-trigger{% endif %}">
+            <h3 class="text-[14px] font-bold text-[#222] uppercase tracking-widest" style="font-family: var(--font-montserrat);">
               {{ filter.label }}
             </h3>
-            <svg class="w-4 h-4 text-[#222] filter-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                 style="transform: rotate(180deg); transition: transform 0.3s ease;">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7"/>
-            </svg>
+            {% if filter.label != 'Size' and filter.label != 'Color' %}
+              <svg class="w-3.5 h-3.5 text-[#222] transition-transform filter-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <path d="M19 9l-7 7-7-7"/>
+              </svg>
+            {% endif %}
           </div>
 
-          <div class="filter-accordion-body">
-
+          <div class="filter-content">
             {% if filter.type == 'price_range' %}
-              {% comment %} ── PRICE RANGE ── {% endcomment %}
-              <div class="flex gap-3 items-center">
+              {% comment %} ── PRICE ── {% endcomment %}
+              <div class="flex gap-3 items-center mb-4">
                 <div class="flex-1">
-                  <label class="text-[11px] uppercase tracking-widest text-gray-400 mb-1 block" style="font-family: var(--font-montserrat)">
-                    {{ 'catalog.price_from' | t | default: 'From' }}
-                  </label>
-                  <input type="number" id="filter-price-min"
-                         name="{{ filter.min_value.param_name }}"
-                         value="{% if filter.min_value.value %}{{ filter.min_value.value | money_without_currency }}{% endif %}"
-                         placeholder="0"
-                         min="0" max="{{ filter.range_max | money_without_currency }}"
-                         class="w-full border border-[#d1d1d1] text-[13px] px-3 py-2 focus:outline-none focus:border-[#222]"
-                         style="font-family: var(--font-montserrat);">
+                  <span class="text-[10px] uppercase text-gray-400 block mb-1">From</span>
+                  <input type="number" id="filter-price-min" name="{{ filter.min_value.param_name }}"
+                         placeholder="0" class="w-full border border-[#eee] text-[13px] px-3 py-2 outline-none">
                 </div>
-                <span class="text-gray-400 mt-5">—</span>
+                <span class="text-gray-300 mt-4">—</span>
                 <div class="flex-1">
-                  <label class="text-[11px] uppercase tracking-widest text-gray-400 mb-1 block" style="font-family: var(--font-montserrat)">
-                    {{ 'catalog.price_to' | t | default: 'To' }}
-                  </label>
-                  <input type="number" id="filter-price-max"
-                         name="{{ filter.max_value.param_name }}"
-                         value="{% if filter.max_value.value %}{{ filter.max_value.value | money_without_currency }}{% endif %}"
-                         placeholder="{{ filter.range_max | money_without_currency }}"
-                         min="0" max="{{ filter.range_max | money_without_currency }}"
-                         class="w-full border border-[#d1d1d1] text-[13px] px-3 py-2 focus:outline-none focus:border-[#222]"
-                         style="font-family: var(--font-montserrat);">
+                  <span class="text-[10px] uppercase text-gray-400 block mb-1">To</span>
+                  <input type="number" id="filter-price-max" name="{{ filter.max_value.param_name }}"
+                         placeholder="{{ filter.range_max | money_without_currency }}" class="w-full border border-[#eee] text-[13px] px-3 py-2 outline-none">
                 </div>
               </div>
-              <button type="button" id="filter-price-apply"
-                      class="mt-3 text-[11px] uppercase tracking-widest border border-[#222] px-4 py-2 hover:bg-[#222] hover:text-white transition-colors"
-                      style="font-family: var(--font-montserrat);">
-                {{ 'catalog.apply' | t | default: 'Apply' }}
-              </button>
+              <button type="button" class="btn-price-apply text-[11px] uppercase tracking-widest border border-[#222] px-6 py-2">Apply</button>
 
             {% elsif filter.type == 'list' %}
-              {% comment %} ── LIST FILTER (color, size, category, material…) ── {% endcomment %}
-
-              {% comment %} Detect if swatch-style (filter label contains Color/Colour/Колір/צבע) {% endcomment %}
-              {% assign lbl_lower = filter.label | downcase %}
-              {% if lbl_lower contains 'color' or lbl_lower contains 'colour' or lbl_lower contains 'колір' or lbl_lower contains 'цвет' or lbl_lower contains 'צבע' %}
-
-                {% comment %} COLOR SWATCHES {% endcomment %}
-                <div class="flex flex-wrap gap-x-[14px] gap-y-[14px]">
+              {% assign lbl = filter.label | downcase %}
+              
+              {% if lbl contains 'color' or lbl contains 'колір' or lbl contains 'צבע' %}
+                {% comment %} ── COLOR SWATCHES ── {% endcomment %}
+                <div class="flex flex-wrap gap-x-4 gap-y-5">
                   {% for value in filter.values %}
-                    <button type="button"
-                            class="filter-swatch w-[20px] h-[20px] rounded-full hover:ring-2 hover:ring-[#e61a7a] ring-offset-2 transition-all
-                                   {% if value.active %}ring-2 ring-[#e61a7a]{% endif %}"
-                            data-param="{{ value.param_name }}"
-                            data-value="{{ value.value | url_encode }}"
-                            data-active="{{ value.active }}"
-                            style="background-color: {{ value.value | downcase }}; border: 1px solid #d1d1d1;"
-                            title="{{ value.label }}"
-                            aria-label="{{ value.label }}">
-                    </button>
+                    <button type="button" class="filter-swatch w-[28px] h-[28px] rounded-full ring-offset-2 transition-all border border-[#eee] {% if value.active %}ring-1 ring-[#e61a7a]{% endif %}"
+                            data-param="{{ value.param_name }}" data-value="{{ value.value | url_encode }}"
+                            style="background-color: {{ value.value | downcase }};" title="{{ value.label }}"></button>
                   {% endfor %}
                 </div>
 
-              {% elsif lbl_lower contains 'size' or lbl_lower contains 'розмір' or lbl_lower contains 'мидa' or lbl_lower contains 'גודל' %}
-
-                {% comment %} SIZE BUTTONS {% endcomment %}
-                <div class="flex flex-wrap gap-[10px]">
+              {% elsif lbl contains 'size' or lbl contains 'розмір' or lbl contains 'גודל' %}
+                {% comment %} ── SIZE GRID ── {% endcomment %}
+                <div class="flex flex-wrap gap-3">
                   {% for value in filter.values %}
-                    <button type="button"
-                            class="filter-size min-w-[32px] h-[32px] px-2 border text-[12px] text-[#444] flex items-center justify-center transition-colors
-                                   {% if value.active %}border-[#222] font-medium bg-[#f5f5f5]{% else %}border-[#d1d1d1] hover:border-black{% endif %}"
-                            data-param="{{ value.param_name }}"
-                            data-value="{{ value.value | url_encode }}"
-                            data-active="{{ value.active }}"
-                            style="font-family: var(--font-montserrat);">
-                      {{ value.label }}
+                    {% assign v_up = value.label | upcase %}
+                    <button type="button" class="filter-size h-[36px] border text-[13px] flex items-center justify-center transition-all bg-white
+                                   {% if v_up contains 'ONE SIZE' %}w-[100px] mt-2{% else %}w-[44px]{% endif %}
+                                   {% if value.active %}border-[#222] font-semibold{% else %}border-[#eee] text-[#222]{% endif %}"
+                            data-param="{{ value.param_name }}" data-value="{{ value.value | url_encode }}">
+                      {{ value.label | upcase }}
                     </button>
                   {% endfor %}
                 </div>
 
               {% else %}
-
-                {% comment %} GENERIC CHECKBOX LIST {% endcomment %}
-                <div class="space-y-[12px]">
+                {% comment %} ── CHECKBOX LIST (Category, Material, Availability) ── {% endcomment %}
+                <div class="flex flex-col gap-3.5">
                   {% for value in filter.values %}
-                    <label class="flex items-center cursor-pointer group filter-label">
-
-                      {% if request.locale.iso_code == 'he' %}
-                        <span class="text-[13px] text-[#444] flex-1" style="font-family: var(--font-montserrat);">{{ value.label }}</span>
-                        <div class="relative flex-shrink-0 w-[14px] h-[14px] rounded-[1px] border transition-colors
-                                    {% if value.active %}border-[#e61a7a] bg-[#e61a7a] flex items-center justify-center{% else %}border-[#222] group-hover:border-[#e61a7a]{% endif %}"
-                             data-param="{{ value.param_name }}"
-                             data-value="{{ value.value | url_encode }}"
-                             data-active="{{ value.active }}">
-                          {% if value.active %}
-                            <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
-                          {% endif %}
-                        </div>
-                      {% else %}
-                        <div class="relative flex-shrink-0 w-[14px] h-[14px] rounded-[1px] border transition-colors mr-3
-                                    {% if value.active %}border-[#e61a7a] bg-[#e61a7a] flex items-center justify-center{% else %}border-[#222] group-hover:border-[#e61a7a]{% endif %}"
-                             data-param="{{ value.param_name }}"
-                             data-value="{{ value.value | url_encode }}"
-                             data-active="{{ value.active }}">
-                          {% if value.active %}
-                            <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
-                          {% endif %}
-                        </div>
-                        <span class="text-[13px] text-[#444]" style="font-family: var(--font-montserrat);">{{ value.label }}
-                          {% if value.count %}<span class="text-gray-400">({{ value.count }})</span>{% endif %}
-                        </span>
-                      {% endif %}
-
-                    </label>
+                    <div class="flex items-center cursor-pointer group filter-item" data-param="{{ value.param_name }}" data-value="{{ value.value | url_encode }}">
+                      <div class="w-[15px] h-[15px] border border-[#222] rounded-[1px] transition-colors flex items-center justify-center mr-3
+                                  {% if value.active %}bg-[#e61a7a] border-[#e61a7a]{% else %}bg-transparent{% endif %}">
+                        {% if value.active %}
+                          <svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="4"><path d="M5 13l4 4L19 7"/></svg>
+                        {% endif %}
+                      </div>
+                      <span class="text-[14px] text-[#222] font-normal" style="font-family: var(--font-montserrat);">{{ value.label }}</span>
+                    </div>
                   {% endfor %}
                 </div>
-
               {% endif %}
             {% endif %}
-
-          </div>{%- comment -%}.filter-accordion-body{%- endcomment -%}
-        </div>{%- comment -%}.filter-group{%- endcomment -%}
-
+          </div>
+          
+          <!-- Divider Line -->
+          <div class="h-[1px] bg-[#d1d1d1] w-full mt-7"></div>
+        </div>
       {% endfor %}
-
     {% else %}
       {% comment %} ── FALLBACK: no collection.filters (not on collection page, or filters not configured) ── {% endcomment %}
       <p class="text-[13px] text-gray-400 mt-4" style="font-family: var(--font-montserrat);">
@@ -400,37 +339,29 @@
 
   /* Visual toggle of a filter control */
   function toggleControl(el, active) {
-    const isCheck  = el.tagName === 'DIV' || (el.closest('label') && !el.classList.contains('filter-swatch') && !el.classList.contains('filter-size'));
     const isSwatch = el.classList.contains('filter-swatch');
     const isSize   = el.classList.contains('filter-size');
+    const isItem   = el.classList.contains('filter-item');
 
     if (isSwatch) {
-      el.classList.toggle('ring-2', active);
+      el.classList.toggle('ring-1', active);
       el.classList.toggle('ring-[#e61a7a]', active);
     } else if (isSize) {
       el.classList.toggle('border-[#222]', active);
-      el.classList.toggle('font-medium', active);
-      el.classList.toggle('bg-[#f5f5f5]', active);
-      el.classList.toggle('border-[#d1d1d1]', !active);
-    } else {
-      // Checkbox box div
-      if (active) {
-        el.style.backgroundColor = '#e61a7a';
-        el.style.borderColor = '#e61a7a';
-        el.style.display = 'flex';
-        el.style.alignItems = 'center';
-        el.style.justifyContent = 'center';
-        if (!el.querySelector('svg')) {
-          el.innerHTML = '<svg style="width:10px;height:10px" fill="none" stroke="white" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>';
+      el.classList.toggle('font-semibold', active);
+      el.classList.toggle('border-[#eee]', !active);
+    } else if (isItem) {
+      const box = el.querySelector('div');
+      if (box) {
+        if (active) {
+          box.classList.add('bg-[#e61a7a]', 'border-[#e61a7a]');
+          box.innerHTML = '<svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="4"><path d="M5 13l4 4L19 7"/></svg>';
+        } else {
+          box.classList.remove('bg-[#e61a7a]', 'border-[#e61a7a]');
+          box.innerHTML = '';
         }
-      } else {
-        el.style.backgroundColor = '';
-        el.style.borderColor = '';
-        const s = el.querySelector('svg');
-        if (s) s.remove();
       }
     }
-    el.dataset.active = active ? 'true' : 'false';
   }
 
   /* Handle click on any filter control */
@@ -440,11 +371,10 @@
     if (!param || !value) return;
 
     if (!pendingFilters[param]) pendingFilters[param] = new Set();
-    const isActive = pendingFilters[param].has(value);
+    const active = pendingFilters[param].has(value);
 
-    if (isActive) {
+    if (active) {
       pendingFilters[param].delete(value);
-      if (pendingFilters[param].size === 0) delete pendingFilters[param];
       toggleControl(el, false);
     } else {
       pendingFilters[param].add(value);
@@ -456,26 +386,20 @@
     /* Accordion toggle */
     filterDrawer.querySelectorAll('.filter-accordion-trigger').forEach(trigger => {
       trigger.addEventListener('click', () => {
-        const body   = trigger.nextElementSibling;
-        const icon   = trigger.querySelector('.filter-chevron');
-        if (!body) return;
-        const open = body.style.display !== 'none';
-        body.style.display = open ? 'none' : '';
-        if (icon) icon.style.transform = open ? 'rotate(0deg)' : 'rotate(180deg)';
+        const group = trigger.closest('.filter-group');
+        const content = group.querySelector('.filter-content');
+        const icon = trigger.querySelector('.filter-chevron');
+        if (!content) return;
+        const isHidden = content.style.display === 'none';
+        content.style.display = isHidden ? '' : 'none';
+        if (icon) icon.style.transform = isHidden ? 'rotate(0deg)' : 'rotate(180deg)';
       });
     });
 
     /* Click on filter items */
     filterDrawer.addEventListener('click', e => {
-      const swatch = e.target.closest('.filter-swatch');
-      const size   = e.target.closest('.filter-size');
-      const box    = e.target.closest('[data-param][data-active]');
-
-      if (swatch) { handleFilterClick(swatch); return; }
-      if (size)   { handleFilterClick(size);   return; }
-      if (box && !e.target.closest('#filter-apply-btn') && !e.target.closest('#filter-clear-btn')) {
-        handleFilterClick(box);
-      }
+      const el = e.target.closest('.filter-swatch, .filter-size, .filter-item');
+      if (el) handleFilterClick(el);
     });
 
     /* Apply button ─ build URL and navigate */
