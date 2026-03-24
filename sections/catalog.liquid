@@ -91,15 +91,14 @@
 
     <button
       type="button"
-      class="flex items-center gap-2.5 px-6 py-2.5 border border-[#222] text-[12px] font-bold tracking-[0.1em] uppercase text-gray-900 hover:bg-[#222] hover:text-white transition-all duration-300"
-      style="font-family: var(--font-montserrat);"
+      class="flex items-center gap-3 px-6 py-2.5 border border-[#222] text-[12px] font-medium tracking-[0.15em] uppercase text-gray-900 transition-colors"
+      style="font-family: var(--font-montserrat), Montserrat, sans-serif;"
       aria-label="Filter"
       data-drawer-trigger="filter-drawer">
-      <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M3 4.5h18M7 12h10M10.5 19.5h3"/>
+      <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M7 12h10M10 18h4"/>
       </svg>
-      {{ 'catalog.filter' | t | default: 'Filters' }}
-      (<span data-filter-count class="font-bold">0</span>)
+      <span>FILTER ( <span data-filter-count>0</span> )</span>
     </button>
   </div>
 
