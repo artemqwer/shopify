@@ -375,17 +375,18 @@
 
         <!-- Account button (desktop text) -->
         {% if customer %}
-          <a
-            href="{{ routes.account_url }}"
-            class="text-[14px] font-normal tracking-widest text-gray-900 uppercase hover:text-[#d62873] transition-colors hidden md:block"
+          <button
+            type="button"
+            onclick="openAccountModal()"
+            class="text-[14px] font-normal tracking-widest text-gray-900 uppercase hover:text-gray-500 transition-colors hidden md:block bg-transparent border-none cursor-pointer"
             style="font-family: Montserrat, sans-serif;"
           >
             {{ 'header.account' | t }}
-          </a>
+          </button>
         {% else %}
           <a
             href="{{ routes.account_login_url }}"
-            class="text-[14px] font-normal tracking-widest text-gray-900 uppercase hover:text-[#d62873] transition-colors hidden md:block"
+            class="text-[14px] font-normal tracking-widest text-gray-900 uppercase hover:text-gray-500 transition-colors hidden md:block"
             style="font-family: Montserrat, sans-serif;"
           >
             {{ 'header.account' | t }}
@@ -393,12 +394,22 @@
         {% endif %}
 
         <!-- Account icon (mobile only) -->
-        <a
-          href="{% if customer %}{{ routes.account_url }}{% else %}{{ routes.account_login_url }}{% endif %}"
-          class="md:hidden header-mobile-icon relative z-[70]"
-        >
-          <img src="{{ 'account.svg' | asset_url }}" width="24" height="24" alt="account" class="cart-icon-img">
-        </a>
+        {% if customer %}
+          <button
+            type="button"
+            onclick="openAccountModal()"
+            class="md:hidden header-mobile-icon relative z-[70] bg-transparent border-none p-0 cursor-pointer"
+          >
+            <img src="{{ 'account.svg' | asset_url }}" width="24" height="24" alt="account" class="cart-icon-img">
+          </button>
+        {% else %}
+          <a
+            href="{{ routes.account_login_url }}"
+            class="md:hidden header-mobile-icon relative z-[70]"
+          >
+            <img src="{{ 'account.svg' | asset_url }}" width="24" height="24" alt="account" class="cart-icon-img">
+          </a>
+        {% endif %}
 
         <!-- Cart trigger -->
         <button
