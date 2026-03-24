@@ -1,9 +1,0 @@
-{
-  "sections": {
-    "main": {
-      "type": "checkout-page",
-      "settings": {}
-    }
-  },
-  "order": ["main"]
-}
