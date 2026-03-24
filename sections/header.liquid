@@ -32,28 +32,31 @@
 >
   <div class="w-full max-w-[1280px] mx-auto px-[20px] header-desktop-padding">
     <div class="relative flex justify-between items-center h-[57px] md:h-[102px]">
-      <div id="burger-desktop-remover" class="md:hidden hide-on-desktop flex-1 flex items-center gap-4 relative z-[70]">
-        <button
-          type="button"
-          class="mobile-menu-toggle header-mobile-icon relative w-6 h-6 focus:outline-none"
-          aria-label="Menu"
-          onclick="toggleMobileMenu(this)"
-        >
-          <span
-            class="absolute block h-[1px] w-6 bg-current transform transition duration-300 ease-in-out top-1/2 -translate-y-2"
-          ></span>
-          <span
-            class="absolute block h-[1px] w-6 bg-current transform transition duration-300 ease-in-out top-1/2"
-          ></span>
-          <span
-            class="absolute block h-[1px] w-6 bg-current transform transition duration-300 ease-in-out top-1/2 translate-y-2"
-          ></span>
-        </button>
+      <div class="md:hidden hide-on-desktop flex-1 flex items-center gap-4 relative">
+        <!-- Burger button wrapper -->
+        <div id="burger-desktop-remover" class="relative z-[70]">
+          <button
+            type="button"
+            class="mobile-menu-toggle header-mobile-icon relative w-6 h-6 focus:outline-none"
+            aria-label="Menu"
+            onclick="toggleMobileMenu(this)"
+          >
+            <span
+              class="absolute block h-[1px] w-6 bg-current transform transition duration-300 ease-in-out top-1/2 -translate-y-2"
+            ></span>
+            <span
+              class="absolute block h-[1px] w-6 bg-current transform transition duration-300 ease-in-out top-1/2"
+            ></span>
+            <span
+              class="absolute block h-[1px] w-6 bg-current transform transition duration-300 ease-in-out top-1/2 translate-y-2"
+            ></span>
+          </button>
+        </div>
 
-        <!-- Search icon (mobile) moved to left -->
+        <!-- Search icon (mobile) - stays in place -->
         <button
           type="button"
-          class="header-mobile-icon relative"
+          class="header-mobile-icon relative z-[70]"
           onclick="window.location='{{ routes.root_url | append: '/search' | replace: '//', '/' }}'"
         >
           <img src="{{ 'Search.svg' | asset_url }}" width="24" height="24" alt="search" class="cart-icon-img">
