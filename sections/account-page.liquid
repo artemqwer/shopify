@@ -1,0 +1,860 @@
+{% schema %}
+{
+  "name": "Account Page",
+  "settings": []
+}
+{% endschema %}
+
+<style>
+  /* Base Account Container */
+  .account-container {
+    font-family: var(--font-montserrat), Montserrat, sans-serif;
+  }
+
+  /* Tab Navigation */
+  .account-tabs {
+    border-bottom: 1px solid #e5e5e5;
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .account-tabs::-webkit-scrollbar { display: none; }
+
+  .account-tab {
+    padding: 16px 24px;
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #888;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+    background: transparent;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    outline: none;
+  }
+  .account-tab:hover { color: #222; }
+  .account-tab.active {
+    color: #e61a7a;
+    border-bottom-color: #e61a7a;
+    font-weight: 500;
+  }
+
+  /* Tab Content Panels */
+  .account-panel {
+    display: none;
+    padding: 32px 0;
+  }
+  .account-panel.active { display: block; }
+
+  /* Form Inputs */
+  .acc-input, .acc-select {
+    width: 100%;
+    border: 1px solid #d1d1d1;
+    padding: 12px 14px;
+    font-size: 13px;
+    color: #222;
+    background: transparent;
+    transition: border-color 0.2s;
+    outline: none;
+    font-family: inherit;
+  }
+  .acc-input::placeholder { color: #888; }
+  .acc-input:focus, .acc-select:focus { border-color: #e61a7a; }
+  .acc-input:disabled, .acc-select:disabled {
+    background: #f8f8f8;
+    color: #999;
+    cursor: not-allowed;
+  }
+
+  /* Buttons */
+  .btn-primary {
+    background: #e61a7a;
+    color: #fff;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    font-weight: 600;
+    padding: 14px 32px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+    text-transform: uppercase;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: #c21566; }
+  .btn-primary:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: #222;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    font-weight: 500;
+    padding: 14px 32px;
+    border: 1px solid #222;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-transform: uppercase;
+    display: inline-block;
+  }
+  .btn-secondary:hover {
+    background: #222;
+    color: #fff;
+  }
+
+  .btn-link {
+    background: none;
+    border: none;
+    color: #e61a7a;
+    font-size: 12px;
+    text-decoration: underline;
+    cursor: pointer;
+    padding: 0;
+  }
+  .btn-link:hover { color: #c21566; }
+
+  /* Order Card */
+  .order-card {
+    border: 1px solid #e5e5e5;
+    padding: 20px;
+    margin-bottom: 16px;
+    transition: border-color 0.2s;
+  }
+  .order-card:hover { border-color: #d1d1d1; }
+
+  .order-status {
+    display: inline-block;
+    padding: 4px 12px;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border-radius: 2px;
+    font-weight: 600;
+  }
+  .order-status.pending { background: #fff3cd; color: #856404; }
+  .order-status.processing { background: #cfe2ff; color: #084298; }
+  .order-status.shipped { background: #d1e7dd; color: #0f5132; }
+  .order-status.delivered { background: #d1e7dd; color: #0f5132; }
+  .order-status.cancelled { background: #f8d7da; color: #842029; }
+
+  /* Address Card */
+  .address-card {
+    border: 1px solid #e5e5e5;
+    padding: 20px;
+    position: relative;
+    background: #fff;
+  }
+  .address-card.default {
+    border-color: #e61a7a;
+    background: #fff8fc;
+  }
+  .address-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: #e61a7a;
+    color: #fff;
+    font-size: 9px;
+    padding: 3px 8px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+
+  /* Empty State */
+  .empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: #888;
+  }
+  .empty-state svg {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 24px;
+    opacity: 0.3;
+  }
+  .empty-state h3 {
+    font-size: 18px;
+    font-weight: 500;
+    color: #222;
+    margin-bottom: 8px;
+  }
+  .empty-state p {
+    font-size: 13px;
+    margin-bottom: 24px;
+  }
+
+  /* Responsive */
+  @media (max-width: 767px) {
+    .account-tab {
+      padding: 14px 16px;
+      font-size: 11px;
+    }
+    .account-panel { padding: 24px 0; }
+    .btn-primary, .btn-secondary {
+      width: 100%;
+      text-align: center;
+    }
+  }
+</style>
+
+{% comment %} ─── Locale Strings ─── {% endcomment %}
+{% if request.locale.iso_code == 'he' %}
+  {% assign acc_dir = 'rtl' %}
+  {% assign txt_account = 'החשבון שלי' %}
+  {% assign txt_orders = 'הזמנות' %}
+  {% assign txt_addresses = 'כתובות' %}
+  {% assign txt_profile = 'פרופיל' %}
+  {% assign txt_logout = 'התנתק' %}
+  {% assign txt_no_orders = 'עדיין אין הזמנות' %}
+  {% assign txt_start_shopping = 'התחל לקנות' %}
+  {% assign txt_order_number = 'מספר הזמנה' %}
+  {% assign txt_date = 'תאריך' %}
+  {% assign txt_total = 'סך הכל' %}
+  {% assign txt_status = 'סטטוס' %}
+  {% assign txt_view_details = 'צפה בפרטים' %}
+  {% assign txt_no_addresses = 'עדיין אין כתובות שמורות' %}
+  {% assign txt_add_address = 'הוסף כתובת' %}
+  {% assign txt_default = 'ברירת מחדל' %}
+  {% assign txt_edit = 'ערוך' %}
+  {% assign txt_delete = 'מחק' %}
+  {% assign txt_set_default = 'הגדר כברירת מחדל' %}
+  {% assign txt_first_name = 'שם פרטי' %}
+  {% assign txt_last_name = 'שם משפחה' %}
+  {% assign txt_email = 'אימייל' %}
+  {% assign txt_phone = 'טלפון' %}
+  {% assign txt_address1 = 'כתובת 1' %}
+  {% assign txt_address2 = 'כתובת 2 (לא חובה)' %}
+  {% assign txt_city = 'עיר' %}
+  {% assign txt_zip = 'מיקוד' %}
+  {% assign txt_country = 'מדינה' %}
+  {% assign txt_save = 'שמור' %}
+  {% assign txt_cancel = 'ביטול' %}
+  {% assign txt_save_changes = 'שמור שינויים' %}
+  {% assign txt_change_password = 'שנה סיסמה' %}
+  {% assign txt_current_password = 'סיסמה נוכחית' %}
+  {% assign txt_new_password = 'סיסמה חדשה' %}
+  {% assign txt_confirm_password = 'אשר סיסמה' %}
+{% elsif request.locale.iso_code == 'uk' %}
+  {% assign acc_dir = 'ltr' %}
+  {% assign txt_account = 'Мій акаунт' %}
+  {% assign txt_orders = 'Замовлення' %}
+  {% assign txt_addresses = 'Адреси' %}
+  {% assign txt_profile = 'Профіль' %}
+  {% assign txt_logout = 'Вийти' %}
+  {% assign txt_no_orders = 'Ви ще не зробили жодного замовлення' %}
+  {% assign txt_start_shopping = 'Почати покупки' %}
+  {% assign txt_order_number = 'Замовлення №' %}
+  {% assign txt_date = 'Дата' %}
+  {% assign txt_total = 'Сума' %}
+  {% assign txt_status = 'Статус' %}
+  {% assign txt_view_details = 'Деталі' %}
+  {% assign txt_no_addresses = 'У вас ще немає збережених адрес' %}
+  {% assign txt_add_address = 'Додати адресу' %}
+  {% assign txt_default = 'За замовчуванням' %}
+  {% assign txt_edit = 'Редагувати' %}
+  {% assign txt_delete = 'Видалити' %}
+  {% assign txt_set_default = 'Зробити основною' %}
+  {% assign txt_first_name = 'Ім&#x27;я' %}
+  {% assign txt_last_name = 'Прізвище' %}
+  {% assign txt_email = 'Email' %}
+  {% assign txt_phone = 'Телефон' %}
+  {% assign txt_address1 = 'Адреса рядок 1' %}
+  {% assign txt_address2 = 'Адреса рядок 2 (необов&#x27;язково)' %}
+  {% assign txt_city = 'Місто' %}
+  {% assign txt_zip = 'Індекс' %}
+  {% assign txt_country = 'Країна' %}
+  {% assign txt_save = 'Зберегти' %}
+  {% assign txt_cancel = 'Скасувати' %}
+  {% assign txt_save_changes = 'Зберегти зміни' %}
+  {% assign txt_change_password = 'Змінити пароль' %}
+  {% assign txt_current_password = 'Поточний пароль' %}
+  {% assign txt_new_password = 'Новий пароль' %}
+  {% assign txt_confirm_password = 'Підтвердити пароль' %}
+{% elsif request.locale.iso_code == 'fr' %}
+  {% assign acc_dir = 'ltr' %}
+  {% assign txt_account = 'Mon compte' %}
+  {% assign txt_orders = 'Commandes' %}
+  {% assign txt_addresses = 'Adresses' %}
+  {% assign txt_profile = 'Profil' %}
+  {% assign txt_logout = 'Déconnexion' %}
+  {% assign txt_no_orders = 'Vous n&#x27;avez pas encore passé de commande' %}
+  {% assign txt_start_shopping = 'Commencer vos achats' %}
+  {% assign txt_order_number = 'Commande N°' %}
+  {% assign txt_date = 'Date' %}
+  {% assign txt_total = 'Total' %}
+  {% assign txt_status = 'Statut' %}
+  {% assign txt_view_details = 'Voir détails' %}
+  {% assign txt_no_addresses = 'Aucune adresse enregistrée' %}
+  {% assign txt_add_address = 'Ajouter une adresse' %}
+  {% assign txt_default = 'Par défaut' %}
+  {% assign txt_edit = 'Modifier' %}
+  {% assign txt_delete = 'Supprimer' %}
+  {% assign txt_set_default = 'Définir par défaut' %}
+  {% assign txt_first_name = 'Prénom' %}
+  {% assign txt_last_name = 'Nom' %}
+  {% assign txt_email = 'Email' %}
+  {% assign txt_phone = 'Téléphone' %}
+  {% assign txt_address1 = 'Adresse ligne 1' %}
+  {% assign txt_address2 = 'Adresse ligne 2 (facultatif)' %}
+  {% assign txt_city = 'Ville' %}
+  {% assign txt_zip = 'Code postal' %}
+  {% assign txt_country = 'Pays' %}
+  {% assign txt_save = 'Enregistrer' %}
+  {% assign txt_cancel = 'Annuler' %}
+  {% assign txt_save_changes = 'Sauvegarder' %}
+  {% assign txt_change_password = 'Changer le mot de passe' %}
+  {% assign txt_current_password = 'Mot de passe actuel' %}
+  {% assign txt_new_password = 'Nouveau mot de passe' %}
+  {% assign txt_confirm_password = 'Confirmer le mot de passe' %}
+{% else %}
+  {% assign acc_dir = 'ltr' %}
+  {% assign txt_account = 'My Account' %}
+  {% assign txt_orders = 'Orders' %}
+  {% assign txt_addresses = 'Addresses' %}
+  {% assign txt_profile = 'Profile' %}
+  {% assign txt_logout = 'Logout' %}
+  {% assign txt_no_orders = 'You haven&#x27;t placed any orders yet' %}
+  {% assign txt_start_shopping = 'Start Shopping' %}
+  {% assign txt_order_number = 'Order #' %}
+  {% assign txt_date = 'Date' %}
+  {% assign txt_total = 'Total' %}
+  {% assign txt_status = 'Status' %}
+  {% assign txt_view_details = 'View Details' %}
+  {% assign txt_no_addresses = 'No saved addresses yet' %}
+  {% assign txt_add_address = 'Add New Address' %}
+  {% assign txt_default = 'Default' %}
+  {% assign txt_edit = 'Edit' %}
+  {% assign txt_delete = 'Delete' %}
+  {% assign txt_set_default = 'Set as Default' %}
+  {% assign txt_first_name = 'First Name' %}
+  {% assign txt_last_name = 'Last Name' %}
+  {% assign txt_email = 'Email' %}
+  {% assign txt_phone = 'Phone' %}
+  {% assign txt_address1 = 'Address Line 1' %}
+  {% assign txt_address2 = 'Address Line 2 (optional)' %}
+  {% assign txt_city = 'City' %}
+  {% assign txt_zip = 'Postal Code' %}
+  {% assign txt_country = 'Country' %}
+  {% assign txt_save = 'Save' %}
+  {% assign txt_cancel = 'Cancel' %}
+  {% assign txt_save_changes = 'Save Changes' %}
+  {% assign txt_change_password = 'Change Password' %}
+  {% assign txt_current_password = 'Current Password' %}
+  {% assign txt_new_password = 'New Password' %}
+  {% assign txt_confirm_password = 'Confirm Password' %}
+{% endif %}
+
+<div class="account-container w-full max-w-[1280px] mx-auto px-4 md:px-[20px] py-8 md:py-16" dir="{{ acc_dir }}">
+
+  <!-- Page Header -->
+  <div class="flex items-center justify-between mb-8 md:mb-12">
+    <h1 class="text-[28px] md:text-[38px] font-light text-[#222] tracking-wide">
+      {{ txt_account }}
+    </h1>
+    <button type="button" onclick="logout()" class="btn-link hidden md:inline">
+      {{ txt_logout }}
+    </button>
+  </div>
+
+  <!-- Tab Navigation -->
+  <div class="account-tabs mb-0">
+    <button class="account-tab active" data-tab="orders">{{ txt_orders }}</button>
+    <button class="account-tab" data-tab="addresses">{{ txt_addresses }}</button>
+    <button class="account-tab" data-tab="profile">{{ txt_profile }}</button>
+    <button class="account-tab md:hidden" data-tab="logout">{{ txt_logout }}</button>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       TAB 1: ORDERS
+  ══════════════════════════════════════ -->
+  <div class="account-panel active" data-panel="orders">
+
+    <div id="orders-list">
+      <!-- Dynamic content rendered by JS -->
+    </div>
+
+    <!-- Empty State (shown by JS if no orders) -->
+    <div id="orders-empty" class="empty-state" style="display:none;">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+      </svg>
+      <h3>{{ txt_no_orders }}</h3>
+      <p>{{ txt_start_shopping }}</p>
+      <a href="{{ routes.all_products_collection_url }}" class="btn-primary">{{ txt_start_shopping }}</a>
+    </div>
+
+  </div>
+
+  <!-- ══════════════════════════════════════
+       TAB 2: ADDRESSES
+  ══════════════════════════════════════ -->
+  <div class="account-panel" data-panel="addresses">
+
+    <div class="flex justify-between items-center mb-6">
+      <h2 class="text-[20px] font-medium text-[#222]">{{ txt_addresses }}</h2>
+      <button type="button" onclick="openAddressForm()" class="btn-secondary">
+        {{ txt_add_address }}
+      </button>
+    </div>
+
+    <div id="addresses-list" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <!-- Dynamic content rendered by JS -->
+    </div>
+
+    <!-- Empty State -->
+    <div id="addresses-empty" class="empty-state" style="display:none;">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+      </svg>
+      <h3>{{ txt_no_addresses }}</h3>
+      <button type="button" onclick="openAddressForm()" class="btn-primary">
+        {{ txt_add_address }}
+      </button>
+    </div>
+
+    <!-- Address Form Modal (hidden by default) -->
+    <div id="address-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4" style="display:none;">
+      <div class="bg-white w-full max-w-[600px] p-6 md:p-8 max-h-[90vh] overflow-y-auto" dir="{{ acc_dir }}">
+        <div class="flex justify-between items-center mb-6">
+          <h3 class="text-[20px] font-medium text-[#222]" id="address-modal-title">{{ txt_add_address }}</h3>
+          <button type="button" onclick="closeAddressForm()" class="text-[#888] hover:text-[#222] text-[24px] leading-none">&times;</button>
+        </div>
+        <form id="address-form" class="space-y-4">
+          <input type="hidden" id="address-id" value="">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label for="addr-first-name" class="block text-[11px] uppercase tracking-wider text-[#888] mb-1">{{ txt_first_name }}</label>
+              <input type="text" id="addr-first-name" class="acc-input" required>
+            </div>
+            <div>
+              <label for="addr-last-name" class="block text-[11px] uppercase tracking-wider text-[#888] mb-1">{{ txt_last_name }}</label>
+              <input type="text" id="addr-last-name" class="acc-input" required>
+            </div>
+          </div>
+          <div>
+            <label for="addr-phone" class="block text-[11px] uppercase tracking-wider text-[#888] mb-1">{{ txt_phone }}</label>
+            <input type="tel" id="addr-phone" class="acc-input" required>
+          </div>
+          <div>
+            <label for="addr-address1" class="block text-[11px] uppercase tracking-wider text-[#888] mb-1">{{ txt_address1 }}</label>
+            <input type="text" id="addr-address1" class="acc-input" required>
+          </div>
+          <div>
+            <label for="addr-address2" class="block text-[11px] uppercase tracking-wider text-[#888] mb-1">{{ txt_address2 }}</label>
+            <input type="text" id="addr-address2" class="acc-input">
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label for="addr-city" class="block text-[11px] uppercase tracking-wider text-[#888] mb-1">{{ txt_city }}</label>
+              <input type="text" id="addr-city" class="acc-input" required>
+            </div>
+            <div>
+              <label for="addr-zip" class="block text-[11px] uppercase tracking-wider text-[#888] mb-1">{{ txt_zip }}</label>
+              <input type="text" id="addr-zip" class="acc-input" required>
+            </div>
+          </div>
+          <div>
+            <label for="addr-country" class="block text-[11px] uppercase tracking-wider text-[#888] mb-1">{{ txt_country }}</label>
+            <select id="addr-country" class="acc-select" required>
+              <option value="">{{ txt_country }}</option>
+              <option value="UA">Україна</option>
+              <option value="US">United States</option>
+              <option value="FR">France</option>
+              <option value="IL">Israel</option>
+            </select>
+          </div>
+          <div class="flex gap-3 pt-4">
+            <button type="submit" class="btn-primary flex-1">{{ txt_save }}</button>
+            <button type="button" onclick="closeAddressForm()" class="btn-secondary flex-1">{{ txt_cancel }}</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ══════════════════════════════════════
+       TAB 3: PROFILE
+  ══════════════════════════════════════ -->
+  <div class="account-panel" data-panel="profile">
+
+    <h2 class="text-[20px] font-medium text-[#222] mb-6">{{ txt_profile }}</h2>
+
+    <form id="profile-form" class="max-w-[600px] space-y-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <label for="prof-first-name" class="block text-[11px] uppercase tracking-wider text-[#888] mb-1">{{ txt_first_name }}</label>
+          <input type="text" id="prof-first-name" class="acc-input" value="{{ customer.first_name | default: '' }}">
+        </div>
+        <div>
+          <label for="prof-last-name" class="block text-[11px] uppercase tracking-wider text-[#888] mb-1">{{ txt_last_name }}</label>
+          <input type="text" id="prof-last-name" class="acc-input" value="{{ customer.last_name | default: '' }}">
+        </div>
+      </div>
+      <div>
+        <label for="prof-email" class="block text-[11px] uppercase tracking-wider text-[#888] mb-1">{{ txt_email }}</label>
+        <input type="email" id="prof-email" class="acc-input" value="{{ customer.email | default: 'user@example.com' }}" disabled>
+        <p class="text-[11px] text-[#888] mt-1">Email cannot be changed</p>
+      </div>
+      <div>
+        <label for="prof-phone" class="block text-[11px] uppercase tracking-wider text-[#888] mb-1">{{ txt_phone }}</label>
+        <input type="tel" id="prof-phone" class="acc-input" value="{{ customer.phone | default: '' }}">
+      </div>
+      <button type="submit" class="btn-primary">{{ txt_save_changes }}</button>
+    </form>
+
+    <hr class="my-10 border-[#e5e5e5]">
+
+    <h3 class="text-[18px] font-medium text-[#222] mb-6">{{ txt_change_password }}</h3>
+    <form id="password-form" class="max-w-[600px] space-y-4">
+      <div>
+        <label for="current-password" class="block text-[11px] uppercase tracking-wider text-[#888] mb-1">{{ txt_current_password }}</label>
+        <input type="password" id="current-password" class="acc-input" required>
+      </div>
+      <div>
+        <label for="new-password" class="block text-[11px] uppercase tracking-wider text-[#888] mb-1">{{ txt_new_password }}</label>
+        <input type="password" id="new-password" class="acc-input" minlength="6" required>
+      </div>
+      <div>
+        <label for="confirm-password" class="block text-[11px] uppercase tracking-wider text-[#888] mb-1">{{ txt_confirm_password }}</label>
+        <input type="password" id="confirm-password" class="acc-input" minlength="6" required>
+      </div>
+      <button type="submit" class="btn-primary">{{ txt_save_changes }}</button>
+    </form>
+
+  </div>
+
+</div>
+
+<script>
+(function() {
+  'use strict';
+
+  // ══════════════════════════════════════
+  // TAB SWITCHING
+  // ══════════════════════════════════════
+  const tabs = document.querySelectorAll('.account-tab');
+  const panels = document.querySelectorAll('.account-panel');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', function() {
+      const targetTab = this.getAttribute('data-tab');
+
+      // Special case: logout on mobile
+      if (targetTab === 'logout') {
+        logout();
+        return;
+      }
+
+      // Switch active tab
+      tabs.forEach(t => t.classList.remove('active'));
+      this.classList.add('active');
+
+      // Switch active panel
+      panels.forEach(p => {
+        if (p.getAttribute('data-panel') === targetTab) {
+          p.classList.add('active');
+        } else {
+          p.classList.remove('active');
+        }
+      });
+    });
+  });
+
+  // ══════════════════════════════════════
+  // MOCK DATA & STORAGE
+  // ══════════════════════════════════════
+  const ORDERS_KEY = 'ester_account_orders';
+  const ADDRESSES_KEY = 'ester_account_addresses';
+  const PROFILE_KEY = 'ester_account_profile';
+
+  function getOrders() {
+    try { return JSON.parse(localStorage.getItem(ORDERS_KEY)) || []; } catch(e) { return []; }
+  }
+  function saveOrders(orders) {
+    localStorage.setItem(ORDERS_KEY, JSON.stringify(orders));
+  }
+
+  function getAddresses() {
+    try { return JSON.parse(localStorage.getItem(ADDRESSES_KEY)) || []; } catch(e) { return []; }
+  }
+  function saveAddresses(addresses) {
+    localStorage.setItem(ADDRESSES_KEY, JSON.stringify(addresses));
+  }
+
+  function getProfile() {
+    try { return JSON.parse(localStorage.getItem(PROFILE_KEY)) || {}; } catch(e) { return {}; }
+  }
+  function saveProfile(profile) {
+    localStorage.setItem(PROFILE_KEY, JSON.stringify(profile));
+  }
+
+  // ══════════════════════════════════════
+  // ORDERS TAB
+  // ══════════════════════════════════════
+  function renderOrders() {
+    const orders = getOrders();
+    const container = document.getElementById('orders-list');
+    const emptyState = document.getElementById('orders-empty');
+
+    if (orders.length === 0) {
+      container.innerHTML = '';
+      emptyState.style.display = 'block';
+      return;
+    }
+
+    emptyState.style.display = 'none';
+    container.innerHTML = orders.map(order => {
+      const statusClass = (order.status || 'pending').toLowerCase();
+      return `
+        <div class="order-card">
+          <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3 mb-3">
+            <div>
+              <h3 class="text-[14px] font-semibold text-[#222] mb-1">{{ txt_order_number }}${order.number}</h3>
+              <p class="text-[12px] text-[#888]">{{ txt_date }}: ${order.date}</p>
+            </div>
+            <span class="order-status ${statusClass}">${order.status}</span>
+          </div>
+          <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+            <div class="text-[13px] text-[#555]">
+              <strong>{{ txt_total }}:</strong> ${order.total}
+            </div>
+            <button type="button" onclick="viewOrderDetails('${order.id}')" class="btn-link text-left md:text-right">
+              {{ txt_view_details }}
+            </button>
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  window.viewOrderDetails = function(orderId) {
+    alert('Order details for ' + orderId + ' - feature in development');
+  };
+
+  // ══════════════════════════════════════
+  // ADDRESSES TAB
+  // ══════════════════════════════════════
+  function renderAddresses() {
+    const addresses = getAddresses();
+    const container = document.getElementById('addresses-list');
+    const emptyState = document.getElementById('addresses-empty');
+
+    if (addresses.length === 0) {
+      container.innerHTML = '';
+      emptyState.style.display = 'block';
+      return;
+    }
+
+    emptyState.style.display = 'none';
+    container.innerHTML = addresses.map(addr => {
+      const defaultClass = addr.isDefault ? 'default' : '';
+      return `
+        <div class="address-card ${defaultClass}">
+          ${addr.isDefault ? '<span class="address-badge">{{ txt_default }}</span>' : ''}
+          <div class="mb-4">
+            <p class="text-[14px] font-medium text-[#222]">${escHtml(addr.firstName)} ${escHtml(addr.lastName)}</p>
+            <p class="text-[13px] text-[#555] mt-1">${escHtml(addr.address1)}</p>
+            ${addr.address2 ? `<p class="text-[13px] text-[#555]">${escHtml(addr.address2)}</p>` : ''}
+            <p class="text-[13px] text-[#555]">${escHtml(addr.city)}, ${escHtml(addr.zip)}</p>
+            <p class="text-[13px] text-[#555]">${escHtml(addr.country)}</p>
+            <p class="text-[13px] text-[#555] mt-2">${escHtml(addr.phone)}</p>
+          </div>
+          <div class="flex gap-3 text-[11px]">
+            <button type="button" onclick="editAddress('${addr.id}')" class="btn-link">{{ txt_edit }}</button>
+            <button type="button" onclick="deleteAddress('${addr.id}')" class="btn-link">{{ txt_delete }}</button>
+            ${!addr.isDefault ? `<button type="button" onclick="setDefaultAddress('${addr.id}')" class="btn-link">{{ txt_set_default }}</button>` : ''}
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  window.openAddressForm = function(addressId) {
+    const modal = document.getElementById('address-modal');
+    const form = document.getElementById('address-form');
+    const title = document.getElementById('address-modal-title');
+
+    form.reset();
+    document.getElementById('address-id').value = '';
+
+    if (addressId) {
+      // Edit mode
+      const addresses = getAddresses();
+      const addr = addresses.find(a => a.id === addressId);
+      if (addr) {
+        title.textContent = '{{ txt_edit }}';
+        document.getElementById('address-id').value = addr.id;
+        document.getElementById('addr-first-name').value = addr.firstName;
+        document.getElementById('addr-last-name').value = addr.lastName;
+        document.getElementById('addr-phone').value = addr.phone;
+        document.getElementById('addr-address1').value = addr.address1;
+        document.getElementById('addr-address2').value = addr.address2 || '';
+        document.getElementById('addr-city').value = addr.city;
+        document.getElementById('addr-zip').value = addr.zip;
+        document.getElementById('addr-country').value = addr.country;
+      }
+    } else {
+      // Add mode
+      title.textContent = '{{ txt_add_address }}';
+    }
+
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  };
+
+  window.closeAddressForm = function() {
+    document.getElementById('address-modal').style.display = 'none';
+    document.body.style.overflow = '';
+  };
+
+  window.editAddress = function(id) {
+    openAddressForm(id);
+  };
+
+  window.deleteAddress = function(id) {
+    if (!confirm('{{ txt_delete }}?')) return;
+    let addresses = getAddresses();
+    addresses = addresses.filter(a => a.id !== id);
+    saveAddresses(addresses);
+    renderAddresses();
+  };
+
+  window.setDefaultAddress = function(id) {
+    let addresses = getAddresses();
+    addresses.forEach(a => {
+      a.isDefault = (a.id === id);
+    });
+    saveAddresses(addresses);
+    renderAddresses();
+  };
+
+  document.getElementById('address-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const id = document.getElementById('address-id').value || 'addr_' + Date.now();
+    const newAddress = {
+      id: id,
+      firstName: document.getElementById('addr-first-name').value,
+      lastName: document.getElementById('addr-last-name').value,
+      phone: document.getElementById('addr-phone').value,
+      address1: document.getElementById('addr-address1').value,
+      address2: document.getElementById('addr-address2').value,
+      city: document.getElementById('addr-city').value,
+      zip: document.getElementById('addr-zip').value,
+      country: document.getElementById('addr-country').value,
+      isDefault: false
+    };
+
+    let addresses = getAddresses();
+    const existingIndex = addresses.findIndex(a => a.id === id);
+
+    if (existingIndex > -1) {
+      // Update existing
+      newAddress.isDefault = addresses[existingIndex].isDefault;
+      addresses[existingIndex] = newAddress;
+    } else {
+      // Add new - set as default if it's the first one
+      if (addresses.length === 0) newAddress.isDefault = true;
+      addresses.push(newAddress);
+    }
+
+    saveAddresses(addresses);
+    renderAddresses();
+    closeAddressForm();
+  });
+
+  // ══════════════════════════════════════
+  // PROFILE TAB
+  // ══════════════════════════════════════
+  function loadProfile() {
+    const profile = getProfile();
+    if (profile.firstName) document.getElementById('prof-first-name').value = profile.firstName;
+    if (profile.lastName) document.getElementById('prof-last-name').value = profile.lastName;
+    if (profile.phone) document.getElementById('prof-phone').value = profile.phone;
+  }
+
+  document.getElementById('profile-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const profile = {
+      firstName: document.getElementById('prof-first-name').value,
+      lastName: document.getElementById('prof-last-name').value,
+      phone: document.getElementById('prof-phone').value
+    };
+    saveProfile(profile);
+    alert('{{ txt_save_changes }} ✓');
+  });
+
+  document.getElementById('password-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const current = document.getElementById('current-password').value;
+    const newPass = document.getElementById('new-password').value;
+    const confirm = document.getElementById('confirm-password').value;
+
+    if (newPass !== confirm) {
+      alert('Passwords do not match');
+      return;
+    }
+    if (newPass.length < 6) {
+      alert('Password must be at least 6 characters');
+      return;
+    }
+
+    // In real Shopify: use /account endpoint
+    alert('Password changed successfully (demo)');
+    this.reset();
+  });
+
+  // ══════════════════════════════════════
+  // LOGOUT
+  // ══════════════════════════════════════
+  window.logout = function() {
+    if (confirm('Are you sure you want to log out?')) {
+      // In real Shopify: window.location.href = '/account/logout';
+      alert('Logged out (demo)');
+      window.location.href = '{{ routes.root_url }}';
+    }
+  };
+
+  // ══════════════════════════════════════
+  // UTILITIES
+  // ══════════════════════════════════════
+  function escHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+  }
+
+  // ══════════════════════════════════════
+  // INIT: Load data & seed demo if empty
+  // ══════════════════════════════════════
+  function init() {
+    // Seed demo orders if none exist
+    let orders = getOrders();
+    if (orders.length === 0) {
+      orders = [
+        { id: 'ord_1001', number: '1001', date: '2026-03-10', total: '$125', status: 'Delivered' },
+        { id: 'ord_1002', number: '1002', date: '2026-03-18', total: '$87', status: 'Shipped' },
+        { id: 'ord_1003', number: '1003', date: '2026-03-22', total: '$210', status: 'Processing' }
+      ];
+      saveOrders(orders);
+    }
+
+    renderOrders();
+    renderAddresses();
+    loadProfile();
+  }
+
+  init();
+})();
+</script>
