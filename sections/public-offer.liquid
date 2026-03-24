@@ -8,110 +8,73 @@
 <div class="w-full bg-white">
   <div class="max-w-[1280px] mx-auto px-5 md:px-[20px] pt-10 pb-16" style="font-family: Montserrat, sans-serif;">
 
-    <h1 class="text-[32px] md:text-[42px] font-light text-[#111] mb-8 tracking-wide">{{ 'public_offer.title' | t }}</h1>
+    <h1 class="text-[32px] md:text-[42px] font-light text-[#111] mb-4 tracking-wide">{{ 'public_offer.title' | t }}</h1>
 
     <p class="text-[15px] text-[#111] leading-[1.65] mb-8">{{ 'public_offer.intro' | t }}</p>
 
     <ol class="flex flex-col gap-7 list-none mb-8">
 
-      <!-- 1. General Provisions -->
+      <!-- 1. General Terms -->
       <li>
         <p class="text-[18px] font-bold text-[#111] mb-3">1. {{ 'public_offer.general_title' | t }}</p>
-        <ul class="flex flex-col gap-2 pl-4 list-disc">
-          <li class="text-[15px] text-[#111] leading-[1.65]">{{ 'public_offer.general_item1' | t }}</li>
-          <li class="text-[15px] text-[#111] leading-[1.65]">{{ 'public_offer.general_item2' | t }}</li>
-          <li class="text-[15px] text-[#111] leading-[1.65]">{{ 'public_offer.general_item3' | t }}</li>
-        </ul>
+        <p class="text-[15px] text-[#111] leading-[1.65]">{{ 'public_offer.general_text' | t }}</p>
       </li>
 
-      <!-- 2. Subject of the Agreement -->
+      <!-- 2. Products -->
       <li>
-        <p class="text-[18px] font-bold text-[#111] mb-3">2. {{ 'public_offer.subject_title' | t }}</p>
-        <ul class="flex flex-col gap-2 pl-4 list-disc">
-          <li class="text-[15px] text-[#111] leading-[1.65]">{{ 'public_offer.subject_item1' | t }}</li>
-          <li class="text-[15px] text-[#111] leading-[1.65]">{{ 'public_offer.subject_item2' | t }}</li>
-        </ul>
+        <p class="text-[18px] font-bold text-[#111] mb-3">2. {{ 'public_offer.products_title' | t }}</p>
+        <p class="text-[15px] text-[#111] leading-[1.65]">{{ 'public_offer.products_text' | t }}</p>
       </li>
 
-      <!-- 3. Order Procedure -->
+      <!-- 3. Pricing and Payment -->
       <li>
-        <p class="text-[18px] font-bold text-[#111] mb-3">3. {{ 'public_offer.order_title' | t }}</p>
-        <ul class="flex flex-col gap-2 pl-4 list-disc">
-          <li class="text-[15px] text-[#111] leading-[1.65]">{{ 'public_offer.order_item1' | t }}</li>
-          <li class="text-[15px] text-[#111] leading-[1.65]">{{ 'public_offer.order_item2' | t }}</li>
-          <li class="text-[15px] text-[#111] leading-[1.65]">{{ 'public_offer.order_item3' | t }}</li>
-          <li class="text-[15px] text-[#111] leading-[1.65]">{{ 'public_offer.order_item4' | t }}</li>
-        </ul>
+        <p class="text-[18px] font-bold text-[#111] mb-3">3. {{ 'public_offer.pricing_title' | t }}</p>
+        <p class="text-[15px] text-[#111] leading-[1.65] mb-2">{{ 'public_offer.pricing_text1' | t }}</p>
+        <p class="text-[15px] text-[#111] leading-[1.65]">{{ 'public_offer.pricing_text2' | t }}</p>
       </li>
 
-      <!-- 4. Payment -->
+      <!-- 4. Shipping -->
       <li>
-        <p class="text-[18px] font-bold text-[#111] mb-3">4. {{ 'public_offer.payment_title' | t }}</p>
-        <ul class="flex flex-col gap-2 pl-4 list-disc">
-          <li class="text-[15px] text-[#111] leading-[1.65]">{{ 'public_offer.payment_item1' | t }}</li>
-          <li class="text-[15px] text-[#111] leading-[1.65]">{{ 'public_offer.payment_item2' | t }}</li>
-          <li class="text-[15px] text-[#111] leading-[1.65]">{{ 'public_offer.payment_item3' | t }}</li>
-        </ul>
+        <p class="text-[18px] font-bold text-[#111] mb-3">4. {{ 'public_offer.shipping_title' | t }}</p>
+        <p class="text-[15px] text-[#111] leading-[1.65] mb-2">{{ 'public_offer.shipping_text1' | t }}</p>
+        <p class="text-[15px] text-[#111] leading-[1.65]">{{ 'public_offer.shipping_text2' | t }}</p>
       </li>
 
-      <!-- 5. Delivery -->
+      <!-- 5. Returns and Cancellations -->
       <li>
-        <p class="text-[18px] font-bold text-[#111] mb-3">5. {{ 'public_offer.delivery_title' | t }}</p>
-        <ul class="flex flex-col gap-2 pl-4 list-disc">
-          <li class="text-[15px] text-[#111] leading-[1.65]">{{ 'public_offer.delivery_item1' | t }}</li>
-          <li class="text-[15px] text-[#111] leading-[1.65]">{{ 'public_offer.delivery_item2' | t }}</li>
-          <li class="text-[15px] text-[#111] leading-[1.65]">{{ 'public_offer.delivery_item3' | t }}</li>
-        </ul>
+        <p class="text-[18px] font-bold text-[#111] mb-3">5. {{ 'public_offer.returns_title' | t }}</p>
+        <p class="text-[15px] text-[#111] leading-[1.65] mb-2">{{ 'public_offer.returns_text1' | t }}</p>
+        <p class="text-[15px] text-[#111] leading-[1.65] mb-2">{{ 'public_offer.returns_text2' | t }}</p>
+        <p class="text-[15px] text-[#111] leading-[1.65]">{{ 'public_offer.returns_text3' | t }}</p>
       </li>
 
-      <!-- 6. Returns and Exchanges -->
+      <!-- 6. Privacy -->
       <li>
-        <p class="text-[18px] font-bold text-[#111] mb-3">6. {{ 'public_offer.returns_title' | t }}</p>
-        <ul class="flex flex-col gap-2 pl-4 list-disc">
-          <li class="text-[15px] text-[#111] leading-[1.65]">{{ 'public_offer.returns_item1' | t }}</li>
-          <li class="text-[15px] text-[#111] leading-[1.65]">{{ 'public_offer.returns_item2' | t }}</li>
-        </ul>
+        <p class="text-[18px] font-bold text-[#111] mb-3">6. {{ 'public_offer.privacy_title' | t }}</p>
+        <p class="text-[15px] text-[#111] leading-[1.65]">{{ 'public_offer.privacy_text' | t }}</p>
       </li>
 
-      <!-- 7. Rights and Obligations -->
+      <!-- 7. Liability -->
       <li>
-        <p class="text-[18px] font-bold text-[#111] mb-3">7. {{ 'public_offer.rights_title' | t }}</p>
-        <p class="text-[16px] font-semibold text-[#111] mb-2 pl-4">{{ 'public_offer.seller_rights' | t }}</p>
-        <ul class="flex flex-col gap-2 pl-8 list-disc mb-3">
-          <li class="text-[15px] text-[#111] leading-[1.65]">{{ 'public_offer.seller_right1' | t }}</li>
-          <li class="text-[15px] text-[#111] leading-[1.65]">{{ 'public_offer.seller_right2' | t }}</li>
-        </ul>
-        <p class="text-[16px] font-semibold text-[#111] mb-2 pl-4">{{ 'public_offer.buyer_rights' | t }}</p>
-        <ul class="flex flex-col gap-2 pl-8 list-disc">
-          <li class="text-[15px] text-[#111] leading-[1.65]">{{ 'public_offer.buyer_right1' | t }}</li>
-          <li class="text-[15px] text-[#111] leading-[1.65]">{{ 'public_offer.buyer_right2' | t }}</li>
-        </ul>
+        <p class="text-[18px] font-bold text-[#111] mb-3">7. {{ 'public_offer.liability_title' | t }}</p>
+        <p class="text-[15px] text-[#111] leading-[1.65] mb-2">{{ 'public_offer.liability_text1' | t }}</p>
+        <p class="text-[15px] text-[#111] leading-[1.65]">{{ 'public_offer.liability_text2' | t }}</p>
       </li>
 
-      <!-- 8. Liability -->
+      <!-- 8. Governing Law -->
       <li>
-        <p class="text-[18px] font-bold text-[#111] mb-3">8. {{ 'public_offer.liability_title' | t }}</p>
-        <ul class="flex flex-col gap-2 pl-4 list-disc">
-          <li class="text-[15px] text-[#111] leading-[1.65]">{{ 'public_offer.liability_item1' | t }}</li>
-          <li class="text-[15px] text-[#111] leading-[1.65]">{{ 'public_offer.liability_item2' | t }}</li>
-        </ul>
+        <p class="text-[18px] font-bold text-[#111] mb-3">8. {{ 'public_offer.law_title' | t }}</p>
+        <p class="text-[15px] text-[#111] leading-[1.65]">{{ 'public_offer.law_text' | t }}</p>
       </li>
 
-      <!-- 9. Dispute Resolution -->
+      <!-- 9. Contact -->
       <li>
-        <p class="text-[18px] font-bold text-[#111] mb-3">9. {{ 'public_offer.dispute_title' | t }}</p>
-        <ul class="flex flex-col gap-2 pl-4 list-disc">
-          <li class="text-[15px] text-[#111] leading-[1.65]">{{ 'public_offer.dispute_item1' | t }}</li>
-          <li class="text-[15px] text-[#111] leading-[1.65]">{{ 'public_offer.dispute_item2' | t }}</li>
-        </ul>
-      </li>
-
-      <!-- 10. Final Provisions -->
-      <li>
-        <p class="text-[18px] font-bold text-[#111] mb-3">10. {{ 'public_offer.final_title' | t }}</p>
-        <ul class="flex flex-col gap-2 pl-4 list-disc">
-          <li class="text-[15px] text-[#111] leading-[1.65]">{{ 'public_offer.final_item1' | t }}</li>
-          <li class="text-[15px] text-[#111] leading-[1.65]">{{ 'public_offer.final_item2' | t }}</li>
+        <p class="text-[18px] font-bold text-[#111] mb-3">9. {{ 'public_offer.contact_title' | t }}</p>
+        <p class="text-[15px] text-[#111] leading-[1.65] mb-2">{{ 'public_offer.contact_intro' | t }}</p>
+        <ul class="flex flex-col gap-1 pl-4">
+          <li class="text-[15px] text-[#111] leading-[1.65]"><strong>{{ 'public_offer.email_label' | t }}</strong> {{ 'public_offer.email_value' | t }}</li>
+          <li class="text-[15px] text-[#111] leading-[1.65]"><strong>{{ 'public_offer.phone_label' | t }}</strong> {{ 'public_offer.phone_value' | t }}</li>
+          <li class="text-[15px] text-[#111] leading-[1.65]"><strong>{{ 'public_offer.address_label' | t }}</strong> {{ 'public_offer.address_value' | t }}</li>
         </ul>
       </li>
 
@@ -121,7 +84,7 @@
       <p class="text-[15px] text-[#111] leading-[1.65] mb-3">
         <strong>{{ 'public_offer.company_name' | t }}</strong>
       </p>
-      <p class="text-[15px] text-[#111] leading-[1.65]">{{ 'public_offer.company_info' | t }}</p>
+      <p class="text-[15px] text-[#111] leading-[1.65]">{{ 'public_offer.company_full_address' | t }}</p>
       <p class="text-[15px] text-[#111] leading-[1.65]">{{ 'public_offer.contact_email' | t }}</p>
     </div>
 
