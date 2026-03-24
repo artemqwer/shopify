@@ -353,6 +353,7 @@
   {% assign txt_confirm_password = 'Confirm Password' %}
 {% endif %}
 
+{% if customer %}
 <!-- Main Account Modal Wrapper (Hidden by default) -->
 <div id="main-account-modal" onclick="if(event.target === this) closeAccountModal()" class="fixed inset-0 z-[1000] flex items-center justify-center p-4 bg-black bg-opacity-60 transition-opacity" style="display:none;">
   <!-- Modal Content Container -->
@@ -368,16 +369,16 @@
       <h1 class="text-[28px] md:text-[38px] font-light text-[#222] tracking-wide">
         {{ txt_account }}
       </h1>
-      <button type="button" onclick="logout()" class="btn-link hidden md:inline">
+      <a href="{{ routes.account_logout_url }}" class="btn-link hidden md:inline">
         {{ txt_logout }}
-      </button>
+      </a>
     </div>
 
   <!-- Tab Navigation -->
   <div class="account-tabs mb-0">
     <button class="account-tab active" data-tab="orders">{{ txt_orders }}</button>
     <button class="account-tab" data-tab="profile">{{ txt_profile }}</button>
-    <button class="account-tab md:hidden" data-tab="logout">{{ txt_logout }}</button>
+    <a href="{{ routes.account_logout_url }}" class="account-tab md:hidden" style="display:block;">{{ txt_logout }}</a>
   </div>
 
   <!-- ══════════════════════════════════════
@@ -385,19 +386,39 @@
   ══════════════════════════════════════ -->
   <div class="account-panel active" data-panel="orders">
 
-    <div id="orders-list">
-      <!-- Dynamic content rendered by JS -->
-    </div>
-
-    <!-- Empty State (shown by JS if no orders) -->
-    <div id="orders-empty" class="empty-state" style="display:none;">
-      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
-      </svg>
-      <h3>{{ txt_no_orders }}</h3>
-      <p>{{ txt_start_shopping }}</p>
-      <a href="{{ routes.all_products_collection_url }}" class="btn-primary">{{ txt_start_shopping }}</a>
-    </div>
+    {% if customer.orders.size > 0 %}
+      <div id="orders-list">
+        {% for order in customer.orders %}
+          <div class="order-card">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3 mb-3">
+              <div>
+                <h3 class="text-[14px] font-semibold text-[#222] mb-1">{{ txt_order_number }}{{ order.name }}</h3>
+                <p class="text-[12px] text-[#888]">{{ txt_date }}: {{ order.created_at | date: "%Y-%m-%d" }}</p>
+              </div>
+              <span class="order-status {{ order.fulfillment_status | default: 'pending' | downcase }}">{{ order.fulfillment_status_label | default: order.financial_status_label }}</span>
+            </div>
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+              <div class="text-[13px] text-[#555]">
+                <strong>{{ txt_total }}:</strong> {{ order.total_price | money }}
+              </div>
+              <a href="{{ order.customer_url }}" class="btn-link text-left md:text-right">
+                {{ txt_view_details }}
+              </a>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <!-- Empty State -->
+      <div id="orders-empty" class="empty-state">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+        </svg>
+        <h3>{{ txt_no_orders }}</h3>
+        <p>{{ txt_start_shopping }}</p>
+        <a href="{{ routes.all_products_collection_url }}" class="btn-primary">{{ txt_start_shopping }}</a>
+      </div>
+    {% endif %}
 
   </div>
 
@@ -471,7 +492,7 @@
 
       // Special case: logout on mobile
       if (targetTab === 'logout') {
-        logout();
+        window.location.href = '{{ routes.account_logout_url }}';
         return;
       }
 
@@ -583,7 +604,7 @@
       phone: document.getElementById('prof-phone').value
     };
     saveProfile(profile);
-    alert('{{ txt_save_changes }} ✓');
+    alert('{{ txt_save_changes }} ✓ (Simulation only)');
   });
 
   document.getElementById('password-form').addEventListener('submit', function(e) {
@@ -602,20 +623,9 @@
     }
 
     // In real Shopify: use /account endpoint
-    alert('Password changed successfully (demo)');
+    alert('Password changed successfully (simulation only)');
     this.reset();
   });
-
-  // ══════════════════════════════════════
-  // LOGOUT
-  // ══════════════════════════════════════
-  window.logout = function() {
-    if (confirm('Are you sure you want to log out?')) {
-      // In real Shopify: window.location.href = '/account/logout';
-      alert('Logged out (demo)');
-      window.location.href = '{{ routes.root_url }}';
-    }
-  };
 
   // ══════════════════════════════════════
   // UTILITIES
@@ -627,28 +637,18 @@
   }
 
   // ══════════════════════════════════════
-  // INIT: Load data & seed demo if empty
+  // INIT: Load data
   // ══════════════════════════════════════
   function init() {
-    // Seed demo orders if none exist
-    let orders = getOrders();
-    if (orders.length === 0) {
-      orders = [
-        { id: 'ord_1001', number: '1001', date: '2026-03-10', total: '$125', status: 'Delivered' },
-        { id: 'ord_1002', number: '1002', date: '2026-03-18', total: '$87', status: 'Shipped' },
-        { id: 'ord_1003', number: '1003', date: '2026-03-22', total: '$210', status: 'Processing' }
-      ];
-      saveOrders(orders);
-    }
-
-    renderOrders();
     loadProfile();
   }
 
   init();
 })();
-
-// Global Modal Controls
+</script>
+{% endif %}
+<!-- Global Modal Controls -->
+<script>
 window.openAccountModal = function() {
   const modal = document.getElementById('main-account-modal');
   if (modal) {
