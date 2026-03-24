@@ -376,7 +376,6 @@
   <!-- Tab Navigation -->
   <div class="account-tabs mb-0">
     <button class="account-tab active" data-tab="orders">{{ txt_orders }}</button>
-    <button class="account-tab" data-tab="addresses">{{ txt_addresses }}</button>
     <button class="account-tab" data-tab="profile">{{ txt_profile }}</button>
     <button class="account-tab md:hidden" data-tab="logout">{{ txt_logout }}</button>
   </div>
@@ -403,95 +402,6 @@
   </div>
 
   <!-- ══════════════════════════════════════
-       TAB 2: ADDRESSES
-  ══════════════════════════════════════ -->
-  <div class="account-panel" data-panel="addresses">
-
-    <div class="flex justify-between items-center mb-6">
-      <h2 class="text-[20px] font-medium text-[#222]">{{ txt_addresses }}</h2>
-      <button type="button" onclick="openAddressForm()" class="btn-secondary">
-        {{ txt_add_address }}
-      </button>
-    </div>
-
-    <div id="addresses-list" class="grid grid-cols-1 md:grid-cols-2 gap-4">
-      <!-- Dynamic content rendered by JS -->
-    </div>
-
-    <!-- Empty State -->
-    <div id="addresses-empty" class="empty-state" style="display:none;">
-      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-      </svg>
-      <h3>{{ txt_no_addresses }}</h3>
-      <button type="button" onclick="openAddressForm()" class="btn-primary">
-        {{ txt_add_address }}
-      </button>
-    </div>
-
-    <!-- Address Form Modal (hidden by default) -->
-    <div id="address-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4" style="display:none;">
-      <div class="bg-white w-full max-w-[600px] p-6 md:p-8 max-h-[90vh] overflow-y-auto" dir="{{ acc_dir }}">
-        <div class="flex justify-between items-center mb-6">
-          <h3 class="text-[20px] font-medium text-[#222]" id="address-modal-title">{{ txt_add_address }}</h3>
-          <button type="button" onclick="closeAddressForm()" class="text-[#888] hover:text-[#222] text-[24px] leading-none">&times;</button>
-        </div>
-        <form id="address-form" class="space-y-4">
-          <input type="hidden" id="address-id" value="">
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label for="addr-first-name" class="block text-[11px] uppercase tracking-wider text-[#888] mb-1">{{ txt_first_name }}</label>
-              <input type="text" id="addr-first-name" class="acc-input" required>
-            </div>
-            <div>
-              <label for="addr-last-name" class="block text-[11px] uppercase tracking-wider text-[#888] mb-1">{{ txt_last_name }}</label>
-              <input type="text" id="addr-last-name" class="acc-input" required>
-            </div>
-          </div>
-          <div>
-            <label for="addr-phone" class="block text-[11px] uppercase tracking-wider text-[#888] mb-1">{{ txt_phone }}</label>
-            <input type="tel" id="addr-phone" class="acc-input" required>
-          </div>
-          <div>
-            <label for="addr-address1" class="block text-[11px] uppercase tracking-wider text-[#888] mb-1">{{ txt_address1 }}</label>
-            <input type="text" id="addr-address1" class="acc-input" required>
-          </div>
-          <div>
-            <label for="addr-address2" class="block text-[11px] uppercase tracking-wider text-[#888] mb-1">{{ txt_address2 }}</label>
-            <input type="text" id="addr-address2" class="acc-input">
-          </div>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label for="addr-city" class="block text-[11px] uppercase tracking-wider text-[#888] mb-1">{{ txt_city }}</label>
-              <input type="text" id="addr-city" class="acc-input" required>
-            </div>
-            <div>
-              <label for="addr-zip" class="block text-[11px] uppercase tracking-wider text-[#888] mb-1">{{ txt_zip }}</label>
-              <input type="text" id="addr-zip" class="acc-input" required>
-            </div>
-          </div>
-          <div>
-            <label for="addr-country" class="block text-[11px] uppercase tracking-wider text-[#888] mb-1">{{ txt_country }}</label>
-            <select id="addr-country" class="acc-select" required>
-              <option value="">{{ txt_country }}</option>
-              <option value="UA">Україна</option>
-              <option value="US">United States</option>
-              <option value="FR">France</option>
-              <option value="IL">Israel</option>
-            </select>
-          </div>
-          <div class="flex gap-3 pt-4">
-            <button type="submit" class="btn-primary flex-1">{{ txt_save }}</button>
-            <button type="button" onclick="closeAddressForm()" class="btn-secondary flex-1">{{ txt_cancel }}</button>
-          </div>
-        </form>
-      </div>
-    </div>
-
-  </div>
-
-  <!-- ══════════════════════════════════════
        TAB 3: PROFILE
   ══════════════════════════════════════ -->
   <div class="account-panel" data-panel="profile">
@@ -511,8 +421,7 @@
       </div>
       <div>
         <label for="prof-email" class="block text-[11px] uppercase tracking-wider text-[#888] mb-1">{{ txt_email }}</label>
-        <input type="email" id="prof-email" class="acc-input" value="{{ customer.email | default: 'user@example.com' }}" disabled>
-        <p class="text-[11px] text-[#888] mt-1">Email cannot be changed</p>
+        <input type="email" id="prof-email" class="acc-input" value="{{ customer.email | default: 'user@example.com' }}">
       </div>
       <div>
         <label for="prof-phone" class="block text-[11px] uppercase tracking-wider text-[#888] mb-1">{{ txt_phone }}</label>
@@ -652,137 +561,7 @@
     alert('Order details for ' + orderId + ' - feature in development');
   };
 
-  // ══════════════════════════════════════
-  // ADDRESSES TAB
-  // ══════════════════════════════════════
-  function renderAddresses() {
-    const addresses = getAddresses();
-    const container = document.getElementById('addresses-list');
-    const emptyState = document.getElementById('addresses-empty');
-
-    if (addresses.length === 0) {
-      container.innerHTML = '';
-      emptyState.style.display = 'block';
-      return;
-    }
-
-    emptyState.style.display = 'none';
-    container.innerHTML = addresses.map(addr => {
-      const defaultClass = addr.isDefault ? 'default' : '';
-      return `
-        <div class="address-card ${defaultClass}">
-          ${addr.isDefault ? '<span class="address-badge">{{ txt_default }}</span>' : ''}
-          <div class="mb-4">
-            <p class="text-[14px] font-medium text-[#222]">${escHtml(addr.firstName)} ${escHtml(addr.lastName)}</p>
-            <p class="text-[13px] text-[#555] mt-1">${escHtml(addr.address1)}</p>
-            ${addr.address2 ? `<p class="text-[13px] text-[#555]">${escHtml(addr.address2)}</p>` : ''}
-            <p class="text-[13px] text-[#555]">${escHtml(addr.city)}, ${escHtml(addr.zip)}</p>
-            <p class="text-[13px] text-[#555]">${escHtml(addr.country)}</p>
-            <p class="text-[13px] text-[#555] mt-2">${escHtml(addr.phone)}</p>
-          </div>
-          <div class="flex gap-3 text-[11px]">
-            <button type="button" onclick="editAddress('${addr.id}')" class="btn-link">{{ txt_edit }}</button>
-            <button type="button" onclick="deleteAddress('${addr.id}')" class="btn-link">{{ txt_delete }}</button>
-            ${!addr.isDefault ? `<button type="button" onclick="setDefaultAddress('${addr.id}')" class="btn-link">{{ txt_set_default }}</button>` : ''}
-          </div>
-        </div>
-      `;
-    }).join('');
-  }
-
-  window.openAddressForm = function(addressId) {
-    const modal = document.getElementById('address-modal');
-    const form = document.getElementById('address-form');
-    const title = document.getElementById('address-modal-title');
-
-    form.reset();
-    document.getElementById('address-id').value = '';
-
-    if (addressId) {
-      // Edit mode
-      const addresses = getAddresses();
-      const addr = addresses.find(a => a.id === addressId);
-      if (addr) {
-        title.textContent = '{{ txt_edit }}';
-        document.getElementById('address-id').value = addr.id;
-        document.getElementById('addr-first-name').value = addr.firstName;
-        document.getElementById('addr-last-name').value = addr.lastName;
-        document.getElementById('addr-phone').value = addr.phone;
-        document.getElementById('addr-address1').value = addr.address1;
-        document.getElementById('addr-address2').value = addr.address2 || '';
-        document.getElementById('addr-city').value = addr.city;
-        document.getElementById('addr-zip').value = addr.zip;
-        document.getElementById('addr-country').value = addr.country;
-      }
-    } else {
-      // Add mode
-      title.textContent = '{{ txt_add_address }}';
-    }
-
-    modal.style.display = 'flex';
-    document.body.style.overflow = 'hidden';
-  };
-
-  window.closeAddressForm = function() {
-    document.getElementById('address-modal').style.display = 'none';
-    document.body.style.overflow = '';
-  };
-
-  window.editAddress = function(id) {
-    openAddressForm(id);
-  };
-
-  window.deleteAddress = function(id) {
-    if (!confirm('{{ txt_delete }}?')) return;
-    let addresses = getAddresses();
-    addresses = addresses.filter(a => a.id !== id);
-    saveAddresses(addresses);
-    renderAddresses();
-  };
-
-  window.setDefaultAddress = function(id) {
-    let addresses = getAddresses();
-    addresses.forEach(a => {
-      a.isDefault = (a.id === id);
-    });
-    saveAddresses(addresses);
-    renderAddresses();
-  };
-
-  document.getElementById('address-form').addEventListener('submit', function(e) {
-    e.preventDefault();
-
-    const id = document.getElementById('address-id').value || 'addr_' + Date.now();
-    const newAddress = {
-      id: id,
-      firstName: document.getElementById('addr-first-name').value,
-      lastName: document.getElementById('addr-last-name').value,
-      phone: document.getElementById('addr-phone').value,
-      address1: document.getElementById('addr-address1').value,
-      address2: document.getElementById('addr-address2').value,
-      city: document.getElementById('addr-city').value,
-      zip: document.getElementById('addr-zip').value,
-      country: document.getElementById('addr-country').value,
-      isDefault: false
-    };
-
-    let addresses = getAddresses();
-    const existingIndex = addresses.findIndex(a => a.id === id);
-
-    if (existingIndex > -1) {
-      // Update existing
-      newAddress.isDefault = addresses[existingIndex].isDefault;
-      addresses[existingIndex] = newAddress;
-    } else {
-      // Add new - set as default if it's the first one
-      if (addresses.length === 0) newAddress.isDefault = true;
-      addresses.push(newAddress);
-    }
-
-    saveAddresses(addresses);
-    renderAddresses();
-    closeAddressForm();
-  });
+  // Address tab has been removed
 
   // ══════════════════════════════════════
   // PROFILE TAB
@@ -791,6 +570,7 @@
     const profile = getProfile();
     if (profile.firstName) document.getElementById('prof-first-name').value = profile.firstName;
     if (profile.lastName) document.getElementById('prof-last-name').value = profile.lastName;
+    if (profile.email) document.getElementById('prof-email').value = profile.email;
     if (profile.phone) document.getElementById('prof-phone').value = profile.phone;
   }
 
@@ -799,6 +579,7 @@
     const profile = {
       firstName: document.getElementById('prof-first-name').value,
       lastName: document.getElementById('prof-last-name').value,
+      email: document.getElementById('prof-email').value,
       phone: document.getElementById('prof-phone').value
     };
     saveProfile(profile);
@@ -861,7 +642,6 @@
     }
 
     renderOrders();
-    renderAddresses();
     loadProfile();
   }
 
