@@ -127,11 +127,7 @@
         <p class="text-[15px] text-[#111] leading-[1.65]">{{ 'shipping.bank_transfer_desc' | t }}</p>
       </li>
       <li>
-        <p class="text-[15px] font-semibold text-[#111] mb-1">2. {{ 'shipping.cod_title' | t }}</p>
-        <p class="text-[15px] text-[#111] leading-[1.65]">{{ 'shipping.cod_desc' | t }}</p>
-      </li>
-      <li>
-        <p class="text-[15px] font-semibold text-[#111] mb-1">3. {{ 'shipping.payment_note_title' | t }}</p>
+        <p class="text-[15px] font-semibold text-[#111] mb-1">2. {{ 'shipping.payment_note_title' | t }}</p>
         <p class="text-[15px] text-[#111] leading-[1.65]">{{ 'shipping.payment_note_desc' | t }}</p>
       </li>
     </ol>
@@ -268,7 +264,6 @@
   {% assign txt_scarf     = 'מטפחת' %}
   {% assign txt_add_cart  = 'הוסף לסל' %}
   {% assign txt_buy_now   = 'רכישה עכשיו' %}
-  {% assign txt_size_guide= 'מדריך מידות' %}
   {% assign txt_material  = 'חומר' %}
   {% assign txt_care      = 'טיפול' %}
   {% assign care_text     = "- אל תכבסו במכונת כביסה; השתמשו בניקוי יבש או הלבנה עדינה בידיים עם מגבת לחה לסיבים.\n- ייבשו שטוחים ואל תייבשו במייבש; אווררו מרווחים לשמור על הצורה.\n- אחסנו קפוץ ולא תלוי, כדי למנוע עיוות.\n- לגיהוץ: השתמשו בנייר בין הברזל לחומר, ואל תנגעו ישירות בברזל." %}
@@ -281,7 +276,6 @@
   {% assign txt_scarf     = 'Scarf' %}
   {% assign txt_add_cart  = 'Add to cart' %}
   {% assign txt_buy_now   = 'Buy Now' %}
-  {% assign txt_size_guide= 'Size Guide' %}
   {% assign txt_material  = 'Material' %}
   {% assign txt_care      = 'Care' %}
   {% assign care_text     = "- Cleaning: do not machine wash; use dry cleaning or gently remove dirt with a damp cloth.\n- Drying: do not dry on a radiator; leave it to rest in a well-ventilated area, keeping its shape.\n- Store in a dry place, away from direct sunlight; preferably in a box to prevent deformation.\n- Fabric care: refresh the material with steam from a distance occasionally; do not touch directly with an iron." %}
@@ -529,42 +523,5 @@
       }, 500);
     }
   }
-  function openSizeGuide() {
-    var el = document.getElementById('size-guide-overlay');
-    if (el) { el.classList.add('active'); document.body.style.overflow = 'hidden'; }
-  }
-  function closeSizeGuide() {
-    var el = document.getElementById('size-guide-overlay');
-    if (el) { el.classList.remove('active'); document.body.style.overflow = ''; }
-  }
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') closeSizeGuide();
-  });
-</script>
-
-<!-- ═══ SIZE GUIDE MODAL ═══ -->
-<div id="size-guide-overlay" onclick="if(event.target===this)closeSizeGuide()" dir="{% if request.locale.iso_code == 'he' %}rtl{% else %}ltr{% endif %}">
-  <div id="size-guide-modal">
-    <button class="sg-close" onclick="closeSizeGuide()" aria-label="Close">
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
-    </button>
-    <div class="sg-body">
-      <div class="sg-left">
-        <h2 class="sg-title">
-          {% if request.locale.iso_code == 'he' %}מידה – היקף ראש{% else %}SIZE — HEAD CIRCUMFERENCE{% endif %}
-        </h2>
-        <div class="sg-row" dir="ltr">S - 56 {% if request.locale.iso_code == 'he' %}ס"מ{% else %}cm{% endif %}</div>
-        <div class="sg-row" dir="ltr">M - 57 {% if request.locale.iso_code == 'he' %}ס"מ{% else %}cm{% endif %}</div>
-        <div class="sg-row" dir="ltr">L - 58 {% if request.locale.iso_code == 'he' %}ס"מ{% else %}cm{% endif %}</div>
-      </div>
-      <div class="sg-right">
-        <div class="sg-right-label">
-          {% if request.locale.iso_code == 'he' %}מדוד לפי הקו הזה{% else %}MEASURE ALONG THIS LINE{% endif %}
-        </div>
-        <img src="{{ 'image2.svg' | asset_url }}" alt="{% if request.locale.iso_code == 'he' %}מדידת ראש{% else %}Measurement{% endif %}" loading="lazy">
-      </div>
-    </div>
-  </div>
-</div>
 
 {% endif %}

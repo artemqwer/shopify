@@ -99,8 +99,7 @@
     "payment_title": "תשלום",
     "bank_transfer_title": "העברה בנקאית",
     "bank_transfer_desc": "התשלום מתבצע לחשבון של FOP Kravets Nelli Viktorivna.",
-    "cod_title": "תשלום בעת קבלה",
-    "cod_desc": "זמין עם תשלום מקדמה של 300 גריבניה השומר את הפריט עבורכם. יתרת הסכום משולמת בעת הקבלה.",
+
     "payment_note_title": "חשוב",
     "payment_note_desc": "התשלום נחשב מאושר רק לאחר קבלת הכספים בחשבון.",
     "pickup_title": "איסוף עצמי",
