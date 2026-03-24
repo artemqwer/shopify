@@ -21,7 +21,7 @@
     outline: none;
   }
   .chk-input::placeholder { color: #888; }
-  .chk-input:focus { border-color: #e61a7a; }
+  .chk-input:focus { border-color: #222; }
 
   /* Select dropdown */
   .chk-select {
@@ -59,14 +59,14 @@
     outline: none; cursor: pointer;
     position: relative; top: 2px; flex-shrink: 0;
   }
-  .chk-radio-box:checked { border-color: #e61a7a; }
+  .chk-radio-box:checked { border-color: #222; }
   .chk-radio-box:checked::after {
     content: '';
     position: absolute;
     top: 50%; left: 50%;
     transform: translate(-50%, -50%);
     width: 8px; height: 8px;
-    background-color: #e61a7a;
+    background-color: #222;
     border-radius: 50%;
   }
 
@@ -571,11 +571,7 @@
       } else {
         appleBtn.style.display   = 'none';
         regularBtn.style.display = '';
-        if (this.value === 'card') {
-          regularBtn.style.background = '#DE2077';
-        } else {
-          regularBtn.style.background = '#000';
-        }
+        regularBtn.style.background = '#000';
       }
     });
   });
