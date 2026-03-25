@@ -1,0 +1,278 @@
+{% schema %}
+{
+  "name": "Search",
+  "settings": []
+}
+{% endschema %}
+
+<style>
+  .search-container {
+    font-family: var(--font-montserrat), Montserrat, sans-serif;
+  }
+  .search-input {
+    transition: border-color 0.3s ease;
+  }
+  .search-input:focus {
+    outline: none;
+    border-color: #e61a7a;
+  }
+  .search-result-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .search-result-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+  .skeleton {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+  }
+  @keyframes loading {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+</style>
+
+<section class="search-container max-w-[1280px] mx-auto px-5 md:px-[20px] py-10 md:py-16" {% if request.locale.iso_code == 'he' %}dir="rtl"{% endif %}>
+
+  <!-- Search Header -->
+  <div class="text-center mb-10">
+    <h1 class="text-[32px] md:text-[42px] font-medium text-[#222] uppercase tracking-wide mb-4">
+      {% if request.locale.iso_code == 'he' %}חיפוש{% else %}Search{% endif %}
+    </h1>
+
+    <!-- Search Input -->
+    <div class="max-w-[600px] mx-auto relative">
+      <input
+        type="text"
+        id="search-input"
+        class="search-input w-full px-6 py-4 text-[16px] border-2 border-[#ddd] focus:border-[#e61a7a]"
+        placeholder="{% if request.locale.iso_code == 'he' %}חפש מוצרים...{% else %}Search for products...{% endif %}"
+        value="{{ search.terms | escape }}"
+        autocomplete="off"
+      >
+      <button type="button" id="search-clear" class="absolute {% if request.locale.iso_code == 'he' %}left-4{% else %}right-4{% endif %} top-1/2 -translate-y-1/2 text-[#999] hover:text-[#333] transition-colors hidden">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Search Info -->
+  <div id="search-info" class="text-center mb-8 text-[14px] text-[#666] hidden"></div>
+
+  <!-- Loading State -->
+  <div id="search-loading" class="hidden">
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      {% for i in (1..8) %}
+        <div class="skeleton h-[300px]"></div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- No Results -->
+  <div id="search-no-results" class="hidden text-center py-20">
+    <svg class="w-16 h-16 text-[#ddd] mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+    </svg>
+    <p class="text-[20px] text-[#666] mb-2">
+      {% if request.locale.iso_code == 'he' %}לא נמצאו תוצאות{% else %}No results found{% endif %}
+    </p>
+    <p class="text-[14px] text-[#999]">
+      {% if request.locale.iso_code == 'he' %}נסה מילות חיפוש אחרות{% else %}Try different search terms{% endif %}
+    </p>
+  </div>
+
+  <!-- Search Results Grid -->
+  <div id="search-results" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
+
+  <!-- Initial State (Popular Products) -->
+  {% if search.performed == false %}
+  <div id="search-initial">
+    <h2 class="text-[24px] font-medium text-[#222] mb-6 text-center">
+      {% if request.locale.iso_code == 'he' %}מוצרים פופולריים{% else %}Popular Products{% endif %}
+    </h2>
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      {% for product in collections.all.products limit: 8 %}
+        <a href="{{ product.url }}" class="search-result-card block group">
+          <div class="relative aspect-[3/4] mb-3 overflow-hidden bg-[#f8f8f8]">
+            {% if product.featured_image %}
+              <img src="{{ product.featured_image | image_url: width: 400 }}" alt="{{ product.title | escape }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            {% else %}
+              <div class="w-full h-full bg-[#f0f0f0]"></div>
+            {% endif %}
+          </div>
+          <h3 class="text-[14px] font-medium text-[#222] mb-1 group-hover:text-[#e61a7a] transition-colors truncate">{{ product.title }}</h3>
+          <p class="text-[13px] text-[#666]">{{ product.price | money }}</p>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+
+</section>
+
+<script>
+(function() {
+  const searchInput = document.getElementById('search-input');
+  const searchClear = document.getElementById('search-clear');
+  const searchInfo = document.getElementById('search-info');
+  const searchLoading = document.getElementById('search-loading');
+  const searchResults = document.getElementById('search-results');
+  const searchNoResults = document.getElementById('search-no-results');
+  const searchInitial = document.getElementById('search-initial');
+
+  if (!searchInput) return;
+
+  const locale = '{{ request.locale.iso_code }}';
+  const isHe = locale === 'he';
+  let searchTimeout;
+
+  // Clear button
+  searchInput.addEventListener('input', function() {
+    if (this.value.length > 0) {
+      searchClear.classList.remove('hidden');
+    } else {
+      searchClear.classList.add('hidden');
+    }
+  });
+
+  if (searchClear) {
+    searchClear.addEventListener('click', function() {
+      searchInput.value = '';
+      searchClear.classList.add('hidden');
+      searchInput.focus();
+      showInitialState();
+    });
+  }
+
+  // Auto-focus on load if there's a search term
+  if (searchInput.value) {
+    searchClear.classList.remove('hidden');
+  }
+
+  // Live search
+  searchInput.addEventListener('input', function() {
+    const query = this.value.trim();
+
+    clearTimeout(searchTimeout);
+
+    if (query.length === 0) {
+      showInitialState();
+      return;
+    }
+
+    if (query.length < 2) {
+      return;
+    }
+
+    searchTimeout = setTimeout(() => {
+      performSearch(query);
+    }, 500);
+  });
+
+  // Perform search on Enter
+  searchInput.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      const query = this.value.trim();
+      if (query.length >= 2) {
+        clearTimeout(searchTimeout);
+        performSearch(query);
+      }
+    }
+  });
+
+  function showInitialState() {
+    hideAll();
+    if (searchInitial) searchInitial.classList.remove('hidden');
+  }
+
+  function showLoading() {
+    hideAll();
+    searchLoading.classList.remove('hidden');
+  }
+
+  function showNoResults(query) {
+    hideAll();
+    searchNoResults.classList.remove('hidden');
+    searchInfo.innerHTML = isHe ?
+      `לא נמצאו תוצאות עבור "<strong>${escapeHtml(query)}</strong>"` :
+      `No results found for "<strong>${escapeHtml(query)}</strong>"`;
+    searchInfo.classList.remove('hidden');
+  }
+
+  function showResults(products, query) {
+    hideAll();
+    searchInfo.innerHTML = isHe ?
+      `נמצאו <strong>${products.length}</strong> תוצאות עבור "<strong>${escapeHtml(query)}</strong>"` :
+      `Found <strong>${products.length}</strong> results for "<strong>${escapeHtml(query)}</strong>"`;
+    searchInfo.classList.remove('hidden');
+    searchResults.innerHTML = products.map(product => renderProduct(product)).join('');
+    searchResults.classList.remove('hidden');
+  }
+
+  function hideAll() {
+    searchLoading.classList.add('hidden');
+    searchResults.classList.add('hidden');
+    searchNoResults.classList.add('hidden');
+    searchInfo.classList.add('hidden');
+    if (searchInitial) searchInitial.classList.add('hidden');
+  }
+
+  function performSearch(query) {
+    showLoading();
+
+    fetch(`/search/suggest.json?q=${encodeURIComponent(query)}&resources[type]=product&resources[limit]=20`)
+      .then(response => response.json())
+      .then(data => {
+        const products = data.resources.results.products || [];
+
+        if (products.length === 0) {
+          showNoResults(query);
+        } else {
+          showResults(products, query);
+        }
+      })
+      .catch(error => {
+        console.error('Search error:', error);
+        showNoResults(query);
+      });
+  }
+
+  function renderProduct(product) {
+    const price = product.price ? formatMoney(product.price) : '';
+    const image = product.image || product.featured_image || '';
+    const imageHtml = image ?
+      `<img src="${escapeHtml(image)}" alt="${escapeHtml(product.title)}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">` :
+      '<div class="w-full h-full bg-[#f0f0f0]"></div>';
+
+    return `
+      <a href="${escapeHtml(product.url)}" class="search-result-card block group">
+        <div class="relative aspect-[3/4] mb-3 overflow-hidden bg-[#f8f8f8]">
+          ${imageHtml}
+        </div>
+        <h3 class="text-[14px] font-medium text-[#222] mb-1 group-hover:text-[#e61a7a] transition-colors truncate">${escapeHtml(product.title)}</h3>
+        <p class="text-[13px] text-[#666]">${price}</p>
+      </a>
+    `;
+  }
+
+  function formatMoney(cents) {
+    return '$' + (cents / 100).toFixed(2).replace(/\.00$/, '');
+  }
+
+  function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+  }
+
+  // Trigger search if there's an initial query
+  if (searchInput.value.trim().length >= 2) {
+    performSearch(searchInput.value.trim());
+  }
+})();
+</script>
