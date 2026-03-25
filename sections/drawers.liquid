@@ -148,64 +148,64 @@
 {% if template.name == 'collection' %}
 <div id="filter-drawer" class="side-drawer flex flex-col bg-white" role="dialog" aria-modal="true" aria-label="Filters" {% if request.locale.iso_code == 'he' %}dir="rtl"{% else %}dir="ltr"{% endif %}>
 
-  <!-- Header + Close button inside body for cleaner alignment -->
-  <button type="button" class="drawer-close-btn absolute {% if request.locale.iso_code == 'he' %}left-5{% else %}right-5{% endif %} top-5 hover:opacity-50 transition-opacity z-10 p-2">
-    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="#222" stroke-width="0.8">
+  <!-- Close Button Absolute at Top Right/Left -->
+  <button type="button" class="drawer-close-btn absolute {% if request.locale.iso_code == 'he' %}left-5{% else %}right-5{% endif %} top-5 hover:opacity-50 transition-opacity z-20">
+    <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="#222" stroke-width="0.8">
       <path d="M18 6L6 18M6 6l12 12"/>
     </svg>
   </button>
   <h2 class="sr-only">Filters</h2>
 
   <!-- Active filters strip -->
-  <div id="active-filters-strip" class="px-6 lg:px-8 pt-8 pb-3 flex flex-wrap gap-2 hidden z-0 relative">
+  <div id="active-filters-strip" class="px-6 lg:px-8 pt-6 pb-2 flex flex-wrap gap-2 hidden z-10 relative">
     <!-- filled by JS -->
   </div>
 
   <!-- Scrollable filter body -->
-  <div class="flex-1 overflow-y-auto px-6 lg:px-8 pt-10 pb-10 bg-white" id="filter-body">
+  <div class="flex-1 overflow-y-auto px-6 lg:px-8 pt-[32px] pb-[40px] bg-white relative" id="filter-body">
 
     {% if collection.filters.size > 0 %}
       {% for filter in collection.filters %}
-        <div class="filter-group mb-6" data-filter-name="{{ filter.label | upcase }}">
+        <div class="filter-group mb-5" data-filter-name="{{ filter.label | upcase }}">
           
           {% comment %} Header {% endcomment %}
-          <div class="flex items-center justify-start gap-2 mb-4 {% if filter.label != 'Size' and filter.label != 'Color' %}cursor-pointer filter-accordion-trigger{% endif %}">
-            <h3 class="text-[13px] font-bold text-[#222] uppercase" style="font-family: var(--font-montserrat);">
+          <div class="flex items-center justify-start gap-1.5 mb-3.5 {% if filter.label != 'Size' and filter.label != 'Color' %}cursor-pointer filter-accordion-trigger{% endif %}">
+            <h3 class="text-[12px] font-medium text-[#222] uppercase tracking-[0.02em]" style="font-family: var(--font-montserrat);">
               {{ filter.label }}
             </h3>
             {% if filter.label != 'Size' and filter.label != 'Color' %}
-              <svg class="w-3.5 h-3.5 text-[#222] transition-transform filter-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+              <svg class="w-3.5 h-3.5 text-[#222] transition-transform filter-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5"/>
               </svg>
             {% endif %}
           </div>
 
-          <div class="filter-content pt-1">
+          <div class="filter-content pt-0.5 pb-2">
             {% if filter.type == 'price_range' %}
               {% comment %} ── PRICE ── {% endcomment %}
               <div class="flex gap-2 items-center mb-4">
                 <div class="flex-1">
                   <span class="text-[9px] uppercase text-gray-400 block mb-1">From</span>
                   <input type="number" id="filter-price-min" name="{{ filter.min_value.param_name }}"
-                         placeholder="0" class="w-full border border-[#e5e5e5] text-[12px] px-3 py-2 outline-none">
+                         placeholder="0" class="w-full border border-[#e5e5e5] text-[12px] font-light px-2.5 py-1.5 outline-none rounded-none text-[#444]">
                 </div>
-                <span class="text-[#e5e5e5] mt-4">—</span>
+                <span class="text-[#ccc] mt-4">—</span>
                 <div class="flex-1">
                   <span class="text-[9px] uppercase text-gray-400 block mb-1">To</span>
                   <input type="number" id="filter-price-max" name="{{ filter.max_value.param_name }}"
-                         placeholder="{{ filter.range_max | money_without_currency }}" class="w-full border border-[#e5e5e5] text-[12px] px-3 py-2 outline-none">
+                         placeholder="{{ filter.range_max | money_without_currency }}" class="w-full border border-[#e5e5e5] text-[12px] font-light px-2.5 py-1.5 outline-none rounded-none text-[#444]">
                 </div>
               </div>
-              <button type="button" id="filter-price-apply" class="text-[10px] uppercase tracking-widest border border-[#222] px-6 py-2 bg-white hover:bg-[#222] hover:text-white transition-colors">Apply</button>
+              <button type="button" id="filter-price-apply" class="text-[10px] uppercase tracking-widest border border-[#222] px-6 py-1.5 bg-white hover:bg-[#222] hover:text-white transition-colors" style="font-family: var(--font-montserrat);">Apply</button>
 
             {% elsif filter.type == 'list' %}
               {% assign lbl = filter.label | downcase %}
               
               {% if lbl contains 'color' or lbl contains 'колір' or lbl contains 'צבע' %}
                 {% comment %} ── COLOR SWATCHES ── {% endcomment %}
-                <div class="flex flex-wrap gap-3">
+                <div class="flex flex-wrap gap-2.5 pt-1 pb-1">
                   {% for value in filter.values %}
-                    <button type="button" class="filter-swatch w-[24px] h-[24px] rounded-full transition-all border border-[#e5e5e5] {% if value.active %}ring-1 ring-offset-1 ring-[#e91e63]{% endif %}"
+                    <button type="button" class="filter-swatch w-[24px] h-[24px] rounded-full transition-all border border-[#e5e5e5] {% if value.active %}ring-1 ring-offset-2 ring-[#e91e63]{% endif %}"
                             data-param="{{ value.param_name }}" data-value="{{ value.value | url_encode }}" data-active="{{ value.active }}"
                             style="background-color: {{ value.value | downcase }};" title="{{ value.label }}"></button>
                   {% endfor %}
@@ -213,41 +213,54 @@
 
               {% elsif lbl contains 'size' or lbl contains 'розмір' or lbl contains 'גודל' %}
                 {% comment %} ── SIZE GRID ── {% endcomment %}
-                <div class="flex flex-wrap gap-2">
-                  {% for value in filter.values %}
-                    {% assign v_up = value.label | upcase %}
-                    {% if v_up contains 'ONE SIZE' %}
-                      <!-- Break to new line for ONE SIZE -->
-                      <div class="w-full h-0 m-0 p-0 hidden"></div>
-                      <button type="button" class="filter-size h-[28px] w-[80px] mt-1 border text-[12px] flex items-center justify-center transition-all bg-white
-                                     {% if value.active %}border-[#222] font-semibold text-[#222]{% else %}border-[#e5e5e5] font-light text-[#444]{% endif %}"
-                              data-param="{{ value.param_name }}" data-value="{{ value.value | url_encode }}" data-active="{{ value.active }}">
-                        {{ value.label | upcase }}
-                      </button>
-                    {% else %}
-                      <button type="button" class="filter-size h-[28px] w-[28px] border text-[12px] flex items-center justify-center transition-all bg-white
-                                     {% if value.active %}border-[#222] font-semibold text-[#222]{% else %}border-[#e5e5e5] font-light text-[#444]{% endif %}"
-                              data-param="{{ value.param_name }}" data-value="{{ value.value | url_encode }}" data-active="{{ value.active }}">
-                        {{ value.label | upcase }}
-                      </button>
-                    {% endif %}
-                  {% endfor %}
+                <div class="flex flex-col gap-2.5">
+                  {% assign sorted_values = filter.values %}
+                  {% assign sizes_normal = '' | split: '' %}
+                  {% assign size_one = '' | split: '' %}
+                  
+                  {% comment %} Render ONE SIZE first (top) then S M L... wait, ref image has ONE SIZE top? 
+                    Actually in ref image: 
+                    ONE SIZE
+                    S M L 
+                    So let's do exactly that layout without sorting complex logic. Just flex row wrap.
+                  {% endcomment %}
+                  
+                  <div class="flex flex-wrap gap-2 pt-1 pb-1">
+                    {% for value in filter.values %}
+                      {% assign v_up = value.label | upcase %}
+                      {% if v_up contains 'ONE SIZE' %}
+                        <!-- Break to new line for ONE SIZE -->
+                        <div class="w-full h-0 m-0 p-0 hidden"></div>
+                        <button type="button" class="filter-size h-[28px] px-3.5 border text-[11px] font-light flex items-center justify-center transition-all bg-white
+                                       {% if value.active %}border-[#222] font-medium text-[#222]{% else %}border-[#ccc] text-[#555]{% endif %}"
+                                data-param="{{ value.param_name }}" data-value="{{ value.value | url_encode }}" data-active="{{ value.active }}">
+                          {{ value.label | upcase }}
+                        </button>
+                      {% else %}
+                        <button type="button" class="filter-size h-[28px] w-[28px] border text-[11px] font-light flex items-center justify-center transition-all bg-white
+                                       {% if value.active %}border-[#222] font-medium text-[#222]{% else %}border-[#ccc] text-[#555]{% endif %}"
+                                data-param="{{ value.param_name }}" data-value="{{ value.value | url_encode }}" data-active="{{ value.active }}">
+                          {{ value.label | upcase }}
+                        </button>
+                      {% endif %}
+                    {% endfor %}
+                  </div>
                 </div>
 
               {% else %}
                 {% comment %} ── CHECKBOX LIST (Category, Material, Availability) ── {% endcomment %}
-                <div class="flex flex-col gap-3">
+                <div class="flex flex-col gap-3 pt-1 pb-1">
                   {% for value in filter.values %}
                     <div class="flex items-center cursor-pointer group filter-item" data-param="{{ value.param_name }}" data-value="{{ value.value | url_encode }}" data-active="{{ value.active }}">
-                      <div class="w-[14px] h-[14px] border border-[#222] rounded-[1px] transition-colors flex items-center justify-center mr-2.5 shrink-0
-                                  {% if value.active %}bg-[#e91e63] border-[#e91e63]{% else %}bg-transparent{% endif %}">
+                      <div class="w-[14px] h-[14px] border border-[#222] rounded-[1px] transition-colors flex items-center justify-center mr-3 shrink-0
+                                  {% if value.active %}bg-[#e91e63] border-[#e91e63]{% else %}bg-transparent border-[#444]{% endif %}">
                         {% if value.active %}
-                          <svg class="w-3 h-3 text-white translate-y-[1px]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="4">
+                          <svg class="w-3 h-3 text-white translate-y-[0px]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="4">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/>
                           </svg>
                         {% endif %}
                       </div>
-                      <span class="text-[13px] text-[#444] font-light leading-none" style="font-family: var(--font-montserrat);">{{ value.label }}</span>
+                      <span class="text-[13px] text-[#555] font-light leading-none" style="font-family: var(--font-montserrat);">{{ value.label }}</span>
                     </div>
                   {% endfor %}
                 </div>
@@ -255,12 +268,12 @@
             {% endif %}
           </div>
           
-          <!-- Divider Line -->
-          <div class="w-full h-[1px] bg-[#999] mt-6 mb-2"></div>
+          <!-- Divider Line matching exactly the width of content -->
+          <div class="w-full border-b border-[#ccc] mt-3"></div>
         </div>
       {% endfor %}
     {% else %}
-      {% comment %} ── FALLBACK: no collection.filters (not on collection page, or filters not configured) ── {% endcomment %}
+      {% comment %} ── FALLBACK ── {% endcomment %}
       <p class="text-[13px] text-gray-400 mt-4" style="font-family: var(--font-montserrat);">
         {{ 'catalog.no_filters' | t | default: 'Filters will appear once products are added.' }}
       </p>
@@ -269,14 +282,14 @@
   </div>{%- comment -%}#filter-body{%- endcomment -%}
 
   <!-- Sticky footer: Clear + Apply -->
-  <div class="flex-shrink-0 px-6 lg:px-8 py-6 flex gap-3 z-10 bg-white">
+  <div class="flex-shrink-0 px-6 lg:px-8 py-5 flex gap-3 z-10 bg-white">
     <button type="button" id="filter-clear-btn"
-            class="flex-1 w-full border border-[#222] text-[12px] font-medium uppercase tracking-widest py-3 text-[#222] hover:bg-gray-50 transition-colors"
+            class="flex-1 w-full border border-[#222] text-[11px] font-medium uppercase tracking-widest py-3 text-[#222] hover:bg-gray-50 transition-colors"
             style="font-family: var(--font-montserrat);">
       {{ 'catalog.clear_filters' | t | default: 'Clear' }}
     </button>
     <button type="button" id="filter-apply-btn"
-            class="flex-1 w-full bg-[#222] text-white text-[12px] font-medium uppercase tracking-widest py-3 border border-[#222] hover:bg-[#111] transition-colors"
+            class="flex-1 w-full bg-[#222] text-white text-[11px] font-medium uppercase tracking-widest py-3 border border-[#222] hover:bg-[#111] transition-colors"
             style="font-family: var(--font-montserrat);">
       {{ 'catalog.apply_filters' | t | default: 'Apply' }}
     </button>
