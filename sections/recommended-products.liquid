@@ -90,46 +90,61 @@
       (function() {
         const productId = {{ product.id | json }};
         const locale    = '{{ request.locale.iso_code }}';
-        if (!productId) return;
+        const inner     = document.getElementById('rec-products-inner');
+        if (!productId || !inner) return;
         
-        // Remove section_id to get JSON, not HTML
+        const isHe = locale === 'he';
+        const priceFormatter = new Intl.NumberFormat(locale === 'he' ? 'he-IL' : 'en-US', {
+          style: 'currency',
+          currency: '{{ cart.currency.iso_code }}',
+          minimumFractionDigits: 0
+        });
+
+        function esc(s) { var d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+
+        function render(products) {
+          inner.innerHTML = products.map(p => {
+            const imgUrl = (p.featured_image && p.featured_image.url) ? p.featured_image.url : (p.images && p.images[0] ? (p.images[0].src || p.images[0]) : '');
+            const price = priceFormatter.format(p.price / 100);
+            const safeTitle = esc(p.title || '');
+            const safeUrl = esc(p.url || (p.handle ? `/products/${p.handle}` : ''));
+            
+            return `<a href="${safeUrl}" class="product-card cursor-pointer flex flex-col group no-underline animate-fade-in opacity-0" style="animation: fadeIn 0.8s forwards;">
+              <div class="relative aspect-[3/4] mb-4 overflow-hidden w-full bg-gray-100">
+                ${imgUrl ? `<img src="${esc(imgUrl.replace('http:', 'https:'))}&width=600" alt="${safeTitle}" class="product-card-img absolute inset-0 w-full h-full object-cover" loading="lazy"/>` : ''}
+              </div>
+              <div class="flex flex-col space-y-1.5 px-1" ${isHe ? 'dir="rtl" style="text-align:right;"' : ''}>
+                <h3 class="text-[13px] font-semibold text-gray-900 tracking-wide group-hover:text-gray-500 transition-colors whitespace-nowrap overflow-hidden text-ellipsis"
+                    style="font-family: 'Montserrat', sans-serif;">${safeTitle}</h3>
+                <p class="text-[13px] text-gray-500 font-light" style="font-family: 'Montserrat', sans-serif;">${price}</p>
+              </div>
+            </a>`;
+          }).join('');
+        }
+
+        // 1. Try Recommendations API
         fetch(`${window.Shopify.routes.root}recommendations/products.json?product_id=${productId}&limit=4`)
           .then(r => r.ok ? r.json() : null)
           .then(data => {
-            if (!data || !data.products || data.products.length === 0) return;
-            const container = document.getElementById('rec-products-inner');
-            if (!container) return;
-            
-            const isHe = locale === 'he';
-            const priceFormatter = new Intl.NumberFormat(locale === 'he' ? 'he-IL' : 'en-US', {
-              style: 'currency',
-              currency: '{{ cart.currency.iso_code }}',
-              minimumFractionDigits: 0
-            });
-
-            function esc(s) { var d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
-            
-            container.innerHTML = data.products.map(p => {
-              const imgUrl = p.featured_image || p.image;
-              const price = priceFormatter.format(p.price / 100);
-              const safeTitle = esc(p.title || '');
-              const safeUrl = esc(p.url || '');
-              
-              return `<a href="${safeUrl}" class="product-card cursor-pointer flex flex-col group no-underline animate-fade-in">
-                <div class="relative aspect-[3/4] mb-4 overflow-hidden w-full bg-gray-100">
-                  <img src="${esc(imgUrl)}&width=600" alt="${safeTitle}" class="product-card-img absolute inset-0 w-full h-full object-cover" loading="lazy"/>
-                </div>
-                <div class="flex flex-col space-y-1.5 px-1" ${isHe ? 'dir="rtl" style="text-align:right;"' : ''}>
-                  <h3 class="text-[13px] font-semibold text-gray-900 tracking-wide group-hover:text-gray-500 transition-colors whitespace-nowrap overflow-hidden text-ellipsis"
-                      style="font-family: var(--font-montserrat), Montserrat, sans-serif;">${safeTitle}</h3>
-                  <p class="text-[13px] text-gray-500 font-light" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">${price}</p>
-                </div>
-              </a>`;
-            }).join('');
+            if (data && data.products && data.products.length > 0) {
+              render(data.products);
+            } else {
+              // 2. Fallback to Catalog All
+              fetch(`${window.Shopify.routes.root}collections/all/products.json?limit=4`)
+                .then(r => r.ok ? r.json() : null)
+                .then(fallData => {
+                  if (fallData && fallData.products && fallData.products.length > 0) {
+                    render(fallData.products);
+                  }
+                });
+            }
           })
           .catch(e => console.error('Recs error:', e));
       })();
       </script>
+      <style>
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+      </style>
 
     {% else %}
       {% comment %}
