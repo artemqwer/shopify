@@ -675,18 +675,6 @@
         header.classList.remove('header-transparent');
         header.classList.add('bg-white');
         document.body.style.overflow = 'hidden';
-        // Lift burger above the full-screen menu (z-55)
-        btn.style.position = 'fixed';
-        btn.style.zIndex = '60';
-        btn.style.top = '18px';
-        var isRtl = document.documentElement.dir === 'rtl';
-        if (isRtl) {
-          btn.style.right = '16px';
-          btn.style.left = '';
-        } else {
-          btn.style.left = '16px';
-          btn.style.right = '';
-        }
       }
     }
     function closeMobileMenu() {
@@ -696,11 +684,6 @@
       const btn = document.querySelector('.mobile-menu-toggle');
       if (btn) {
         btn.classList.remove('menu-open');
-        btn.style.position = '';
-        btn.style.zIndex = '';
-        btn.style.top = '';
-        btn.style.left = '';
-        btn.style.right = '';
       }
       menu.classList.remove('is-open');
       backdrop.classList.remove('is-open');
