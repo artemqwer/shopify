@@ -62,18 +62,17 @@
     {% elsif product.id %}
       {% comment %}
       ════════════════════════════════════════════════════════
-      TRANSITIONAL: On a real product page but before 
-      recommendations engine warms up — use JS to load them.
+      TRANSITIONAL: On a real product page. Use JS to load 
+      real data and replace demo placeholders.
       ════════════════════════════════════════════════════════
       {% endcomment %}
-      <div id="rec-products-container" class="contents">
+      <div id="rec-products-inner" class="contents">
         {% comment %} DEMO FALLBACK while async loads {% endcomment %}
         {% assign demo_names = "products.product_1,products.product_2,products.product_3,products.product_4" | split: "," %}
         {% assign demo_imgs  = "product-image-1.png,product-image-2.png,product-image-3.png,product-image-4.png" | split: "," %}
         {% assign demo_slugs = "leopard-print-scarf,blue-silk-scarf,pink-scarf,vintage-scarf" | split: "," %}
         {% for i in (0..3) %}
-          <a href="{{ routes.search_url }}?view=demo&product={{ demo_slugs[i] }}"
-             class="product-card cursor-pointer flex flex-col group no-underline" data-demo-card>
+          <div class="product-card cursor-pointer flex flex-col group no-underline" data-demo-card>
             <div class="relative aspect-[3/4] mb-4 overflow-hidden w-full bg-gray-100">
               <img src="{{ demo_imgs[i] | asset_url }}" alt="{{ demo_names[i] | t }}"
                    class="product-card-img absolute inset-0 w-full h-full object-cover" loading="lazy"/>
@@ -83,32 +82,42 @@
                   style="font-family: var(--font-montserrat), Montserrat, sans-serif;">{{ demo_names[i] | t }}</h3>
               <p class="text-[13px] text-gray-500 font-light" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">$ 80</p>
             </div>
-          </a>
+          </div>
         {% endfor %}
       </div>
 
       <script>
       (function() {
         const productId = {{ product.id | json }};
-        const sectionId = '{{ section.id }}';
         const locale    = '{{ request.locale.iso_code }}';
         if (!productId) return;
-        fetch(`/recommendations/products.json?product_id=${productId}&limit=4&section_id=${sectionId}`)
+        
+        // Remove section_id to get JSON, not HTML
+        fetch(`${window.Shopify.routes.root}recommendations/products.json?product_id=${productId}&limit=4`)
           .then(r => r.ok ? r.json() : null)
           .then(data => {
             if (!data || !data.products || data.products.length === 0) return;
-            const container = document.getElementById('rec-products-container');
+            const container = document.getElementById('rec-products-inner');
             if (!container) return;
+            
             const isHe = locale === 'he';
+            const priceFormatter = new Intl.NumberFormat(locale === 'he' ? 'he-IL' : 'en-US', {
+              style: 'currency',
+              currency: '{{ cart.currency.iso_code }}',
+              minimumFractionDigits: 0
+            });
+
             function esc(s) { var d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+            
             container.innerHTML = data.products.map(p => {
-              const img = p.featured_image ? p.featured_image.url.replace('http:', 'https:') : '';
-              const price = p.price ? ('$' + (p.price / 100).toFixed(2).replace(/\.00$/, '')) : '';
+              const imgUrl = p.featured_image || p.image;
+              const price = priceFormatter.format(p.price / 100);
               const safeTitle = esc(p.title || '');
               const safeUrl = esc(p.url || '');
-              return `<a href="${safeUrl}" class="product-card cursor-pointer flex flex-col group no-underline">
+              
+              return `<a href="${safeUrl}" class="product-card cursor-pointer flex flex-col group no-underline animate-fade-in">
                 <div class="relative aspect-[3/4] mb-4 overflow-hidden w-full bg-gray-100">
-                  ${img ? `<img src="${esc(img)}&width=600" alt="${safeTitle}" class="product-card-img absolute inset-0 w-full h-full object-cover" loading="lazy"/>` : ''}
+                  <img src="${esc(imgUrl)}&width=600" alt="${safeTitle}" class="product-card-img absolute inset-0 w-full h-full object-cover" loading="lazy"/>
                 </div>
                 <div class="flex flex-col space-y-1.5 px-1" ${isHe ? 'dir="rtl" style="text-align:right;"' : ''}>
                   <h3 class="text-[13px] font-semibold text-gray-900 tracking-wide group-hover:text-gray-500 transition-colors whitespace-nowrap overflow-hidden text-ellipsis"
@@ -118,7 +127,7 @@
               </a>`;
             }).join('');
           })
-          .catch(() => { /* keep demo cards */ });
+          .catch(e => console.error('Recs error:', e));
       })();
       </script>
 
