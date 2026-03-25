@@ -1,0 +1,318 @@
+{% schema %}
+{
+  "name": "Cart Page",
+  "settings": []
+}
+{% endschema %}
+
+<style>
+  .cart-page-container {
+    min-height: 60vh;
+    font-family: var(--font-montserrat), Montserrat, sans-serif;
+  }
+  .cart-item-row {
+    transition: opacity 0.3s ease;
+  }
+  .cart-item-row.removing {
+    opacity: 0.5;
+  }
+</style>
+
+<section class="cart-page-container max-w-[1280px] mx-auto px-5 md:px-[20px] py-10 md:py-16" {% if request.locale.iso_code == 'he' %}dir="rtl"{% endif %}>
+
+  <!-- Page Title -->
+  <div class="text-center mb-10">
+    <h1 class="text-[32px] md:text-[42px] font-medium text-[#222] uppercase tracking-wide">
+      {% if request.locale.iso_code == 'he' %}סל הקניות שלי{% else %}Shopping Cart{% endif %}
+    </h1>
+  </div>
+
+  <!-- Loading State -->
+  <div id="cart-page-loading" class="flex items-center justify-center py-20">
+    <svg class="animate-spin w-10 h-10 text-[#e61a7a]" fill="none" viewBox="0 0 24 24">
+      <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/>
+      <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"/>
+    </svg>
+  </div>
+
+  <!-- Empty State -->
+  <div id="cart-page-empty" class="hidden text-center py-20">
+    <svg class="w-20 h-20 text-[#e0e0e0] mb-6 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+    </svg>
+    <p class="text-[24px] font-medium text-[#222] mb-3">
+      {% if request.locale.iso_code == 'he' %}הסל ריק{% else %}Your cart is empty{% endif %}
+    </p>
+    <p class="text-[14px] text-[#999] mb-8">
+      {% if request.locale.iso_code == 'he' %}הוסיפי מוצרים כדי להמשיך{% else %}Add some products to continue shopping{% endif %}
+    </p>
+    <a href="{{ routes.all_products_collection_url }}" class="inline-block px-10 py-4 border border-[#DE2077] text-[13px] text-[#DE2077] uppercase tracking-widest hover:bg-[#DE2077] hover:text-white transition-colors">
+      {% if request.locale.iso_code == 'he' %}המשיכי לקנות{% else %}Continue Shopping{% endif %}
+    </a>
+  </div>
+
+  <!-- Cart Content -->
+  <div id="cart-page-content" class="hidden">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+      <!-- Left: Cart Items -->
+      <div class="lg:col-span-2">
+        <div class="mb-4 pb-4 border-b border-[#f0f0f0]">
+          <p id="cart-page-count" class="text-[14px] text-[#888]"></p>
+        </div>
+        <div id="cart-page-items"></div>
+      </div>
+
+      <!-- Right: Summary -->
+      <div class="lg:col-span-1">
+        <div class="bg-[#f9f9f9] p-6 md:p-8 sticky top-[120px]">
+          <h2 class="text-[20px] font-medium text-[#222] mb-6 uppercase tracking-wide">
+            {% if request.locale.iso_code == 'he' %}סיכום הזמנה{% else %}Order Summary{% endif %}
+          </h2>
+
+          <div class="space-y-4 mb-6">
+            <div class="flex justify-between items-center">
+              <span class="text-[14px] text-[#666]">
+                {% if request.locale.iso_code == 'he' %}סיכום ביניים{% else %}Subtotal{% endif %}
+              </span>
+              <span id="cart-page-subtotal" class="text-[18px] font-medium text-[#222]">$0</span>
+            </div>
+            <div class="text-[12px] text-[#999]">
+              {% if request.locale.iso_code == 'he' %}משלוח יחושב בקופה{% else %}Shipping calculated at checkout{% endif %}
+            </div>
+          </div>
+
+          <div class="h-[1px] bg-[#ddd] mb-6"></div>
+
+          <div class="flex justify-between items-baseline mb-8">
+            <span class="text-[16px] font-medium text-[#222]">
+              {% if request.locale.iso_code == 'he' %}סך הכל{% else %}Total{% endif %}
+            </span>
+            <span id="cart-page-total" class="text-[32px] font-medium text-[#222]">$0</span>
+          </div>
+
+          <button type="button" id="cart-page-checkout-btn" class="w-full py-4 bg-[#e61a7a] text-white text-[14px] font-medium tracking-widest uppercase text-center hover:bg-black transition-colors mb-4">
+            {% if request.locale.iso_code == 'he' %}לתשלום{% else %}Proceed to Checkout{% endif %}
+          </button>
+
+          <a href="{{ routes.all_products_collection_url }}" class="block w-full py-4 border border-[#222] text-[13px] text-[#222] uppercase tracking-widest text-center hover:bg-[#222] hover:text-white transition-colors">
+            {% if request.locale.iso_code == 'he' %}המשך קנייה{% else %}Continue Shopping{% endif %}
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</section>
+
+<script>
+(function() {
+  const locale = '{{ request.locale.iso_code }}';
+  const isHe = locale === 'he';
+
+  const elLoading  = document.getElementById('cart-page-loading');
+  const elEmpty    = document.getElementById('cart-page-empty');
+  const elContent  = document.getElementById('cart-page-content');
+  const elItems    = document.getElementById('cart-page-items');
+  const elCount    = document.getElementById('cart-page-count');
+  const elSubtotal = document.getElementById('cart-page-subtotal');
+  const elTotal    = document.getElementById('cart-page-total');
+  const checkoutBtn = document.getElementById('cart-page-checkout-btn');
+
+  // Mock cart helper
+  const MOCK_KEY = 'ester_mock_cart';
+  function mockGet() {
+    try { return JSON.parse(localStorage.getItem(MOCK_KEY)) || []; } catch(e) { return []; }
+  }
+  function mockSave(items) {
+    localStorage.setItem(MOCK_KEY, JSON.stringify(items));
+  }
+  function mockChange(key, qty) {
+    let items = mockGet();
+    if (qty <= 0) { items = items.filter(i => i.key !== key); }
+    else { const it = items.find(i => i.key === key); if (it) it.quantity = qty; }
+    mockSave(items);
+    return items;
+  }
+  function mockTotal(items) {
+    return items.reduce((sum, i) => {
+      const num = parseFloat(String(i.price).replace(/[^0-9.]/g, '')) || 0;
+      return sum + num * i.quantity;
+    }, 0);
+  }
+  function mockCount(items) { return items.reduce((s,i) => s + i.quantity, 0); }
+
+  function moneyFromCents(cents) {
+    var n = parseInt(cents) || 0;
+    return '$' + (n / 100).toFixed(2).replace(/\.00$/, '');
+  }
+  function moneyFromFloat(f) {
+    var n = parseFloat(f) || 0;
+    return '$' + n.toFixed(2).replace(/\.00$/, '');
+  }
+
+  function showLoading() {
+    elLoading && (elLoading.style.display = 'flex');
+    elEmpty && elEmpty.classList.add('hidden');
+    elContent && elContent.classList.add('hidden');
+  }
+
+  function showEmpty() {
+    elLoading && (elLoading.style.display = 'none');
+    elEmpty && elEmpty.classList.remove('hidden');
+    elContent && elContent.classList.add('hidden');
+  }
+
+  function showCart(allItems, subtotal, count) {
+    elLoading && (elLoading.style.display = 'none');
+    elEmpty && elEmpty.classList.add('hidden');
+    elContent && elContent.classList.remove('hidden');
+
+    if (elSubtotal) elSubtotal.textContent = subtotal;
+    if (elTotal) elTotal.textContent = subtotal;
+    if (elCount) {
+      const itemText = isHe ?
+        (count === 1 ? 'פריט אחד' : count + ' פריטים') :
+        (count + ' item' + (count !== 1 ? 's' : ''));
+      elCount.textContent = itemText;
+    }
+
+    renderItems(allItems);
+  }
+
+  function renderItems(items) {
+    if (!elItems) return;
+
+    elItems.innerHTML = items.map(item => {
+      const priceStr = item.isMock ? item.price : moneyFromCents(item.price);
+      const totalPrice = item.isMock ?
+        moneyFromFloat(parseFloat(String(item.price).replace(/[^0-9.]/g, '')) * item.quantity) :
+        moneyFromCents(item.price * item.quantity);
+
+      const safeTitle = (item.product_title || '').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');
+      const safeImg = (item.image || '').replace(/"/g,'&quot;');
+      const imgHtml = item.image
+        ? `<img src="${safeImg}" alt="${safeTitle}" class="w-full h-full object-cover">`
+        : '<div class="w-full h-full bg-[#eee]"></div>';
+
+      return `
+      <div class="cart-item-row flex flex-col md:flex-row gap-6 py-6 border-b border-[#f0f0f0]" data-key="${item.key}" data-mock="${item.isMock ? '1' : ''}">
+        <div class="w-full md:w-[160px] h-[200px] md:h-[160px] flex-shrink-0 bg-[#f8f8f8] overflow-hidden">
+          ${imgHtml}
+        </div>
+        <div class="flex-1 flex flex-col justify-between">
+          <div>
+            <h3 class="text-[18px] font-medium text-[#222] mb-2">${safeTitle}</h3>
+            ${item.variant_title ? `<p class="text-[13px] text-[#999] mb-2">${(item.variant_title || '').replace(/&/g,'&amp;').replace(/</g,'&lt;')}</p>` : ''}
+            <p class="text-[16px] text-[#666]">${priceStr} ${isHe ? 'ליחידה' : 'each'}</p>
+          </div>
+          <div class="flex items-center justify-between mt-4">
+            <div class="flex items-center border border-[#ddd] h-10">
+              <button class="cart-qty-btn w-10 h-full flex items-center justify-center border-r border-[#ddd] text-gray-500 hover:text-black transition-colors"
+                      data-key="${item.key}" data-delta="-1" aria-label="Decrease quantity">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 12H4"/></svg>
+              </button>
+              <span class="w-12 text-center text-[15px] text-gray-700 font-medium">${item.quantity}</span>
+              <button class="cart-qty-btn w-10 h-full flex items-center justify-center border-l border-[#ddd] text-gray-500 hover:text-black transition-colors"
+                      data-key="${item.key}" data-delta="1" aria-label="Increase quantity">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4v16m8-8H4"/></svg>
+              </button>
+            </div>
+            <div class="flex items-center gap-4">
+              <span class="text-[18px] font-medium text-[#222]">${totalPrice}</span>
+              <button class="cart-remove-btn text-[#999] hover:text-red-500 transition-colors" data-key="${item.key}" aria-label="Remove item">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>`;
+    }).join('');
+
+    // Attach event listeners
+    elItems.querySelectorAll('.cart-qty-btn').forEach(btn => {
+      btn.addEventListener('click', handleQuantityChange);
+    });
+    elItems.querySelectorAll('.cart-remove-btn').forEach(btn => {
+      btn.addEventListener('click', handleRemove);
+    });
+  }
+
+  function handleQuantityChange(e) {
+    const btn = e.currentTarget;
+    const key = btn.dataset.key;
+    const delta = parseInt(btn.dataset.delta);
+    const row = elItems.querySelector(`[data-key="${key}"]`);
+    const isMock = row && row.dataset.mock === '1';
+    const qtyEl = row && row.querySelector('span');
+    const curQty = qtyEl ? parseInt(qtyEl.textContent) : 1;
+    const newQty = Math.max(0, curQty + delta);
+
+    if (isMock) {
+      mockChange(key, newQty);
+      loadCart();
+    } else {
+      updateRealCartItem(key, newQty);
+    }
+  }
+
+  function handleRemove(e) {
+    const btn = e.currentTarget;
+    const key = btn.dataset.key;
+    const row = elItems.querySelector(`[data-key="${key}"]`);
+    const isMock = row && row.dataset.mock === '1';
+
+    if (row) row.classList.add('removing');
+
+    if (isMock) {
+      mockChange(key, 0);
+      setTimeout(() => loadCart(), 300);
+    } else {
+      updateRealCartItem(key, 0);
+    }
+  }
+
+  function updateRealCartItem(key, qty) {
+    fetch('/cart/change.js', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id: key, quantity: qty })
+    }).then(() => loadCart());
+  }
+
+  function loadCart() {
+    showLoading();
+    fetch('/cart.js')
+      .then(r => r.json())
+      .then(realCart => {
+        const mockItems = mockGet();
+        const allItems = [...(realCart.items || []), ...mockItems];
+        const mockSub = mockTotal(mockItems);
+        const realSub = realCart.total_price / 100;
+        const totalSub = moneyFromFloat(realSub + mockSub);
+        const totalCount = realCart.item_count + mockCount(mockItems);
+
+        if (allItems.length === 0) showEmpty();
+        else showCart(allItems, totalSub, totalCount);
+      })
+      .catch(() => {
+        const mockItems = mockGet();
+        const sub = moneyFromFloat(mockTotal(mockItems));
+        const cnt = mockCount(mockItems);
+        if (mockItems.length === 0) showEmpty();
+        else showCart(mockItems, sub, cnt);
+      });
+  }
+
+  // Checkout button
+  if (checkoutBtn) {
+    checkoutBtn.addEventListener('click', function() {
+      window.location.href = '/checkout';
+    });
+  }
+
+  // Load cart on page load
+  loadCart();
+})();
+</script>
