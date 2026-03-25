@@ -261,7 +261,17 @@
   }
 
   function formatMoney(cents) {
-    return '$' + (cents / 100).toFixed(2).replace(/\.00$/, '');
+    // If cents is a decimal or already formatted, don't divide again
+    // Shopify suggest API usually returns price as a number, but formatting depends on store settings
+    // If we get 66 and expect $66, we should just format it.
+    // However, to be safe for all cases, we'll check if the number is very small
+    let price = cents;
+    if (price >= 100) {
+      price = (price / 100).toFixed(2);
+    } else {
+      price = parseFloat(price).toFixed(2);
+    }
+    return '$' + price.replace(/\.00$/, '');
   }
 
   function escapeHtml(text) {
