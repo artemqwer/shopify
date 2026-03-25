@@ -193,7 +193,7 @@
       const safeTitle = (item.product_title || '').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');
       const safeImg = (item.image || '').replace(/"/g,'&quot;');
       const imgHtml = item.image
-        ? `<img src="${safeImg}" alt="${safeTitle}" class="w-full h-full object-cover">`
+        ? `<img src="${safeImg}" alt="${safeTitle}" class="w-full h-full object-contain">`
         : '<div class="w-full h-full bg-[#eee]"></div>';
 
       return `
