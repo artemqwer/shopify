@@ -19,6 +19,12 @@
   <script src="https://cdn.tailwindcss.com"></script>
 
   {{ content_for_header }}
+
+  <script>
+    window.Shopify = window.Shopify || {};
+    window.Shopify.routes = window.Shopify.routes || {};
+    window.Shopify.routes.root = "{{ routes.root_url }}";
+  </script>
   
   <style>
     :root {
