@@ -12,12 +12,18 @@
     "hero": {
       "type": "hero",
       "settings": {
-        "mobile_video": "shopify://files/videos/IMG_5141.MP4"
+        "mobile_video": "shopify://files/videos/IMG_5141.MP4",
+        "link_1_text": "For sea",
+        "link_1_url": "",
+        "link_2_text": "Classic",
+        "link_2_url": ""
       }
     },
     "popular": {
       "type": "popular-products",
-      "settings": {}
+      "settings": {
+        "collection": ""
+      }
     },
     "video-banner": {
       "type": "video-banner",
@@ -31,6 +37,45 @@
     },
     "reviews": {
       "type": "reviews",
+      "blocks": {
+        "review_Bj83Bz": {
+          "type": "review",
+          "settings": {
+            "author": "Customer Name"
+          }
+        },
+        "review_tgRbAB": {
+          "type": "review",
+          "settings": {
+            "author": "Customer Name"
+          }
+        },
+        "review_cKbCCB": {
+          "type": "review",
+          "settings": {
+            "author": "Customer Name"
+          }
+        },
+        "review_ryWeKz": {
+          "type": "review",
+          "settings": {
+            "author": "Customer Name"
+          }
+        },
+        "review_TbPK8d": {
+          "type": "review",
+          "settings": {
+            "author": "Customer Name"
+          }
+        }
+      },
+      "block_order": [
+        "review_Bj83Bz",
+        "review_tgRbAB",
+        "review_cKbCCB",
+        "review_ryWeKz",
+        "review_TbPK8d"
+      ],
       "settings": {
         "title": "Reviews"
       }
