@@ -21,6 +21,8 @@
     "account": "Account",
     "cart": "Cart",
     "language": "EN",
+    "recommended_products": "Recommended products",
+    "unpacking": "Unpacking",
     "menu": {
       "all": "All products",
       "bestsellers": "Bestsellers",
