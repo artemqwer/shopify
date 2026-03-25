@@ -432,7 +432,7 @@
     <div class="h-[60px]"></div>
 
     <!-- Recommended products -->
-    <div class="pl-[32px] pr-[20px] mb-6">
+    <div class="{% if request.locale.iso_code == 'he' %}pr-[32px] pl-[20px]{% else %}pl-[32px] pr-[20px]{% endif %} mb-6">
       <button
         type="button"
         class="flex items-center justify-between w-full text-left mb-3"
@@ -443,7 +443,7 @@
           <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1" stroke-linecap="round"/>
         </svg>
       </button>
-      <div id="recommended-section" class="flex space-x-3 overflow-x-auto scrollbar-hide -mr-[20px] pl-[32px] pr-0 snap-x snap-mandatory w-full">
+      <div id="recommended-section" class="flex space-x-3 rtl:space-x-reverse overflow-x-auto scrollbar-hide {% if request.locale.iso_code == 'he' %}-ml-[20px] pr-[32px] pl-0{% else %}-mr-[20px] pl-[32px] pr-0{% endif %} snap-x snap-mandatory w-full">
         {% if section.settings.recommended_collection != blank %}
           {% for product in section.settings.recommended_collection.products limit: 3 %}
             <a href="{{ product.url }}" class="flex-shrink-0 w-[calc(50vw-22px)] block snap-start">
@@ -470,7 +470,7 @@
     </div>
 
     <!-- Unpacking section -->
-    <div class="pl-[32px] pr-[20px] mb-6">
+    <div class="{% if request.locale.iso_code == 'he' %}pr-[32px] pl-[20px]{% else %}pl-[32px] pr-[20px]{% endif %} mb-6">
       <button
         type="button"
         class="flex items-center justify-between w-full text-left mb-3"
@@ -481,7 +481,7 @@
           <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1" stroke-linecap="round"/>
         </svg>
       </button>
-      <div id="unpacking-section" class="flex space-x-3 overflow-x-auto scrollbar-hide -mr-[20px] pl-[32px] pr-0 snap-x snap-mandatory w-full">
+      <div id="unpacking-section" class="flex space-x-3 rtl:space-x-reverse overflow-x-auto scrollbar-hide {% if request.locale.iso_code == 'he' %}-ml-[20px] pr-[32px] pl-0{% else %}-mr-[20px] pl-[32px] pr-0{% endif %} snap-x snap-mandatory w-full">
         {% assign unpacking_blocks = section.blocks | where: 'type', 'unpacking_image' %}
         {% if unpacking_blocks.size > 0 %}
           {% for block in unpacking_blocks %}
