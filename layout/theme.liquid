@@ -10,6 +10,11 @@
   <title>{{ page_title }}</title>
   {% if page_description %}<meta name="description" content="{{ page_description | escape }}">{% endif %}
 
+  <!-- Google Fonts: Montserrat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
   <!-- Add Tailwind CDN for exact pixel-perfect match without build steps -->
   <script src="https://cdn.tailwindcss.com"></script>
 
@@ -42,12 +47,17 @@
       .hidden.md\:block { display: block !important; }
     }
 
-    /* Prevent fixed-content sections after footer from taking layout space on desktop */
-    @media (min-width: 768px) {
-      #shopify-section-drawers,
-      #shopify-section-cookie-consent,
-      #shopify-section-lang-modal {
-        position: absolute;
+    /* Keep drawers fixed and z-indexed correctly */
+    #shopify-section-drawers {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 10001;
+      pointer-events: none;
+    }
+    #shopify-section-drawers > * {
+      pointer-events: auto;
+    }
         width: 0;
         height: 0;
         overflow: visible;
