@@ -50,36 +50,33 @@
     {% endif %}
 
     <div class="relative w-full overflow-x-auto scrollbar-hide snap-x snap-mandatory flex gap-4 md:gap-6 pb-4">
-      {% if section.blocks.size > 0 %}
-        {% for block in section.blocks %}
-          <div class="min-w-[280px] md:min-w-[400px] flex-1 snap-start" {{ block.shopify_attributes }}>
-            <div class="aspect-square bg-gray-50 overflow-hidden mb-4">
-              {% if block.settings.image != blank %}
-                <img src="{{ block.settings.image | image_url: width: 800 }}" alt="Review by {{ block.settings.author }}" class="w-full h-full object-cover">
-              {% else %}
-                <div class="w-full h-full flex items-center justify-center bg-gray-100 text-gray-400">
-                   <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                </div>
-              {% endif %}
-            </div>
-            {% if block.settings.author != blank %}
-                <p class="text-[14px] md:text-[16px] font-medium text-center tracking-wide" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">
-                    {{ block.settings.author }}
-                </p>
+      {% for block in section.blocks %}
+        <div class="min-w-[280px] md:min-w-[400px] max-w-[400px] flex-1 snap-start" {{ block.shopify_attributes }}>
+          <div class="aspect-square bg-gray-50 overflow-hidden mb-4 rounded-sm">
+            {% if block.settings.image != blank %}
+              <img 
+                src="{{ block.settings.image | image_url: width: 800 }}" 
+                alt="Review photo" 
+                width="800" 
+                height="800" 
+                class="w-full h-full object-cover"
+                loading="lazy"
+              >
+            {% else %}
+              <div class="w-full h-full flex items-center justify-center bg-gray-100 text-gray-300">
+                 <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                 </svg>
+              </div>
             {% endif %}
           </div>
-        {% endfor %}
-      {% else %}
-        {% comment %} Placeholder Reviews {% endcomment %}
-        {% for i in (1..4) %}
-          <div class="min-w-[280px] md:min-w-[400px] flex-1 snap-start">
-             <div class="aspect-square bg-gray-100 mb-4 flex items-center justify-center text-gray-300">
-                <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-             </div>
-             <p class="text-[14px] font-medium text-center">Customer Name</p>
-          </div>
-        {% endfor %}
-      {% endif %}
+          {% if block.settings.author != blank %}
+              <p class="text-[14px] md:text-[16px] font-medium text-center tracking-wide text-gray-900" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">
+                  {{ block.settings.author }}
+              </p>
+          {% endif %}
+        </div>
+      {% endfor %}
     </div>
   </div>
 </section>
