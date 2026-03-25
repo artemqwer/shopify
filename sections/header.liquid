@@ -29,6 +29,7 @@
   id="site-header"
   class="fixed top-0 w-full z-50 transition-all duration-300 {% if template.name == 'index' %}bg-transparent header-transparent md:bg-white{% else %}bg-white{% endif %} text-gray-900"
   style="box-shadow: none !important; border: none !important;"
+  {% if request.locale.iso_code == 'he' %}dir="rtl"{% endif %}
 >
   <div class="w-full max-w-[1280px] mx-auto px-[20px] header-desktop-padding">
     <div class="relative flex justify-between items-center h-[57px] md:h-[102px]">
@@ -55,7 +56,7 @@
       <!-- Search icon (mobile) - fixed position, stays in place -->
       <button
         type="button"
-        class="md:hidden hide-on-desktop header-mobile-icon absolute left-[36px] top-1/2 -translate-y-1/2 z-[70]"
+        class="md:hidden hide-on-desktop header-mobile-icon absolute {% if request.locale.iso_code == 'he' %}right-[36px]{% else %}left-[36px]{% endif %} top-1/2 -translate-y-1/2 z-[70]"
         onclick="window.location='{{ routes.root_url | append: '/search' | replace: '//', '/' }}'"
       >
         <img src="{{ 'Search.svg' | asset_url }}" width="24" height="24" alt="search" class="cart-icon-img">
