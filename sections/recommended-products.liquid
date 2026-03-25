@@ -159,34 +159,67 @@
     {% else %}
       {% comment %}
       ════════════════════════════════════════════════════════
-      DEMO MODE: No real products exist yet.
-      Shows 4 placeholder product cards.
-      Replace these with real products by adding items to
-      Shopify Admin → Products → Collections.
+      HOME PAGE MODE: Load real products from collection
       ════════════════════════════════════════════════════════
       {% endcomment %}
-      {% assign demo_names = "products.product_1,products.product_2,products.product_3,products.product_4" | split: "," %}
-      {% assign demo_imgs  = "product-image-1.png,product-image-2.png,product-image-3.png,product-image-4.png" | split: "," %}
-      {% assign demo_slugs = "leopard-print-scarf,blue-silk-scarf,pink-scarf,vintage-scarf" | split: "," %}
+      {% assign all_products = collections.all.products %}
+      {% if all_products.size > 0 %}
+        {% for product in all_products limit: 4 %}
+          <a href="{{ product.url }}" class="product-card cursor-pointer flex flex-col group no-underline">
+            <div class="relative aspect-[3/4] mb-4 overflow-hidden w-full bg-gray-100">
+              {% if product.featured_image %}
+                <img
+                  src="{{ product.featured_image | image_url: width: 600 }}"
+                  alt="{{ product.featured_image.alt | default: product.title | escape }}"
+                  class="product-card-img absolute inset-0 w-full h-full object-cover"
+                  loading="lazy"
+                />
+              {% else %}
+                {% assign fb = forloop.index0 | modulo: 4 | plus: 1 %}
+                <img
+                  src="{{ 'product-image-' | append: fb | append: '.png' | asset_url }}"
+                  alt="{{ product.title | escape }}"
+                  class="product-card-img absolute inset-0 w-full h-full object-cover"
+                  loading="lazy"
+                />
+              {% endif %}
+            </div>
+            <div class="flex flex-col space-y-1.5 px-1" {% if request.locale.iso_code == 'he' %}dir="rtl" style="text-align: right;"{% endif %}>
+              <h3 class="text-[13px] font-semibold text-gray-900 tracking-wide group-hover:text-gray-500 transition-colors whitespace-nowrap overflow-hidden text-ellipsis"
+                  style="font-family: var(--font-montserrat), Montserrat, sans-serif;">
+                {{ product.title }}
+              </h3>
+              <p class="text-[13px] text-gray-500 font-light" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">
+                {{ product.price | money }}
+              </p>
+            </div>
+          </a>
+        {% endfor %}
+      {% else %}
+        {% comment %} Fallback to demo mode if no products exist {% endcomment %}
+        {% assign demo_names = "products.product_1,products.product_2,products.product_3,products.product_4" | split: "," %}
+        {% assign demo_imgs  = "product-image-1.png,product-image-2.png,product-image-3.png,product-image-4.png" | split: "," %}
+        {% assign demo_slugs = "leopard-print-scarf,blue-silk-scarf,pink-scarf,vintage-scarf" | split: "," %}
 
-      {% for i in (0..3) %}
-        <a href="{{ routes.search_url }}?view=demo&product={{ demo_slugs[i] }}"
-           class="product-card cursor-pointer flex flex-col group no-underline">
-          <div class="relative aspect-[3/4] mb-4 overflow-hidden w-full bg-gray-100">
-            <img
-              src="{{ demo_imgs[i] | asset_url }}"
-              alt="{{ demo_names[i] | t }}"
-              class="product-card-img absolute inset-0 w-full h-full object-cover"
-              loading="lazy"
-            />
-          </div>
-          <div class="flex flex-col space-y-1.5 px-1" {% if request.locale.iso_code == 'he' %}dir="rtl" style="text-align: right;"{% endif %}>
-            <h3 class="text-[13px] font-semibold text-gray-900 tracking-wide group-hover:text-gray-500 transition-colors"
-                style="font-family: var(--font-montserrat), Montserrat, sans-serif;">{{ demo_names[i] | t }}</h3>
-            <p class="text-[13px] text-gray-500 font-light" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">$ 80</p>
-          </div>
-        </a>
-      {% endfor %}
+        {% for i in (0..3) %}
+          <a href="{{ routes.search_url }}?view=demo&product={{ demo_slugs[i] }}"
+             class="product-card cursor-pointer flex flex-col group no-underline">
+            <div class="relative aspect-[3/4] mb-4 overflow-hidden w-full bg-gray-100">
+              <img
+                src="{{ demo_imgs[i] | asset_url }}"
+                alt="{{ demo_names[i] | t }}"
+                class="product-card-img absolute inset-0 w-full h-full object-cover"
+                loading="lazy"
+              />
+            </div>
+            <div class="flex flex-col space-y-1.5 px-1" {% if request.locale.iso_code == 'he' %}dir="rtl" style="text-align: right;"{% endif %}>
+              <h3 class="text-[13px] font-semibold text-gray-900 tracking-wide group-hover:text-gray-500 transition-colors"
+                  style="font-family: var(--font-montserrat), Montserrat, sans-serif;">{{ demo_names[i] | t }}</h3>
+              <p class="text-[13px] text-gray-500 font-light" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">$ 80</p>
+            </div>
+          </a>
+        {% endfor %}
+      {% endif %}
 
     {% endif %}
 
