@@ -190,7 +190,7 @@
                 <span class="text-[#eee] mt-6">—</span>
                 <div class="flex-1">
                   <span class="text-[10px] uppercase text-gray-400 block mb-2 font-light">To</span>
-                  <input type="number" id="filter-price-max" name="{{ filter.max_value.param_name }}"
+                                    <input type="number" id="filter-price-max" name="{{ filter.max_value.param_name }}"
                          placeholder="{{ filter.range_max | money_without_currency }}" class="w-full border border-[#eee] text-[13px] font-light px-4 py-3 outline-none rounded-none text-[#222]">
                 </div>
               </div>
@@ -208,7 +208,7 @@
                   {% endfor %}
                 </div>
 
-              {% elsif lbl contains 'size' or lbl contains 'розмір' or lbl contains 'גודל' %}
+              {% elsif lbl contains 'size' or lbl contains 'розмір' or lbl contains 'גודл' or lbl contains 'גודל' %}
                 <div class="flex flex-col gap-4 pt-2">
                   <div class="flex flex-wrap gap-3">
                     {% for value in filter.values %}
