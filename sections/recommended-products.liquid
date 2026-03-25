@@ -66,7 +66,7 @@
       real data and replace demo placeholders.
       ════════════════════════════════════════════════════════
       {% endcomment %}
-      <div id="rec-products-inner" class="contents">
+      <div id="rec-products-{{ section.id }}" class="contents">
         {% comment %} DEMO FALLBACK while async loads {% endcomment %}
         {% assign demo_names = "products.product_1,products.product_2,products.product_3,products.product_4" | split: "," %}
         {% assign demo_imgs  = "product-image-1.png,product-image-2.png,product-image-3.png,product-image-4.png" | split: "," %}
@@ -90,7 +90,8 @@
       (function() {
         const productId = {{ product.id | json }};
         const locale    = '{{ request.locale.iso_code }}';
-        const inner     = document.getElementById('rec-products-inner');
+        const sectionId = '{{ section.id }}';
+        const inner     = document.getElementById('rec-products-' + sectionId);
         if (!productId || !inner) return;
         
         const isHe = locale === 'he';
