@@ -509,8 +509,14 @@
   const elSubtotal = document.getElementById('cart-subtotal');
   const elCount    = document.getElementById('cart-count-label');
 
-  function moneyFromCents(cents) { var n = parseInt(cents) || 0; return '$' + (n / 100).toFixed(2).replace(/\.00$/, ''); }
-  function moneyFromFloat(f)     { var n = parseFloat(f) || 0; return '$' + n.toFixed(2).replace(/\.00$/, ''); }
+  function moneyFromCents(cents) { 
+    var n = parseInt(cents) || 0; 
+    return '$' + (n / 100).toFixed(2).replace(/\.00$/, ''); 
+  }
+  function moneyFromFloat(f) { 
+    var n = parseFloat(f) || 0; 
+    return '$' + n.toFixed(2).replace(/\.00$/, ''); 
+  }
 
   function showLoading() {
     elLoading && (elLoading.style.display = 'flex');

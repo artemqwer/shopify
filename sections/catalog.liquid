@@ -153,7 +153,7 @@
             </h3>
             <p class="text-[11px] font-medium md:text-[13px] md:font-light text-gray-500"
                style="font-family: var(--font-montserrat), Montserrat, sans-serif;">
-              {{ product.price | money }}
+              $ {{ product.price | money_without_currency }}
             </p>
           </a>
         </div>

@@ -53,7 +53,7 @@
               {{ rec.title }}
             </h3>
             <p class="text-[13px] text-gray-500 font-light" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">
-              {{ rec.price | money }}
+              $ {{ rec.price | money_without_currency }}
             </p>
           </div>
         </a>
@@ -96,7 +96,7 @@
         if (!productId || !inner) return;
         
         const isHe = locale === 'he';
-        const priceFormatter = new Intl.NumberFormat(locale === 'he' ? 'he-IL' : 'en-US', {
+        const priceFormatter = new Intl.NumberFormat(locale === 'he' ? 'he-IL' : 'uk-UA', {
           style: 'currency',
           currency: '{{ cart.currency.iso_code }}',
           minimumFractionDigits: 0
@@ -111,9 +111,14 @@
             else if (p.featured_image && p.featured_image.url) { imgUrl = p.featured_image.url; }
             else if (p.images && p.images.length > 0) { imgUrl = typeof p.images[0] === 'string' ? p.images[0] : (p.images[0].src || p.images[0].url || ''); }
             
-            if (imgUrl) imgUrl = imgUrl.replace('http:', 'https:').replace(/_[a-z0-9]+\.(jpg|png|webp)/i, '.$1');
-
-            const price = priceFormatter.format(p.price / 100);
+            let priceNum = p.price;
+            if (typeof priceNum === 'string') {
+              priceNum = priceNum.includes('.') ? parseFloat(priceNum) : (parseInt(priceNum) / 100);
+            } else if (typeof priceNum === 'number') {
+              if (Number.isInteger(priceNum) && priceNum >= 100) priceNum = priceNum / 100;
+            }
+            const price = (priceNum !== undefined && !isNaN(priceNum)) ? '$' + priceNum.toFixed(2).replace(/\.00$/, '') : '';
+            
             const safeTitle = esc(p.title || p.heading || '');
             const safeUrl = esc(p.url || (p.handle ? `/products/${p.handle}` : ''));
             
@@ -190,7 +195,7 @@
                 {{ product.title }}
               </h3>
               <p class="text-[13px] text-gray-500 font-light" style="font-family: var(--font-montserrat), Montserrat, sans-serif;">
-                {{ product.price | money }}
+                $ {{ product.price | money_without_currency }}
               </p>
             </div>
           </a>

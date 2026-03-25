@@ -219,7 +219,7 @@
 
 {% comment %} ─── PRICE ─── {% endcomment %}
 {% if use_real_product and product.price > 0 %}
-  {% assign product_price = product.price | money %}
+  {% assign product_price = product.price | money_without_currency | prepend: "$" %}
 {% else %}
   {% assign product_price = "$ 80" %}
 {% endif %}
