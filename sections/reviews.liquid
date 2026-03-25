@@ -55,6 +55,11 @@
           "id": "product_title",
           "label": "Product Title / Description",
           "default": "A gray beam square handkerchief"
+        },
+        {
+          "type": "url",
+          "id": "product_url",
+          "label": "Product Link"
         }
       ]
     }
@@ -118,7 +123,7 @@
               </div>
 
               {% comment %} Product Snapshot {% endcomment %}
-              <div class="mt-auto pt-4 border-t border-gray-100 flex items-center gap-4">
+              <a href="{{ block.settings.product_url | default: '#' }}" class="mt-auto pt-4 border-t border-gray-100 flex items-center gap-4 hover:opacity-80 transition-opacity">
                 <div class="w-16 h-16 rounded-lg overflow-hidden flex-shrink-0 bg-gray-50">
                   {% if block.settings.product_image != blank %}
                     <img src="{{ block.settings.product_image | image_url: width: 200 }}" alt="Product" class="w-full h-full object-cover" />
@@ -129,7 +134,7 @@
                   {% endif %}
                 </div>
                 <p class="text-[13px] font-bold text-gray-950 leading-snug">{{ block.settings.product_title }}</p>
-              </div>
+              </a>
 
             </div>
           </div>
