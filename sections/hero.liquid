@@ -15,7 +15,7 @@
       "type": "text",
       "id": "link_1_text",
       "label": "Link 1 Text",
-      "default": "For sea/pool"
+      "default": "For sea"
     },
     {
       "type": "url",
@@ -75,7 +75,7 @@
 
   <div class="absolute inset-x-0 bottom-[12px] flex justify-center items-center gap-12 z-20">
     <a href="{{ section.settings.link_1_url | default: routes.all_products_collection_url }}" class="text-white opacity-90 border-b border-white transition-all text-center" style="font-family: Montserrat, sans-serif; font-weight: 300; font-size: 12px; line-height: 1; letter-spacing: 0.03em; text-transform: none;">
-      {{ section.settings.link_1_text | default: 'For sea/pool' }}
+      {{ section.settings.link_1_text | default: 'For sea' }}
     </a>
     <a href="{{ section.settings.link_2_url | default: routes.all_products_collection_url }}" class="text-white opacity-90 border-b border-white transition-all text-center" style="font-family: Montserrat, sans-serif; font-weight: 300; font-size: 12px; line-height: 1; letter-spacing: 0.03em; text-transform: none;">
       {{ section.settings.link_2_text | default: 'Classic' }}
