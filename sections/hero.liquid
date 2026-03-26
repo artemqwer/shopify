@@ -15,23 +15,37 @@
       "type": "text",
       "id": "link_1_text",
       "label": "Link 1 Text",
-      "default": ""
+      "default": "For sea",
+      "info": "Leave empty to use translation"
+    },
+    {
+      "type": "collection",
+      "id": "link_1_collection",
+      "label": "Link 1 Collection (recommended)"
     },
     {
       "type": "url",
       "id": "link_1_url",
-      "label": "Link 1 URL"
+      "label": "Link 1 Custom URL (optional)",
+      "info": "Leave empty to use collection above"
     },
     {
       "type": "text",
       "id": "link_2_text",
       "label": "Link 2 Text",
-      "default": ""
+      "default": "Classic",
+      "info": "Leave empty to use translation"
+    },
+    {
+      "type": "collection",
+      "id": "link_2_collection",
+      "label": "Link 2 Collection (recommended)"
     },
     {
       "type": "url",
       "id": "link_2_url",
-      "label": "Link 2 URL"
+      "label": "Link 2 Custom URL (optional)",
+      "info": "Leave empty to use collection above"
     },
     {
       "type": "header",
@@ -74,10 +88,25 @@
   </div>
 
   <div class="absolute inset-x-0 bottom-[12px] flex justify-center items-center gap-12 z-20">
-    <a href="{{ section.settings.link_1_url | default: routes.all_products_collection_url }}" class="text-white opacity-90 border-b border-white transition-all text-center" style="font-family: Montserrat, sans-serif; font-weight: 300; font-size: 12px; line-height: 1; letter-spacing: 0.03em; text-transform: none;">
+    {% liquid
+      assign link_1_href = section.settings.link_1_url
+      if link_1_href == blank and section.settings.link_1_collection != blank
+        assign link_1_href = section.settings.link_1_collection.url
+      elsif link_1_href == blank
+        assign link_1_href = routes.all_products_collection_url
+      endif
+
+      assign link_2_href = section.settings.link_2_url
+      if link_2_href == blank and section.settings.link_2_collection != blank
+        assign link_2_href = section.settings.link_2_collection.url
+      elsif link_2_href == blank
+        assign link_2_href = routes.all_products_collection_url
+      endif
+    %}
+    <a href="{{ link_1_href }}" class="text-white opacity-90 border-b border-white transition-all text-center" style="font-family: Montserrat, sans-serif; font-weight: 300; font-size: 12px; line-height: 1; letter-spacing: 0.03em; text-transform: none;">
       {{ 'hero.for_sea' | t }}
     </a>
-    <a href="{{ section.settings.link_2_url | default: routes.all_products_collection_url }}" class="text-white opacity-90 border-b border-white transition-all text-center" style="font-family: Montserrat, sans-serif; font-weight: 300; font-size: 12px; line-height: 1; letter-spacing: 0.03em; text-transform: none;">
+    <a href="{{ link_2_href }}" class="text-white opacity-90 border-b border-white transition-all text-center" style="font-family: Montserrat, sans-serif; font-weight: 300; font-size: 12px; line-height: 1; letter-spacing: 0.03em; text-transform: none;">
       {{ 'hero.classic' | t }}
     </a>
   </div>
