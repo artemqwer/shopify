@@ -11,7 +11,7 @@
 }
 {% endschema %}
 
-<section class="w-full mt-16 md:mt-12 mb-16 md:mb-24 block md:hidden">
+<section class="w-full mt-10 md:mt-12 mb-10 md:mb-12 block md:hidden">
   <div class="relative w-full aspect-[390/500] overflow-hidden bg-black/5">
     {% if section.settings.banner_video != blank %}
       {{ section.settings.banner_video | video_tag: autoplay: true, loop: true, muted: true, controls: false, image_size: 'master', class: 'absolute inset-0 w-full h-full object-cover', id: 'video-banner-el' }}
