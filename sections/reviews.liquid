@@ -149,9 +149,9 @@
       {% endfor %}
     </div>
 
-    <!-- Scroll Progress Bar -->
-    <div class="relative w-full h-[2px] bg-gray-200 mt-4">
-      <div id="reviews-progress-bar" class="absolute left-0 top-0 h-full bg-[#e61a7a] transition-all duration-150 ease-out" style="width: 0%"></div>
+    <!-- Custom Scrollbar -->
+    <div id="reviews-scrollbar-track" class="relative w-full h-[6px] bg-gray-200 mt-4 rounded-full cursor-pointer">
+      <div id="reviews-scrollbar-thumb" class="absolute left-0 top-0 h-full bg-[#e61a7a] rounded-full cursor-grab active:cursor-grabbing transition-colors hover:bg-[#d01869]" style="width: 30%"></div>
     </div>
   </div>
 </section>
@@ -164,29 +164,101 @@
 <script>
 (function() {
   const container = document.getElementById('reviews-scroll-container');
-  const progressBar = document.getElementById('reviews-progress-bar');
+  const track = document.getElementById('reviews-scrollbar-track');
+  const thumb = document.getElementById('reviews-scrollbar-thumb');
 
-  if (!container || !progressBar) return;
+  if (!container || !track || !thumb) return;
 
-  function updateProgress() {
+  let isDragging = false;
+  let startX = 0;
+  let startScrollLeft = 0;
+
+  // Calculate thumb size and position
+  function updateScrollbar() {
+    const scrollWidth = container.scrollWidth;
+    const clientWidth = container.clientWidth;
     const scrollLeft = container.scrollLeft;
+    const maxScroll = scrollWidth - clientWidth;
+
+    if (maxScroll <= 0) {
+      thumb.style.width = '100%';
+      thumb.style.left = '0%';
+      return;
+    }
+
+    // Thumb width proportional to visible content
+    const thumbWidth = (clientWidth / scrollWidth) * 100;
+    thumb.style.width = Math.max(20, thumbWidth) + '%'; // Min 20%
+
+    // Thumb position
+    const thumbPosition = (scrollLeft / maxScroll) * (100 - parseFloat(thumb.style.width));
+    thumb.style.left = thumbPosition + '%';
+  }
+
+  // Scroll container on thumb drag
+  function onThumbDrag(e) {
+    if (!isDragging) return;
+
+    const clientX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
+    const deltaX = clientX - startX;
+    const trackWidth = track.offsetWidth;
     const scrollWidth = container.scrollWidth;
     const clientWidth = container.clientWidth;
     const maxScroll = scrollWidth - clientWidth;
 
-    if (maxScroll <= 0) {
-      progressBar.style.width = '100%';
-      return;
-    }
-
-    const progress = (scrollLeft / maxScroll) * 100;
-    progressBar.style.width = Math.min(100, Math.max(0, progress)) + '%';
+    const scrollDelta = (deltaX / trackWidth) * scrollWidth;
+    container.scrollLeft = startScrollLeft + scrollDelta;
   }
 
-  container.addEventListener('scroll', updateProgress);
-  window.addEventListener('resize', updateProgress);
+  function startDrag(e) {
+    isDragging = true;
+    startX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
+    startScrollLeft = container.scrollLeft;
+    thumb.style.transition = 'none';
+    e.preventDefault();
+  }
 
-  // Initialize on load
-  updateProgress();
+  function stopDrag() {
+    isDragging = false;
+    thumb.style.transition = '';
+  }
+
+  // Click on track to jump
+  function onTrackClick(e) {
+    if (e.target === thumb) return;
+
+    const rect = track.getBoundingClientRect();
+    const clickX = e.clientX - rect.left;
+    const trackWidth = rect.width;
+    const scrollWidth = container.scrollWidth;
+    const clientWidth = container.clientWidth;
+    const maxScroll = scrollWidth - clientWidth;
+
+    const targetScroll = (clickX / trackWidth) * scrollWidth - (clientWidth / 2);
+    container.scrollTo({
+      left: Math.max(0, Math.min(maxScroll, targetScroll)),
+      behavior: 'smooth'
+    });
+  }
+
+  // Event listeners
+  container.addEventListener('scroll', updateScrollbar);
+  window.addEventListener('resize', updateScrollbar);
+
+  // Mouse events
+  thumb.addEventListener('mousedown', startDrag);
+  document.addEventListener('mousemove', onThumbDrag);
+  document.addEventListener('mouseup', stopDrag);
+
+  // Touch events
+  thumb.addEventListener('touchstart', startDrag, { passive: false });
+  document.addEventListener('touchmove', onThumbDrag, { passive: false });
+  document.addEventListener('touchend', stopDrag);
+
+  // Track click
+  track.addEventListener('click', onTrackClick);
+
+  // Initialize
+  updateScrollbar();
 })();
 </script>
