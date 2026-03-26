@@ -291,7 +291,7 @@
     </div>
 
     <nav
-      class="flex flex-col pl-[32px] pr-5 pt-6 pb-10 gap-[20px] {% if request.locale.iso_code == 'he' %}items-start text-right{% else %}items-start text-left{% endif %}"
+      class="flex flex-col {% if request.locale.iso_code == 'he' %}pr-[32px] pl-5{% else %}pl-[32px] pr-5{% endif %} pt-6 pb-10 gap-[20px] {% if request.locale.iso_code == 'he' %}items-start text-right{% else %}items-start text-left{% endif %}"
       style="font-family: Montserrat, sans-serif;"
     >
       <a

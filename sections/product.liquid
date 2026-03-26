@@ -97,8 +97,7 @@
     display: none;
     position: absolute;
     bottom: 16px;
-    left: 20px;
-    right: auto;
+    {% if request.locale.iso_code == 'he' %}right: 20px; left: auto;{% else %}left: 20px; right: auto;{% endif %}
     justify-content: flex-start;
     align-items: center;
     gap: 8px;
@@ -377,7 +376,7 @@
 
       <!-- Accordion: Material -->
       <div class="border-t border-[#e5e5e5]">
-        <button class="w-full flex items-center justify-between py-4 text-left" onclick="toggleAccordion('acc-material')">
+        <button class="w-full flex items-center justify-between py-4 {% if request.locale.iso_code == 'he' %}text-right{% else %}text-left{% endif %}" onclick="toggleAccordion('acc-material')">
           <span class="text-[13px] font-medium text-[#222] tracking-wider"
                 style="font-family: var(--font-montserrat), Montserrat, sans-serif;">{{ txt_material }}</span>
           <span id="acc-material-icon" class="accordion-icon text-[20px] font-light text-[#222] leading-none">+</span>
@@ -392,7 +391,7 @@
 
       <!-- Accordion: Care -->
       <div class="border-t border-[#e5e5e5]">
-        <button class="w-full flex items-center justify-between py-4 text-left" onclick="toggleAccordion('acc-care')">
+        <button class="w-full flex items-center justify-between py-4 {% if request.locale.iso_code == 'he' %}text-right{% else %}text-left{% endif %}" onclick="toggleAccordion('acc-care')">
           <span class="text-[13px] font-medium text-[#222] tracking-wider"
                 style="font-family: var(--font-montserrat), Montserrat, sans-serif;">{{ txt_care }}</span>
           <span id="acc-care-icon" class="accordion-icon text-[20px] font-light text-[#e61a7a] leading-none">–</span>
