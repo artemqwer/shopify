@@ -659,7 +659,11 @@
       if (!section || !caret) return;
       const isOpen = !section.classList.contains('hidden');
       section.classList.toggle('hidden', isOpen);
-      caret.style.transform = isOpen ? '' : 'rotate(180deg)';
+      if (isOpen) {
+        caret.classList.remove('rotate-180');
+      } else {
+        caret.classList.add('rotate-180');
+      }
     }
     window.toggleMobileSection = toggleMobileSection;
 
