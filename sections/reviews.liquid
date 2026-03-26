@@ -79,9 +79,9 @@
 
 <section class="max-w-[1280px] mx-auto px-4 md:px-[20px] pt-8 md:pt-12 pb-16 overflow-hidden">
   <div class="w-full">
-    <div class="relative w-full overflow-x-auto scrollbar-hide snap-x snap-mandatory flex gap-[12px] md:gap-[24px] pb-6">
+    <div class="relative w-full overflow-x-auto scrollbar-hide snap-x snap-mandatory flex gap-[16px] md:gap-[24px] pb-6">
       {% for block in section.blocks %}
-        <div class="min-w-[280px] md:min-w-[320px] flex-1 snap-start group cursor-default" {{ block.shopify_attributes }}>
+        <div class="w-[210px] md:w-[320px] flex-shrink-0 snap-start group cursor-default" {{ block.shopify_attributes }}>
           <div class="flex flex-col h-full">
             
             {% comment %} Top Image {% endcomment %}
