@@ -386,9 +386,12 @@
         <!-- Account icon (mobile only) -->
         <a
           href="{% if customer %}{{ routes.account_url }}{% else %}{{ routes.account_login_url }}{% endif %}"
-          class="md:hidden header-mobile-icon relative z-[70]"
+          class="md:hidden header-mobile-icon relative z-[70] p-1 ml-1"
         >
-          <img src="{{ 'account.svg' | asset_url }}" width="24" height="24" alt="account" class="cart-icon-img">
+          <svg class="cart-icon-img text-gray-900" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+            <circle cx="12" cy="7" r="4" />
+          </svg>
         </a>
 
         <!-- Cart trigger -->
@@ -403,11 +406,15 @@
             >(<span data-cart-count>{{ cart.item_count | default: 0 }}</span>)</span
           >
           <!-- Mobile: bag icon with badge -->
-          <span class="md:hidden relative inline-flex items-center justify-center">
-            <img src="{{ 'cart.svg' | asset_url }}" width="18" height="24" alt="cart" class="cart-icon-img">
+          <span class="md:hidden relative inline-flex items-center justify-center p-1">
+            <svg class="cart-icon-img text-gray-900" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="4" y="8" width="16" height="14" />
+              <path d="M8 8V6a4 4 0 0 1 8 0v2" />
+            </svg>
             <span
               data-cart-count-mobile
-              class="absolute top-0 -right-[10px] text-[#e61a7a] text-[12px] font-light leading-none tabular-nums"
+              class="absolute top-0 right-0 text-[#e61a7a] text-[12px] font-medium leading-none tabular-nums"
+              style="font-family: Montserrat, sans-serif;"
             >
               {{ cart.item_count | default: 0 }}
             </span>
