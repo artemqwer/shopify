@@ -386,9 +386,9 @@
         <!-- Account icon (mobile only) -->
         <a
           href="{% if customer %}{{ routes.account_url }}{% else %}{{ routes.account_login_url }}{% endif %}"
-          class="md:hidden header-mobile-icon relative z-[70] p-1 ml-1"
+          class="md:hidden header-mobile-icon relative z-[70] flex items-center justify-center mr-3 mt-[-2px]"
         >
-          <svg class="cart-icon-img text-gray-900" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+          <svg class="text-gray-900" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
             <circle cx="12" cy="7" r="4" />
           </svg>
