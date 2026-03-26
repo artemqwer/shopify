@@ -162,20 +162,19 @@
   <!-- Scrollable filter body -->
   <div class="flex-1 overflow-y-auto px-8 pt-0 pb-10 bg-white" id="filter-body" style="font-family: 'Montserrat', sans-serif;">
 
-    <!-- Quick Filters Section -->
     <div class="filter-group mb-6 pb-6 border-b border-[#eee]">
       <h3 class="text-[12px] font-normal text-[#222] uppercase tracking-[0.14em] mb-4">
-        {% if request.locale.iso_code == 'he' %}סינון מהיר{% elsif request.locale.iso_code == 'uk' %}Швидкий фільтр{% else %}Quick Filter{% endif %}
+        {{ 'header.quick_filter' | t | default: 'Quick Filter' }}
       </h3>
       <div class="flex flex-col gap-3">
-        <a href="/collections/for-sea"
+        <a href="{{ routes.root_url | append: '/collections/for-sea' | replace: '//', '/' }}"
            class="quick-filter-btn flex items-center justify-between px-4 py-3 border border-[#eee] text-[13px] font-light text-[#222] hover:border-[#222] hover:font-medium transition-all bg-white">
           <span>{{ 'hero.for_sea' | t }}</span>
           <svg class="w-4 h-4 {% if request.locale.iso_code == 'he' %}rotate-180{% endif %}" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
             <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/>
           </svg>
         </a>
-        <a href="/collections/classic"
+        <a href="{{ routes.root_url | append: '/collections/classic' | replace: '//', '/' }}"
            class="quick-filter-btn flex items-center justify-between px-4 py-3 border border-[#eee] text-[13px] font-light text-[#222] hover:border-[#222] hover:font-medium transition-all bg-white">
           <span>{{ 'hero.classic' | t }}</span>
           <svg class="w-4 h-4 {% if request.locale.iso_code == 'he' %}rotate-180{% endif %}" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
