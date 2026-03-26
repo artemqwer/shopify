@@ -657,11 +657,13 @@
       const section = document.getElementById(sectionName + '-section');
       const caret = document.getElementById(sectionName + '-caret');
       if (!section || !caret) return;
-      const isOpen = !section.classList.contains('hidden');
-      section.classList.toggle('hidden', isOpen);
-      // isOpen = true means we're closing it → arrow should point up (rotate-180)
-      // isOpen = false means we're opening it → arrow should point down (no rotate)
-      if (isOpen) {
+
+      // Toggle section visibility
+      section.classList.toggle('hidden');
+
+      // Toggle arrow rotation based on NEW state
+      const isClosed = section.classList.contains('hidden');
+      if (isClosed) {
         caret.classList.add('rotate-180');
       } else {
         caret.classList.remove('rotate-180');
