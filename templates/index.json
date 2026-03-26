@@ -41,31 +41,53 @@
         "review_Bj83Bz": {
           "type": "review",
           "settings": {
-            "author": "Customer Name"
+            "image": "shopify://shop_images/hero-image-1.png",
+            "date": "The day before",
+            "author": "Sarah Goldstein",
+            "verified": true,
+            "rating": 5,
+            "review_text": "Beautiful kippah, the stitching is incredibly clean and it sits perfectly. Bought it for my husband and he absolutely loves it!",
+            "product_title": "A gray beam square handkerchief",
+            "product_url": ""
           }
         },
         "review_tgRbAB": {
           "type": "review",
           "settings": {
-            "author": "Customer Name"
+            "image": "shopify://shop_images/hero-image-3.png",
+            "date": "The day before",
+            "author": "Rachel Levy",
+            "verified": true,
+            "rating": 5,
+            "review_text": "Exactly what I was looking for. The fabric is soft yet durable. My son wore it all Shabbat and it stayed in place the whole time.",
+            "product_title": "A gray beam square handkerchief",
+            "product_url": ""
           }
         },
         "review_cKbCCB": {
           "type": "review",
           "settings": {
-            "author": "Customer Name"
+            "image": "shopify://shop_images/product-image-2.png",
+            "date": "The day before",
+            "author": "Miriam Friedman",
+            "verified": true,
+            "rating": 4,
+            "review_text": "Really nice quality. The color is exactly as shown in the photo. Only giving 4 stars because I wish there were more size options.",
+            "product_title": "A gray beam square handkerchief",
+            "product_url": ""
           }
         },
         "review_ryWeKz": {
           "type": "review",
           "settings": {
-            "author": "Customer Name"
-          }
-        },
-        "review_TbPK8d": {
-          "type": "review",
-          "settings": {
-            "author": "Customer Name"
+            "image": "shopify://shop_images/hero-image-2.png",
+            "date": "The day before",
+            "author": "Leah Shapiro",
+            "verified": true,
+            "rating": 5,
+            "review_text": "Ordered two for my sons for their bar mitzvahs and they were both thrilled. High quality and fast delivery. Highly recommend!",
+            "product_title": "A gray beam square handkerchief",
+            "product_url": ""
           }
         }
       },
@@ -73,12 +95,9 @@
         "review_Bj83Bz",
         "review_tgRbAB",
         "review_cKbCCB",
-        "review_ryWeKz",
-        "review_TbPK8d"
+        "review_ryWeKz"
       ],
-      "settings": {
-        "title": "Reviews"
-      }
+      "settings": {}
     }
   },
   "order": [
