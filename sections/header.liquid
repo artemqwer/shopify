@@ -659,10 +659,12 @@
       if (!section || !caret) return;
       const isOpen = !section.classList.contains('hidden');
       section.classList.toggle('hidden', isOpen);
+      // isOpen = true means we're closing it → arrow should point up (rotate-180)
+      // isOpen = false means we're opening it → arrow should point down (no rotate)
       if (isOpen) {
-        caret.classList.remove('rotate-180');
-      } else {
         caret.classList.add('rotate-180');
+      } else {
+        caret.classList.remove('rotate-180');
       }
     }
     window.toggleMobileSection = toggleMobileSection;
